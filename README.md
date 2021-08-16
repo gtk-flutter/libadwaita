@@ -1,5 +1,5 @@
 ## GTK ❤️ Flutter
-Unofficial implementation of GTK Widgets, themes and titlebar buttons in Flutter. Based on the GNOME Human Interface Guidelines
+Unofficial implementation of GTK Widgets, themes and titlebar buttons in Flutter. Based on the GNOME Human Interface Guidelines.
 
 ### Features
 - Adwaita style Colors and icons
