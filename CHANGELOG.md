@@ -1,3 +1,7 @@
+## 0.2.0+1
+
+* Update github homepage
+
 ## 0.2.0
 
 * Remove `bitsdojo_window` dependency
