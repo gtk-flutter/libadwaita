@@ -1,3 +1,8 @@
+## 0.2.0+2
+
+* Fix typo in README
+* Add Screenshot in README
+
 ## 0.2.0+1
 
 * Update github homepage
