@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:window_decorations/window_decorations.dart';
 import '../utils/utils.dart';
 
@@ -12,8 +11,12 @@ class GtkHeaderBar extends StatelessWidget {
   final VoidCallback? onClose;
   final ThemeType themeType;
 
+  /// appWindow object from bitsdojo_window
+  final dynamic appWindow;
+
   const GtkHeaderBar({
     Key? key,
+    required this.appWindow,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),

@@ -20,7 +20,6 @@ Unofficial implementation of GTK Widgets, themes and titlebar buttons in Flutter
 
 This package is dependent on 
 * [`adwaita_icons`](https://pub.dev/packages/adwaita_icons) for adwaita style icons
-* [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) for headerbar related function
 * [`popover`](https://pub.dev/packages/popover) for GtkPopover.
 * [`window_decorations`](https://pub.dev/packages/window_decorations) for Window Decorations
 

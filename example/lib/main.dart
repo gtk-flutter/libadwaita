@@ -62,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: <Widget>[
           GtkHeaderBar(
+            appWindow: appWindow,
             leading: GtkHeaderButton(
               icon: const AdwaitaIcon(AdwaitaIcons.list_add),
               onPressed: _incrementCounter,

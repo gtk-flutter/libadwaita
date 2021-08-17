@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  bitsdojo_window:
   gtk:
     path: ../
 
