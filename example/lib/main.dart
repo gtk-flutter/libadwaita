@@ -83,20 +83,23 @@ class _MyHomePageState extends State<MyHomePage> {
                               : ThemeMode.dark;
                     }),
                 GtkPopupMenu(
-                  children: [
-                    ListTile(
-                      onTap: () {
-                        setState(() {
-                          _counter = 0;
-                          Navigator.of(context).pop();
-                        });
-                      },
-                      title: const Text(
-                        'Reset Counter',
-                        style: TextStyle(fontSize: 15),
+                  body: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          setState(() {
+                            _counter = 0;
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        title: const Text(
+                          'Reset Counter',
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -109,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'You have pushed the button this many times:',
+                  'You have pushed the add button this many times:',
                 ),
                 Text(
                   '$_counter',

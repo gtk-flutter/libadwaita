@@ -3,16 +3,29 @@ import 'package:window_decorations/window_decorations.dart';
 import '../utils/utils.dart';
 
 class GtkHeaderBar extends StatelessWidget {
-  final Widget leading;
-  final Widget center;
-  final Widget trailling;
-  final VoidCallback? onMinimize;
-  final VoidCallback? onMaximize;
-  final VoidCallback? onClose;
-  final ThemeType themeType;
-
-  /// appWindow object from bitsdojo_window
+  /// appWindow object from bitsdojo_window, can be null
   final dynamic appWindow;
+
+  /// The leading widget for the headerbar
+  final Widget leading;
+
+  /// The center widget for the headerbar
+  final Widget center;
+
+  /// The trailing widget for the headerbar
+  final Widget trailling;
+
+  /// The action to perform when minimize button is pressed
+  final VoidCallback? onMinimize;
+
+  /// The action to perform when maximize button is pressed
+  final VoidCallback? onMaximize;
+
+  /// The action to perform when close button is pressed
+  final VoidCallback? onClose;
+
+  /// The theme to use for the titlerbar/window buttons
+  final ThemeType themeType;
 
   const GtkHeaderBar({
     Key? key,
@@ -33,8 +46,8 @@ class GtkHeaderBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onPanStart: (_) => appWindow.startDragging(),
-      onDoubleTap: () => appWindow.maximizeOrRestore(),
+      onPanStart: (_) => appWindow?.startDragging(),
+      onDoubleTap: appWindow?.maximizeOrRestore,
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(

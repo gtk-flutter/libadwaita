@@ -5,14 +5,21 @@ import './gtk_header_button.dart';
 import '../utils/utils.dart';
 
 class GtkPopupMenu extends StatelessWidget {
-  final List<Widget> children;
+  /// The body of the popup
+  final Widget body;
+
+  // The icon for Popup menu
   final String? icon;
+
+  /// The width of the popup
   final double popupWidth;
+
+  /// The height of the popup
   final double? popupHeight;
 
   const GtkPopupMenu({
     Key? key,
-    required this.children,
+    required this.body,
     this.icon,
     this.popupWidth = 200,
     this.popupHeight,
@@ -44,13 +51,7 @@ class GtkPopupMenu extends StatelessWidget {
             colorType: GtkColorType.headerButtonBackgroundTop,
           ),
           transitionDuration: const Duration(milliseconds: 150),
-          bodyBuilder: (context) => SizedBox(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: children,
-            ),
-          ),
+          bodyBuilder: (context) => SizedBox(child: body),
           direction: PopoverDirection.top,
           width: popupWidth,
           height: popupHeight,

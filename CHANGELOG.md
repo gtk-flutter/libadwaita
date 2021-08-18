@@ -1,3 +1,11 @@
+## 0.3.0
+
+* Change children to body for GtkPopupMenu
+* Update Documentation and comments
+* Update get Gtk color logic
+* Update example by adding bitsdojo_window
+* Update Screenshot
+
 ## 0.2.0+2
 
 * Fix typo in README

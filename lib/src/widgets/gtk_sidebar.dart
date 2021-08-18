@@ -2,14 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:adwaita_icons/adwaita_icons.dart';
 
 class GtkSidebar extends StatelessWidget {
-  final int? itemCount;
+  /// The current index of the item selected
   final int? currentIndex;
+
+  /// The padding of the Sidebar
   final EdgeInsets? padding;
+
+  /// Scroll controller for sidebar
   final ScrollController? controller;
+
+  /// List of all the Gtk Sidebar Item's, use itemBuilder if you want to build them on demand.
   final List<GtkSidebarItem>? children;
+
+  /// Called when one of the Sidebar item is selected
   final Function(int index) onSelected;
+
+  /// Create a vertical list of GtkSidebarItem on demand.
   final GtkSidebarItem Function(
       BuildContext context, int index, bool isSelected)? itemBuilder;
+
+  /// Item count used when itemBuilder is not null
+  final int? itemCount;
 
   const GtkSidebar({
     Key? key,

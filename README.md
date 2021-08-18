@@ -2,7 +2,7 @@
 
 Unofficial implementation of GTK Widgets, themes and titlebar buttons in Flutter. Based on the GNOME Human Interface Guidelines.
 
-![gtk+flutter](https://user-images.githubusercontent.com/41370460/129775177-a4dcd231-0756-4062-a4a8-bef2e1f31dd1.png)
+![GTK+Flutter example screenshot](https://user-images.githubusercontent.com/41370460/129860402-79c3f416-dc3c-4be4-86cd-26015bac3895.png)
 
 ### Features
 

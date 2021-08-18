@@ -45,8 +45,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-android/
-ios/
-windows/
-linux/
-web/
+android/*
+ios/*
+windows/*
+linux/*
+web/*
+
+!./linux/my_application.cc

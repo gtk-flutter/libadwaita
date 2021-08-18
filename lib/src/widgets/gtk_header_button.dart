@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import '../utils/utils.dart';
 
 class GtkHeaderButton extends StatelessWidget {
+  /// The icon of the button
   final Widget icon;
+
+  /// The background color for the button
   final Color? color;
+
+  /// Triggered when the button is pressed.
   final VoidCallback? onPressed;
 
   const GtkHeaderButton({
