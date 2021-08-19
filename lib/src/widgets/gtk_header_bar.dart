@@ -27,6 +27,8 @@ class GtkHeaderBar extends StatelessWidget {
   /// The theme to use for the titlerbar/window buttons
   final ThemeType themeType;
 
+  final GtkColorTheme systemTheme;
+
   const GtkHeaderBar({
     Key? key,
     required this.appWindow,
@@ -34,6 +36,7 @@ class GtkHeaderBar extends StatelessWidget {
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
     this.themeType = ThemeType.auto,
+    this.systemTheme = GtkColorTheme.adwaita,
     this.onMinimize,
     this.onMaximize,
     this.onClose,
@@ -59,10 +62,12 @@ class GtkHeaderBar extends StatelessWidget {
                 getAdaptiveGtkColor(
                   context,
                   colorType: GtkColorType.headerBarBackgroundTop,
+                  colorTheme: systemTheme,
                 ),
                 getAdaptiveGtkColor(
                   context,
                   colorType: GtkColorType.headerBarBackgroundBottom,
+                  colorTheme: systemTheme,
                 ),
               ],
             ),
@@ -71,12 +76,14 @@ class GtkHeaderBar extends StatelessWidget {
                 color: getAdaptiveGtkColor(
                   context,
                   colorType: GtkColorType.headerBarTopBorder,
+                  colorTheme: systemTheme,
                 ),
               ),
               bottom: BorderSide(
                 color: getAdaptiveGtkColor(
                   context,
                   colorType: GtkColorType.headerBarBottomBorder,
+                  colorTheme: systemTheme,
                 ),
               ),
             ),

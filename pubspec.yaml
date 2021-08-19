@@ -13,6 +13,8 @@ dependencies:
   adwaita_icons:
   popover:
   window_decorations:
+  gsettings: ^0.1.2+1
+  from_css_color: ^2.0.0
 
 dev_dependencies:
   flutter_test:
