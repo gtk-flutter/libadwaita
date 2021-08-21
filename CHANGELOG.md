@@ -1,4 +1,10 @@
-## 0.3.0
+## 0.4.0
+
+* Add auto detect gtk theme using GtkColorType.system by @MalcolmMielle
+* Update Window Decorations plugin
+* Add isActive parameter to Gtk popup button
+
+## 0.2.3
 
 * Change children to body for GtkPopupMenu
 * Update Documentation and comments

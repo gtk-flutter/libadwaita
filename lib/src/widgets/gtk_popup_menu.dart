@@ -4,7 +4,7 @@ import 'package:adwaita_icons/adwaita_icons.dart';
 import './gtk_header_button.dart';
 import '../utils/utils.dart';
 
-class GtkPopupMenu extends StatelessWidget {
+class GtkPopupMenu extends StatefulWidget {
   /// The body of the popup
   final Widget body;
 
@@ -26,15 +26,23 @@ class GtkPopupMenu extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<GtkPopupMenu> createState() => _GtkPopupMenuState();
+}
+
+class _GtkPopupMenuState extends State<GtkPopupMenu> {
+  bool isActive = false;
+  @override
   Widget build(BuildContext context) {
     return GtkHeaderButton(
       icon: Center(
         child: AdwaitaIcon(
-          icon ?? AdwaitaIcons.menu,
+          widget.icon ?? AdwaitaIcons.menu,
           size: 17,
         ),
       ),
+      isActive: isActive,
       onPressed: () {
+        setState(() => isActive = true);
         showPopover(
           context: context,
           barrierColor: Colors.transparent,
@@ -42,22 +50,20 @@ class GtkPopupMenu extends StatelessWidget {
           shadow: [
             BoxShadow(
               color: getAdaptiveGtkColor(context,
-                  colorType: GtkColorType.headerSwitcherTabBorder),
+                  colorType: GtkColorType.headerButtonBorder),
               blurRadius: 8,
             )
           ],
-          backgroundColor: getAdaptiveGtkColor(
-            context,
-            colorType: GtkColorType.headerButtonBackgroundTop,
-          ),
+          backgroundColor:
+              getAdaptiveGtkColor(context, colorType: GtkColorType.canvas),
           transitionDuration: const Duration(milliseconds: 150),
-          bodyBuilder: (context) => SizedBox(child: body),
+          bodyBuilder: (context) => SizedBox(child: widget.body),
           direction: PopoverDirection.top,
-          width: popupWidth,
-          height: popupHeight,
+          width: widget.popupWidth,
+          height: widget.popupHeight,
           arrowHeight: 10,
           arrowWidth: 22,
-        );
+        ).whenComplete(() => setState(() => isActive = false));
       },
     );
   }

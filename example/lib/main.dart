@@ -7,34 +7,18 @@ void main() {
   runApp(const MyApp());
 }
 
-final themeMode = ValueNotifier<ThemeMode>(ThemeMode.system);
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<ThemeMode>(
-        valueListenable: themeMode,
-        builder: (context, value, _) {
-          return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              canvasColor:
-                  getGtkColor(colorType: GtkColorType.canvas, isDark: false),
-            ),
-            darkTheme: ThemeData(
-              primarySwatch: Colors.blue,
-              brightness: Brightness.dark,
-              canvasColor:
-                  getGtkColor(colorType: GtkColorType.canvas, isDark: true),
-            ),
-            themeMode: value,
-            debugShowCheckedModeBanner: false,
-            home: const MyHomePage(title: 'Gtk + Flutter Demo'),
-          );
-        });
+    var theme = GnomeTheme();
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: theme.data(context),
+      debugShowCheckedModeBanner: false,
+      home: const MyHomePage(title: 'Gtk + Flutter Demo'),
+    );
   }
 }
 
@@ -74,14 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             trailling: Row(
               children: [
-                GtkHeaderButton(
-                    icon: const AdwaitaIcon(AdwaitaIcons.night_light),
-                    onPressed: () {
-                      themeMode.value =
-                          Theme.of(context).brightness == Brightness.dark
-                              ? ThemeMode.light
-                              : ThemeMode.dark;
-                    }),
                 GtkPopupMenu(
                   body: Column(
                     mainAxisSize: MainAxisSize.min,

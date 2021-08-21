@@ -1,117 +1,76 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../utils/utils.dart';
 
 class GtkHeaderButton extends StatefulWidget {
+  /// The icon of the button
   final Widget icon;
+
+  /// Is this button active, generally it is for popup buttons
+  final bool isActive;
 
   /// Triggered when the button is pressed.
   final VoidCallback? onPressed;
 
-  final GtkColorTheme systemTheme;
+  final GtkColorTheme colorTheme;
 
   const GtkHeaderButton({
     Key? key,
     required this.icon,
-    this.systemTheme = GtkColorTheme.adwaita,
+    this.isActive = false,
+    this.colorTheme = GtkColorTheme.adwaita,
     this.onPressed,
   }) : super(key: key);
 
   @override
-  _GtkHeaderButtonState createState() => _GtkHeaderButtonState(
-      icon: icon, systemTheme: systemTheme, onPressed: onPressed);
+  _GtkHeaderButtonState createState() => _GtkHeaderButtonState();
 }
 
 class _GtkHeaderButtonState extends State<GtkHeaderButton> {
   bool hovering = false;
 
-  /// The icon of the button
-  final Widget icon;
-
-  /// Triggered when the button is pressed.
-  final VoidCallback? onPressed;
-
-  final GtkColorTheme systemTheme;
-
-  _GtkHeaderButtonState({
-    required this.icon,
-    this.systemTheme = GtkColorTheme.adwaita,
-    this.onPressed,
-  });
-
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-        onExit: _removeColor,
-        onHover: _updateColor,
+        onExit: (_) => _updateColor(false),
+        onHover: (_) => _updateColor(),
         child: Container(
           height: 34,
           width: 36,
           margin: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: getAdaptiveGtkColor(
+                  context,
+                  colorType: GtkColorType.headerButtonBorder,
+                  colorTheme: widget.colorTheme,
+                ),
+              ),
               color: getAdaptiveGtkColor(
                 context,
-                colorType: GtkColorType.headerButtonBorder,
-                colorTheme: systemTheme,
-              ),
-            ),
-            gradient: hovering
-                ? LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      getAdaptiveGtkColor(
-                        context,
-                        colorType:
-                            GtkColorType.headerButtonBackgroundBottomHover,
-                        colorTheme: systemTheme,
-                      ),
-                      getAdaptiveGtkColor(
-                        context,
-                        colorType: GtkColorType.headerButtonBackgroundTopHover,
-                        colorTheme: systemTheme,
-                      ),
-                    ],
-                  )
-                : LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      getAdaptiveGtkColor(
-                        context,
-                        colorType: GtkColorType.headerButtonBackgroundBottom,
-                        colorTheme: systemTheme,
-                      ),
-                      getAdaptiveGtkColor(
-                        context,
-                        colorType: GtkColorType.headerButtonBackgroundTop,
-                        colorTheme: systemTheme,
-                      ),
-                    ],
-                  ),
-          ),
+                colorType: widget.isActive
+                    ? Theme.of(context).brightness == Brightness.dark
+                        ? GtkColorType.headerButtonBackgroundTop
+                        : GtkColorType.headerButtonBackgroundBottom
+                    : Theme.of(context).brightness == Brightness.dark
+                        ? hovering
+                            ? GtkColorType.headerButtonBackgroundBottomHover
+                            : GtkColorType.headerButtonBackgroundBottom
+                        : hovering
+                            ? GtkColorType.headerButtonBackgroundTopHover
+                            : GtkColorType.headerButtonBackgroundTop,
+                colorTheme: widget.colorTheme,
+              )),
           child: IconButton(
-            icon: icon,
+            icon: widget.icon,
             hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            onPressed: onPressed,
+            onPressed: widget.onPressed,
           ),
         ));
   }
 
-  void _updateColor(PointerHoverEvent ev) {
-    setState(() {
-      hovering = true;
-    });
-  }
-
-  void _removeColor(PointerExitEvent ev) {
-    setState(() {
-      hovering = false;
-    });
-  }
+  void _updateColor([bool value = true]) => setState(() => hovering = value);
 }
