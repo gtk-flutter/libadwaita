@@ -1,3 +1,7 @@
+## 0.4.0+1
+
+* Update Screenshot
+
 ## 0.4.0
 
 * Add auto detect gtk theme using GtkColorType.system by @MalcolmMielle

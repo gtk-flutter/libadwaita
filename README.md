@@ -2,7 +2,7 @@
 
 Unofficial implementation of GTK Widgets, themes and titlebar buttons in Flutter. Based on the GNOME Human Interface Guidelines.
 
-![GTK+Flutter example screenshot](https://user-images.githubusercontent.com/41370460/129860402-79c3f416-dc3c-4be4-86cd-26015bac3895.png)
+![GTK+Flutter example screenshot](https://user-images.githubusercontent.com/41370460/130322523-890fdccb-94f0-443c-9e6d-18e571827667.png)
 
 ### Features
 
@@ -30,3 +30,5 @@ This package is dependent on
 ### License
 
 `GNU GENERAL PUBLIC LICENSE v3`
+
+License is subject to change as this provides core ui elements which are required for any kind of application, if it will then it will probably change to `LGPL`.
