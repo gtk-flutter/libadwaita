@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          GtkHeaderBar(
+          GtkHeaderBar.bitsdojo(
             appWindow: appWindow,
             leading: GtkHeaderButton(
               icon: const AdwaitaIcon(AdwaitaIcons.list_add),

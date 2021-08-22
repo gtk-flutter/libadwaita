@@ -3,9 +3,6 @@ import 'package:window_decorations/window_decorations.dart';
 import '../utils/utils.dart';
 
 class GtkHeaderBar extends StatelessWidget {
-  /// appWindow object from bitsdojo_window, can be null
-  final dynamic appWindow;
-
   /// The leading widget for the headerbar
   final Widget leading;
 
@@ -29,18 +26,71 @@ class GtkHeaderBar extends StatelessWidget {
 
   final GtkColorTheme systemTheme;
 
+  /// The height of the headerbar
+  final double height;
+
+  /// The padding inside the headerbar
+  final EdgeInsets padding;
+
+  /// Called when headerbar is dragged
+  final VoidCallback? onHeaderDrag;
+
+  /// Called when headerbar is double tapped
+  final VoidCallback? onDoubleTap;
+
   const GtkHeaderBar({
     Key? key,
-    required this.appWindow,
+    this.onDoubleTap,
+    this.onHeaderDrag,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
+    this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.height = 47,
     this.themeType = ThemeType.auto,
     this.systemTheme = GtkColorTheme.adwaita,
     this.onMinimize,
     this.onMaximize,
     this.onClose,
   }) : super(key: key);
+
+  GtkHeaderBar.bitsdojo({
+    Key? key,
+
+    /// The appWindow object from bitsdojo_window package
+    required appWindow,
+    this.leading = const SizedBox(),
+    this.center = const SizedBox(),
+    this.trailling = const SizedBox(),
+    this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.height = 47,
+    this.themeType = ThemeType.auto,
+    this.systemTheme = GtkColorTheme.adwaita,
+    this.onMinimize,
+    this.onMaximize,
+    this.onClose,
+  })  : onHeaderDrag = appWindow?.startDragging,
+        onDoubleTap = appWindow?.maximizeOrRestore,
+        super(key: key);
+
+  GtkHeaderBar.nativeshell({
+    Key? key,
+
+    /// The Window.of(context) object from nativeshell package
+    required window,
+    this.leading = const SizedBox(),
+    this.center = const SizedBox(),
+    this.trailling = const SizedBox(),
+    this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.height = 47,
+    this.themeType = ThemeType.auto,
+    this.systemTheme = GtkColorTheme.adwaita,
+    this.onMinimize,
+    this.onMaximize,
+    this.onClose,
+  })  : onHeaderDrag = window?.beginDrag,
+        onDoubleTap = null,
+        super(key: key);
 
   bool get hasWindowControls =>
       onClose != null || onMinimize != null || onMaximize != null;
@@ -49,8 +99,8 @@ class GtkHeaderBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onPanStart: (_) => appWindow?.startDragging(),
-      onDoubleTap: appWindow?.maximizeOrRestore,
+      onPanStart: (_) => onHeaderDrag?.call(),
+      onDoubleTap: onDoubleTap,
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
@@ -88,13 +138,13 @@ class GtkHeaderBar extends StatelessWidget {
               ),
             ),
           ),
-          height: 47,
+          height: height,
           width: double.infinity,
           child: Stack(
             alignment: Alignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                padding: padding,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

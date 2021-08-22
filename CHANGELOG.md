@@ -1,3 +1,9 @@
+## 0.5.0
+
+* Add onDoubleTap and onHeaderDrag method for GtkHeaderBar
+* Add padding and height parameter to GtkHeaderBar
+* Add GtkHeaderBar.bitsdojo and GtkHeaderBar.nativeshell to integerate well with these plugins
+
 ## 0.4.0+1
 
 * Update Screenshot
