@@ -88,7 +88,7 @@ class GtkHeaderBar extends StatelessWidget {
     this.onMinimize,
     this.onMaximize,
     this.onClose,
-  })  : onHeaderDrag = window?.beginDrag,
+  })  : onHeaderDrag = window?.performDrag,
         onDoubleTap = null,
         super(key: key);
 

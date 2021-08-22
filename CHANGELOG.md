@@ -1,3 +1,7 @@
+## 0.5.0+1
+
+* Rename beignDrag to performDrag for nativeshell Gtk Header.
+
 ## 0.5.0
 
 * Add onDoubleTap and onHeaderDrag method for GtkHeaderBar
