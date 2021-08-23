@@ -90,8 +90,7 @@ class GtkSidebarItem {
     this.labelStyle,
     this.labelWidget,
     this.leading,
-  })  : assert(labelWidget != null || label != null),
-        assert(leading == null || leadingIcon == null);
+  }) : assert(labelWidget != null || label != null);
 }
 
 Widget _gtkSidebarItem(
