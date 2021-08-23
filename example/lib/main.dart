@@ -79,9 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            onClose: appWindow.close,
-            onMinimize: appWindow.minimize,
-            onMaximize: appWindow.maximizeOrRestore,
           ),
           Expanded(
             child: Column(

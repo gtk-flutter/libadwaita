@@ -32,6 +32,9 @@ class GtkHeaderBar extends StatelessWidget {
   /// The padding inside the headerbar
   final EdgeInsets padding;
 
+  /// The space b/w trailing elements and titlebar
+  final double titlebarSpace;
+
   /// Called when headerbar is dragged
   final VoidCallback? onHeaderDrag;
 
@@ -46,6 +49,7 @@ class GtkHeaderBar extends StatelessWidget {
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
     this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.titlebarSpace = 16,
     this.height = 47,
     this.themeType = ThemeType.auto,
     this.systemTheme = GtkColorTheme.adwaita,
@@ -63,14 +67,18 @@ class GtkHeaderBar extends StatelessWidget {
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
     this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.titlebarSpace = 16,
     this.height = 47,
     this.themeType = ThemeType.auto,
     this.systemTheme = GtkColorTheme.adwaita,
-    this.onMinimize,
-    this.onMaximize,
-    this.onClose,
+    bool showMinimize = true,
+    bool showMaximize = true,
+    bool showClose = true,
   })  : onHeaderDrag = appWindow?.startDragging,
         onDoubleTap = appWindow?.maximizeOrRestore,
+        onMinimize = showMinimize ? appWindow?.minimize : null,
+        onMaximize = showMaximize ? appWindow?.maximizeOrRestore : null,
+        onClose = showClose ? appWindow?.close : null,
         super(key: key);
 
   GtkHeaderBar.nativeshell({
@@ -82,14 +90,18 @@ class GtkHeaderBar extends StatelessWidget {
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
     this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.titlebarSpace = 16,
     this.height = 47,
     this.themeType = ThemeType.auto,
     this.systemTheme = GtkColorTheme.adwaita,
-    this.onMinimize,
-    this.onMaximize,
-    this.onClose,
+    bool showMinimize = true,
+    bool showMaximize = true,
+    bool showClose = true,
   })  : onHeaderDrag = window?.performDrag,
         onDoubleTap = null,
+        onMinimize = showMinimize ? null : null,
+        onMaximize = showMaximize ? null : null,
+        onClose = showClose ? window.close : null,
         super(key: key);
 
   bool get hasWindowControls =>
@@ -154,7 +166,8 @@ class GtkHeaderBar extends StatelessWidget {
                         trailling,
                         Row(
                           children: [
-                            if (hasWindowControls) const SizedBox(width: 16),
+                            if (hasWindowControls)
+                              SizedBox(width: titlebarSpace),
                             ...[
                               if (onMinimize != null)
                                 DecoratedMinimizeButton(

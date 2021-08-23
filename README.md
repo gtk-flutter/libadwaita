@@ -20,17 +20,17 @@ Unofficial implementation of GTK Widgets, themes and titlebar buttons in Flutter
 
 ### Additional information
 
-* You can use GtkHeaderBar.bitsdojo or GtkHeaderBar.nativeshell if you are using these plugins, else you can just use GtkHeaderBar.
-
 This package is dependent on 
-* [`adwaita_icons`](https://pub.dev/packages/adwaita_icons) for adwaita style icons
 * [`popover`](https://pub.dev/packages/popover) for GtkPopover.
 * [`window_decorations`](https://pub.dev/packages/window_decorations) for Window Decorations
+
+Additional packages to use with this package:
+* [`adwaita_icons`](https://pub.dev/packages/adwaita_icons) for Adwaita Icons
+* [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) for Better look and feel with custom GtkHeaderBar.bitsdojo
+* [`nativeshell`](https://pub.dev/packages/nativeshell) for Better look and feel with custom GtkHeaderBar.nativeshell
 
 [Classic API Docs](https://pub.dev/documentation/gtk/latest/)
 
 ### License
 
-`GNU GENERAL PUBLIC LICENSE v3`
-
-License is subject to change as this provides core ui elements which are required for any kind of application, if it will then it will probably change to `LGPL`.
+`GNU LESSER GENERAL PUBLIC LICENSE v3`

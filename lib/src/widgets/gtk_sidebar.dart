@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:adwaita_icons/adwaita_icons.dart';
 
 class GtkSidebar extends StatelessWidget {
   /// The current index of the item selected
@@ -82,11 +81,8 @@ class GtkSidebarItem {
   /// The label to render to the right of the button
   final Widget? labelWidget;
 
-  // the leading widget for sidebar item
+  // the leading widget for sidebar item, use size of 19 for better results
   final Widget? leading;
-
-  // the leading icon for sidebar item
-  final String? leadingIcon;
 
   GtkSidebarItem({
     this.key,
@@ -94,7 +90,6 @@ class GtkSidebarItem {
     this.labelStyle,
     this.labelWidget,
     this.leading,
-    this.leadingIcon,
   })  : assert(labelWidget != null || label != null),
         assert(leading == null || leadingIcon == null);
 }
@@ -110,15 +105,7 @@ Widget _gtkSidebarItem(
     tileColor: isSelected ? Theme.of(context).primaryColor : null,
     title: Row(
       children: [
-        item.leading != null
-            ? item.leading!
-            : item.leadingIcon != null
-                ? AdwaitaIcon(
-                    item.leadingIcon!,
-                    size: 19,
-                    color: isSelected ? Colors.white : null,
-                  )
-                : const SizedBox(),
+        item.leading != null ? item.leading! : const SizedBox(),
         const SizedBox(width: 12),
         item.labelWidget ??
             Text(

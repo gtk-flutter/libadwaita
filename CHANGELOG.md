@@ -1,3 +1,9 @@
+## 0.5.5
+
+* Remove `adwaita_icons` from dependency
+* Add default values for onClose, onMinimize and onMaximize for GtkHeaderBar.bitsdojo and .nativeshell.
+* Add titlebarSpace property to adjust the space b/w titlebar and trailing items.
+
 ## 0.5.0+1
 
 * Rename beignDrag to performDrag for nativeshell Gtk Header.

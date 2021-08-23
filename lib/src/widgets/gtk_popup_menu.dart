@@ -1,6 +1,5 @@
 import 'package:popover/popover.dart';
 import 'package:flutter/material.dart';
-import 'package:adwaita_icons/adwaita_icons.dart';
 import './gtk_header_button.dart';
 import '../utils/utils.dart';
 
@@ -8,8 +7,8 @@ class GtkPopupMenu extends StatefulWidget {
   /// The body of the popup
   final Widget body;
 
-  // The icon for Popup menu
-  final String? icon;
+  // The icon for Popup menu, use size of 17 for better results
+  final Widget icon;
 
   /// The width of the popup
   final double popupWidth;
@@ -20,7 +19,7 @@ class GtkPopupMenu extends StatefulWidget {
   const GtkPopupMenu({
     Key? key,
     required this.body,
-    this.icon,
+    this.icon = const Icon(Icons.menu, size: 17),
     this.popupWidth = 200,
     this.popupHeight,
   }) : super(key: key);
@@ -34,12 +33,7 @@ class _GtkPopupMenuState extends State<GtkPopupMenu> {
   @override
   Widget build(BuildContext context) {
     return GtkHeaderButton(
-      icon: Center(
-        child: AdwaitaIcon(
-          widget.icon ?? AdwaitaIcons.menu,
-          size: 17,
-        ),
-      ),
+      icon: Center(child: widget.icon),
       isActive: isActive,
       onPressed: () {
         setState(() => isActive = true);
