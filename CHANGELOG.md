@@ -1,3 +1,7 @@
+## 0.5.9
+
+* Remove `adwaita_icons` from dependency of example
+
 ## 0.5.5
 
 * Remove `adwaita_icons` from dependency

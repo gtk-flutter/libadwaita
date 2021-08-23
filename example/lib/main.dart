@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:adwaita_icons/adwaita_icons.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:gtk/gtk.dart';
 
@@ -48,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           GtkHeaderBar.bitsdojo(
             appWindow: appWindow,
             leading: GtkHeaderButton(
-              icon: const AdwaitaIcon(AdwaitaIcons.list_add),
+              icon: const Icon(Icons.add, size: 17),
               onPressed: _incrementCounter,
             ),
             center: Text(

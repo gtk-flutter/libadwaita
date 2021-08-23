@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/utils.dart';
 
 class GtkHeaderButton extends StatefulWidget {
-  /// The icon of the button
+  /// The icon of the button, use size of 17 for better results
   final Widget icon;
 
   /// Is this button active, generally it is for popup buttons
