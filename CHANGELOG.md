@@ -1,6 +1,7 @@
-## 0.5.9
+## 0.6.0
 
 * Remove `adwaita_icons` from dependency of example
+* Revamp code for `GtkSidebar`.
 
 ## 0.5.5
 
