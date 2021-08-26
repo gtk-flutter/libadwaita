@@ -1,3 +1,8 @@
+## 0.7.0+1
+
+* Fix Padding of Icons with Gtk header button
+* Update `titlebarSpace` and `padding` for `GtkHeaderBar`
+
 ## 0.7.0
 
 * Add GtkViewSwitcher from `flutter_gtk` package

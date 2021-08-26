@@ -13,10 +13,18 @@ class GtkHeaderButton extends StatefulWidget {
 
   final GtkColorTheme colorTheme;
 
+  /// The margin of the [GtkHeaderButton]
+  final EdgeInsets margin;
+
+  /// The padding of the [GtkHeaderButton]
+  final EdgeInsets padding;
+
   const GtkHeaderButton({
     Key? key,
     required this.icon,
+    this.padding = const EdgeInsets.all(8),
     this.isActive = false,
+    this.margin = const EdgeInsets.symmetric(horizontal: 5),
     this.colorTheme = GtkColorTheme.adwaita,
     this.onPressed,
   }) : super(key: key);
@@ -34,12 +42,12 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
       onExit: (_) => _updateColor(false),
       onHover: (_) => _updateColor(),
       child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
         onTap: widget.onPressed,
         child: Container(
           height: 34,
+          padding: widget.padding,
           width: 36,
-          margin: const EdgeInsets.symmetric(horizontal: 6),
+          margin: widget.margin,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               border: Border.all(
