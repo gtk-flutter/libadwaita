@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _currentIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -50,10 +51,26 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.add, size: 17),
               onPressed: _incrementCounter,
             ),
-            center: Text(
-              "Gtk ❤️ Flutter",
-              style:
-                  Theme.of(context).textTheme.headline6!.copyWith(fontSize: 17),
+            center: GtkViewSwitcher(
+              tabs: const [
+                ViewSwitcherData(
+                  icon: Icons.star_outline,
+                  title: "Explore",
+                ),
+                ViewSwitcherData(
+                  icon: Icons.list_outlined,
+                  title: "Installed",
+                ),
+                ViewSwitcherData(
+                  icon: Icons.find_replace_rounded,
+                  title: "Updates",
+                )
+              ],
+              currentIndex: _currentIndex,
+              onViewChanged: (index) {
+                _currentIndex = index;
+                setState(() {});
+              },
             ),
             trailling: Row(
               children: [

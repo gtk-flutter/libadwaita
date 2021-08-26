@@ -48,7 +48,7 @@ class GtkHeaderBar extends StatelessWidget {
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
-    this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.padding = const EdgeInsets.only(right: 5),
     this.titlebarSpace = 16,
     this.height = 47,
     this.themeType = ThemeType.auto,
@@ -66,7 +66,7 @@ class GtkHeaderBar extends StatelessWidget {
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
-    this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.padding = const EdgeInsets.only(right: 5),
     this.titlebarSpace = 16,
     this.height = 47,
     this.themeType = ThemeType.auto,
@@ -89,7 +89,7 @@ class GtkHeaderBar extends StatelessWidget {
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailling = const SizedBox(),
-    this.padding = const EdgeInsets.symmetric(horizontal: 7),
+    this.padding = const EdgeInsets.only(right: 5),
     this.titlebarSpace = 16,
     this.height = 47,
     this.themeType = ThemeType.auto,
@@ -112,7 +112,6 @@ class GtkHeaderBar extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: (_) => onHeaderDrag?.call(),
-      onDoubleTap: onDoubleTap,
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
@@ -155,6 +154,10 @@ class GtkHeaderBar extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onDoubleTap: onDoubleTap,
+              ),
               Padding(
                 padding: padding,
                 child: Row(
@@ -164,29 +167,24 @@ class GtkHeaderBar extends StatelessWidget {
                     Row(
                       children: [
                         trailling,
-                        Row(
-                          children: [
-                            if (hasWindowControls)
-                              SizedBox(width: titlebarSpace),
-                            ...[
-                              if (onMinimize != null)
-                                DecoratedMinimizeButton(
-                                  type: themeType,
-                                  onPressed: onMinimize,
-                                ),
-                              if (onMaximize != null)
-                                DecoratedMaximizeButton(
-                                  type: themeType,
-                                  onPressed: onMaximize,
-                                ),
-                              if (onClose != null)
-                                DecoratedCloseButton(
-                                  type: themeType,
-                                  onPressed: onClose,
-                                ),
-                            ]
-                          ],
-                        ),
+                        if (hasWindowControls) SizedBox(width: titlebarSpace),
+                        ...[
+                          if (onMinimize != null)
+                            DecoratedMinimizeButton(
+                              type: themeType,
+                              onPressed: onMinimize,
+                            ),
+                          if (onMaximize != null)
+                            DecoratedMaximizeButton(
+                              type: themeType,
+                              onPressed: onMaximize,
+                            ),
+                          if (onClose != null)
+                            DecoratedCloseButton(
+                              type: themeType,
+                              onPressed: onClose,
+                            ),
+                        ],
                       ],
                     ),
                   ],

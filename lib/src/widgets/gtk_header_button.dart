@@ -31,8 +31,11 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-        onExit: (_) => _updateColor(false),
-        onHover: (_) => _updateColor(),
+      onExit: (_) => _updateColor(false),
+      onHover: (_) => _updateColor(),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: widget.onPressed,
         child: Container(
           height: 34,
           width: 36,
@@ -61,15 +64,10 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
                             : GtkColorType.headerButtonBackgroundTop,
                 colorTheme: widget.colorTheme,
               )),
-          child: IconButton(
-            icon: widget.icon,
-            hoverColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: widget.onPressed,
-          ),
-        ));
+          child: widget.icon,
+        ),
+      ),
+    );
   }
 
   void _updateColor([bool value = true]) => setState(() => hovering = value);

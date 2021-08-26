@@ -1,3 +1,9 @@
+## 0.7.0
+
+* Add GtkViewSwitcher from `flutter_gtk` package
+* Fix Double tap on header buttons doesn't work.
+* Change default padding for header
+
 ## 0.6.0
 
 * Remove `adwaita_icons` from dependency of example

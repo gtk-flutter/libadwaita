@@ -1,0 +1,1 @@
+enum ViewSwitcherStyle { desktop, mobile }
