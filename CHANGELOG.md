@@ -1,3 +1,7 @@
+## 0.8.5
+
+* Use NavigationToolbar instead of Stack to center widget.
+
 ## 0.8.0
 
 * Update example

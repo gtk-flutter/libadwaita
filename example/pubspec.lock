@@ -157,7 +157,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.0"
+    version: "0.8.5"
   lints:
     dependency: transitive
     description:

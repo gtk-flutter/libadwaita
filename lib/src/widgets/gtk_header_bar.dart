@@ -151,45 +151,39 @@ class GtkHeaderBar extends StatelessWidget {
           height: height,
           width: double.infinity,
           child: Stack(
-            alignment: Alignment.center,
             children: [
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onDoubleTap: onDoubleTap,
               ),
-              Padding(
-                padding: padding,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              NavigationToolbar(
+                leading: leading,
+                middle: center,
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    leading,
-                    Row(
-                      children: [
-                        trailling,
-                        if (hasWindowControls) SizedBox(width: titlebarSpace),
-                        ...[
-                          if (onMinimize != null)
-                            DecoratedMinimizeButton(
-                              type: themeType,
-                              onPressed: onMinimize,
-                            ),
-                          if (onMaximize != null)
-                            DecoratedMaximizeButton(
-                              type: themeType,
-                              onPressed: onMaximize,
-                            ),
-                          if (onClose != null)
-                            DecoratedCloseButton(
-                              type: themeType,
-                              onPressed: onClose,
-                            ),
-                        ],
-                      ],
-                    ),
+                    trailling,
+                    if (hasWindowControls) SizedBox(width: titlebarSpace),
+                    ...[
+                      if (onMinimize != null)
+                        DecoratedMinimizeButton(
+                          type: themeType,
+                          onPressed: onMinimize,
+                        ),
+                      if (onMaximize != null)
+                        DecoratedMaximizeButton(
+                          type: themeType,
+                          onPressed: onMaximize,
+                        ),
+                      if (onClose != null)
+                        DecoratedCloseButton(
+                          type: themeType,
+                          onPressed: onClose,
+                        ),
+                    ],
                   ],
                 ),
               ),
-              center,
             ],
           ),
         ),
