@@ -43,13 +43,11 @@ class _GtkPopupMenuState extends State<GtkPopupMenu> {
           contentDyOffset: 4,
           shadow: [
             BoxShadow(
-              color: getAdaptiveGtkColor(context,
-                  colorType: GtkColorType.headerButtonBorder),
+              color: getAdaptiveGtkColor(context, colorType: GtkColorType.headerButtonBorder),
               blurRadius: 8,
             )
           ],
-          backgroundColor:
-              getAdaptiveGtkColor(context, colorType: GtkColorType.canvas),
+          backgroundColor: getAdaptiveGtkColor(context, colorType: GtkColorType.canvas),
           transitionDuration: const Duration(milliseconds: 150),
           bodyBuilder: (context) => SizedBox(child: widget.body),
           direction: PopoverDirection.top,

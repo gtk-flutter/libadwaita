@@ -104,8 +104,7 @@ class GtkHeaderBar extends StatelessWidget {
         onClose = showClose ? window.close : null,
         super(key: key);
 
-  bool get hasWindowControls =>
-      onClose != null || onMinimize != null || onMaximize != null;
+  bool get hasWindowControls => onClose != null || onMinimize != null || onMaximize != null;
 
   @override
   Widget build(BuildContext context) {

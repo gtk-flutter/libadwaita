@@ -54,8 +54,7 @@ class GtkSidebar extends StatelessWidget {
     this.color,
     this.border,
     // Create a vertical list of GtkSidebarItem on demand.
-    required Function(BuildContext context, int index, bool isSelected)
-        itemBuilder,
+    required Function(BuildContext context, int index, bool isSelected) itemBuilder,
     required int itemCount,
     this.controller,
     this.padding,
@@ -63,8 +62,7 @@ class GtkSidebar extends StatelessWidget {
         childrenDelegate = List.generate(
           itemCount,
           (index) => _GtkSidebarItemBuilder(
-            item: (context) =>
-                itemBuilder(context, index, currentIndex == index),
+            item: (context) => itemBuilder(context, index, currentIndex == index),
             isSelected: currentIndex == index,
             onSelected: () => onSelected(index),
           ),
@@ -76,14 +74,11 @@ class GtkSidebar extends StatelessWidget {
     return Container(
         constraints: BoxConstraints(maxWidth: width),
         decoration: BoxDecoration(
-          color: color ??
-              getAdaptiveGtkColor(context, colorType: GtkColorType.canvas),
+          color: color ?? getAdaptiveGtkColor(context, colorType: GtkColorType.canvas),
           border: border ??
               Border(
                 right: BorderSide(
-                  color: getAdaptiveGtkColor(context,
-                          colorType: GtkColorType.headerBarBottomBorder)
-                      .withOpacity(0.4),
+                  color: getAdaptiveGtkColor(context, colorType: GtkColorType.headerBarBottomBorder).withOpacity(0.4),
                 ),
               ),
         ),
@@ -150,15 +145,11 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
     return InkWell(
       onTap: onSelected,
       child: Container(
-        color: isSelected
-            ? currentItem.selectedColor ?? Theme.of(context).primaryColor
-            : currentItem.unselectedColor,
+        color: isSelected ? currentItem.selectedColor ?? Theme.of(context).primaryColor : currentItem.unselectedColor,
         padding: currentItem.padding,
         child: Row(
           children: [
-            currentItem.leading != null
-                ? currentItem.leading!
-                : const SizedBox(),
+            currentItem.leading != null ? currentItem.leading! : const SizedBox(),
             const SizedBox(width: 12),
             currentItem.labelWidget ??
                 Text(

@@ -31,8 +31,7 @@ class GtkViewSwitcherTab extends StatelessWidget {
             child: Row(
               children: [
                 if (data.icon != null) icon,
-                if (data.icon != null && data.title != null)
-                  const SizedBox(width: 8),
+                if (data.icon != null && data.title != null) const SizedBox(width: 8),
                 if (data.title != null)
                   Text(
                     data.title!,
@@ -41,8 +40,7 @@ class GtkViewSwitcherTab extends StatelessWidget {
                             context,
                             colorType: GtkColorType.headerSwitcherTabPrimary,
                           ),
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                   ),
               ],
@@ -54,8 +52,7 @@ class GtkViewSwitcherTab extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (data.icon != null) icon,
-                if (data.icon != null && data.title != null)
-                  const SizedBox(height: 2),
+                if (data.icon != null && data.title != null) const SizedBox(height: 2),
                 if (data.title != null)
                   Text(
                     data.title!,
@@ -65,8 +62,7 @@ class GtkViewSwitcherTab extends StatelessWidget {
                             context,
                             colorType: GtkColorType.headerSwitcherTabPrimary,
                           ),
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                   ),
               ],

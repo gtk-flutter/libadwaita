@@ -44,8 +44,7 @@ class GtkTwoPane extends StatefulWidget {
 class _GtkTwoPaneState extends State<GtkTwoPane> {
   bool _popupNotOpen = true;
 
-  bool get canSplitPanes =>
-      widget.breakpoint < MediaQuery.of(context).size.width;
+  bool get canSplitPanes => widget.breakpoint < MediaQuery.of(context).size.width;
 
   /// Loads and removes the popup page for pane2 on small screens
   void loadPane2Page(BuildContext context) async {
@@ -79,8 +78,7 @@ class _GtkTwoPaneState extends State<GtkTwoPane> {
   /// closes popup wind
   void _closePopup() {
     if (!_popupNotOpen) {
-      SchedulerBinding.instance!
-          .addPostFrameCallback((_) => Navigator.pop(context));
+      SchedulerBinding.instance!.addPostFrameCallback((_) => Navigator.pop(context));
     }
   }
 
@@ -94,9 +92,7 @@ class _GtkTwoPaneState extends State<GtkTwoPane> {
             decoration: BoxDecoration(
               border: Border(
                 right: BorderSide(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey[800]!
-                      : Colors.grey[400]!,
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.grey[800]! : Colors.grey[400]!,
                 ),
               ),
             ),

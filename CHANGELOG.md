@@ -1,3 +1,8 @@
+## 0.8.0
+
+* Update example
+* Add expanded and height property to GtkViewSwitcher
+
 ## 0.7.0+1
 
 * Fix Padding of Icons with Gtk header button
