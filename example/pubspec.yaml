@@ -13,6 +13,7 @@ dependencies:
   bitsdojo_window:
   gtk:
     path: ../
+  window_decorations: ^0.9.0
 
 dev_dependencies:
   flutter_test:

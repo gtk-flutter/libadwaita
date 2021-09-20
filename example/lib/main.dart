@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:gtk/gtk.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:window_decorations/window_decorations.dart';
 
 void main() => runApp(const MyApp());
 
@@ -41,9 +42,19 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           GtkHeaderBar.bitsdojo(
             appWindow: appWindow,
-            leading: GtkHeaderButton(icon: const Icon(Icons.add, size: 17), onPressed: _incrementCounter),
-            center: MediaQuery.of(context).size.width >= 650 ? buildViewSwitcher() : const SizedBox(),
-            trailling: Row(
+            rawDecoratedWindowButton: (name, type, onPressed) =>
+                RawDecoratedWindowButton(
+              name: name,
+              type: type ?? ThemeType.auto,
+              onPressed: onPressed,
+            ),
+            leading: GtkHeaderButton(
+                icon: const Icon(Icons.add, size: 17),
+                onPressed: _incrementCounter),
+            center: MediaQuery.of(context).size.width >= 650
+                ? buildViewSwitcher()
+                : const SizedBox(),
+            trailing: Row(
               children: [
                 GtkPopupMenu(
                   body: Column(
@@ -54,7 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           _counter = 0;
                           Navigator.of(context).pop();
                         }),
-                        title: const Text('Reset Counter', style: TextStyle(fontSize: 15)),
+                        title: const Text('Reset Counter',
+                            style: TextStyle(fontSize: 15)),
                       ),
                     ],
                   ),
@@ -73,11 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: MediaQuery.of(context).size.width < 650 ? buildViewSwitcher(ViewSwitcherStyle.mobile) : null,
+      bottomNavigationBar: MediaQuery.of(context).size.width < 650
+          ? buildViewSwitcher(ViewSwitcherStyle.mobile)
+          : null,
     );
   }
 
-  GtkViewSwitcher buildViewSwitcher([ViewSwitcherStyle viewSwitcherStyle = ViewSwitcherStyle.desktop]) {
+  GtkViewSwitcher buildViewSwitcher(
+      [ViewSwitcherStyle viewSwitcherStyle = ViewSwitcherStyle.desktop]) {
     return GtkViewSwitcher(
       height: 55,
       tabs: const [
