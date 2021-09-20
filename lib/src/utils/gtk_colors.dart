@@ -31,22 +31,23 @@ class GnomeTheme {
   loadFromFile() {
     final settings = GSettings(schemaId: 'org.gnome.desktop.interface');
     theme = settings.stringValue('gtk-theme');
-    late String fileName;
-    String path1 = "/usr/share/themes/" + theme + "/gtk-3.0/gtk.css";
-    String path2 = xdgdir.configHome.path.replaceAll('config', 'themes/') + theme + "/gtk-3.0/gtk.css";
-    String path3 = "${xdgdir.dataHome.path}/themes/" + theme + "/gtk-3.0/gtk.css";
+    String folderPath = "";
+    String path1 = "/usr/share/themes/" + theme;
+    String path2 =
+        xdgdir.configHome.path.replaceAll('config', 'themes/') + theme;
+    String path3 = "${xdgdir.dataHome.path}/themes/" + theme;
     if (Directory(path1).existsSync()) {
-      fileName = path1;
+      folderPath = path1;
     } else if (Directory(path2).existsSync()) {
-      fileName = path2;
+      folderPath = path2;
     } else if (Directory(path3).existsSync()) {
-      fileName = path3;
+      folderPath = path3;
     } else {
       return null;
     }
-    File file = File(fileName);
+    File file = File(folderPath + "/gtk-3.0/gtk.css");
     if (file.existsSync()) {
-      contents = File(fileName).readAsStringSync();
+      contents = file.readAsStringSync();
     }
   }
 
