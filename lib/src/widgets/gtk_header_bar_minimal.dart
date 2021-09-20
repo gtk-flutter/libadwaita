@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/utils.dart';
+import 'package:gtk/src/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class GtkHeaderBarMinimal extends StatelessWidget {
   /// The leading widget for the headerbar
@@ -17,7 +18,7 @@ class GtkHeaderBarMinimal extends StatelessWidget {
 
   final Widget? closeBtn;
 
-  final GtkColorTheme systemTheme;
+  // final GtkColorTheme systemTheme;
 
   /// The height of the headerbar
   final double height;
@@ -44,7 +45,6 @@ class GtkHeaderBarMinimal extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
-    this.systemTheme = GtkColorTheme.adwaita,
     this.minimizeBtn,
     this.maximizeBtn,
     this.closeBtn,
@@ -61,7 +61,6 @@ class GtkHeaderBarMinimal extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
-    this.systemTheme = GtkColorTheme.adwaita,
     Widget Function(VoidCallback onTap)? minimizeBtn,
     Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
@@ -83,7 +82,6 @@ class GtkHeaderBarMinimal extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
-    this.systemTheme = GtkColorTheme.adwaita,
     Widget Function(VoidCallback onTap)? minimizeBtn,
     Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
@@ -99,6 +97,7 @@ class GtkHeaderBarMinimal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color? border = Provider.of<GnomeThemeProvider>(context).theme.border;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: (_) => onHeaderDrag?.call(),
@@ -107,35 +106,22 @@ class GtkHeaderBarMinimal extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                getAdaptiveGtkColor(
-                  context,
-                  colorType: GtkColorType.headerBarBackgroundTop,
-                  colorTheme: systemTheme,
-                ),
-                getAdaptiveGtkColor(
-                  context,
-                  colorType: GtkColorType.headerBarBackgroundBottom,
-                  colorTheme: systemTheme,
-                ),
-              ],
-            ),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Provider.of<GnomeThemeProvider>(context)
+                      .theme
+                      .headerBarBackgroundTop,
+                  Provider.of<GnomeThemeProvider>(context)
+                      .theme
+                      .headerBarBackgroundBottom,
+                ]),
             border: Border(
               top: BorderSide(
-                color: getAdaptiveGtkColor(
-                  context,
-                  colorType: GtkColorType.headerBarTopBorder,
-                  colorTheme: systemTheme,
-                ),
+                color: Theme.of(context).canvasColor,
               ),
               bottom: BorderSide(
-                color: getAdaptiveGtkColor(
-                  context,
-                  colorType: GtkColorType.headerBarBottomBorder,
-                  colorTheme: systemTheme,
-                ),
+                color: border ?? Theme.of(context).canvasColor,
               ),
             ),
           ),

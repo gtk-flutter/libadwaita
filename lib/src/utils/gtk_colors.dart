@@ -23,8 +23,14 @@ class GnomeTheme {
   Color? border;
   Color? themeSelectedBG;
   Color? textSelectedFG;
+  Color headerBarBackgroundTop = const Color(0xFFE1DEDB);
+  Color headerBarBackgroundBottom = const Color(0xFFDAD6D2);
+  Color headerBarBottomBorder = const Color(0xFFBFB8B1);
+
+  late ThemeData themeData;
 
   GnomeTheme() {
+    themeData = adwaita();
     loadFromFile();
     parse();
   }
@@ -52,11 +58,21 @@ class GnomeTheme {
     }
   }
 
-  ThemeData data(context) {
-    ThemeData themedata = ThemeData(
+  ThemeData adwaita() {
+    headerBarBackgroundTop = const Color(0xFFE1DEDB);
+    headerBarBackgroundBottom = const Color(0xFFDAD6D2);
+    headerBarBottomBorder = const Color(0xFFBFB8B1);
+    themeData = ThemeData(
+      brightness: Brightness.light,
+    );
+    return themeData;
+  }
+
+  ThemeData data() {
+    themeData = ThemeData(
       iconTheme: IconThemeData(color: textColor),
-      brightness: textColor != null
-          ? textColor!.computeLuminance() <= 0.5
+      brightness: themeBgColor != null
+          ? themeBgColor!.computeLuminance() >= 0.5
               ? Brightness.light
               : Brightness.dark
           : null,
@@ -70,8 +86,9 @@ class GnomeTheme {
           bodyText1: TextStyle(color: textColor)),
       primaryColor: themeBaseColor,
     );
-    return themedata.copyWith(
-        colorScheme: themedata.colorScheme.copyWith(secondary: textColor));
+    themeData = themeData.copyWith(
+        colorScheme: themeData.colorScheme.copyWith(secondary: textColor));
+    return themeData;
   }
 
   /// Get standard gtk color define
@@ -107,7 +124,16 @@ class GnomeTheme {
     themeSelectedBG = getBaseColor("theme_selected_bg_color");
     textSelectedFG = getBaseColor("theme_selected_fg_color");
 
+    if (themeBgColor != null) {
+      headerBarBackgroundTop = themeBgColor!;
+      headerBarBackgroundBottom = themeBgColor!;
+    }
+    if (border != null) {
+      headerBarBottomBorder = border!;
+    }
+
     buttonFg ??= themeBgColor;
+    data();
   }
 }
 
