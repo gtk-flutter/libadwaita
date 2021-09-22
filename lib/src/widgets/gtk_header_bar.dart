@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gtk/gtk.dart';
-import '../utils/utils.dart';
 
 /// Use GtkHeaderBarMinimal for HeaderBar without window_decorations package
 class GtkHeaderBar extends StatelessWidget {
@@ -24,8 +23,6 @@ class GtkHeaderBar extends StatelessWidget {
 
   /// The ThemeType property from windowDecoration package to use for the titlerbar/window buttons
   final dynamic themeType;
-
-  final GtkColorTheme systemTheme;
 
   /// The height of the headerbar
   final double height;
@@ -65,7 +62,6 @@ class GtkHeaderBar extends StatelessWidget {
     this.titlebarSpace = 4,
     this.height = 47,
     this.themeType,
-    this.systemTheme = GtkColorTheme.adwaita,
     this.onMinimize,
     this.onMaximize,
     this.onClose,
@@ -84,7 +80,6 @@ class GtkHeaderBar extends StatelessWidget {
     this.titlebarSpace = 4,
     this.height = 47,
     this.themeType,
-    this.systemTheme = GtkColorTheme.adwaita,
     bool showMinimize = true,
     bool showMaximize = true,
     bool showClose = true,
@@ -108,7 +103,6 @@ class GtkHeaderBar extends StatelessWidget {
     this.titlebarSpace = 4,
     this.height = 47,
     this.themeType,
-    this.systemTheme = GtkColorTheme.adwaita,
     bool showMinimize = true,
     bool showMaximize = true,
     bool showClose = true,
@@ -133,7 +127,6 @@ class GtkHeaderBar extends StatelessWidget {
       padding: padding,
       titlebarSpace: titlebarSpace,
       height: height,
-      systemTheme: systemTheme,
       closeBtn: onClose != null
           ? rawDecoratedWindowButton(
               'close',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gtk/gtk.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:window_decorations/window_decorations.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,13 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = GnomeTheme();
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: theme.data(context),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Gtk + Flutter Demo'),
-    );
+    return GtkApp(builder: (context, widget) {
+      return MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          home: const MyHomePage(title: 'Gtk + Flutter Demo'),
+          theme: Provider.of<GnomeThemeProvider>(context).getTheme());
+    });
   }
 }
 
