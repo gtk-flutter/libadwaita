@@ -6,4 +6,3 @@ export 'gtk_sidebar.dart';
 export 'gtk_two_pane.dart';
 export 'gtk_view_switcher.dart';
 export 'gtk_view_switcher_tab.dart';
-export 'gtk_app.dart';

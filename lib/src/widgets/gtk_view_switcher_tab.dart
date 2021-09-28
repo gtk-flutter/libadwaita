@@ -3,12 +3,14 @@ import 'package:gtk/src/models/models.dart';
 import 'package:gtk/src/utils/utils.dart';
 
 class GtkViewSwitcherTab extends StatelessWidget {
+  final GnomeTheme gnomeTheme;
   final ViewSwitcherData data;
   final ViewSwitcherStyle style;
   final bool isSelected;
 
   const GtkViewSwitcherTab({
     Key? key,
+    required this.gnomeTheme,
     required this.data,
     required this.isSelected,
     required this.style,
@@ -21,6 +23,7 @@ class GtkViewSwitcherTab extends StatelessWidget {
       size: 18,
       color: getAdaptiveGtkColor(
         context,
+        gnomeTheme: gnomeTheme,
         colorType: GtkColorType.headerSwitcherTabPrimary,
       ),
     );
@@ -31,16 +34,19 @@ class GtkViewSwitcherTab extends StatelessWidget {
             child: Row(
               children: [
                 if (data.icon != null) icon,
-                if (data.icon != null && data.title != null) const SizedBox(width: 8),
+                if (data.icon != null && data.title != null)
+                  const SizedBox(width: 8),
                 if (data.title != null)
                   Text(
                     data.title!,
                     style: Theme.of(context).textTheme.subtitle2?.copyWith(
                           color: getAdaptiveGtkColor(
                             context,
+                            gnomeTheme: gnomeTheme,
                             colorType: GtkColorType.headerSwitcherTabPrimary,
                           ),
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                   ),
               ],
@@ -52,7 +58,8 @@ class GtkViewSwitcherTab extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (data.icon != null) icon,
-                if (data.icon != null && data.title != null) const SizedBox(height: 2),
+                if (data.icon != null && data.title != null)
+                  const SizedBox(height: 2),
                 if (data.title != null)
                   Text(
                     data.title!,
@@ -60,9 +67,11 @@ class GtkViewSwitcherTab extends StatelessWidget {
                           fontSize: 12,
                           color: getAdaptiveGtkColor(
                             context,
+                            gnomeTheme: gnomeTheme,
                             colorType: GtkColorType.headerSwitcherTabPrimary,
                           ),
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                   ),
               ],

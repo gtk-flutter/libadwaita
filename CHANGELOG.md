@@ -1,7 +1,8 @@
 ## 0.9.0
 
+- Update gsettings to latest version
 - Fix native theme picker by @MalcolmMielle
-- Made Window Decorations a seperate package to keep package lightweight
+- Made Window Decorations a seperate package to keep this package lightweight
 
 ## 0.8.5
 

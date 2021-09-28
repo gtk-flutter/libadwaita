@@ -1,9 +1,14 @@
+import 'package:gtk/gtk.dart';
 import 'package:popover/popover.dart';
 import 'package:flutter/material.dart';
 import './gtk_header_button.dart';
 import '../utils/utils.dart';
 
 class GtkPopupMenu extends StatefulWidget {
+  /// The Theme by which the color scheme
+  /// of the Popup menu will be based of
+  final GnomeTheme gnomeTheme;
+
   /// The body of the popup
   final Widget body;
 
@@ -18,6 +23,7 @@ class GtkPopupMenu extends StatefulWidget {
 
   const GtkPopupMenu({
     Key? key,
+    required this.gnomeTheme,
     required this.body,
     this.icon = const Icon(Icons.menu, size: 17),
     this.popupWidth = 200,
@@ -33,6 +39,7 @@ class _GtkPopupMenuState extends State<GtkPopupMenu> {
   @override
   Widget build(BuildContext context) {
     return GtkHeaderButton(
+      gnomeTheme: widget.gnomeTheme,
       icon: Center(child: widget.icon),
       isActive: isActive,
       onPressed: () {
@@ -43,11 +50,14 @@ class _GtkPopupMenuState extends State<GtkPopupMenu> {
           contentDyOffset: 4,
           shadow: [
             BoxShadow(
-              color: getAdaptiveGtkColor(context, colorType: GtkColorType.headerButtonBorder),
+              color: getAdaptiveGtkColor(context,
+                  gnomeTheme: widget.gnomeTheme,
+                  colorType: GtkColorType.headerButtonBorder),
               blurRadius: 8,
             )
           ],
-          backgroundColor: getAdaptiveGtkColor(context, colorType: GtkColorType.canvas),
+          backgroundColor: getAdaptiveGtkColor(context,
+              gnomeTheme: widget.gnomeTheme, colorType: GtkColorType.canvas),
           transitionDuration: const Duration(milliseconds: 150),
           bodyBuilder: (context) => SizedBox(child: widget.body),
           direction: PopoverDirection.top,

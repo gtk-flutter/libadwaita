@@ -5,6 +5,7 @@ import 'package:gtk/src/utils/utils.dart';
 import 'widgets.dart';
 
 class GtkViewSwitcher extends StatelessWidget {
+  final GnomeTheme gnomeTheme;
   final List<ViewSwitcherData> tabs;
   final ValueChanged<int> onViewChanged;
   final ViewSwitcherStyle style;
@@ -14,13 +15,15 @@ class GtkViewSwitcher extends StatelessWidget {
 
   const GtkViewSwitcher({
     Key? key,
+    required this.gnomeTheme,
     required this.tabs,
     required this.onViewChanged,
     required this.currentIndex,
     this.style = ViewSwitcherStyle.desktop,
     this.height = 55,
     bool? expanded,
-  })  : expanded = expanded ?? (style == ViewSwitcherStyle.desktop ? false : true),
+  })  : expanded =
+            expanded ?? (style == ViewSwitcherStyle.desktop ? false : true),
         assert(tabs.length >= 2),
         super(key: key);
 
@@ -32,13 +35,15 @@ class GtkViewSwitcher extends StatelessWidget {
         for (final tab in tabs.asMap().entries)
           () {
             var ctab = InkWell(
-              onTap: currentIndex != tab.key ? () => onViewChanged(tab.key) : null,
+              onTap:
+                  currentIndex != tab.key ? () => onViewChanged(tab.key) : null,
               child: Container(
                 height: height,
                 decoration: BoxDecoration(
                   color: tab.key == currentIndex
                       ? getAdaptiveGtkColor(
                           context,
+                          gnomeTheme: gnomeTheme,
                           colorType: GtkColorType.headerSwitcherTabBackground,
                         )
                       : Colors.transparent,
@@ -48,6 +53,7 @@ class GtkViewSwitcher extends StatelessWidget {
                       color: tab.key == currentIndex
                           ? getAdaptiveGtkColor(
                               context,
+                              gnomeTheme: gnomeTheme,
                               colorType: GtkColorType.headerSwitcherTabBorder,
                             )
                           : Colors.transparent,
@@ -55,6 +61,7 @@ class GtkViewSwitcher extends StatelessWidget {
                   ),
                 ),
                 child: GtkViewSwitcherTab(
+                  gnomeTheme: gnomeTheme,
                   data: tab.value,
                   isSelected: tab.key == currentIndex,
                   style: style,

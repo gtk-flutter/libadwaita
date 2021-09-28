@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../utils/utils.dart';
 
 class GtkHeaderButton extends StatefulWidget {
+  /// The Theme by which the color scheme
+  /// of the Header button will be based of
+  final GnomeTheme gnomeTheme;
+
   /// The icon of the button, use size of 17 for better results
   final Widget icon;
 
@@ -11,8 +15,6 @@ class GtkHeaderButton extends StatefulWidget {
   /// Triggered when the button is pressed.
   final VoidCallback? onPressed;
 
-  final GtkColorTheme colorTheme;
-
   /// The margin of the [GtkHeaderButton]
   final EdgeInsets margin;
 
@@ -21,11 +23,11 @@ class GtkHeaderButton extends StatefulWidget {
 
   const GtkHeaderButton({
     Key? key,
+    required this.gnomeTheme,
     required this.icon,
     this.padding = const EdgeInsets.all(8),
     this.isActive = false,
     this.margin = const EdgeInsets.symmetric(horizontal: 5),
-    this.colorTheme = GtkColorTheme.adwaita,
     this.onPressed,
   }) : super(key: key);
 
@@ -53,12 +55,13 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
               border: Border.all(
                 color: getAdaptiveGtkColor(
                   context,
+                  gnomeTheme: widget.gnomeTheme,
                   colorType: GtkColorType.headerButtonBorder,
-                  colorTheme: widget.colorTheme,
                 ),
               ),
               color: getAdaptiveGtkColor(
                 context,
+                gnomeTheme: widget.gnomeTheme,
                 colorType: widget.isActive
                     ? Theme.of(context).brightness == Brightness.dark
                         ? GtkColorType.headerButtonBackgroundTop
@@ -70,7 +73,6 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
                         : hovering
                             ? GtkColorType.headerButtonBackgroundTopHover
                             : GtkColorType.headerButtonBackgroundTop,
-                colorTheme: widget.colorTheme,
               )),
           child: widget.icon,
         ),

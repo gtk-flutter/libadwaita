@@ -23,16 +23,13 @@ class GnomeTheme {
   Color? border;
   Color? themeSelectedBG;
   Color? textSelectedFG;
-  Color headerBarBackgroundTop = const Color(0xFFE1DEDB);
-  Color headerBarBackgroundBottom = const Color(0xFFDAD6D2);
-  Color headerBarBottomBorder = const Color(0xFFBFB8B1);
 
   late ThemeData themeData;
 
   GnomeTheme() {
     themeData = adwaita();
-    loadFromFile();
-    parse();
+    // loadFromFile();
+    // parse();
   }
 
   Future loadFromFile() async {
@@ -53,15 +50,12 @@ class GnomeTheme {
       return;
     }
     File file = File(folderPath + "/gtk-3.0/gtk.css");
-    if (file.existsSync()) {
-      contents = file.readAsStringSync();
+    if (await file.exists()) {
+      contents = await file.readAsString();
     }
   }
 
   ThemeData adwaita() {
-    headerBarBackgroundTop = const Color(0xFFE1DEDB);
-    headerBarBackgroundBottom = const Color(0xFFDAD6D2);
-    headerBarBottomBorder = const Color(0xFFBFB8B1);
     themeData = ThemeData(
       brightness: Brightness.light,
     );
@@ -71,8 +65,8 @@ class GnomeTheme {
   ThemeData data() {
     themeData = ThemeData(
       iconTheme: IconThemeData(color: textColor),
-      brightness: themeBgColor != null
-          ? themeBgColor!.computeLuminance() >= 0.5
+      brightness: textColor != null
+          ? textColor!.computeLuminance() < 0.5
               ? Brightness.light
               : Brightness.dark
           : null,
@@ -124,45 +118,29 @@ class GnomeTheme {
     themeSelectedBG = getBaseColor("theme_selected_bg_color");
     textSelectedFG = getBaseColor("theme_selected_fg_color");
 
-    if (themeBgColor != null) {
-      headerBarBackgroundTop = themeBgColor!;
-      headerBarBackgroundBottom = themeBgColor!;
-    }
-    if (border != null) {
-      headerBarBottomBorder = border!;
-    }
-
     buttonFg ??= themeBgColor;
     data();
   }
 }
 
 Color getGtkColor({
+  required GnomeTheme gnomeTheme,
   required GtkColorType colorType,
   required bool isDark,
-  GtkColorTheme colorTheme = GtkColorTheme.system,
 }) {
-  switch (colorTheme) {
-    case GtkColorTheme.adwaita:
-      return _adwaita(isDark)[describeEnum(colorType)]!;
-    default:
-      var theme = GnomeTheme();
-      theme.loadFromFile();
-      theme.parse();
-      return _system(theme)[describeEnum(colorType)] ??
-          _adwaita(isDark)[describeEnum(colorType)]!;
-  }
+  return _system(gnomeTheme)[describeEnum(colorType)] ??
+      _adwaita(isDark)[describeEnum(colorType)]!;
 }
 
 Color getAdaptiveGtkColor(
   BuildContext context, {
+  required GnomeTheme gnomeTheme,
   required GtkColorType colorType,
-  GtkColorTheme colorTheme = GtkColorTheme.system,
 }) =>
     getGtkColor(
+      gnomeTheme: gnomeTheme,
       colorType: colorType,
       isDark: Theme.of(context).brightness == Brightness.dark,
-      colorTheme: colorTheme,
     );
 
 enum GtkColorType {

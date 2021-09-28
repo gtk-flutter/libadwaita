@@ -11,13 +11,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GtkApp(builder: (context, widget) {
-      return MaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          home: const MyHomePage(title: 'Gtk + Flutter Demo'),
-          theme: Provider.of<GnomeThemeProvider>(context).getTheme());
-    });
+    return ChangeNotifierProvider<GnomeThemeProvider>(
+      create: (_) => GnomeThemeProvider(),
+      builder: (context, widget) {
+        return MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            home: const MyHomePage(title: 'Gtk + Flutter Demo'),
+            theme: Provider.of<GnomeThemeProvider>(context).getTheme());
+      },
+    );
   }
 }
 
@@ -43,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           GtkHeaderBar.bitsdojo(
             appWindow: appWindow,
+            gnomeTheme: Provider.of<GnomeThemeProvider>(context).theme,
             rawDecoratedWindowButton: (name, type, onPressed) =>
                 RawDecoratedWindowButton(
               name: name,
@@ -50,7 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: onPressed,
             ),
             leading: GtkHeaderButton(
-                icon: const Icon(Icons.add, size: 17),
+                gnomeTheme: Provider.of<GnomeThemeProvider>(context).theme,
+                icon: const Icon(Icons.add, size: 15),
                 onPressed: _incrementCounter),
             center: MediaQuery.of(context).size.width >= 650
                 ? buildViewSwitcher()
@@ -58,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
             trailing: Row(
               children: [
                 GtkPopupMenu(
+                  gnomeTheme: Provider.of<GnomeThemeProvider>(context).theme,
                   body: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -95,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
   GtkViewSwitcher buildViewSwitcher(
       [ViewSwitcherStyle viewSwitcherStyle = ViewSwitcherStyle.desktop]) {
     return GtkViewSwitcher(
+      gnomeTheme: Provider.of<GnomeThemeProvider>(context).theme,
       height: 55,
       tabs: const [
         ViewSwitcherData(icon: Icons.star_outline, title: "Explore"),
