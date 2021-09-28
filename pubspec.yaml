@@ -11,13 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
   from_css_color: ">=2.0.0 <3.0.0"
+  dbus: ">=0.6.3 <1.0.0"
   gsettings: ">=0.2.0 <1.0.0"
   popover: ">=0.2.6+2 <1.0.0"
   xdg_directories: ">=0.2.0 <1.0.0"
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   flutter_lints: ">=1.0.0 <2.0.0"
 
 flutter:
