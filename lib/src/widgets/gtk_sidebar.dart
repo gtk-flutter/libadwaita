@@ -171,7 +171,9 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
     return InkWell(
       onTap: onSelected,
       child: Container(
-        color: gnomeTheme.themeBgColor,
+        color: isSelected
+            ? currentItem.selectedColor ?? Theme.of(context).primaryColor
+            : currentItem.unselectedColor,
         padding: currentItem.padding,
         child: Row(
           children: [
@@ -182,7 +184,9 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
                   currentItem.label!,
                   style: TextStyle(
                     fontWeight: isSelected ? FontWeight.bold : null,
-                    color: isSelected ? gnomeTheme.themeSelectedBG : null,
+                    color: isSelected
+                        ? gnomeTheme.themeSelectedBG ?? Colors.white
+                        : null,
                     fontSize: 15,
                   ),
                 ),

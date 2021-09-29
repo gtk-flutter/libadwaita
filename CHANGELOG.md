@@ -1,3 +1,9 @@
+## 0.9.8
+
+- Add riverpod example
+- Fix selected and unselected color for gtk sidebar
+- Fix initial color parsing
+
 ## 0.9.5
 
 - Fix instructions on how to use window decoration

@@ -13,8 +13,9 @@ dependencies:
   bitsdojo_window:
   gtk:
     path: ../
-  window_decorations: ^0.9.5
+  flutter_riverpod: ^1.0.0-dev.7
   provider: ">=6.0.0"
+  window_decorations: ^0.9.5
 
 dev_dependencies:
   flutter_test:

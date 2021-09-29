@@ -29,7 +29,6 @@ class GnomeTheme {
   GnomeTheme() {
     themeData = adwaita();
     // loadFromFile();
-    // parse();
   }
 
   Future loadFromFile() async {
@@ -50,14 +49,29 @@ class GnomeTheme {
       return;
     }
     File file = File(folderPath + "/gtk-3.0/gtk.css");
-    if (await file.exists()) {
+    if (file.existsSync()) {
       contents = await file.readAsString();
     }
+    parse();
   }
 
-  ThemeData adwaita() {
+  ThemeData adwaita([bool isDark = false]) {
+    var brightness = isDark ? Brightness.dark : Brightness.light;
+    var txtClr = isDark ? Colors.white : Colors.black;
     themeData = ThemeData(
-      brightness: Brightness.light,
+      brightness: brightness,
+      iconTheme: IconThemeData(color: txtClr),
+      canvasColor: _adwaita(isDark)['canvas'],
+      textSelectionTheme: TextSelectionThemeData(cursorColor: txtClr),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+        primary: _adwaita(isDark)['brightness == Brightness.dark'],
+        onPrimary: txtClr,
+      )),
+      textTheme: TextTheme(
+          bodyText2: TextStyle(color: txtClr),
+          bodyText1: TextStyle(color: txtClr)),
+      primaryColor: Colors.blue,
     );
     return themeData;
   }
