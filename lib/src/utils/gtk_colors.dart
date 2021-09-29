@@ -28,7 +28,6 @@ class GnomeTheme {
 
   GnomeTheme() {
     themeData = adwaita();
-    // loadFromFile();
   }
 
   Future loadFromFile() async {

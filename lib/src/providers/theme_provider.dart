@@ -10,7 +10,6 @@ class GnomeThemeProvider with ChangeNotifier {
 
   Future<void> load() async {
     await theme.loadFromFile();
-    theme.parse();
     notifyListeners();
   }
 
