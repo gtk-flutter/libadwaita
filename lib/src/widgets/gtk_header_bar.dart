@@ -43,21 +43,22 @@ class GtkHeaderBar extends StatelessWidget {
   /// Called when headerbar is double tapped
   final VoidCallback? onDoubleTap;
 
-  /// Just import window decoration package and use it as below
+  /// Just import window decoration package and supply the windowDecor to this
+  /// To make a custom button use below code instead
   /// ```
   /// (name, type, onPressed) => RawDecoratedWindowButton(
   ///   name: name,
-  ///   type: ?? ThemeType.auto,
+  ///   type: type,
   ///   onPressed: onPressed,
   /// )
   /// ```
   final Widget Function(String name, dynamic type, VoidCallback onPressed)
-      rawDecoratedWindowButton;
+      windowDecor;
 
   const GtkHeaderBar({
     Key? key,
     required this.gnomeTheme,
-    required this.rawDecoratedWindowButton,
+    required this.windowDecor,
     this.onDoubleTap,
     this.onHeaderDrag,
     this.leading = const SizedBox(),
@@ -78,7 +79,7 @@ class GtkHeaderBar extends StatelessWidget {
     /// The appWindow object from bitsdojo_window package
     required appWindow,
     required this.gnomeTheme,
-    required this.rawDecoratedWindowButton,
+    required this.windowDecor,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailing = const SizedBox(),
@@ -102,7 +103,7 @@ class GtkHeaderBar extends StatelessWidget {
     /// The Window.of(context) object from nativeshell package
     required window,
     required this.gnomeTheme,
-    required this.rawDecoratedWindowButton,
+    required this.windowDecor,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailing = const SizedBox(),
@@ -136,21 +137,21 @@ class GtkHeaderBar extends StatelessWidget {
       titlebarSpace: titlebarSpace,
       height: height,
       closeBtn: onClose != null
-          ? rawDecoratedWindowButton(
+          ? windowDecor(
               'close',
               themeType,
               onClose!,
             )
           : null,
       maximizeBtn: onMaximize != null
-          ? rawDecoratedWindowButton(
+          ? windowDecor(
               'maximize',
               themeType,
               onMaximize!,
             )
           : null,
       minimizeBtn: onMinimize != null
-          ? rawDecoratedWindowButton(
+          ? windowDecor(
               'minimize',
               themeType,
               onMinimize!,

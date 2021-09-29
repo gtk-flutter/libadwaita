@@ -1,3 +1,8 @@
+## 0.9.5
+
+- Fix instructions on how to use window decoration
+- Update README and screenshot
+
 ## 0.9.0
 
 - Update gsettings to latest version

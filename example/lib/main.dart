@@ -47,12 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           GtkHeaderBar.bitsdojo(
             appWindow: appWindow,
             gnomeTheme: Provider.of<GnomeThemeProvider>(context).theme,
-            rawDecoratedWindowButton: (name, type, onPressed) =>
-                RawDecoratedWindowButton(
-              name: name,
-              type: type ?? ThemeType.auto,
-              onPressed: onPressed,
-            ),
+            windowDecor: windowDecor,
             leading: GtkHeaderButton(
                 gnomeTheme: Provider.of<GnomeThemeProvider>(context).theme,
                 icon: const Icon(Icons.add, size: 15),
