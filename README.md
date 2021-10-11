@@ -1,8 +1,8 @@
 ## GTK ❤️ Flutter
 
-<p>
-<a href="https://github.com/prateekmedia/appimagepool/releases"><img alt="GitHub release" src="https://img.shields.io/github/v/release/prateekmedia/appimagepool?color=blue"/></a> <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/prateekmedia/appimagepool?color=indigo"/></a> <a href="https://github.com/prateekmedia"><img alt="Maintainer" src="https://img.shields.io/badge/Maintainer-prateekmedia-informational"/></a>
-</p>
+[![Pub.dev](https://img.shields.io/pub/v/gtk.svg)](https://pub.dev/packages/gtk)
+[![License](https://img.shields.io/github/license/prateekmedia/gtk-flutter?color=indigo)](LICENSE)
+[![Maintainer](https://img.shields.io/badge/Maintainer-prateekmedia-informational)](https://github.com/prateekmedia)
 
 Unofficial implementation of GTK Widgets and libadwaita in Flutter. Based on the GNOME Human Interface Guidelines.
 
