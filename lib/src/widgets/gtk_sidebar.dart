@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gtk/gtk.dart';
 
 class GtkSidebar extends StatelessWidget {
-  /// The Theme by which the color scheme
-  /// of the sidebar will be based of
-  final GnomeTheme gnomeTheme;
-
   /// The current index of the item selected
   final int? currentIndex;
 
@@ -31,7 +27,6 @@ class GtkSidebar extends StatelessWidget {
 
   GtkSidebar({
     Key? key,
-    required this.gnomeTheme,
     required this.currentIndex,
     required this.onSelected,
     this.width = 265,
@@ -45,7 +40,6 @@ class GtkSidebar extends StatelessWidget {
   })  : childrenDelegate = List.generate(
             children.length,
             (index) => _GtkSidebarItemBuilder(
-                  gnomeTheme: gnomeTheme,
                   item: (context) => children[index],
                   isSelected: index == currentIndex,
                   onSelected: () => onSelected(index),
@@ -54,7 +48,6 @@ class GtkSidebar extends StatelessWidget {
 
   GtkSidebar.builder({
     Key? key,
-    required this.gnomeTheme,
     required this.currentIndex,
     required this.onSelected,
     this.width = 265,
@@ -70,7 +63,6 @@ class GtkSidebar extends StatelessWidget {
         childrenDelegate = List.generate(
           itemCount,
           (index) => _GtkSidebarItemBuilder(
-            gnomeTheme: gnomeTheme,
             item: (context) =>
                 itemBuilder(context, index, currentIndex == index),
             isSelected: currentIndex == index,
@@ -101,8 +93,6 @@ class GtkSidebar extends StatelessWidget {
 }
 
 class GtkSidebarItem {
-  final GnomeTheme gnomeTheme;
-
   /// The key of the gtk sidebar item child.
   final Key? key;
 
@@ -129,7 +119,6 @@ class GtkSidebarItem {
 
   GtkSidebarItem({
     this.key,
-    required this.gnomeTheme,
     this.label,
     this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
     this.selectedColor,
@@ -141,14 +130,12 @@ class GtkSidebarItem {
 }
 
 class _GtkSidebarItemBuilder extends StatelessWidget {
-  final GnomeTheme gnomeTheme;
   final GtkSidebarItem Function(BuildContext context) item;
   final bool isSelected;
   final VoidCallback? onSelected;
 
   const _GtkSidebarItemBuilder({
     Key? key,
-    required this.gnomeTheme,
     required this.item,
     required this.isSelected,
     this.onSelected,
@@ -158,10 +145,8 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentItem = item(context);
     var leading = isSelected
-        ? Theme(
-            data: gnomeTheme.themeData.copyWith(
-                iconTheme:
-                    IconThemeData(color: isSelected ? Colors.white : null)),
+        ? IconTheme(
+            data: IconThemeData(color: isSelected ? Colors.white : null),
             child: currentItem.leading!)
         : currentItem.leading;
     return InkWell(

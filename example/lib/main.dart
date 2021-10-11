@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
       builder: (context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const MyHomePage(),
-        // theme: ThemeData.light(),
         theme: GnomeTheme.of(context).themeData,
       ),
     );

@@ -2,16 +2,32 @@ import 'package:flutter/material.dart';
 
 class GnomeTheme extends InheritedWidget {
   final ValueNotifier<Color> primary = ValueNotifier<Color>(Colors.blue);
+
+  /// List rows, tiles
   final Color tiles;
+
+  /// Menus, popovers
   final Color menus;
+
+  /// Header bars, active tabs, message dialogs, sidebars
   final Color sidebars;
+
+  /// Text, icons color
   final Color textColor;
+
+  /// Foreground areas, borders
   final Color fgColor;
+
+  /// Background areas
   final Color bgColor;
+
+  /// Inactive tabs
   final Color inactiveTabs;
+
   final bool isDark;
 
   late final Color border = fgColor.withOpacity(isDark ? 0.5 : 0.2 * 0.5);
+
   late final ThemeData themeData = ThemeData(
     primaryColor: primary.value,
     canvasColor: bgColor,
@@ -57,24 +73,12 @@ class LibAdwaita {
   /// Colors taken from https://gitlab.gnome.org/GNOME/libadwaita/-/issues/267,
   /// for more info see https://gitlab.gnome.org/GNOME/libadwaita/-/blob/main/src/stylesheet/_colors.scss
 
-  /// List rows, tiles
   final List<Color> tiles = ['ffffff'.fromHex, '303030'.fromHex];
-
-  /// Menus, popovers
   final List<Color> menus = ['ffffff'.fromHex, '383838'.fromHex];
-
-  /// Header bars, active tabs, message dialogs, sidebars
   final List<Color> sidebars = ['ebebeb'.fromHex, '303030'.fromHex];
-
   final List<Color> textColor = [Colors.black, Colors.white];
-
-  /// Foreground areas, borders
   final List<Color> fgColor = [Colors.black26, Colors.white];
-
-  /// Background areas
   final List<Color> bgColor = ['fafafa'.fromHex, '242424'.fromHex];
-
-  /// Inactive tabs
   final List<Color> inactiveTabs = ['e5e5e5'.fromHex, '292929'.fromHex];
 }
 

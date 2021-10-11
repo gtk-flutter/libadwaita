@@ -1,3 +1,8 @@
+## 1.0.0-rc.1
+
+- Remove gnomeTheme parameter requirement for gtk_sidebar
+- Add details about paramters of `GnomeTheme.of(context)`
+
 ## 1.0.0-rc.0
 
 - Use color schemes from libadwaita
