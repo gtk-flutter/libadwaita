@@ -41,7 +41,7 @@ class GnomeTheme extends InheritedWidget {
     final GnomeTheme? result =
         context.dependOnInheritedWidgetOfExactType<GnomeTheme>();
     assert(result != null,
-        'No GnomeTheme found in context, Please wrap your Material / Cupertino App with GnomeTheme');
+        'No GnomeTheme found in context, Please wrap your MaterialApp / CupertinoApp with GnomeTheme');
     return result!;
   }
 
