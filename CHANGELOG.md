@@ -1,3 +1,7 @@
+## 1.0.0-rc.0
+
+- Use color schemes from libadwaita
+
 ## 0.9.8+1
 
 - Remove dead code

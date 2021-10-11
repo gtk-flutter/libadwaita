@@ -4,14 +4,7 @@ import 'package:gtk/gtk.dart';
 import 'package:window_decorations/window_decorations.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    Key? key,
-    required this.title,
-    required this.gnomeTheme,
-  }) : super(key: key);
-
-  final String title;
-  final GnomeTheme gnomeTheme;
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -30,10 +23,8 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           GtkHeaderBar.bitsdojo(
             appWindow: appWindow,
-            gnomeTheme: widget.gnomeTheme,
             windowDecor: windowDecor,
             leading: GtkHeaderButton(
-                gnomeTheme: widget.gnomeTheme,
                 icon: const Icon(Icons.add, size: 15),
                 onPressed: _incrementCounter),
             center: MediaQuery.of(context).size.width >= 650
@@ -42,7 +33,6 @@ class _MyHomePageState extends State<MyHomePage> {
             trailing: Row(
               children: [
                 GtkPopupMenu(
-                  gnomeTheme: widget.gnomeTheme,
                   body: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -80,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
   GtkViewSwitcher buildViewSwitcher(
       [ViewSwitcherStyle viewSwitcherStyle = ViewSwitcherStyle.desktop]) {
     return GtkViewSwitcher(
-      gnomeTheme: widget.gnomeTheme,
       height: 55,
       tabs: const [
         ViewSwitcherData(icon: Icons.star_outline, title: "Explore"),

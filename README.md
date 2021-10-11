@@ -1,19 +1,24 @@
 ## GTK ❤️ Flutter
 
-Unofficial implementation of GTK Widgets, themes and titlebar buttons in Flutter. Based on the GNOME Human Interface Guidelines.
+<p>
+<a href="https://github.com/prateekmedia/appimagepool/releases"><img alt="GitHub release" src="https://img.shields.io/github/v/release/prateekmedia/appimagepool?color=blue"/></a> <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/prateekmedia/appimagepool?color=indigo"/></a> <a href="https://github.com/prateekmedia"><img alt="Maintainer" src="https://img.shields.io/badge/Maintainer-prateekmedia-informational"/></a>
+</p>
 
-![GTK+Flutter example screenshot](https://user-images.githubusercontent.com/41370460/135214049-fc40e042-96ac-4386-aece-df4998ae0ef7.jpg)
+Unofficial implementation of GTK Widgets and libadwaita in Flutter. Based on the GNOME Human Interface Guidelines.
+
+![GTK+Flutter example screenshot](https://user-images.githubusercontent.com/41370460/136773750-eb2a6dcc-bc7b-4054-9207-35fcffd05867.jpg)
 
 ### Features
 
-- Adwaita style Colors and icons
+- Libadwaita colors implemented
 - Various GTK widgets ported to flutter
-- Picks up system theme from current gtk-3.0 theme
-- Provides various window decorations / titlebar buttons for header bar
+- Compatible with [various packages](#additional-information)
 
 ### Usage
 
-- To get color from theme you can use either `getGtkColor` function or `getAdaptiveGtkColor` function.
+- Wrap your `MaterialApp` / `CupertinoApp` with `GnomeTheme`
+- To get `ThemeData` for `MaterialApp` use `GnomeTheme.of(context).themeData`.
+- To get color from theme you can use `GnomeTheme.of(context).[color]` like `GnomeTheme.of(context).tiles`.
 - If you want custom titlebar then you can follow the steps for that on [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) package.
 - Following Widgets are currently ported to flutter:
     - `GtkHeaderBar`

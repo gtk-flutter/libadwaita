@@ -84,15 +84,11 @@ class GtkSidebar extends StatelessWidget {
     return Container(
         constraints: BoxConstraints(maxWidth: width),
         decoration: BoxDecoration(
-          color: color ?? gnomeTheme.themeBgColor,
+          color: color ?? GnomeTheme.of(context).sidebars,
           border: border ??
               Border(
                 right: BorderSide(
-                  color: getAdaptiveGtkColor(
-                    context,
-                    gnomeTheme: gnomeTheme,
-                    colorType: GtkColorType.headerBarBottomBorder,
-                  ).withOpacity(0.4),
+                  color: GnomeTheme.of(context).border,
                 ),
               ),
         ),
@@ -164,8 +160,8 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
     var leading = isSelected
         ? Theme(
             data: gnomeTheme.themeData.copyWith(
-                iconTheme: IconThemeData(
-                    color: isSelected ? gnomeTheme.themeSelectedBG : null)),
+                iconTheme:
+                    IconThemeData(color: isSelected ? Colors.white : null)),
             child: currentItem.leading!)
         : currentItem.leading;
     return InkWell(
@@ -184,9 +180,7 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
                   currentItem.label!,
                   style: TextStyle(
                     fontWeight: isSelected ? FontWeight.bold : null,
-                    color: isSelected
-                        ? gnomeTheme.themeSelectedBG ?? Colors.white
-                        : null,
+                    color: isSelected ? Colors.white : null,
                     fontSize: 15,
                   ),
                 ),

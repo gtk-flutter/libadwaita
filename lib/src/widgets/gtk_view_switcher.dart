@@ -5,7 +5,6 @@ import 'package:gtk/src/utils/utils.dart';
 import 'widgets.dart';
 
 class GtkViewSwitcher extends StatelessWidget {
-  final GnomeTheme gnomeTheme;
   final List<ViewSwitcherData> tabs;
   final ValueChanged<int> onViewChanged;
   final ViewSwitcherStyle style;
@@ -15,7 +14,6 @@ class GtkViewSwitcher extends StatelessWidget {
 
   const GtkViewSwitcher({
     Key? key,
-    required this.gnomeTheme,
     required this.tabs,
     required this.onViewChanged,
     required this.currentIndex,
@@ -41,27 +39,18 @@ class GtkViewSwitcher extends StatelessWidget {
                 height: height,
                 decoration: BoxDecoration(
                   color: tab.key == currentIndex
-                      ? getAdaptiveGtkColor(
-                          context,
-                          gnomeTheme: gnomeTheme,
-                          colorType: GtkColorType.headerSwitcherTabBackground,
-                        )
-                      : Colors.transparent,
+                      ? GnomeTheme.of(context).sidebars
+                      : GnomeTheme.of(context).inactiveTabs,
                   border: Border.symmetric(
                     vertical: BorderSide(
                       width: 1,
                       color: tab.key == currentIndex
-                          ? getAdaptiveGtkColor(
-                              context,
-                              gnomeTheme: gnomeTheme,
-                              colorType: GtkColorType.headerSwitcherTabBorder,
-                            )
+                          ? GnomeTheme.of(context).border
                           : Colors.transparent,
                     ),
                   ),
                 ),
                 child: GtkViewSwitcherTab(
-                  gnomeTheme: gnomeTheme,
                   data: tab.value,
                   isSelected: tab.key == currentIndex,
                   style: style,

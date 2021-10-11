@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gtk/gtk.dart';
 
 class GtkHeaderBarMinimal extends StatelessWidget {
-  /// The Theme by which the color scheme
-  /// of the HeaderBar will be based of
-  final GnomeTheme gnomeTheme;
-
   /// The leading widget for the headerbar
   final Widget leading;
 
@@ -40,7 +36,6 @@ class GtkHeaderBarMinimal extends StatelessWidget {
 
   const GtkHeaderBarMinimal({
     Key? key,
-    required this.gnomeTheme,
     this.onDoubleTap,
     this.onHeaderDrag,
     this.leading = const SizedBox(),
@@ -59,7 +54,6 @@ class GtkHeaderBarMinimal extends StatelessWidget {
 
     /// The appWindow object from bitsdojo_window package
     required appWindow,
-    required this.gnomeTheme,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailing = const SizedBox(),
@@ -81,7 +75,6 @@ class GtkHeaderBarMinimal extends StatelessWidget {
 
     /// The Window.of(context) object from nativeshell package
     required window,
-    required this.gnomeTheme,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
     this.trailing = const SizedBox(),
@@ -103,7 +96,7 @@ class GtkHeaderBarMinimal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color? border = gnomeTheme.border;
+    Color? border = GnomeTheme.of(context).border;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: (_) => onHeaderDrag?.call(),
@@ -111,28 +104,10 @@ class GtkHeaderBarMinimal extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  getAdaptiveGtkColor(
-                    context,
-                    gnomeTheme: gnomeTheme,
-                    colorType: GtkColorType.headerBarBackgroundTop,
-                  ),
-                  getAdaptiveGtkColor(
-                    context,
-                    gnomeTheme: gnomeTheme,
-                    colorType: GtkColorType.headerBarBackgroundBottom,
-                  ),
-                ]),
+            color: GnomeTheme.of(context).sidebars,
             border: Border(
-              top: BorderSide(
-                color: Theme.of(context).canvasColor,
-              ),
-              bottom: BorderSide(
-                color: border ?? Theme.of(context).canvasColor,
-              ),
+              top: BorderSide(color: GnomeTheme.of(context).bgColor),
+              bottom: BorderSide(color: border),
             ),
           ),
           height: height,

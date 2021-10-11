@@ -3,10 +3,6 @@ import 'package:gtk/gtk.dart';
 
 /// Use GtkHeaderBarMinimal for HeaderBar without window_decorations package
 class GtkHeaderBar extends StatelessWidget {
-  /// The Theme by which the color scheme
-  /// of the HeaderBar will be based of
-  final GnomeTheme gnomeTheme;
-
   /// The leading widget for the headerbar
   final Widget leading;
 
@@ -57,7 +53,6 @@ class GtkHeaderBar extends StatelessWidget {
 
   const GtkHeaderBar({
     Key? key,
-    required this.gnomeTheme,
     required this.windowDecor,
     this.onDoubleTap,
     this.onHeaderDrag,
@@ -78,7 +73,6 @@ class GtkHeaderBar extends StatelessWidget {
 
     /// The appWindow object from bitsdojo_window package
     required appWindow,
-    required this.gnomeTheme,
     required this.windowDecor,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
@@ -102,7 +96,6 @@ class GtkHeaderBar extends StatelessWidget {
 
     /// The Window.of(context) object from nativeshell package
     required window,
-    required this.gnomeTheme,
     required this.windowDecor,
     this.leading = const SizedBox(),
     this.center = const SizedBox(),
@@ -127,7 +120,6 @@ class GtkHeaderBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GtkHeaderBarMinimal(
-      gnomeTheme: gnomeTheme,
       onDoubleTap: onDoubleTap,
       onHeaderDrag: onHeaderDrag,
       leading: leading,

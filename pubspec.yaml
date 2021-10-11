@@ -1,6 +1,6 @@
 name: gtk
 description: Implements GTK Widgets, themes and titlebar buttons in Flutter. Based on the GNOME HIG
-version: 0.9.8+1
+version: 1.0.0-rc.0
 homepage: https://github.com/prateekmedia/gtk-flutter
 
 environment:
@@ -10,11 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  from_css_color: ">=2.0.0 <3.0.0"
-  dbus: ">=0.6.3 <1.0.0"
-  gsettings: ">=0.2.0 <1.0.0"
   popover: ">=0.2.6+2 <1.0.0"
-  xdg_directories: ">=0.2.0 <1.0.0"
 
 dev_dependencies:
   flutter_lints: ">=1.0.0 <2.0.0"

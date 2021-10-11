@@ -3,14 +3,12 @@ import 'package:gtk/src/models/models.dart';
 import 'package:gtk/src/utils/utils.dart';
 
 class GtkViewSwitcherTab extends StatelessWidget {
-  final GnomeTheme gnomeTheme;
   final ViewSwitcherData data;
   final ViewSwitcherStyle style;
   final bool isSelected;
 
   const GtkViewSwitcherTab({
     Key? key,
-    required this.gnomeTheme,
     required this.data,
     required this.isSelected,
     required this.style,
@@ -21,11 +19,6 @@ class GtkViewSwitcherTab extends StatelessWidget {
     final icon = Icon(
       data.icon,
       size: 18,
-      color: getAdaptiveGtkColor(
-        context,
-        gnomeTheme: gnomeTheme,
-        colorType: GtkColorType.headerSwitcherTabPrimary,
-      ),
     );
 
     return style == ViewSwitcherStyle.desktop
@@ -39,12 +32,8 @@ class GtkViewSwitcherTab extends StatelessWidget {
                 if (data.title != null)
                   Text(
                     data.title!,
-                    style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                          color: getAdaptiveGtkColor(
-                            context,
-                            gnomeTheme: gnomeTheme,
-                            colorType: GtkColorType.headerSwitcherTabPrimary,
-                          ),
+                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                          color: GnomeTheme.of(context).textColor,
                           fontWeight:
                               isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
@@ -63,13 +52,9 @@ class GtkViewSwitcherTab extends StatelessWidget {
                 if (data.title != null)
                   Text(
                     data.title!,
-                    style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontSize: 12,
-                          color: getAdaptiveGtkColor(
-                            context,
-                            gnomeTheme: gnomeTheme,
-                            colorType: GtkColorType.headerSwitcherTabPrimary,
-                          ),
+                          color: GnomeTheme.of(context).textColor,
                           fontWeight:
                               isSelected ? FontWeight.bold : FontWeight.normal,
                         ),

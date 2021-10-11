@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/utils.dart';
 
 class GtkHeaderButton extends StatefulWidget {
-  /// The Theme by which the color scheme
-  /// of the Header button will be based of
-  final GnomeTheme gnomeTheme;
-
   /// The icon of the button, use size of 17 for better results
   final Widget icon;
 
@@ -23,7 +18,6 @@ class GtkHeaderButton extends StatefulWidget {
 
   const GtkHeaderButton({
     Key? key,
-    required this.gnomeTheme,
     required this.icon,
     this.padding = const EdgeInsets.all(8),
     this.isActive = false,
@@ -50,30 +44,6 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
           padding: widget.padding,
           width: 36,
           margin: widget.margin,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(
-                color: getAdaptiveGtkColor(
-                  context,
-                  gnomeTheme: widget.gnomeTheme,
-                  colorType: GtkColorType.headerButtonBorder,
-                ),
-              ),
-              color: getAdaptiveGtkColor(
-                context,
-                gnomeTheme: widget.gnomeTheme,
-                colorType: widget.isActive
-                    ? Theme.of(context).brightness == Brightness.dark
-                        ? GtkColorType.headerButtonBackgroundTop
-                        : GtkColorType.headerButtonBackgroundBottom
-                    : Theme.of(context).brightness == Brightness.dark
-                        ? hovering
-                            ? GtkColorType.headerButtonBackgroundBottomHover
-                            : GtkColorType.headerButtonBackgroundBottom
-                        : hovering
-                            ? GtkColorType.headerButtonBackgroundTopHover
-                            : GtkColorType.headerButtonBackgroundTop,
-              )),
           child: widget.icon,
         ),
       ),

@@ -1,7 +1,7 @@
 name: example
 description: A new Flutter project.
 
-publish_to: "none"
+publish_to: none
 version: 1.0.0+1
 
 environment:
@@ -13,8 +13,6 @@ dependencies:
   bitsdojo_window:
   gtk:
     path: ../
-  flutter_riverpod: ^1.0.0-dev.7
-  provider: ">=6.0.0"
   window_decorations: ^0.9.5
 
 dev_dependencies:
