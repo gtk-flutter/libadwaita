@@ -1,6 +1,5 @@
+import 'package:gtk/gtk.dart';
 import 'package:flutter/material.dart';
-import 'package:gtk/src/models/models.dart';
-import 'package:gtk/src/utils/utils.dart';
 
 class GtkViewSwitcherTab extends StatelessWidget {
   final ViewSwitcherData data;

@@ -41,6 +41,7 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
         onTap: widget.onPressed,
         child: Container(
           height: 34,
+          color: Colors.transparent,
           padding: widget.padding,
           width: 36,
           margin: widget.margin,

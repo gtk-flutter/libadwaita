@@ -26,7 +26,7 @@ class GnomeTheme extends InheritedWidget {
 
   final bool isDark;
 
-  late final Color border = fgColor.withOpacity(isDark ? 0.5 : 0.2 * 0.5);
+  late final Color border = fgColor.withOpacity(0.1);
 
   late final ThemeData themeData = ThemeData(
     primaryColor: primary.value,

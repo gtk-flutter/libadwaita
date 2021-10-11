@@ -1,8 +1,6 @@
 import 'package:gtk/gtk.dart';
 import 'package:popover/popover.dart';
 import 'package:flutter/material.dart';
-import './gtk_header_button.dart';
-import '../utils/utils.dart';
 
 class GtkPopupMenu extends StatefulWidget {
   /// The body of the popup

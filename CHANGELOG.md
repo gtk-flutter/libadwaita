@@ -1,3 +1,9 @@
+## 1.0.0-rc.2
+
+- Fix error when no leading icon was provided for the sidebar
+- Rename `gtk_colors.dart` to `gtk_theme.dart` and moved it to the widgets directory
+- Fix imports in the files
+
 ## 1.0.0-rc.1
 
 - Remove gnomeTheme parameter requirement for gtk_sidebar

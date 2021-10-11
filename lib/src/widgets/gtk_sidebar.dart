@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gtk/gtk.dart';
+import 'package:flutter/material.dart';
 
 class GtkSidebar extends StatelessWidget {
   /// The current index of the item selected
@@ -144,11 +144,11 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currentItem = item(context);
-    var leading = isSelected
-        ? IconTheme(
-            data: IconThemeData(color: isSelected ? Colors.white : null),
-            child: currentItem.leading!)
-        : currentItem.leading;
+    var leading = IconTheme(
+      data: IconThemeData(color: isSelected ? Colors.white : null),
+      child: currentItem.leading ?? const SizedBox(),
+    );
+
     return InkWell(
       onTap: onSelected,
       child: Container(
@@ -158,7 +158,7 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
         padding: currentItem.padding,
         child: Row(
           children: [
-            leading ?? const SizedBox(),
+            leading,
             const SizedBox(width: 12),
             currentItem.labelWidget ??
                 Text(
