@@ -1,3 +1,8 @@
+## 1.0.0-rc.4
+
+- Made width nullable and fix defaults for `GtkContainer`
+- Update Screenshot
+
 ## 1.0.0-rc.3
 
 - Fix ViewSwitcher color

@@ -7,12 +7,12 @@ class GtkContainer extends StatelessWidget {
     required this.child,
     this.width = 580,
     this.borderWidth = 2,
-    this.padding = const EdgeInsets.symmetric(vertical: 14),
-    this.margin = const EdgeInsets.symmetric(vertical: 14),
+    this.padding = EdgeInsets.zero,
+    this.margin = const EdgeInsets.all(14),
   }) : super(key: key);
 
   final Widget child;
-  final double width;
+  final double? width;
   final double borderWidth;
   final EdgeInsets padding;
   final EdgeInsets margin;
