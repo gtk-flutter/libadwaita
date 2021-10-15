@@ -8,6 +8,8 @@ Unofficial implementation of GTK Widgets and libadwaita in Flutter. Based on the
 
 ![GTK+Flutter example screenshot](https://user-images.githubusercontent.com/41370460/137439130-571c6d74-b3f5-4f01-8c11-3ea8de562dd3.jpg)
 
+**NOTE:** For getting colors from gtk 3.0 theme use version [`<=0.9.8+1`](https://pub.dev/packages/gtk/versions/0.9.8+1)
+
 ### Features
 
 - Libadwaita colors implemented
