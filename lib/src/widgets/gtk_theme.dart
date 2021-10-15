@@ -12,6 +12,9 @@ class GnomeTheme extends InheritedWidget {
   /// Header bars, active tabs, message dialogs, sidebars
   final Color sidebars;
 
+  /// View switcher
+  final Color viewSwitcher;
+
   /// Text, icons color
   final Color textColor;
 
@@ -52,6 +55,7 @@ class GnomeTheme extends InheritedWidget {
   })  : tiles = LibAdwaita().tiles[isDark ? 1 : 0],
         menus = LibAdwaita().menus[isDark ? 1 : 0],
         sidebars = LibAdwaita().sidebars[isDark ? 1 : 0],
+        viewSwitcher = LibAdwaita().viewSwitcher[isDark ? 1 : 0],
         textColor = LibAdwaita().textColor[isDark ? 1 : 0],
         fgColor = LibAdwaita().fgColor[isDark ? 1 : 0],
         bgColor = LibAdwaita().bgColor[isDark ? 1 : 0],
@@ -76,6 +80,10 @@ class LibAdwaita {
   final List<Color> tiles = ['ffffff'.fromHex, '303030'.fromHex];
   final List<Color> menus = ['ffffff'.fromHex, '383838'.fromHex];
   final List<Color> sidebars = ['ebebeb'.fromHex, '303030'.fromHex];
+  final List<Color> viewSwitcher = [
+    'd9d9d9'.fromHex,
+    '444444'.fromHex
+  ]; // TO BE UPDATED
   final List<Color> textColor = [Colors.black, Colors.white];
   final List<Color> fgColor = [Colors.black26, Colors.white];
   final List<Color> bgColor = ['fafafa'.fromHex, '242424'.fromHex];

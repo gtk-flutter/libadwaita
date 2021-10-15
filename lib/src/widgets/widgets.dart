@@ -1,3 +1,4 @@
+export 'gtk_container.dart';
 export 'gtk_header_bar_minimal.dart';
 export 'gtk_header_bar.dart';
 export 'gtk_header_button.dart';

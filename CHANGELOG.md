@@ -1,3 +1,10 @@
+## 1.0.0-rc.3
+
+- Fix ViewSwitcher color
+- Add `GtkContainer` custom widget
+- Add new example app
+- Fix gtk sidebar item bg color
+
 ## 1.0.0-rc.2
 
 - Fix error when no leading icon was provided for the sidebar

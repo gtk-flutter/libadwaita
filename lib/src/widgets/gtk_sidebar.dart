@@ -145,7 +145,9 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentItem = item(context);
     var leading = IconTheme(
-      data: IconThemeData(color: isSelected ? Colors.white : null),
+      data: IconThemeData(
+        color: isSelected ? Colors.white : GnomeTheme.of(context).textColor,
+      ),
       child: currentItem.leading ?? const SizedBox(),
     );
 

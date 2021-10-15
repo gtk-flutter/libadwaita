@@ -16,11 +16,12 @@ Unofficial implementation of GTK Widgets and libadwaita in Flutter. Based on the
 
 ### Usage
 
-- Wrap your `MaterialApp` / `CupertinoApp` with `GnomeTheme`
+- Wrap your `WidgetApp` / `MaterialApp` / `CupertinoApp` with `GnomeTheme`
 - To get `ThemeData` for `MaterialApp` use `GnomeTheme.of(context).themeData`.
 - To get color from theme you can use `GnomeTheme.of(context).[color]` like `GnomeTheme.of(context).tiles`.
 - If you want custom titlebar then you can follow the steps for that on [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) package.
 - Following Widgets are currently ported to flutter:
+    - `GtkContainer`
     - `GtkHeaderBar`
     - `GtkHeaderBarMinimal`
     - `GtkHeaderButton`
