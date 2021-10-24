@@ -1,3 +1,7 @@
+## 1.0.0-rc.5
+
+- Get native window button placement by using gsetting schema
+
 ## 1.0.0-rc.4
 
 - Made width nullable and fix defaults for `GtkContainer`

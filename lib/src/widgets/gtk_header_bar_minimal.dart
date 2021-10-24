@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
+import 'package:gsettings/gsettings.dart';
 import 'package:gtk/gtk.dart';
 
-class GtkHeaderBarMinimal extends StatelessWidget {
+class GtkHeaderBarMinimal extends StatefulWidget {
   /// The leading widget for the headerbar
   final Widget leading;
 
@@ -91,15 +95,53 @@ class GtkHeaderBarMinimal extends StatelessWidget {
         closeBtn = closeBtn?.call(window.close),
         super(key: key);
 
-  bool get hasWindowControls =>
-      closeBtn != null || minimizeBtn != null || maximizeBtn != null;
+  @override
+  State<GtkHeaderBarMinimal> createState() => _GtkHeaderBarMinimalState();
+}
+
+class _GtkHeaderBarMinimalState extends State<GtkHeaderBarMinimal> {
+  bool get hasWindowControls => widget.closeBtn != null || widget.minimizeBtn != null || widget.maximizeBtn != null;
+
+  late ValueNotifier<List<String>> seperator = ValueNotifier(["", "minimize,maximize,close"]);
+
+  @override
+  void initState() {
+    super.initState();
+
+    late ValueNotifier<String> order = ValueNotifier(":minimize,maximize,close");
+    updateSep() {
+      if (mounted) {
+        seperator.value = order.value.split(':');
+      }
+    }
+
+    if (Platform.isLinux) {
+      ValueNotifier<DBusString?> buttonLayout = ValueNotifier(null);
+      var schema = GSettings('org.gnome.desktop.wm.preferences');
+      WidgetsBinding.instance?.addPostFrameCallback((_) async {
+        buttonLayout.value = await schema.get('button-layout') as DBusString;
+        if (buttonLayout.value != null) {
+          order.value = buttonLayout.value!.value;
+        }
+        updateSep();
+      });
+    } else if (Platform.isMacOS) {
+      order.value = "close,maximize,minimize:";
+      updateSep();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    Color? border = GnomeTheme.of(context).border;
+    Map<String, Widget> windowButtons = {
+      "maximize": widget.maximizeBtn!,
+      "minimize": widget.minimizeBtn!,
+      "close": widget.closeBtn!,
+    };
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onPanStart: (_) => onHeaderDrag?.call(),
+      onPanStart: (_) => widget.onHeaderDrag?.call(),
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
@@ -107,38 +149,42 @@ class GtkHeaderBarMinimal extends StatelessWidget {
             color: GnomeTheme.of(context).sidebars,
             border: Border(
               top: BorderSide(color: GnomeTheme.of(context).bgColor),
-              bottom: BorderSide(color: border),
+              bottom: BorderSide(color: GnomeTheme.of(context).border),
             ),
           ),
-          height: height,
+          height: widget.height,
           width: double.infinity,
           child: Stack(
             children: [
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onDoubleTap: onDoubleTap,
+                onDoubleTap: widget.onDoubleTap,
               ),
-              NavigationToolbar(
-                leading: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    leading,
-                  ],
-                ),
-                middle: center,
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    trailing,
-                    if (hasWindowControls) SizedBox(width: titlebarSpace),
-                    ...[
-                      if (minimizeBtn != null) minimizeBtn!,
-                      if (maximizeBtn != null) maximizeBtn!,
-                      if (closeBtn != null) closeBtn!,
-                    ],
-                  ],
-                ),
-              ),
+              ValueListenableBuilder<List<String>>(
+                  valueListenable: seperator,
+                  builder: (context, sep, _) => NavigationToolbar(
+                        leading: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (hasWindowControls && sep[0].split(',').isNotEmpty)
+                              SizedBox(width: widget.titlebarSpace),
+                            for (var i in sep[0].split(','))
+                              if (windowButtons[i] != null) windowButtons[i]!,
+                            widget.leading,
+                          ],
+                        ),
+                        middle: widget.center,
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            widget.trailing,
+                            if (hasWindowControls && sep[1].split(',').isNotEmpty)
+                              SizedBox(width: widget.titlebarSpace),
+                            for (var i in sep[1].split(','))
+                              if (windowButtons[i] != null) windowButtons[i]!,
+                          ],
+                        ),
+                      )),
             ],
           ),
         ),
