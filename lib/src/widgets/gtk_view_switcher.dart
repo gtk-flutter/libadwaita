@@ -36,13 +36,13 @@ class GtkViewSwitcher extends StatelessWidget {
                 height: height,
                 decoration: BoxDecoration(
                   color: tab.key == currentIndex
-                      ? GnomeTheme.of(context).viewSwitcher
+                      ? Theme.of(context).viewSwitcher
                       : Colors.transparent,
                   border: Border.symmetric(
                     vertical: BorderSide(
                       width: 1,
                       color: tab.key == currentIndex
-                          ? GnomeTheme.of(context).border
+                          ? Theme.of(context).border
                           : Colors.transparent,
                     ),
                   ),

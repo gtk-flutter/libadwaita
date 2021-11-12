@@ -76,11 +76,11 @@ class GtkSidebar extends StatelessWidget {
     return Container(
         constraints: BoxConstraints(maxWidth: width),
         decoration: BoxDecoration(
-          color: color ?? GnomeTheme.of(context).sidebars,
+          color: color ?? Theme.of(context).sidebars,
           border: border ??
               Border(
                 right: BorderSide(
-                  color: GnomeTheme.of(context).border,
+                  color: Theme.of(context).border,
                 ),
               ),
         ),
@@ -146,7 +146,7 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
     var currentItem = item(context);
     var leading = IconTheme(
       data: IconThemeData(
-        color: isSelected ? Colors.white : GnomeTheme.of(context).textColor,
+        color: isSelected ? Colors.white : Theme.of(context).textColor,
       ),
       child: currentItem.leading ?? const SizedBox(),
     );
