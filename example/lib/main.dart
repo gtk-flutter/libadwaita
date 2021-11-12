@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) => MaterialApp(
-          darkTheme: adwaitaDark(context),
-          theme: adwaitaLight(context),
+          darkTheme: adwaitaDark,
+          theme: adwaitaLight,
           debugShowCheckedModeBanner: false,
           home: MyHomePage(themeNotifier: themeNotifier),
           themeMode: currentMode),

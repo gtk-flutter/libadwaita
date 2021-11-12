@@ -1,3 +1,7 @@
+## 1.0.0-rc.9
+
+- Change adwaitaLight and adwaitaDark type to getters instead of Function
+
 ## 1.0.0-rc.8
 
 - Fix canvasColor not working

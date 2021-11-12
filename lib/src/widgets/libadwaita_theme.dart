@@ -32,17 +32,13 @@ Color _border(Brightness brightness) => brightness == Brightness.light
     ? Colors.black26.withOpacity(0.1)
     : Colors.white.withOpacity(0.1);
 
-ThemeData _adwaitaTheme(BuildContext context, Brightness brightness) =>
-    ThemeData(
+ThemeData _adwaitaTheme(Brightness brightness) => ThemeData(
       brightness: brightness,
       canvasColor: _bgColor(brightness),
     );
 
-ThemeData adwaitaLight(BuildContext context) =>
-    _adwaitaTheme(context, Brightness.light);
-
-ThemeData adwaitaDark(BuildContext context) =>
-    _adwaitaTheme(context, Brightness.dark);
+ThemeData get adwaitaLight => _adwaitaTheme(Brightness.light);
+ThemeData get adwaitaDark => _adwaitaTheme(Brightness.dark);
 
 extension LibAdwaitaTheme on ThemeData {
   /// For List rows, tiles
