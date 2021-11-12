@@ -4,48 +4,70 @@ extension _ColorExtension on String {
   Color get fromHex => Color(int.parse('FF${toString()}', radix: 16));
 }
 
-ThemeData adwaitaLight(BuildContext context) => ThemeData.light().copyWith(
-      canvasColor: Theme.of(context).bgColor,
+Color _tiles(Brightness brightness) =>
+    brightness == Brightness.light ? 'ffffff'.fromHex : '303030'.fromHex;
+
+Color _menus(Brightness brightness) =>
+    brightness == Brightness.light ? 'ffffff'.fromHex : '383838'.fromHex;
+
+Color _sidebars(Brightness brightness) =>
+    brightness == Brightness.light ? 'ebebeb'.fromHex : '303030'.fromHex;
+
+Color _viewSwitcher(Brightness brightness) =>
+    brightness == Brightness.light ? 'd9d9d9'.fromHex : '444444'.fromHex;
+
+Color _textColor(Brightness brightness) =>
+    brightness == Brightness.light ? Colors.black : Colors.white;
+
+Color _fgColor(Brightness brightness) =>
+    brightness == Brightness.light ? Colors.black26 : Colors.white;
+
+Color _bgColor(Brightness brightness) =>
+    brightness == Brightness.light ? 'fafafa'.fromHex : '242424'.fromHex;
+
+Color _inactiveTabs(Brightness brightness) =>
+    brightness == Brightness.light ? 'e5e5e5'.fromHex : '292929'.fromHex;
+
+Color _border(Brightness brightness) => brightness == Brightness.light
+    ? Colors.black26.withOpacity(0.1)
+    : Colors.white.withOpacity(0.1);
+
+ThemeData _adwaitaTheme(BuildContext context, Brightness brightness) =>
+    ThemeData(
+      brightness: brightness,
+      canvasColor: _bgColor(brightness),
     );
 
-ThemeData adwaitaDark(BuildContext context) => ThemeData.dark().copyWith(
-      canvasColor: Theme.of(context).bgColor,
-    );
+ThemeData adwaitaLight(BuildContext context) =>
+    _adwaitaTheme(context, Brightness.light);
+
+ThemeData adwaitaDark(BuildContext context) =>
+    _adwaitaTheme(context, Brightness.dark);
 
 extension LibAdwaitaTheme on ThemeData {
-  /// List rows, tiles
-  Color get tiles =>
-      brightness == Brightness.light ? 'ffffff'.fromHex : '303030'.fromHex;
+  /// For List rows, tiles
+  Color get tiles => _tiles(brightness);
 
-  /// Menus, popovers
-  Color get menus =>
-      brightness == Brightness.light ? 'ffffff'.fromHex : '383838'.fromHex;
+  /// For Menus, popovers
+  Color get menus => _menus(brightness);
 
-  /// Header bars, active tabs, message dialogs, sidebars
-  Color get sidebars =>
-      brightness == Brightness.light ? 'ebebeb'.fromHex : '303030'.fromHex;
+  /// For Header bars, active tabs, message dialogs, sidebars
+  Color get sidebars => _sidebars(brightness);
 
-  /// View switcher
-  Color get viewSwitcher =>
-      brightness == Brightness.light ? 'd9d9d9'.fromHex : '444444'.fromHex;
+  /// For View switcher
+  Color get viewSwitcher => _viewSwitcher(brightness);
 
-  /// Text, icons color
-  Color get textColor =>
-      brightness == Brightness.light ? Colors.black : Colors.white;
+  /// For Text, icons color
+  Color get textColor => _textColor(brightness);
 
-  /// Foreground areas, borders
-  Color get fgColor =>
-      brightness == Brightness.light ? Colors.black26 : Colors.white;
+  /// For Foreground areas, borders
+  Color get fgColor => _fgColor(brightness);
 
-  /// Background areas
-  Color get bgColor =>
-      brightness == Brightness.light ? 'fafafa'.fromHex : '242424'.fromHex;
+  /// For Background areas
+  Color get bgColor => _bgColor(brightness);
 
-  /// Inactive tabs
-  Color get inactiveTabs =>
-      brightness == Brightness.light ? 'e5e5e5'.fromHex : '292929'.fromHex;
-
-  Color get border => brightness == Brightness.light
-      ? Colors.black26.withOpacity(0.1)
-      : Colors.white.withOpacity(0.1);
+  /// For Inactive tabs
+  Color get inactiveTabs => _inactiveTabs(brightness);
+  // Border for the elements of your GTK app
+  Color get border => _border(brightness);
 }

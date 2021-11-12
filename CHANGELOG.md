@@ -1,3 +1,7 @@
+## 1.0.0-rc.8
+
+- Fix canvasColor not working
+
 ## 1.0.0-rc.7
 
 - Add documentation for colors in libadwaita_theme
