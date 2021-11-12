@@ -24,10 +24,10 @@ class GtkContainer extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: GnomeTheme.of(context).tiles,
+        color: Theme.of(context).tiles,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
-          color: GnomeTheme.of(context).border,
+          color: Theme.of(context).border,
           width: borderWidth,
         ),
       ),

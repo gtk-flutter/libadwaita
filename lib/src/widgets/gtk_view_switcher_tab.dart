@@ -32,7 +32,7 @@ class GtkViewSwitcherTab extends StatelessWidget {
                   Text(
                     data.title!,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          color: GnomeTheme.of(context).textColor,
+                          color: Theme.of(context).textColor,
                           fontWeight:
                               isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
@@ -53,7 +53,7 @@ class GtkViewSwitcherTab extends StatelessWidget {
                     data.title!,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontSize: 12,
-                          color: GnomeTheme.of(context).textColor,
+                          color: Theme.of(context).textColor,
                           fontWeight:
                               isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
