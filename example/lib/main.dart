@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gtk/gtk.dart';
 import 'home_page.dart';
 
 void main() => runApp(MyApp());
@@ -11,13 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
-        valueListenable: themeNotifier,
-        builder: (_, ThemeMode currentMode, __) {
-          return MaterialApp(
-              darkTheme: ThemeData.dark(),
-              debugShowCheckedModeBanner: false,
-              home: MyHomePage(themeNotifier: themeNotifier),
-              themeMode: currentMode);
-        });
+      valueListenable: themeNotifier,
+      builder: (_, ThemeMode currentMode, __) => MaterialApp(
+          darkTheme: adwaitaDark(context),
+          theme: adwaitaLight(context),
+          debugShowCheckedModeBanner: false,
+          home: MyHomePage(themeNotifier: themeNotifier),
+          themeMode: currentMode),
+    );
   }
 }

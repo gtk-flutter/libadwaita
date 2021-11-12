@@ -1,3 +1,8 @@
+## 1.0.0-rc.7
+
+- Add documentation for colors in libadwaita_theme
+- Add adwaitaLight and adwaitaDark for LibAdwaita Theme
+
 ## 1.0.0-rc.6
 
 - `GnomeTheme` is now deprecated, use `Theme.of(context).[color]` to get whatever color you want.

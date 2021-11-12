@@ -1,4 +1,4 @@
-export 'gnome_theme.dart';
+export 'libadwaita_theme.dart';
 export 'gtk_container.dart';
 export 'gtk_header_bar_minimal.dart';
 export 'gtk_header_bar.dart';
