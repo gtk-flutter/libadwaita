@@ -150,7 +150,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0-rc.5"
+    version: "1.0.0-rc.6"
   lints:
     dependency: transitive
     description:

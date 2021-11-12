@@ -1,3 +1,7 @@
+## 1.0.0-rc.6
+
+- `GnomeTheme` is now deprecated, use `Theme.of(context).[color]` to get whatever color you want.
+
 ## 1.0.0-rc.5
 
 - Get native window button placement by using gsetting schema
