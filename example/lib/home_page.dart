@@ -52,65 +52,85 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          _currentIndex == 2
-              ? Column(
-                  children: [
-                    GtkContainer(
-                      child: SwitchListTile(
-                          title: Text(
-                            "Dark mode",
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          value: widget.themeNotifier.value == ThemeMode.light
-                              ? false
-                              : true,
-                          onChanged: (value) {
-                            widget.themeNotifier.value =
-                                widget.themeNotifier.value == ThemeMode.light
-                                    ? ThemeMode.dark
-                                    : ThemeMode.light;
-                          }),
-                    ),
-                  ],
+          Expanded(
+              child: GtkTwoPane(
+            pane1: GtkSidebar(
+              currentIndex: _currentIndex,
+              children: [
+                GtkSidebarItem(
+                  leading: const Icon(Icons.countertops),
+                  label: 'Counter',
+                ),
+                GtkSidebarItem(
+                  leading: const Icon(Icons.list),
+                  label: 'List View',
+                ),
+                GtkSidebarItem(
+                  leading: const Icon(Icons.settings),
+                  label: 'Settings',
                 )
-              : _currentIndex == 1
-                  ? Expanded(
-                      child: SingleChildScrollView(
-                        child: Center(
-                          child: GtkContainer(
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                              primary: false,
-                              itemCount: 30,
-                              itemBuilder: (context, index) => ListTile(
-                                title: Text("Index $index"),
-                              ),
-                              separatorBuilder:
-                                  (BuildContext context, int index) => Divider(
-                                color: Theme.of(context).border,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  : Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                              'You have pushed the add button this many times:'),
-                          Text('$_counter',
-                              style: Theme.of(context).textTheme.headline4),
-                        ],
-                      ),
-                    ),
+              ],
+              onSelected: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
+            pane2: Center(child: buildPanel()),
+            onClosePane2Popup: () {},
+            showPane2: true,
+          )),
         ],
       ),
       bottomNavigationBar: MediaQuery.of(context).size.width < 650
           ? buildViewSwitcher(ViewSwitcherStyle.mobile)
           : null,
     );
+  }
+
+  Widget buildPanel() {
+    return _currentIndex == 2
+        ? Column(
+            children: [
+              GtkContainer(
+                child: SwitchListTile(
+                    title: Text(
+                      "Dark mode",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    value: widget.themeNotifier.value == ThemeMode.light
+                        ? false
+                        : true,
+                    onChanged: (value) {
+                      widget.themeNotifier.value =
+                          widget.themeNotifier.value == ThemeMode.light
+                              ? ThemeMode.dark
+                              : ThemeMode.light;
+                    }),
+              ),
+            ],
+          )
+        : _currentIndex == 1
+            ? GtkContainer(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: 30,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text("Index $index"),
+                  ),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(),
+                ),
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('You have pushed the add button this many times:'),
+                  Text('$_counter',
+                      style: Theme.of(context).textTheme.headline4),
+                ],
+              );
   }
 
   GtkViewSwitcher buildViewSwitcher(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gtk/gtk.dart';
+import 'package:gtk/src/utils/colors.dart';
 
 class GtkContainer extends StatelessWidget {
   const GtkContainer({
@@ -24,10 +24,11 @@ class GtkContainer extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: Theme.of(context).tiles,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
-          color: Theme.of(context).border,
+          color: Theme.of(context).brightness == Brightness.light
+              ? borderLight
+              : borderDark,
           width: borderWidth,
         ),
       ),

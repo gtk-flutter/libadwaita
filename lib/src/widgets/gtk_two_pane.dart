@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gtk/src/utils/colors.dart';
 
 class GtkTwoPane extends StatefulWidget {
   final Widget pane1;
@@ -94,10 +95,10 @@ class _GtkTwoPaneState extends State<GtkTwoPane> {
             decoration: BoxDecoration(
               border: Border(
                 right: BorderSide(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey[800]!
-                      : Colors.grey[400]!,
-                ),
+                    width: 1,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? borderLight
+                        : borderDark),
               ),
             ),
             width: widget.panelWidth,

@@ -1,5 +1,5 @@
-import 'package:gtk/gtk.dart';
 import 'package:flutter/material.dart';
+import 'package:gtk/src/utils/colors.dart';
 
 class GtkSidebar extends StatelessWidget {
   /// The current index of the item selected
@@ -76,13 +76,7 @@ class GtkSidebar extends StatelessWidget {
     return Container(
         constraints: BoxConstraints(maxWidth: width),
         decoration: BoxDecoration(
-          color: color ?? Theme.of(context).sidebars,
-          border: border ??
-              Border(
-                right: BorderSide(
-                  color: Theme.of(context).border,
-                ),
-              ),
+          color: color ?? Theme.of(context).appBarTheme.backgroundColor,
         ),
         child: ListView(
           controller: controller,
@@ -144,18 +138,14 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currentItem = item(context);
-    var leading = IconTheme(
-      data: IconThemeData(
-        color: isSelected ? Colors.white : Theme.of(context).textColor,
-      ),
-      child: currentItem.leading ?? const SizedBox(),
-    );
+    var leading = currentItem.leading ?? const SizedBox();
 
     return InkWell(
       onTap: onSelected,
       child: Container(
         color: isSelected
-            ? currentItem.selectedColor ?? Theme.of(context).primaryColor
+            ? currentItem.selectedColor ??
+                Theme.of(context).appBarTheme.backgroundColor?.lighten(0.05)
             : currentItem.unselectedColor,
         padding: currentItem.padding,
         child: Row(
@@ -167,7 +157,6 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
                   currentItem.label!,
                   style: TextStyle(
                     fontWeight: isSelected ? FontWeight.bold : null,
-                    color: isSelected ? Colors.white : null,
                     fontSize: 15,
                   ),
                 ),

@@ -14,6 +14,7 @@ dependencies:
   gtk:
     path: ../
   window_decorations: ^0.9.5
+  adwaita: ">= 0.0.1"
 
 dev_dependencies:
   flutter_test:

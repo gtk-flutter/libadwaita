@@ -40,7 +40,7 @@ class _GtkPopupMenuState extends State<GtkPopupMenu> {
           context: context,
           barrierColor: Colors.transparent,
           contentDyOffset: 4,
-          backgroundColor: Theme.of(context).menus,
+          backgroundColor: Theme.of(context).cardColor,
           transitionDuration: const Duration(milliseconds: 150),
           bodyBuilder: (context) => SizedBox(child: widget.body),
           direction: PopoverDirection.top,
