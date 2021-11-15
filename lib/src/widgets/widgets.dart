@@ -10,3 +10,5 @@ export 'stack_sidebar.dart';
 export 'preferences_group.dart';
 export 'view_switcher.dart';
 export 'view_switcher_tab.dart';
+export 'gtk_text_field.dart';
+export 'gtk_text_button.dart';

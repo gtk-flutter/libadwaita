@@ -148,6 +148,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
+              Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: GtkTextField(
+                      initialValue: "some text",
+                      keyboardType: TextInputType.number,
+                      labelText: "text field label",
+                      icon: Icons.insert_photo,
+                      onChanged: (String s) {})),
+              GtkTextButton(child: const Text("Hello"), onPressed: () {}),
             ],
           )
         : _currentIndex == 1
