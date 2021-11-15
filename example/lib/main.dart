@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gtk/gtk.dart';
 import 'home_page.dart';
+import 'package:adwaita/adwaita.dart' as adwaita;
 
 void main() => runApp(MyApp());
 
@@ -12,13 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
-      valueListenable: themeNotifier,
-      builder: (_, ThemeMode currentMode, __) => MaterialApp(
-          darkTheme: adwaitaDark,
-          theme: adwaitaLight,
-          debugShowCheckedModeBanner: false,
-          home: MyHomePage(themeNotifier: themeNotifier),
-          themeMode: currentMode),
-    );
+        valueListenable: themeNotifier,
+        builder: (_, ThemeMode currentMode, __) {
+          return MaterialApp(
+              theme: adwaita.lightTheme,
+              darkTheme: adwaita.darkTheme,
+              debugShowCheckedModeBanner: false,
+              home: MyHomePage(themeNotifier: themeNotifier),
+              themeMode: currentMode);
+        });
   }
 }

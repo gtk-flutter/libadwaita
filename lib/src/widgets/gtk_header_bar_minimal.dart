@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
 import 'package:gsettings/gsettings.dart';
-import 'package:gtk/gtk.dart';
+import 'package:gtk/src/utils/colors.dart';
 
 class GtkHeaderBarMinimal extends StatefulWidget {
   /// The leading widget for the headerbar
@@ -151,11 +151,13 @@ class _GtkHeaderBarMinimalState extends State<GtkHeaderBarMinimal> {
         alignment: Alignment.topCenter,
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).sidebars,
+            color: Theme.of(context).appBarTheme.backgroundColor,
             border: Border(
-              top: BorderSide(color: Theme.of(context).bgColor),
-              bottom: BorderSide(color: Theme.of(context).border),
-            ),
+                top: BorderSide(color: Theme.of(context).backgroundColor),
+                bottom: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? borderLight
+                        : borderDark)),
           ),
           height: widget.height,
           width: double.infinity,

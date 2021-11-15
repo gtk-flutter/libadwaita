@@ -12,23 +12,12 @@ Unofficial implementation of GTK Widgets and libadwaita in Flutter. Based on the
 
 ### Features
 
-- Libadwaita colors implemented
 - Various GTK widgets ported to flutter
+- Can be used with any material theme (e.g. [libawaita](https://pub.dev/packages/adwaita) and [yaru](https://github.com/ubuntu/yaru.dart))
 - Compatible with [various packages](#additional-information)
 
 ### Usage
 
-- To get color from theme you can use `Theme.of(context).[color]` like usual. E.g. `Theme.of(context).tiles`.
-- Following colors are available:
-    - `tiles` - List rows, tiles
-    - `menus`- Menus, popovers
-    - `sidebars` - Header bars, active tabs, message dialogs, sidebars
-    - `viewSwitcher` - View switcher
-    - `textColor` - Text, icons color
-    - `fgColor` - Foreground areas, borders
-    - `bgColor` - Background areas
-    - `inactiveTabs` - Inactive tabs
-    - `border` - Border
 - If you want custom titlebar then you can follow the steps for that on [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) package.
 - Following Widgets are currently ported to flutter:
     - `GtkContainer`

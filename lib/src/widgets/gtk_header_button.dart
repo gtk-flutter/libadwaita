@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gtk/src/utils/colors.dart';
 
 class GtkHeaderButton extends StatefulWidget {
   /// The icon of the button, use size of 17 for better results
@@ -10,18 +11,10 @@ class GtkHeaderButton extends StatefulWidget {
   /// Triggered when the button is pressed.
   final VoidCallback? onPressed;
 
-  /// The margin of the [GtkHeaderButton]
-  final EdgeInsets margin;
-
-  /// The padding of the [GtkHeaderButton]
-  final EdgeInsets padding;
-
   const GtkHeaderButton({
     Key? key,
     required this.icon,
-    this.padding = const EdgeInsets.all(8),
     this.isActive = false,
-    this.margin = const EdgeInsets.symmetric(horizontal: 5),
     this.onPressed,
   }) : super(key: key);
 
@@ -34,22 +27,30 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onExit: (_) => _updateColor(false),
-      onHover: (_) => _updateColor(),
-      child: GestureDetector(
-        onTap: widget.onPressed,
-        child: Container(
+    return InkWell(
+      onTap: widget.onPressed,
+      onHover: (hover) {
+        setState(() => hovering = hover);
+      },
+      child: AnimatedContainer(
           height: 34,
-          color: Colors.transparent,
-          padding: widget.padding,
           width: 36,
-          margin: widget.margin,
-          child: widget.icon,
-        ),
-      ),
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.ease,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+            border: Border.all(
+                width: 1,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? borderLight
+                    : borderDark),
+            color: hovering
+                ? Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03)
+                : Theme.of(context).appBarTheme.backgroundColor?.lighten(0.025),
+          ),
+          child: widget.icon),
     );
   }
-
-  void _updateColor([bool value = true]) => setState(() => hovering = value);
 }

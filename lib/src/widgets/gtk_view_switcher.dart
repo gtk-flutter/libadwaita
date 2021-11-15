@@ -1,5 +1,6 @@
 import 'package:gtk/gtk.dart';
 import 'package:flutter/material.dart';
+import 'package:gtk/src/utils/colors.dart';
 
 class GtkViewSwitcher extends StatelessWidget {
   final List<ViewSwitcherData> tabs;
@@ -36,15 +37,20 @@ class GtkViewSwitcher extends StatelessWidget {
                 height: height,
                 decoration: BoxDecoration(
                   color: tab.key == currentIndex
-                      ? Theme.of(context).viewSwitcher
+                      ? Theme.of(context)
+                          .appBarTheme
+                          .backgroundColor
+                          ?.darken(0.05)
                       : Colors.transparent,
-                  border: Border.symmetric(
-                    vertical: BorderSide(
+                  border: Border(
+                    left: const BorderSide(
                       width: 1,
-                      color: tab.key == currentIndex
-                          ? Theme.of(context).border
-                          : Colors.transparent,
                     ),
+                    right: tab.key == tabs.length - 1
+                        ? const BorderSide(
+                            width: 1,
+                          )
+                        : const BorderSide(width: 0, color: Colors.transparent),
                   ),
                 ),
                 child: GtkViewSwitcherTab(
