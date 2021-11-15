@@ -100,20 +100,15 @@ class GtkHeaderBarMinimal extends StatefulWidget {
 }
 
 class _GtkHeaderBarMinimalState extends State<GtkHeaderBarMinimal> {
-  bool get hasWindowControls =>
-      widget.closeBtn != null ||
-      widget.minimizeBtn != null ||
-      widget.maximizeBtn != null;
+  bool get hasWindowControls => widget.closeBtn != null || widget.minimizeBtn != null || widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>> seperator =
-      ValueNotifier(["", "minimize,maximize,close"]);
+  late ValueNotifier<List<String>> seperator = ValueNotifier(["", "minimize,maximize,close"]);
 
   @override
   void initState() {
     super.initState();
 
-    late ValueNotifier<String> order =
-        ValueNotifier(":minimize,maximize,close");
+    late ValueNotifier<String> order = ValueNotifier(":minimize,maximize,close");
     updateSep() {
       if (mounted) {
         seperator.value = order.value.split(':');
@@ -154,10 +149,7 @@ class _GtkHeaderBarMinimalState extends State<GtkHeaderBarMinimal> {
             color: Theme.of(context).appBarTheme.backgroundColor,
             border: Border(
                 top: BorderSide(color: Theme.of(context).backgroundColor),
-                bottom: BorderSide(
-                    color: Theme.of(context).brightness == Brightness.light
-                        ? borderLight
-                        : borderDark)),
+                bottom: BorderSide(color: context.borderColor)),
           ),
           height: widget.height,
           width: double.infinity,
@@ -173,8 +165,7 @@ class _GtkHeaderBarMinimalState extends State<GtkHeaderBarMinimal> {
                         leading: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            if (hasWindowControls &&
-                                sep[0].split(',').isNotEmpty)
+                            if (hasWindowControls && sep[0].split(',').isNotEmpty)
                               SizedBox(width: widget.titlebarSpace),
                             for (var i in sep[0].split(','))
                               if (windowButtons[i] != null) windowButtons[i]!,
@@ -186,8 +177,7 @@ class _GtkHeaderBarMinimalState extends State<GtkHeaderBarMinimal> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             widget.trailing,
-                            if (hasWindowControls &&
-                                sep[1].split(',').isNotEmpty)
+                            if (hasWindowControls && sep[1].split(',').isNotEmpty)
                               SizedBox(width: widget.titlebarSpace),
                             for (var i in sep[1].split(','))
                               if (windowButtons[i] != null) windowButtons[i]!,

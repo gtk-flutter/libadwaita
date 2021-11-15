@@ -18,8 +18,7 @@ class GtkViewSwitcher extends StatelessWidget {
     this.style = ViewSwitcherStyle.desktop,
     this.height = 55,
     bool? expanded,
-  })  : expanded =
-            expanded ?? (style == ViewSwitcherStyle.desktop ? false : true),
+  })  : expanded = expanded ?? (style == ViewSwitcherStyle.desktop ? false : true),
         assert(tabs.length >= 2),
         super(key: key);
 
@@ -31,24 +30,22 @@ class GtkViewSwitcher extends StatelessWidget {
         for (final tab in tabs.asMap().entries)
           () {
             var ctab = InkWell(
-              onTap:
-                  currentIndex != tab.key ? () => onViewChanged(tab.key) : null,
+              onTap: currentIndex != tab.key ? () => onViewChanged(tab.key) : null,
               child: Container(
                 height: height,
                 decoration: BoxDecoration(
                   color: tab.key == currentIndex
-                      ? Theme.of(context)
-                          .appBarTheme
-                          .backgroundColor
-                          ?.darken(0.05)
+                      ? Theme.of(context).appBarTheme.backgroundColor?.darken(0.05)
                       : Colors.transparent,
                   border: Border(
-                    left: const BorderSide(
+                    left: BorderSide(
                       width: 1,
+                      color: context.borderColor,
                     ),
                     right: tab.key == tabs.length - 1
-                        ? const BorderSide(
+                        ? BorderSide(
                             width: 1,
+                            color: context.borderColor,
                           )
                         : const BorderSide(width: 0, color: Colors.transparent),
                   ),

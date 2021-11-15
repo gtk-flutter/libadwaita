@@ -41,11 +41,7 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
             borderRadius: const BorderRadius.all(
               Radius.circular(8.0),
             ),
-            border: Border.all(
-                width: 1,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? borderLight
-                    : borderDark),
+            border: Border.all(width: 1, color: context.borderColor),
             color: hovering
                 ? Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03)
                 : Theme.of(context).appBarTheme.backgroundColor?.lighten(0.025),

@@ -26,9 +26,7 @@ class GtkContainer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
-          color: Theme.of(context).brightness == Brightness.light
-              ? borderLight
-              : borderDark,
+          color: context.borderColor,
           width: borderWidth,
         ),
       ),

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:gtk/gtk.dart';
 import 'home_page.dart';
+import 'package:flutter/material.dart';
 import 'package:adwaita/adwaita.dart' as adwaita;
 
 void main() => runApp(MyApp());
