@@ -1,8 +1,8 @@
-import 'package:gtk/gtk.dart';
+import 'package:libadwaita/libadwaita.dart';
 import 'package:popover/popover.dart';
 import 'package:flutter/material.dart';
 
-class GtkPopupMenu extends StatefulWidget {
+class AdwPopupMenu extends StatefulWidget {
   /// The body of the popup
   final Widget body;
 
@@ -15,7 +15,7 @@ class GtkPopupMenu extends StatefulWidget {
   /// The height of the popup
   final double? popupHeight;
 
-  const GtkPopupMenu({
+  const AdwPopupMenu({
     Key? key,
     required this.body,
     this.icon = const Icon(Icons.menu, size: 17),
@@ -24,14 +24,14 @@ class GtkPopupMenu extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<GtkPopupMenu> createState() => _GtkPopupMenuState();
+  State<AdwPopupMenu> createState() => _AdwPopupMenuState();
 }
 
-class _GtkPopupMenuState extends State<GtkPopupMenu> {
+class _AdwPopupMenuState extends State<AdwPopupMenu> {
   bool isActive = false;
   @override
   Widget build(BuildContext context) {
-    return GtkHeaderButton(
+    return AdwHeaderButton(
       icon: Center(child: widget.icon),
       isActive: isActive,
       onPressed: () {

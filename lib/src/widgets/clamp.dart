@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:gtk/src/utils/colors.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
-class GtkContainer extends StatelessWidget {
-  const GtkContainer({
+class AdwClamp extends StatelessWidget {
+  const AdwClamp({
     Key? key,
     required this.child,
-    this.width = 580,
+    this.maximumSize = 580,
     this.borderWidth = 2,
+    this.borderRadius = 18,
     this.padding = EdgeInsets.zero,
     this.margin = const EdgeInsets.all(14),
   }) : super(key: key);
 
   final Widget child;
-  final double? width;
+  final double maximumSize;
   final double borderWidth;
+  final double borderRadius;
   final EdgeInsets padding;
   final EdgeInsets margin;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
+      constraints: BoxConstraints(maxWidth: maximumSize),
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
           color: context.borderColor,
           width: borderWidth,

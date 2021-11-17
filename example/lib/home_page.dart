@@ -1,6 +1,6 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
-import 'package:gtk/gtk.dart';
+import 'package:libadwaita/libadwaita.dart';
 import 'package:window_decorations/window_decorations.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -23,18 +23,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          GtkHeaderBar.bitsdojo(
+          AdwHeaderBar.bitsdojo(
             appWindow: appWindow,
             windowDecor: windowDecor,
-            leading: GtkHeaderButton(
-                icon: const Icon(Icons.add, size: 15),
-                onPressed: _incrementCounter),
-            center: MediaQuery.of(context).size.width >= 650
-                ? buildViewSwitcher()
-                : const SizedBox(),
+            leading: AdwHeaderButton(icon: const Icon(Icons.add, size: 15), onPressed: _incrementCounter),
+            center: MediaQuery.of(context).size.width >= 650 ? buildViewSwitcher() : const SizedBox(),
             trailing: Row(
               children: [
-                GtkPopupMenu(
+                AdwPopupMenu(
                   body: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -43,8 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           _counter = 0;
                           Navigator.of(context).pop();
                         }),
-                        title: const Text('Reset Counter',
-                            style: TextStyle(fontSize: 15)),
+                        title: const Text('Reset Counter', style: TextStyle(fontSize: 15)),
                       ),
                     ],
                   ),
@@ -53,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-              child: GtkTwoPane(
-            pane1: GtkSidebar(
+              child: AdwFlap(
+            flap: AdwSidebar(
               currentIndex: _currentIndex,
               children: [
                 GtkSidebarItem(
@@ -76,15 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
-            pane2: Center(child: buildPanel()),
-            onClosePane2Popup: () {},
-            showPane2: true,
+            content: Center(child: buildPanel()),
+            onContentPopupClosed: () {},
+            showContent: true,
           )),
         ],
       ),
-      bottomNavigationBar: MediaQuery.of(context).size.width < 650
-          ? buildViewSwitcher(ViewSwitcherStyle.mobile)
-          : null,
+      bottomNavigationBar: MediaQuery.of(context).size.width < 650 ? buildViewSwitcher(ViewSwitcherStyle.mobile) : null,
     );
   }
 
@@ -92,26 +85,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return _currentIndex == 2
         ? Column(
             children: [
-              GtkContainer(
+              AdwClamp(
                 child: SwitchListTile(
                     title: Text(
                       "Dark mode",
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
-                    value: widget.themeNotifier.value == ThemeMode.light
-                        ? false
-                        : true,
+                    value: widget.themeNotifier.value == ThemeMode.light ? false : true,
                     onChanged: (value) {
                       widget.themeNotifier.value =
-                          widget.themeNotifier.value == ThemeMode.light
-                              ? ThemeMode.dark
-                              : ThemeMode.light;
+                          widget.themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
                     }),
               ),
             ],
           )
         : _currentIndex == 1
-            ? GtkContainer(
+            ? AdwClamp(
                 child: ListView.separated(
                   shrinkWrap: true,
                   primary: false,
@@ -119,23 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (context, index) => ListTile(
                     title: Text("Index $index"),
                   ),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
+                  separatorBuilder: (BuildContext context, int index) => const Divider(),
                 ),
               )
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('You have pushed the add button this many times:'),
-                  Text('$_counter',
-                      style: Theme.of(context).textTheme.headline4),
+                  Text('$_counter', style: Theme.of(context).textTheme.headline4),
                 ],
               );
   }
 
-  GtkViewSwitcher buildViewSwitcher(
-      [ViewSwitcherStyle viewSwitcherStyle = ViewSwitcherStyle.desktop]) {
-    return GtkViewSwitcher(
+  AdwViewSwitcher buildViewSwitcher([ViewSwitcherStyle viewSwitcherStyle = ViewSwitcherStyle.desktop]) {
+    return AdwViewSwitcher(
       height: 55,
       tabs: const [
         ViewSwitcherData(icon: Icons.near_me_outlined, title: "Counter"),

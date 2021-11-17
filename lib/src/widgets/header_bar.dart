@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gtk/gtk.dart';
+import 'package:libadwaita/libadwaita.dart';
 
-/// Use GtkHeaderBarMinimal for HeaderBar without window_decorations package
-class GtkHeaderBar extends StatelessWidget {
+/// Use AdwHeaderBarMinimal for HeaderBar without window_decorations package
+class AdwHeaderBar extends StatelessWidget {
   /// The leading widget for the headerbar
   final Widget leading;
 
@@ -48,10 +48,9 @@ class GtkHeaderBar extends StatelessWidget {
   ///   onPressed: onPressed,
   /// )
   /// ```
-  final Widget Function(String name, dynamic type, VoidCallback onPressed)
-      windowDecor;
+  final Widget Function(String name, dynamic type, VoidCallback onPressed) windowDecor;
 
-  const GtkHeaderBar({
+  const AdwHeaderBar({
     Key? key,
     required this.windowDecor,
     this.onDoubleTap,
@@ -68,7 +67,7 @@ class GtkHeaderBar extends StatelessWidget {
     this.onClose,
   }) : super(key: key);
 
-  GtkHeaderBar.bitsdojo({
+  AdwHeaderBar.bitsdojo({
     Key? key,
 
     /// The appWindow object from bitsdojo_window package
@@ -91,7 +90,7 @@ class GtkHeaderBar extends StatelessWidget {
         onClose = showClose ? appWindow?.close : null,
         super(key: key);
 
-  GtkHeaderBar.nativeshell({
+  AdwHeaderBar.nativeshell({
     Key? key,
 
     /// The Window.of(context) object from nativeshell package
@@ -114,12 +113,11 @@ class GtkHeaderBar extends StatelessWidget {
         onClose = showClose ? window.close : null,
         super(key: key);
 
-  bool get hasWindowControls =>
-      onClose != null || onMinimize != null || onMaximize != null;
+  bool get hasWindowControls => onClose != null || onMinimize != null || onMaximize != null;
 
   @override
   Widget build(BuildContext context) {
-    return GtkHeaderBarMinimal(
+    return AdwHeaderBarMinimal(
       onDoubleTap: onDoubleTap,
       onHeaderDrag: onHeaderDrag,
       leading: leading,

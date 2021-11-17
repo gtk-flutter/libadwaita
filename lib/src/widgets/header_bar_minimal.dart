@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
 import 'package:gsettings/gsettings.dart';
-import 'package:gtk/src/utils/colors.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
-class GtkHeaderBarMinimal extends StatefulWidget {
+class AdwHeaderBarMinimal extends StatefulWidget {
   /// The leading widget for the headerbar
   final Widget leading;
 
@@ -38,7 +38,7 @@ class GtkHeaderBarMinimal extends StatefulWidget {
   /// Called when headerbar is double tapped
   final VoidCallback? onDoubleTap;
 
-  const GtkHeaderBarMinimal({
+  const AdwHeaderBarMinimal({
     Key? key,
     this.onDoubleTap,
     this.onHeaderDrag,
@@ -53,7 +53,7 @@ class GtkHeaderBarMinimal extends StatefulWidget {
     this.closeBtn,
   }) : super(key: key);
 
-  GtkHeaderBarMinimal.bitsdojo({
+  AdwHeaderBarMinimal.bitsdojo({
     Key? key,
 
     /// The appWindow object from bitsdojo_window package
@@ -74,7 +74,7 @@ class GtkHeaderBarMinimal extends StatefulWidget {
         closeBtn = closeBtn?.call(appWindow?.close),
         super(key: key);
 
-  GtkHeaderBarMinimal.nativeshell({
+  AdwHeaderBarMinimal.nativeshell({
     Key? key,
 
     /// The Window.of(context) object from nativeshell package
@@ -96,10 +96,10 @@ class GtkHeaderBarMinimal extends StatefulWidget {
         super(key: key);
 
   @override
-  State<GtkHeaderBarMinimal> createState() => _GtkHeaderBarMinimalState();
+  State<AdwHeaderBarMinimal> createState() => _AdwHeaderBarMinimalState();
 }
 
-class _GtkHeaderBarMinimalState extends State<GtkHeaderBarMinimal> {
+class _AdwHeaderBarMinimalState extends State<AdwHeaderBarMinimal> {
   bool get hasWindowControls => widget.closeBtn != null || widget.minimizeBtn != null || widget.maximizeBtn != null;
 
   late ValueNotifier<List<String>> seperator = ValueNotifier(["", "minimize,maximize,close"]);

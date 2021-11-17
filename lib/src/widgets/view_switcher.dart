@@ -1,8 +1,8 @@
-import 'package:gtk/gtk.dart';
+import 'package:libadwaita/libadwaita.dart';
 import 'package:flutter/material.dart';
-import 'package:gtk/src/utils/colors.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
-class GtkViewSwitcher extends StatelessWidget {
+class AdwViewSwitcher extends StatelessWidget {
   final List<ViewSwitcherData> tabs;
   final ValueChanged<int> onViewChanged;
   final ViewSwitcherStyle style;
@@ -10,7 +10,7 @@ class GtkViewSwitcher extends StatelessWidget {
   final bool expanded;
   final double height;
 
-  const GtkViewSwitcher({
+  const AdwViewSwitcher({
     Key? key,
     required this.tabs,
     required this.onViewChanged,
@@ -50,7 +50,7 @@ class GtkViewSwitcher extends StatelessWidget {
                         : const BorderSide(width: 0, color: Colors.transparent),
                   ),
                 ),
-                child: GtkViewSwitcherTab(
+                child: AdwViewSwitcherTab(
                   data: tab.value,
                   isSelected: tab.key == currentIndex,
                   style: style,

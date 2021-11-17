@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gtk/src/utils/colors.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
-class GtkSidebar extends StatelessWidget {
+class AdwSidebar extends StatelessWidget {
   /// The current index of the item selected
   final int? currentIndex;
 
@@ -25,7 +25,7 @@ class GtkSidebar extends StatelessWidget {
 
   final List<Widget> childrenDelegate;
 
-  GtkSidebar({
+  AdwSidebar({
     Key? key,
     required this.currentIndex,
     required this.onSelected,
@@ -46,7 +46,7 @@ class GtkSidebar extends StatelessWidget {
                 )),
         super(key: key);
 
-  GtkSidebar.builder({
+  AdwSidebar.builder({
     Key? key,
     required this.currentIndex,
     required this.onSelected,
@@ -54,8 +54,7 @@ class GtkSidebar extends StatelessWidget {
     this.color,
     this.border,
     // Create a vertical list of GtkSidebarItem on demand.
-    required Function(BuildContext context, int index, bool isSelected)
-        itemBuilder,
+    required Function(BuildContext context, int index, bool isSelected) itemBuilder,
     required int itemCount,
     this.controller,
     this.padding,
@@ -63,8 +62,7 @@ class GtkSidebar extends StatelessWidget {
         childrenDelegate = List.generate(
           itemCount,
           (index) => _GtkSidebarItemBuilder(
-            item: (context) =>
-                itemBuilder(context, index, currentIndex == index),
+            item: (context) => itemBuilder(context, index, currentIndex == index),
             isSelected: currentIndex == index,
             onSelected: () => onSelected(index),
           ),
@@ -144,8 +142,7 @@ class _GtkSidebarItemBuilder extends StatelessWidget {
       onTap: onSelected,
       child: Container(
         color: isSelected
-            ? currentItem.selectedColor ??
-                Theme.of(context).appBarTheme.backgroundColor?.lighten(0.05)
+            ? currentItem.selectedColor ?? Theme.of(context).appBarTheme.backgroundColor?.lighten(0.05)
             : currentItem.unselectedColor,
         padding: currentItem.padding,
         child: Row(

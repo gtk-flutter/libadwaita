@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gtk/src/utils/colors.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
-class GtkHeaderButton extends StatefulWidget {
+class AdwHeaderButton extends StatefulWidget {
   /// The icon of the button, use size of 17 for better results
   final Widget icon;
 
@@ -11,7 +11,7 @@ class GtkHeaderButton extends StatefulWidget {
   /// Triggered when the button is pressed.
   final VoidCallback? onPressed;
 
-  const GtkHeaderButton({
+  const AdwHeaderButton({
     Key? key,
     required this.icon,
     this.isActive = false,
@@ -19,10 +19,10 @@ class GtkHeaderButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _GtkHeaderButtonState createState() => _GtkHeaderButtonState();
+  _AdwHeaderButtonState createState() => _AdwHeaderButtonState();
 }
 
-class _GtkHeaderButtonState extends State<GtkHeaderButton> {
+class _AdwHeaderButtonState extends State<AdwHeaderButton> {
   bool hovering = false;
 
   @override
@@ -41,7 +41,6 @@ class _GtkHeaderButtonState extends State<GtkHeaderButton> {
             borderRadius: const BorderRadius.all(
               Radius.circular(8.0),
             ),
-            border: Border.all(width: 1, color: context.borderColor),
             color: hovering
                 ? Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03)
                 : Theme.of(context).appBarTheme.backgroundColor?.lighten(0.025),

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:gtk/src/utils/colors.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
-class GtkTwoPane extends StatefulWidget {
-  final Widget pane1;
-  final Widget pane2;
+class AdwFlap extends StatefulWidget {
+  final Widget flap;
+  final Widget content;
+  final Widget? seperator;
 
-  /// keeps track of the pane2 open state
-  final bool showPane2;
+  /// Keeps track of the content's open state
+  final bool showContent;
 
-  /// keeps track of the pane2 header name
-  final String? pane2Name;
+  /// Keeps track of the content header title
+  final String? contentTitle;
 
-  /// Called called when pane2Popup
-  final void Function() onClosePane2Popup;
+  /// Called when content screen is closed and flap is shown
+  final void Function() onContentPopupClosed;
 
-  /// the breakpoint for small devices
+  /// The breakpoint for small devices
   final double breakpoint;
 
   /// pane1 has a width of `panelWidth`
@@ -26,30 +27,31 @@ class GtkTwoPane extends StatefulWidget {
   // Pane 2 builder on smaller screen
   final Function(String? pane2Name, Widget pane2)? fullPane2Builder;
 
-  const GtkTwoPane({
+  const AdwFlap({
     Key? key,
-    this.showPane2 = false,
-    required this.pane1,
-    required this.pane2,
-    required this.onClosePane2Popup,
+    this.showContent = false,
+    required this.flap,
+    required this.content,
+    this.seperator,
+    required this.onContentPopupClosed,
     this.breakpoint = 800,
     this.panelWidth = 250,
-    this.pane2Name,
+    this.contentTitle,
     this.fullPane2Builder,
   }) : super(key: key);
 
   @override
-  _GtkTwoPaneState createState() => _GtkTwoPaneState();
+  _AdwFlapState createState() => _AdwFlapState();
 }
 
-class _GtkTwoPaneState extends State<GtkTwoPane> {
+class _AdwFlapState extends State<AdwFlap> {
   bool _popupNotOpen = true;
 
   bool get canSplitPanes => widget.breakpoint < MediaQuery.of(context).size.width;
 
   /// Loads and removes the popup page for pane2 on small screens
   void loadPane2Page(BuildContext context) async {
-    if (widget.showPane2 && _popupNotOpen) {
+    if (widget.showContent && _popupNotOpen) {
       _popupNotOpen = false;
       SchedulerBinding.instance!.addPostFrameCallback((_) async {
         // sets _popupNotOpen to true after popup is closed
@@ -59,8 +61,8 @@ class _GtkTwoPaneState extends State<GtkTwoPane> {
             builder: (BuildContext context) {
               return Scaffold(
                 body: widget.fullPane2Builder != null
-                    ? widget.fullPane2Builder!(widget.pane2Name, widget.pane2)
-                    : widget.pane2,
+                    ? widget.fullPane2Builder!(widget.contentTitle, widget.content)
+                    : widget.content,
               );
             },
             fullscreenDialog: true,
@@ -70,7 +72,7 @@ class _GtkTwoPaneState extends State<GtkTwoPane> {
           // less code than wapping in a WillPopScope
           _popupNotOpen = true;
           // preserves value if screen canSplitPanes
-          if (!canSplitPanes) widget.onClosePane2Popup();
+          if (!canSplitPanes) widget.onContentPopupClosed();
         });
       });
     }
@@ -85,21 +87,17 @@ class _GtkTwoPaneState extends State<GtkTwoPane> {
 
   @override
   Widget build(BuildContext context) {
-    if (canSplitPanes && widget.showPane2) {
+    if (canSplitPanes && widget.showContent) {
       _closePopup();
       return Row(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                right: BorderSide(width: 1, color: context.borderColor),
-              ),
-            ),
+          SizedBox(
             width: widget.panelWidth,
-            child: widget.pane1,
+            child: widget.flap,
           ),
+          widget.seperator ?? VerticalDivider(color: context.borderColor),
           Flexible(
-            child: widget.pane2,
+            child: widget.content,
           ),
         ],
       );
@@ -110,7 +108,7 @@ class _GtkTwoPaneState extends State<GtkTwoPane> {
         children: [
           Flexible(
             flex: 100,
-            child: widget.pane1,
+            child: widget.flap,
           ),
         ],
       );

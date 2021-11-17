@@ -151,13 +151,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
-  gtk:
+  libadwaita:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0-rc.10"
+    version: "1.0.0-rc.0"
   lints:
     dependency: transitive
     description:
