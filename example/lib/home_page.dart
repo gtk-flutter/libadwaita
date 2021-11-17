@@ -14,9 +14,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  int _currentIndex = 0;
+  int? _currentIndex = 0;
 
   void _incrementCounter() => setState(() => _counter++);
+
+  void changeTheme() =>
+      widget.themeNotifier.value = widget.themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
           AdwHeaderBar.bitsdojo(
             appWindow: appWindow,
             windowDecor: windowDecor,
-            leading: AdwHeaderButton(icon: const Icon(Icons.add, size: 15), onPressed: _incrementCounter),
+            leading: AdwHeaderButton(icon: const Icon(Icons.nightlight_round, size: 15), onPressed: changeTheme),
             center: MediaQuery.of(context).size.width >= 650 ? buildViewSwitcher() : const SizedBox(),
             trailing: Row(
               children: [
@@ -49,18 +52,34 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
               child: AdwFlap(
+            fullContentBuilder: (contentIdx, content) => Column(
+              children: [
+                AdwHeaderBar.bitsdojo(
+                  appWindow: appWindow,
+                  windowDecor: windowDecor,
+                  leading: AdwHeaderButton(
+                    icon: const Icon(Icons.chevron_left),
+                    onPressed: () {
+                      _currentIndex = null;
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                Expanded(child: Center(child: content)),
+              ],
+            ),
             flap: AdwSidebar(
               currentIndex: _currentIndex,
               children: [
-                GtkSidebarItem(
+                AdwSidebarItem(
                   leading: const Icon(Icons.countertops),
                   label: 'Counter',
                 ),
-                GtkSidebarItem(
+                AdwSidebarItem(
                   leading: const Icon(Icons.list),
                   label: 'List View',
                 ),
-                GtkSidebarItem(
+                AdwSidebarItem(
                   leading: const Icon(Icons.settings),
                   label: 'Settings',
                 )
@@ -86,29 +105,36 @@ class _MyHomePageState extends State<MyHomePage> {
         ? Column(
             children: [
               AdwClamp(
-                child: SwitchListTile(
-                    title: Text(
-                      "Dark mode",
-                      style: Theme.of(context).textTheme.bodyText1,
+                child: Column(
+                  children: const [
+                    AdwPreferencesGroup(
+                      title: "Pages",
+                      description: "Preferences are organized in pages, this example has the following pages:",
+                      children: [
+                        AdwActionRow(
+                          title: "Layout",
+                        ),
+                        AdwActionRow(
+                          title: "Search",
+                        ),
+                      ],
                     ),
-                    value: widget.themeNotifier.value == ThemeMode.light ? false : true,
-                    onChanged: (value) {
-                      widget.themeNotifier.value =
-                          widget.themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-                    }),
+                  ],
+                ),
               ),
             ],
           )
         : _currentIndex == 1
-            ? AdwClamp(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: 30,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text("Index $index"),
+            ? SingleChildScrollView(
+                child: AdwClamp(
+                  child: AdwPreferencesGroup(
+                    children: List.generate(
+                      15,
+                      (index) => ListTile(
+                        title: Text("Index $index"),
+                      ),
+                    ),
                   ),
-                  separatorBuilder: (BuildContext context, int index) => const Divider(),
                 ),
               )
             : Column(
@@ -116,6 +142,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   const Text('You have pushed the add button this many times:'),
                   Text('$_counter', style: Theme.of(context).textTheme.headline4),
+                  ElevatedButton(
+                    onPressed: _incrementCounter,
+                    child: const Text("Add"),
+                  ),
                 ],
               );
   }
@@ -129,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ViewSwitcherData(icon: Icons.settings, title: "Settings")
       ],
       style: viewSwitcherStyle,
-      currentIndex: _currentIndex,
+      currentIndex: _currentIndex ?? -1,
       onViewChanged: (index) => setState(() => _currentIndex = index),
     );
   }

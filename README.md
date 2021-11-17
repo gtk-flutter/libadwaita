@@ -4,9 +4,9 @@
 [![License](https://img.shields.io/github/license/gtk-flutter/libadwaita?color=indigo)](LICENSE)
 [![Maintainer](https://img.shields.io/badge/Maintainer-prateekmedia-informational)](https://github.com/prateekmedia)
 
-Unofficial implementation of GTK Widgets and libadwaita in Flutter. Based on the GNOME Human Interface Guidelines.
+Unofficial implementation of Libadwaita Widgets in Flutter.
 
-![GTK+Flutter example screenshot](https://user-images.githubusercontent.com/41370460/137439130-571c6d74-b3f5-4f01-8c11-3ea8de562dd3.jpg)
+![libadwaita example screenshot](https://user-images.githubusercontent.com/41370460/137439130-571c6d74-b3f5-4f01-8c11-3ea8de562dd3.jpg)
 
 **NOTE:** For getting colors from gtk 3.0 theme use version [`<=0.9.8+1`](https://pub.dev/packages/gtk/versions/0.9.8+1)
 
@@ -21,14 +21,15 @@ Unofficial implementation of GTK Widgets and libadwaita in Flutter. Based on the
 - This only provides widgets, for theming you should consider [adwaita](https://pub.dev/packages/adwaita) or [yaru](https://github.com/ubuntu/yaru.dart) package.
 - If you want custom titlebar then you can follow the steps for that on [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) package.
 - Following Widgets are currently ported to flutter, for more info visit [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/index.html#classes):
-    - `AdwClamp`
-    - `AdwFlap`
-    - `AdwHeaderBar`
-    - `AdwHeaderBarMinimal`
+    - [`AdwActionRow`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ActionRow.html)
+    - [`AdwClamp`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html)
+    - [`AdwFlap`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Flap.html)
+    - [`AdwHeaderBar`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html), `AdwHeaderBarMinimal`
     - `AdwHeaderButton`
     - `AdwPopupMenu`
+    - [`PreferencesGroup`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html)
     - `AdwSidebar`
-    - `AdwViewSwitcher`
+    - [`AdwViewSwitcher`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcher.html)
     - `AdwViewSwitcherTab`
 
 See the example app in the `example` folder for more info.
@@ -37,7 +38,7 @@ See the example app in the `example` folder for more info.
 
 This package is dependent on
 - [adwaita](https://pub.dev/packages/adwaita) or [yaru](https://github.com/ubuntu/yaru.dart) - For theming
-- [`popover`](https://pub.dev/packages/popover) for GtkPopover.
+- [`popover`](https://pub.dev/packages/popover) for AdwPopover.
 - [`window_decorations`](https://pub.dev/packages/window_decorations) for Window Decorations (not needed if you use `AdwHeaderBarMinimal`)
 
 Optional packages to use with this package:

@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
+enum FoldPolicy { never, always, auto }
+enum FlapPosition { start, end }
+
 class AdwFlap extends StatefulWidget {
   final Widget flap;
   final Widget content;
   final Widget? seperator;
 
+  final FoldPolicy foldPolicy;
+  final FlapPosition flapPosition;
+
   /// Keeps track of the content's open state
   final bool showContent;
 
-  /// Keeps track of the content header title
-  final String? contentTitle;
+  /// Keeps track of the content index
+  final int? contentIndex;
 
   /// Called when content screen is closed and flap is shown
   final void Function() onContentPopupClosed;
@@ -19,13 +25,12 @@ class AdwFlap extends StatefulWidget {
   /// The breakpoint for small devices
   final double breakpoint;
 
-  /// pane1 has a width of `panelWidth`
-  ///
-  /// pane2 `total - panelWidth`
-  final double panelWidth;
+  /// flap has a width of `flapWidth`
+  /// Rest is allocated to content
+  final double flapWidth;
 
-  // Pane 2 builder on smaller screen
-  final Function(String? pane2Name, Widget pane2)? fullPane2Builder;
+  // Content builder on smaller screen
+  final Function(int? contentIndex, Widget content)? fullContentBuilder;
 
   const AdwFlap({
     Key? key,
@@ -33,11 +38,13 @@ class AdwFlap extends StatefulWidget {
     required this.flap,
     required this.content,
     this.seperator,
+    this.foldPolicy = FoldPolicy.auto,
+    this.flapPosition = FlapPosition.start,
     required this.onContentPopupClosed,
     this.breakpoint = 800,
-    this.panelWidth = 250,
-    this.contentTitle,
-    this.fullPane2Builder,
+    this.flapWidth = 250,
+    this.contentIndex,
+    this.fullContentBuilder,
   }) : super(key: key);
 
   @override
@@ -47,10 +54,12 @@ class AdwFlap extends StatefulWidget {
 class _AdwFlapState extends State<AdwFlap> {
   bool _popupNotOpen = true;
 
-  bool get canSplitPanes => widget.breakpoint < MediaQuery.of(context).size.width;
+  bool get canSplitPanes =>
+      widget.foldPolicy == FoldPolicy.never ||
+      widget.foldPolicy == FoldPolicy.auto && widget.breakpoint < MediaQuery.of(context).size.width;
 
-  /// Loads and removes the popup page for pane2 on small screens
-  void loadPane2Page(BuildContext context) async {
+  /// Loads and removes the popup page for content on small screens
+  void loadContentPage(BuildContext context) async {
     if (widget.showContent && _popupNotOpen) {
       _popupNotOpen = false;
       SchedulerBinding.instance!.addPostFrameCallback((_) async {
@@ -60,8 +69,8 @@ class _AdwFlapState extends State<AdwFlap> {
           MaterialPageRoute(
             builder: (BuildContext context) {
               return Scaffold(
-                body: widget.fullPane2Builder != null
-                    ? widget.fullPane2Builder!(widget.contentTitle, widget.content)
+                body: widget.fullContentBuilder != null
+                    ? widget.fullContentBuilder!(widget.contentIndex, widget.content)
                     : widget.content,
               );
             },
@@ -89,25 +98,23 @@ class _AdwFlapState extends State<AdwFlap> {
   Widget build(BuildContext context) {
     if (canSplitPanes && widget.showContent) {
       _closePopup();
+      List<Widget> content = [
+        SizedBox(
+          width: widget.flapWidth,
+          child: widget.flap,
+        ),
+        widget.seperator ?? Container(width: 1, color: context.borderColor),
+        Flexible(child: widget.content),
+      ];
       return Row(
-        children: [
-          SizedBox(
-            width: widget.panelWidth,
-            child: widget.flap,
-          ),
-          widget.seperator ?? VerticalDivider(color: context.borderColor),
-          Flexible(
-            child: widget.content,
-          ),
-        ],
+        children: widget.flapPosition == FlapPosition.start ? content : content.reversed.toList(),
       );
     } else {
-      loadPane2Page(context);
+      loadContentPage(context);
       return Flex(
         direction: Axis.horizontal,
         children: [
-          Flexible(
-            flex: 100,
+          Expanded(
             child: widget.flap,
           ),
         ],

@@ -37,18 +37,6 @@ class AdwViewSwitcher extends StatelessWidget {
                   color: tab.key == currentIndex
                       ? Theme.of(context).appBarTheme.backgroundColor?.darken(0.05)
                       : Colors.transparent,
-                  border: Border(
-                    left: BorderSide(
-                      width: 1,
-                      color: context.borderColor,
-                    ),
-                    right: tab.key == tabs.length - 1
-                        ? BorderSide(
-                            width: 1,
-                            color: context.borderColor,
-                          )
-                        : const BorderSide(width: 0, color: Colors.transparent),
-                  ),
                 ),
                 child: AdwViewSwitcherTab(
                   data: tab.value,

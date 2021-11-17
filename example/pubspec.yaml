@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  adwaita: ">= 0.0.1"
+  adwaita: ">= 0.0.3"
   bitsdojo_window:
   libadwaita:
     path: ../

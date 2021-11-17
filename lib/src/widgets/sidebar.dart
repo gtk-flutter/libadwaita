@@ -35,11 +35,11 @@ class AdwSidebar extends StatelessWidget {
     this.controller,
     this.padding,
 
-    /// List of all the Gtk Sidebar Item's, use GtkSidebar.builder if you want to build them on demand.
-    required List<GtkSidebarItem> children,
+    /// List of all the Adw Sidebar Item's, use AdwSidebar.builder if you want to build them on demand.
+    required List<AdwSidebarItem> children,
   })  : childrenDelegate = List.generate(
             children.length,
-            (index) => _GtkSidebarItemBuilder(
+            (index) => _AdwSidebarItemBuilder(
                   item: (context) => children[index],
                   isSelected: index == currentIndex,
                   onSelected: () => onSelected(index),
@@ -53,7 +53,7 @@ class AdwSidebar extends StatelessWidget {
     this.width = 265,
     this.color,
     this.border,
-    // Create a vertical list of GtkSidebarItem on demand.
+    // Create a vertical list of AdwSidebarItem on demand.
     required Function(BuildContext context, int index, bool isSelected) itemBuilder,
     required int itemCount,
     this.controller,
@@ -61,7 +61,7 @@ class AdwSidebar extends StatelessWidget {
   })  : assert(itemCount >= 0),
         childrenDelegate = List.generate(
           itemCount,
-          (index) => _GtkSidebarItemBuilder(
+          (index) => _AdwSidebarItemBuilder(
             item: (context) => itemBuilder(context, index, currentIndex == index),
             isSelected: currentIndex == index,
             onSelected: () => onSelected(index),
@@ -84,7 +84,7 @@ class AdwSidebar extends StatelessWidget {
   }
 }
 
-class GtkSidebarItem {
+class AdwSidebarItem {
   /// The key of the gtk sidebar item child.
   final Key? key;
 
@@ -109,7 +109,7 @@ class GtkSidebarItem {
   // The Padding of the item
   final EdgeInsets padding;
 
-  GtkSidebarItem({
+  AdwSidebarItem({
     this.key,
     this.label,
     this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
@@ -121,12 +121,12 @@ class GtkSidebarItem {
   }) : assert(labelWidget != null || label != null);
 }
 
-class _GtkSidebarItemBuilder extends StatelessWidget {
-  final GtkSidebarItem Function(BuildContext context) item;
+class _AdwSidebarItemBuilder extends StatelessWidget {
+  final AdwSidebarItem Function(BuildContext context) item;
   final bool isSelected;
   final VoidCallback? onSelected;
 
-  const _GtkSidebarItemBuilder({
+  const _AdwSidebarItemBuilder({
     Key? key,
     required this.item,
     required this.isSelected,

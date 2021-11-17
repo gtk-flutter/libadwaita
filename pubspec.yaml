@@ -1,5 +1,5 @@
 name: libadwaita
-description: Implements GTK Widgets, themes and titlebar buttons in Flutter. Based on libadwaita
+description: Unofficial implementation of Libadwaita Widgets in Flutter.
 version: 1.0.0-rc.0
 homepage: https://github.com/gtk-flutter/libadwaita
 

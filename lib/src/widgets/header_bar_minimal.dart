@@ -21,8 +21,6 @@ class AdwHeaderBarMinimal extends StatefulWidget {
 
   final Widget? closeBtn;
 
-  // final GtkColorTheme systemTheme;
-
   /// The height of the headerbar
   final double height;
 
