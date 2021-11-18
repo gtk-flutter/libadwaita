@@ -7,13 +7,13 @@ import 'package:libadwaita/src/utils/colors.dart';
 
 class AdwHeaderBarMinimal extends StatefulWidget {
   /// The leading widget for the headerbar
-  final Widget leading;
+  final Widget start;
 
   /// The center widget for the headerbar
-  final Widget center;
+  final Widget title;
 
   /// The trailing widget for the headerbar
-  final Widget trailing;
+  final Widget end;
 
   final Widget? minimizeBtn;
 
@@ -40,9 +40,9 @@ class AdwHeaderBarMinimal extends StatefulWidget {
     Key? key,
     this.onDoubleTap,
     this.onHeaderDrag,
-    this.leading = const SizedBox(),
-    this.center = const SizedBox(),
-    this.trailing = const SizedBox(),
+    this.start = const SizedBox(),
+    this.title = const SizedBox(),
+    this.end = const SizedBox(),
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
@@ -56,9 +56,9 @@ class AdwHeaderBarMinimal extends StatefulWidget {
 
     /// The appWindow object from bitsdojo_window package
     required appWindow,
-    this.leading = const SizedBox(),
-    this.center = const SizedBox(),
-    this.trailing = const SizedBox(),
+    this.start = const SizedBox(),
+    this.title = const SizedBox(),
+    this.end = const SizedBox(),
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
@@ -77,9 +77,9 @@ class AdwHeaderBarMinimal extends StatefulWidget {
 
     /// The Window.of(context) object from nativeshell package
     required window,
-    this.leading = const SizedBox(),
-    this.center = const SizedBox(),
-    this.trailing = const SizedBox(),
+    this.start = const SizedBox(),
+    this.title = const SizedBox(),
+    this.end = const SizedBox(),
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
@@ -167,14 +167,14 @@ class _AdwHeaderBarMinimalState extends State<AdwHeaderBarMinimal> {
                               SizedBox(width: widget.titlebarSpace),
                             for (var i in sep[0].split(','))
                               if (windowButtons[i] != null) windowButtons[i]!,
-                            widget.leading,
+                            widget.start,
                           ],
                         ),
-                        middle: widget.center,
+                        middle: widget.title,
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            widget.trailing,
+                            widget.end,
                             if (hasWindowControls && sep[1].split(',').isNotEmpty)
                               SizedBox(width: widget.titlebarSpace),
                             for (var i in sep[1].split(','))

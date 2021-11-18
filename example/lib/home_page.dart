@@ -29,9 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
           AdwHeaderBar.bitsdojo(
             appWindow: appWindow,
             windowDecor: windowDecor,
-            leading: AdwHeaderButton(icon: const Icon(Icons.nightlight_round, size: 15), onPressed: changeTheme),
-            center: MediaQuery.of(context).size.width >= 650 ? buildViewSwitcher() : const SizedBox(),
-            trailing: Row(
+            start: AdwHeaderButton(icon: const Icon(Icons.nightlight_round, size: 15), onPressed: changeTheme),
+            title: MediaQuery.of(context).size.width >= 650 ? buildViewSwitcher() : const SizedBox(),
+            end: Row(
               children: [
                 AdwPopupMenu(
                   body: Column(
@@ -51,13 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-              child: AdwFlap(
+              child: AdwStackSidebar(
             fullContentBuilder: (contentIdx, content) => Column(
               children: [
                 AdwHeaderBar.bitsdojo(
                   appWindow: appWindow,
                   windowDecor: windowDecor,
-                  leading: AdwHeaderButton(
+                  start: AdwHeaderButton(
                     icon: const Icon(Icons.chevron_left),
                     onPressed: () {
                       _currentIndex = null;
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(child: Center(child: content)),
               ],
             ),
-            flap: AdwSidebar(
+            sidebar: AdwSidebar(
               currentIndex: _currentIndex,
               children: [
                 AdwSidebarItem(
@@ -92,7 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             content: Center(child: buildPanel()),
             onContentPopupClosed: () {},
-            showContent: true,
           )),
         ],
       ),
@@ -143,6 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text('You have pushed the add button this many times:'),
                   Text('$_counter', style: Theme.of(context).textTheme.headline4),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
                     onPressed: _incrementCounter,
                     child: const Text("Add"),
                   ),

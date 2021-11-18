@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
-enum FoldPolicy { never, always, auto }
-enum FlapPosition { start, end }
-
-class AdwFlap extends StatefulWidget {
-  final Widget flap;
+class AdwStackSidebar extends StatefulWidget {
+  final Widget sidebar;
   final Widget content;
   final Widget? seperator;
-
-  final FoldPolicy foldPolicy;
-  final FlapPosition flapPosition;
 
   /// Keeps track of the content index
   final int? contentIndex;
@@ -29,13 +23,11 @@ class AdwFlap extends StatefulWidget {
   // Content builder on smaller screen
   final Function(int? contentIndex, Widget content)? fullContentBuilder;
 
-  const AdwFlap({
+  const AdwStackSidebar({
     Key? key,
-    required this.flap,
+    required this.sidebar,
     required this.content,
     this.seperator,
-    this.foldPolicy = FoldPolicy.auto,
-    this.flapPosition = FlapPosition.start,
     required this.onContentPopupClosed,
     this.breakpoint = 800,
     this.flapWidth = 250,
@@ -44,15 +36,13 @@ class AdwFlap extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AdwFlapState createState() => _AdwFlapState();
+  _AdwStackSidebarState createState() => _AdwStackSidebarState();
 }
 
-class _AdwFlapState extends State<AdwFlap> {
+class _AdwStackSidebarState extends State<AdwStackSidebar> {
   bool _popupNotOpen = true;
 
-  bool get canSplitPanes =>
-      widget.foldPolicy == FoldPolicy.never ||
-      widget.foldPolicy == FoldPolicy.auto && widget.breakpoint < MediaQuery.of(context).size.width;
+  bool get canSplitPanes => widget.breakpoint < MediaQuery.of(context).size.width;
 
   /// Loads and removes the popup page for content on small screens
   void loadContentPage(BuildContext context) async {
@@ -97,13 +87,13 @@ class _AdwFlapState extends State<AdwFlap> {
       List<Widget> content = [
         SizedBox(
           width: widget.flapWidth,
-          child: widget.flap,
+          child: widget.sidebar,
         ),
         widget.seperator ?? Container(width: 1, color: context.borderColor),
         Flexible(child: widget.content),
       ];
       return Row(
-        children: widget.flapPosition == FlapPosition.start ? content : content.reversed.toList(),
+        children: content,
       );
     } else {
       loadContentPage(context);
@@ -111,7 +101,7 @@ class _AdwFlapState extends State<AdwFlap> {
         direction: Axis.horizontal,
         children: [
           Expanded(
-            child: widget.flap,
+            child: widget.sidebar,
           ),
         ],
       );

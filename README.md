@@ -24,13 +24,15 @@ Unofficial implementation of Libadwaita Widgets in Flutter.
     - [`AdwActionRow`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ActionRow.html)
     - [`AdwClamp`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html)
     - [`AdwFlap`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Flap.html)
-    - [`AdwHeaderBar`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html), `AdwHeaderBarMinimal`
-    - `AdwHeaderButton`
-    - `AdwPopupMenu`
+    - [`AdwHeaderBar`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html)
+    - `AdwHeaderBarMinimal` - `AdwHeaderBar` without [window_decorations](https://pub.dev/packages/window_decorations) dependency
+    - `AdwHeaderButton` - A Header button to be used with `AdwHeaderBar*`
+    - `AdwPopupMenu` - A Popup Menu button
     - [`PreferencesGroup`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html)
-    - `AdwSidebar`
+    - `AdwStackSidebar` - GtkStackSidebar renamed to match the flow
+    - `AdwSidebar` - To be used with `AdwStackSidebar` or `AdwFlap`
     - [`AdwViewSwitcher`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcher.html)
-    - `AdwViewSwitcherTab`
+    - `AdwViewSwitcherTab` - Tabs for AdwViewSwitcher
 
 See the example app in the `example` folder for more info.
 
@@ -38,7 +40,7 @@ See the example app in the `example` folder for more info.
 
 This package is dependent on
 - [adwaita](https://pub.dev/packages/adwaita) or [yaru](https://github.com/ubuntu/yaru.dart) - For theming
-- [`popover`](https://pub.dev/packages/popover) for AdwPopover.
+- [`popover`](https://pub.dev/packages/popover) for `AdwPopupMenu`.
 - [`window_decorations`](https://pub.dev/packages/window_decorations) for Window Decorations (not needed if you use `AdwHeaderBarMinimal`)
 
 Optional packages to use with this package:

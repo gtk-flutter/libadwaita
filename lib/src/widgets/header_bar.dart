@@ -4,13 +4,13 @@ import 'package:libadwaita/libadwaita.dart';
 /// Use AdwHeaderBarMinimal for HeaderBar without window_decorations package
 class AdwHeaderBar extends StatelessWidget {
   /// The leading widget for the headerbar
-  final Widget leading;
+  final Widget start;
 
   /// The center widget for the headerbar
-  final Widget center;
+  final Widget title;
 
   /// The trailing widget for the headerbar
-  final Widget trailing;
+  final Widget end;
 
   /// The action to perform when minimize button is pressed
   final VoidCallback? onMinimize;
@@ -55,9 +55,9 @@ class AdwHeaderBar extends StatelessWidget {
     required this.windowDecor,
     this.onDoubleTap,
     this.onHeaderDrag,
-    this.leading = const SizedBox(),
-    this.center = const SizedBox(),
-    this.trailing = const SizedBox(),
+    this.start = const SizedBox(),
+    this.title = const SizedBox(),
+    this.end = const SizedBox(),
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
@@ -73,9 +73,9 @@ class AdwHeaderBar extends StatelessWidget {
     /// The appWindow object from bitsdojo_window package
     required appWindow,
     required this.windowDecor,
-    this.leading = const SizedBox(),
-    this.center = const SizedBox(),
-    this.trailing = const SizedBox(),
+    this.start = const SizedBox(),
+    this.title = const SizedBox(),
+    this.end = const SizedBox(),
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
@@ -96,9 +96,9 @@ class AdwHeaderBar extends StatelessWidget {
     /// The Window.of(context) object from nativeshell package
     required window,
     required this.windowDecor,
-    this.leading = const SizedBox(),
-    this.center = const SizedBox(),
-    this.trailing = const SizedBox(),
+    this.start = const SizedBox(),
+    this.title = const SizedBox(),
+    this.end = const SizedBox(),
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 47,
@@ -120,9 +120,9 @@ class AdwHeaderBar extends StatelessWidget {
     return AdwHeaderBarMinimal(
       onDoubleTap: onDoubleTap,
       onHeaderDrag: onHeaderDrag,
-      leading: leading,
-      center: center,
-      trailing: trailing,
+      start: start,
+      title: title,
+      end: end,
       padding: padding,
       titlebarSpace: titlebarSpace,
       height: height,
