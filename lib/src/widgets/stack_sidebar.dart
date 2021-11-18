@@ -10,15 +10,15 @@ class AdwStackSidebar extends StatefulWidget {
   /// Keeps track of the content index
   final int? contentIndex;
 
-  /// Called when content screen is closed and flap is shown
+  /// Called when content screen is closed and sidebar is shown
   final void Function() onContentPopupClosed;
 
   /// The breakpoint for small devices
   final double breakpoint;
 
-  /// flap has a width of `flapWidth`
+  /// sidebar has a width of `sidebarWidth`
   /// Rest is allocated to content
-  final double flapWidth;
+  final double sidebarWidth;
 
   // Content builder on smaller screen
   final Function(int? contentIndex, Widget content)? fullContentBuilder;
@@ -30,7 +30,7 @@ class AdwStackSidebar extends StatefulWidget {
     this.seperator,
     required this.onContentPopupClosed,
     this.breakpoint = 800,
-    this.flapWidth = 250,
+    this.sidebarWidth = 250,
     this.contentIndex,
     this.fullContentBuilder,
   }) : super(key: key);
@@ -86,7 +86,7 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
       _closePopup();
       List<Widget> content = [
         SizedBox(
-          width: widget.flapWidth,
+          width: widget.sidebarWidth,
           child: widget.sidebar,
         ),
         widget.seperator ?? Container(width: 1, color: context.borderColor),

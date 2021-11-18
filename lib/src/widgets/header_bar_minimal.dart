@@ -131,10 +131,10 @@ class _AdwHeaderBarMinimalState extends State<AdwHeaderBarMinimal> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, Widget> windowButtons = {
-      "maximize": widget.maximizeBtn!,
-      "minimize": widget.minimizeBtn!,
-      "close": widget.closeBtn!,
+    Map<String, Widget?> windowButtons = {
+      "maximize": widget.maximizeBtn,
+      "minimize": widget.minimizeBtn,
+      "close": widget.closeBtn,
     };
 
     return GestureDetector(

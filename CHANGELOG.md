@@ -1,3 +1,9 @@
+## 1.0.0-rc.1
+
+- Fix Window buttons null error
+- Update Example
+- Update `AdwActionRow` and `AdwStackSidebar`
+
 ## 1.0.0-rc.0
 
 - Seperate libadwaita (Widgets) and adwaita (Colors)

@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
             appWindow: appWindow,
             windowDecor: windowDecor,
             start: AdwHeaderButton(icon: const Icon(Icons.nightlight_round, size: 15), onPressed: changeTheme),
-            title: MediaQuery.of(context).size.width >= 650 ? buildViewSwitcher() : const SizedBox(),
+            title: const Text("Libadwaita Demo"),
             end: Row(
               children: [
                 AdwPopupMenu(
@@ -90,12 +90,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
-            content: Center(child: buildPanel()),
+            content: Center(child: SingleChildScrollView(child: buildPanel())),
             onContentPopupClosed: () {},
           )),
         ],
       ),
-      bottomNavigationBar: MediaQuery.of(context).size.width < 650 ? buildViewSwitcher(ViewSwitcherStyle.mobile) : null,
     );
   }
 
@@ -105,8 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               AdwClamp(
                 child: Column(
-                  children: const [
-                    AdwPreferencesGroup(
+                  children: [
+                    const AdwPreferencesGroup(
                       title: "Pages",
                       description: "Preferences are organized in pages, this example has the following pages:",
                       children: [
@@ -118,20 +117,46 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 12),
+                    const AdwPreferencesGroup(
+                      title: "Groups",
+                      description:
+                          "Preferences are grouped together, a group can have a title and a description. Descriptions will be wrapped if they are too long. This page has the following groups:",
+                      children: [
+                        AdwActionRow(title: "An untitled group"),
+                        AdwActionRow(title: "Pages"),
+                        AdwActionRow(title: "Groups"),
+                        AdwActionRow(title: "Preferences"),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    AdwPreferencesGroup(
+                      title: "Subpages",
+                      description: "Preferences windows can have subpages.",
+                      children: [
+                        AdwActionRow(
+                          title: "Go to a subpage",
+                          end: const Icon(Icons.chevron_right),
+                          onActivated: () => print("Hi"),
+                        ),
+                        const AdwActionRow(
+                          title: "Go to another subpage",
+                          end: Icon(Icons.chevron_right),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ],
           )
         : _currentIndex == 1
-            ? SingleChildScrollView(
-                child: AdwClamp(
-                  child: AdwPreferencesGroup(
-                    children: List.generate(
-                      15,
-                      (index) => ListTile(
-                        title: Text("Index $index"),
-                      ),
+            ? AdwClamp(
+                child: AdwPreferencesGroup(
+                  children: List.generate(
+                    15,
+                    (index) => ListTile(
+                      title: Text("Index $index"),
                     ),
                   ),
                 ),
@@ -148,19 +173,5 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               );
-  }
-
-  AdwViewSwitcher buildViewSwitcher([ViewSwitcherStyle viewSwitcherStyle = ViewSwitcherStyle.desktop]) {
-    return AdwViewSwitcher(
-      height: 55,
-      tabs: const [
-        ViewSwitcherData(icon: Icons.near_me_outlined, title: "Counter"),
-        ViewSwitcherData(icon: Icons.list_outlined, title: "List View"),
-        ViewSwitcherData(icon: Icons.settings, title: "Settings")
-      ],
-      style: viewSwitcherStyle,
-      currentIndex: _currentIndex ?? -1,
-      onViewChanged: (index) => setState(() => _currentIndex = index),
-    );
   }
 }
