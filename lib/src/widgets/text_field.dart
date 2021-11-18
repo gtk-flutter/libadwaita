@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class GtkTextField extends StatelessWidget {
+class AdwTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final String? labelText;
@@ -8,7 +8,7 @@ class GtkTextField extends StatelessWidget {
   final IconData? icon;
   final String? initialValue;
 
-  const GtkTextField(
+  const AdwTextField(
       {Key? key,
       this.controller,
       this.keyboardType,

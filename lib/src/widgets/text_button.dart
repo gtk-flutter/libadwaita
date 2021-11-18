@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class GtkTextButton extends StatefulWidget {
+class AdwTextButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final VoidCallback? onLongPress;
   final FocusNode? focusNode;
@@ -8,7 +8,7 @@ class GtkTextButton extends StatefulWidget {
   final Clip clipBehavior;
   final Widget child;
 
-  const GtkTextButton({
+  const AdwTextButton({
     Key? key,
     required this.onPressed,
     this.onLongPress,
@@ -21,25 +21,18 @@ class GtkTextButton extends StatefulWidget {
         );
 
   @override
-  _GtkTextButtonState createState() => _GtkTextButtonState();
-}
-
-class _GtkTextButtonState extends State<GtkTextButton> {
-  _GtkTextButtonState();
-
-  @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: widget.onPressed,
-        onLongPress: widget.onLongPress,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
         style: TextButton.styleFrom(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
               side: BorderSide(color: Colors.transparent)),
         ),
-        focusNode: widget.focusNode,
-        autofocus: widget.autofocus,
-        clipBehavior: widget.clipBehavior,
-        child: widget.child);
+        focusNode: focusNode,
+        autofocus: autofocus,
+        clipBehavior: clipBehavior,
+        child: child);
   }
 }
