@@ -74,27 +74,29 @@ class _FlapHomePageState extends State<FlapHomePage> {
           ),
           Expanded(
             child: AdwFlap(
-              flap: AdwSidebar(
-                currentIndex: _currentIndex,
-                children: [
-                  AdwSidebarItem(
-                    leading: const Icon(Icons.countertops),
-                    label: 'Counter',
-                  ),
-                  AdwSidebarItem(
-                    leading: const Icon(Icons.list),
-                    label: 'List View',
-                  ),
-                  AdwSidebarItem(
-                    leading: const Icon(Icons.settings),
-                    label: 'Settings',
-                  )
-                ],
-                onSelected: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
+              flap: Drawer(
+                child: AdwSidebar(
+                  currentIndex: _currentIndex,
+                  children: [
+                    AdwSidebarItem(
+                      leading: const Icon(Icons.countertops),
+                      label: 'Counter',
+                    ),
+                    AdwSidebarItem(
+                      leading: const Icon(Icons.list),
+                      label: 'List View',
+                    ),
+                    AdwSidebarItem(
+                      leading: const Icon(Icons.settings),
+                      label: 'Settings',
+                    )
+                  ],
+                  onSelected: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                ),
               ),
               index: _currentIndex,
               children: [

@@ -12,14 +12,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
-        valueListenable: themeNotifier,
-        builder: (_, ThemeMode currentMode, __) {
-          return MaterialApp(
-              theme: adwaita.lightTheme,
-              darkTheme: adwaita.darkTheme,
-              debugShowCheckedModeBanner: false,
-              home: FlapHomePage(themeNotifier: themeNotifier),
-              themeMode: currentMode);
-        });
+      valueListenable: themeNotifier,
+      builder: (_, ThemeMode currentMode, __) {
+        return MaterialApp(
+          theme: adwaita.lightTheme,
+          darkTheme: adwaita.darkTheme,
+          debugShowCheckedModeBanner: false,
+          home: FlapHomePage(themeNotifier: themeNotifier),
+          themeMode: currentMode,
+        );
+      },
+    );
   }
 }
