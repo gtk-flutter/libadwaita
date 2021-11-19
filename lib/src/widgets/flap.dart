@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/widgets/slide_hide.dart';
+import 'package:libadwaita/src/animations/animated_indexed_stack.dart';
+import 'package:libadwaita/src/animations/slide_hide.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 enum FoldPolicy { never, always, auto }
@@ -57,7 +58,7 @@ class _AdwFlapState extends State<AdwFlap> {
     }
 
     var content = Expanded(
-      child: IndexedStack(
+      child: AnimatedIndexedStack(
         index: widget.index,
         children: widget.children,
       ),
