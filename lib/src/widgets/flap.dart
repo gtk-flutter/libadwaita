@@ -67,7 +67,10 @@ class _AdwFlapState extends State<AdwFlap> {
     var flap = SlideHide(
       isHidden: shouldHide,
       width: widget.flapWidth,
-      child: widget.flap,
+      child: SingleChildScrollView(
+        child: widget.flap,
+        scrollDirection: Axis.horizontal,
+      ),
     );
 
     var seperator = widget.seperator ??
