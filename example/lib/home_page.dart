@@ -19,7 +19,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() => setState(() => _counter++);
 
   void changeTheme() =>
-      widget.themeNotifier.value = widget.themeNotifier.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+      widget.themeNotifier.value = widget.themeNotifier.value == ThemeMode.light
+          ? ThemeMode.dark
+          : ThemeMode.light;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,9 @@ class _MyHomePageState extends State<MyHomePage> {
           AdwHeaderBar.bitsdojo(
             appWindow: appWindow,
             windowDecor: windowDecor,
-            start: AdwHeaderButton(icon: const Icon(Icons.nightlight_round, size: 15), onPressed: changeTheme),
+            start: AdwHeaderButton(
+                icon: const Icon(Icons.nightlight_round, size: 15),
+                onPressed: changeTheme),
             title: const Text("Libadwaita Demo"),
             end: Row(
               children: [
@@ -42,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           _counter = 0;
                           Navigator.of(context).pop();
                         }),
-                        title: const Text('Reset Counter', style: TextStyle(fontSize: 15)),
+                        title: const Text('Reset Counter',
+                            style: TextStyle(fontSize: 15)),
                       ),
                     ],
                   ),
@@ -107,7 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     const AdwPreferencesGroup(
                       title: "Pages",
-                      description: "Preferences are organized in pages, this example has the following pages:",
+                      description:
+                          "Preferences are organized in pages, this example has the following pages:",
                       children: [
                         AdwActionRow(
                           title: "Layout",
@@ -148,6 +154,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
+              Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: AdwTextField(
+                      initialValue: "some text",
+                      keyboardType: TextInputType.number,
+                      labelText: "text field label",
+                      icon: Icons.insert_photo,
+                      onChanged: (String s) {})),
+              AdwTextButton(child: const Text("Hello"), onPressed: () {}),
             ],
           )
         : _currentIndex == 1
@@ -165,9 +180,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('You have pushed the add button this many times:'),
-                  Text('$_counter', style: Theme.of(context).textTheme.headline4),
+                  Text('$_counter',
+                      style: Theme.of(context).textTheme.headline4),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
+                    style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).primaryColor),
                     onPressed: _incrementCounter,
                     child: const Text("Add"),
                   ),
