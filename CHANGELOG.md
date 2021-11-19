@@ -1,8 +1,9 @@
 ## 1.0.0-rc.1
 
+- Add `AdwTextField` & `AdwTextButton`
 - Fix Window buttons null error
 - Update Example
-- Update `AdwActionRow` and `AdwStackSidebar`
+- Update `AdwActionRow` & `AdwStackSidebar`
 
 ## 1.0.0-rc.0
 
