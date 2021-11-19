@@ -16,6 +16,23 @@ class _FlapHomePageState extends State<FlapHomePage> {
   int _counter = 0;
   int? _currentIndex = 0;
 
+  late ScrollController _scrollController;
+  late ScrollController _scrollControllerOther;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollControllerOther = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _scrollControllerOther.dispose();
+    super.dispose();
+  }
+
   void _incrementCounter() => setState(() => _counter++);
 
   void changeTheme() =>
@@ -99,6 +116,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
                   ),
                 ),
                 SingleChildScrollView(
+                  controller: _scrollController,
                   child: Center(
                     child: AdwClamp(
                       child: AdwPreferencesGroup(
@@ -113,6 +131,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
                   ),
                 ),
                 SingleChildScrollView(
+                  controller: _scrollControllerOther,
                   child: Center(
                     child: Column(
                       children: [
