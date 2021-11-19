@@ -18,12 +18,16 @@ class _FlapHomePageState extends State<FlapHomePage> {
 
   late ScrollController _scrollController;
   late ScrollController _scrollControllerOther;
+  late FlapController _flapController;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollControllerOther = ScrollController();
+    _flapController = FlapController();
+
+    _flapController.addListener(() => setState(() {}));
   }
 
   @override
@@ -48,9 +52,20 @@ class _FlapHomePageState extends State<FlapHomePage> {
           AdwHeaderBar.bitsdojo(
             appWindow: appWindow,
             windowDecor: windowDecor,
-            start: AdwHeaderButton(
-                icon: const Icon(Icons.nightlight_round, size: 15),
-                onPressed: changeTheme),
+            start: Row(
+              children: [
+                AdwHeaderButton(
+                  icon: Icon(
+                      _flapController.isOpen ? Icons.close : Icons.view_sidebar,
+                      size: 15),
+                  onPressed: _flapController.toggle,
+                ),
+                AdwHeaderButton(
+                  icon: const Icon(Icons.nightlight_round, size: 15),
+                  onPressed: changeTheme,
+                ),
+              ],
+            ),
             title: const Text("Libadwaita Demo"),
             end: Row(
               children: [
@@ -74,6 +89,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
           ),
           Expanded(
             child: AdwFlap(
+              flapController: _flapController,
               flap: Drawer(
                 child: AdwSidebar(
                   currentIndex: _currentIndex,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/animations/animated_indexed_stack.dart';
 import 'package:libadwaita/src/animations/slide_hide.dart';
+import 'package:libadwaita/src/controllers/flap_controller.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 enum FoldPolicy { never, always, auto }
@@ -13,6 +14,8 @@ class AdwFlap extends StatefulWidget {
 
   final FoldPolicy foldPolicy;
   final FlapPosition flapPosition;
+
+  final FlapController? flapController;
 
   /// Keeps track of the content index
   final int? index;
@@ -28,6 +31,7 @@ class AdwFlap extends StatefulWidget {
     Key? key,
     required this.flap,
     required this.children,
+    this.flapController,
     this.seperator,
     this.foldPolicy = FoldPolicy.auto,
     this.flapPosition = FlapPosition.start,
@@ -41,6 +45,25 @@ class AdwFlap extends StatefulWidget {
 }
 
 class _AdwFlapState extends State<AdwFlap> {
+  late FlapController _controller;
+  // was the flap open last time
+  bool latestFlapState = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.flapController == null) {
+      _controller = FlapController();
+    } else {
+      _controller = widget.flapController!;
+    }
+
+    _controller.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     bool shouldHide;
@@ -56,6 +79,17 @@ class _AdwFlapState extends State<AdwFlap> {
         shouldHide = MediaQuery.of(context).size.width < widget.breakpoint;
         break;
     }
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      if (shouldHide != latestFlapState) {
+        if (shouldHide) {
+          _controller.close();
+        } else {
+          _controller.open();
+        }
+        latestFlapState = shouldHide;
+      }
+    });
 
     var content = Expanded(
       child: AnimatedIndexedStack(
