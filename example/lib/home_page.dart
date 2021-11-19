@@ -151,18 +151,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 12),
+                    AdwTextField(
+                        initialValue: "some text",
+                        keyboardType: TextInputType.number,
+                        labelText: "Text field label",
+                        icon: Icons.insert_photo,
+                        onChanged: (String s) {}),
                   ],
                 ),
               ),
-              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: AdwTextField(
-                      initialValue: "some text",
-                      keyboardType: TextInputType.number,
-                      labelText: "text field label",
-                      icon: Icons.insert_photo,
-                      onChanged: (String s) {})),
-              AdwTextButton(child: const Text("Hello"), onPressed: () {}),
             ],
           )
         : _currentIndex == 1
@@ -182,9 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text('You have pushed the add button this many times:'),
                   Text('$_counter',
                       style: Theme.of(context).textTheme.headline4),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor),
+                  AdwTextButton(
                     onPressed: _incrementCounter,
                     child: const Text("Add"),
                   ),
