@@ -46,7 +46,7 @@ class AdwFlap extends StatefulWidget {
 
 class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
   late Size _lastSize;
-  bool wasWindowResized = false;
+  bool wasWindowResized = true;
 
   late FlapController _controller;
 
