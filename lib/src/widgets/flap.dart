@@ -44,14 +44,22 @@ class AdwFlap extends StatefulWidget {
   _AdwFlapState createState() => _AdwFlapState();
 }
 
-class _AdwFlapState extends State<AdwFlap> {
+class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
+  late Size _lastSize;
+  bool wasWindowResized = false;
+
   late FlapController _controller;
-  // was the flap open last time
-  bool latestFlapState = false;
+
+  void rebuild() {
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
+
+    _lastSize = WidgetsBinding.instance!.window.physicalSize;
+    WidgetsBinding.instance!.addObserver(this);
 
     if (widget.flapController == null) {
       _controller = FlapController();
@@ -59,35 +67,45 @@ class _AdwFlapState extends State<AdwFlap> {
       _controller = widget.flapController!;
     }
 
-    _controller.addListener(() {
-      setState(() {});
+    _controller.addListener(rebuild);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    _controller.removeListener(rebuild);
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    setState(() {
+      var winSize = WidgetsBinding.instance!.window.physicalSize;
+
+      if (winSize != _lastSize) {
+        wasWindowResized = true;
+        _lastSize = winSize;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    bool shouldHide;
-
-    switch (widget.foldPolicy) {
-      case FoldPolicy.never:
-        shouldHide = false;
-        break;
-      case FoldPolicy.always:
-        shouldHide = true;
-        break;
-      case FoldPolicy.auto:
-        shouldHide = MediaQuery.of(context).size.width < widget.breakpoint;
-        break;
-    }
-
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      if (shouldHide != latestFlapState) {
-        if (shouldHide) {
-          _controller.close();
-        } else {
-          _controller.open();
-        }
-        latestFlapState = shouldHide;
+      switch (widget.foldPolicy) {
+        case FoldPolicy.never:
+          _controller.update(false);
+          break;
+        case FoldPolicy.always:
+          _controller.update(true);
+          break;
+        case FoldPolicy.auto:
+          if (wasWindowResized) {
+            _controller
+                .update(MediaQuery.of(context).size.width > widget.breakpoint);
+            wasWindowResized = false;
+          }
+          break;
       }
     });
 
@@ -99,7 +117,7 @@ class _AdwFlapState extends State<AdwFlap> {
     );
 
     var flap = SlideHide(
-      isHidden: shouldHide,
+      isHidden: !_controller.isOpen,
       width: widget.flapWidth,
       child: SingleChildScrollView(
         child: widget.flap,
