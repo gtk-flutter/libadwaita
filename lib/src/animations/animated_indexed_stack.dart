@@ -29,7 +29,7 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
       CurvedAnimation(parent: _animationController, curve: Curves.ease),
     );
 
-    _scaleAnimation = Tween(begin: 0.95, end: 1.0).animate(
+    _scaleAnimation = Tween(begin: 0.9, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.ease),
     );
 
@@ -58,8 +58,9 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
-        return Transform.scale(
-          scaleY: _scaleAnimation.value,
+        return Transform(
+          transform: Matrix4(1, 0, 0, 0, 0, _scaleAnimation.value, 0, 0, 0, 0,
+              1, 0, 0, 0, 0, 1),
           child: Transform.translate(
             offset: Offset(0, _yAnimation.value),
             child: IndexedStack(
