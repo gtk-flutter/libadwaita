@@ -1,22 +1,6 @@
 import 'package:libadwaita/libadwaita.dart';
 import 'package:flutter/material.dart';
-
-class CustomTriangleClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.lineTo(size.width / 2, 0);
-    path.lineTo(0, size.height);
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width / 2, 0);
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
-}
+import 'package:libadwaita/src/internal/triangle_painter.dart';
 
 class _PopoverRoute extends PopupRoute {
   final Widget body;
@@ -55,22 +39,29 @@ class _PopoverRoute extends PopupRoute {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ClipPath(
-              clipper: CustomTriangleClipper(),
-              child: Container(
-                width: 26,
-                height: 16,
-                color: backgroundColor,
-              ),
+            Stack(
+              children: [
+                CustomPaint(
+                  painter: TriangleShadowPainter(color: backgroundColor),
+                  size: const Size(36, 20),
+                ),
+                CustomPaint(
+                  painter: TrianglePainter(color: backgroundColor),
+                  size: const Size(34, 18),
+                ),
+              ],
             ),
-            SizedBox(
-              width: width,
-              height: height,
-              child: Material(
-                type: MaterialType.card,
-                borderRadius: BorderRadius.circular(8),
-                color: backgroundColor,
-                child: body,
+            Transform.translate(
+              offset: const Offset(0, -5),
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: Material(
+                  type: MaterialType.card,
+                  borderRadius: BorderRadius.circular(8),
+                  color: backgroundColor,
+                  child: body,
+                ),
               ),
             ),
           ],
