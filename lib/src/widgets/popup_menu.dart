@@ -52,19 +52,6 @@ class _AdwPopupMenuState extends State<AdwPopupMenu> {
           backgroundColor: Theme.of(context).cardColor,
           contentOffset: const Offset(0, 4),
         ).whenComplete(() => setState(() => isActive = false));
-        /* showPopover( */
-        /*   context: context, */
-        /*   barrierColor: Colors.transparent, */
-        /*   contentDyOffset: 4, */
-        /*   backgroundColor: Theme.of(context).cardColor, */
-        /*   transitionDuration: const Duration(milliseconds: 150), */
-        /*   bodyBuilder: (context) => SizedBox(child: widget.body), */
-        /*   direction: PopoverDirection.top, */
-        /*   width: widget.popupWidth, */
-        /*   height: widget.popupHeight, */
-        /*   arrowHeight: 10, */
-        /*   arrowWidth: 22, */
-        /* ).whenComplete(() => setState(() => isActive = false)); */
       },
     );
   }
