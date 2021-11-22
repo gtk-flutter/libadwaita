@@ -1,4 +1,5 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:window_decorations/window_decorations.dart';
@@ -13,7 +14,6 @@ class FlapHomePage extends StatefulWidget {
 }
 
 class _FlapHomePageState extends State<FlapHomePage> {
-  int _counter = 0;
   int? _currentIndex = 0;
 
   late ScrollController _scrollController;
@@ -37,8 +37,6 @@ class _FlapHomePageState extends State<FlapHomePage> {
     super.dispose();
   }
 
-  void _incrementCounter() => setState(() => _counter++);
-
   void changeTheme() =>
       widget.themeNotifier.value = widget.themeNotifier.value == ThemeMode.light
           ? ThemeMode.dark
@@ -55,9 +53,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
             start: Row(
               children: [
                 AdwHeaderButton(
-                  icon: Icon(
-                      _flapController.isOpen ? Icons.close : Icons.view_sidebar,
-                      size: 15),
+                  icon: const Icon(Icons.view_sidebar, size: 15),
+                  isActive: _flapController.isOpen,
                   onPressed: _flapController.toggle,
                 ),
                 AdwHeaderButton(
@@ -66,26 +63,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
                 ),
               ],
             ),
-            title: const Text("Libadwaita Demo"),
-            end: Row(
-              children: [
-                AdwPopupMenu(
-                  body: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        onTap: () => setState(() {
-                          _counter = 0;
-                          Navigator.of(context).pop();
-                        }),
-                        title: const Text('Reset Counter',
-                            style: TextStyle(fontSize: 15)),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            title: const Text("AdwFlap Demo"),
           ),
           Expanded(
             child: AdwFlap(
@@ -95,16 +73,13 @@ class _FlapHomePageState extends State<FlapHomePage> {
                   currentIndex: _currentIndex,
                   children: [
                     AdwSidebarItem(
-                      leading: const Icon(Icons.countertops),
-                      label: 'Counter',
+                      label: 'Folding',
                     ),
                     AdwSidebarItem(
-                      leading: const Icon(Icons.list),
-                      label: 'List View',
+                      label: 'Layout',
                     ),
                     AdwSidebarItem(
-                      leading: const Icon(Icons.settings),
-                      label: 'Settings',
+                      label: 'Interaction',
                     )
                   ],
                   onSelected: (index) {
@@ -116,93 +91,57 @@ class _FlapHomePageState extends State<FlapHomePage> {
               ),
               index: _currentIndex,
               children: [
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                AdwClamp.scrollable(
+                  center: true,
+                  child: AdwPreferencesGroup(
                     children: [
-                      const Text(
-                          'You have pushed the add button this many times:'),
-                      Text('$_counter',
-                          style: Theme.of(context).textTheme.headline4),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).primaryColor),
-                        onPressed: _incrementCounter,
-                        child: const Text("Add"),
+                      const AdwActionRow(
+                        title: "Fold Policy",
+                        end: Text("auto"),
                       ),
+                      AdwActionRow(
+                        title: "Locked",
+                        subtitle:
+                            "Sidebar visibility doesn't change when fold state changes",
+                        end: CupertinoSwitch(value: false, onChanged: (val) {}),
+                      )
                     ],
                   ),
                 ),
-                SingleChildScrollView(
-                  controller: _scrollController,
-                  child: Center(
-                    child: AdwClamp(
-                      child: AdwPreferencesGroup(
-                        children: List.generate(
-                          15,
-                          (index) => ListTile(
-                            title: Text("Index $index"),
-                          ),
-                        ),
+                AdwClamp.scrollable(
+                  center: true,
+                  child: const AdwPreferencesGroup(
+                    children: [
+                      AdwActionRow(
+                        title: "Flap position",
+                        end: Text("Start | End"),
                       ),
-                    ),
+                      AdwActionRow(
+                        title: "Transition type",
+                        end: Text("Over"),
+                      )
+                    ],
                   ),
                 ),
-                SingleChildScrollView(
-                  controller: _scrollControllerOther,
-                  child: Center(
-                    child: Column(
-                      children: [
-                        AdwClamp(
-                          child: Column(
-                            children: [
-                              const AdwPreferencesGroup(
-                                title: "Pages",
-                                description:
-                                    "Preferences are organized in pages, this example has the following pages:",
-                                children: [
-                                  AdwActionRow(
-                                    title: "Layout",
-                                  ),
-                                  AdwActionRow(
-                                    title: "Search",
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 12),
-                              const AdwPreferencesGroup(
-                                title: "Groups",
-                                description:
-                                    "Preferences are grouped together, a group can have a title and a description. Descriptions will be wrapped if they are too long. This page has the following groups:",
-                                children: [
-                                  AdwActionRow(title: "An untitled group"),
-                                  AdwActionRow(title: "Pages"),
-                                  AdwActionRow(title: "Groups"),
-                                  AdwActionRow(title: "Preferences"),
-                                ],
-                              ),
-                              const SizedBox(height: 12),
-                              AdwPreferencesGroup(
-                                title: "Subpages",
-                                description:
-                                    "Preferences windows can have subpages.",
-                                children: [
-                                  AdwActionRow(
-                                    title: "Go to a subpage",
-                                    end: const Icon(Icons.chevron_right),
-                                    onActivated: () => debugPrint("Hi"),
-                                  ),
-                                  const AdwActionRow(
-                                    title: "Go to another subpage",
-                                    end: Icon(Icons.chevron_right),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                AdwClamp.scrollable(
+                  center: true,
+                  child: AdwPreferencesGroup(
+                    children: [
+                      AdwActionRow(
+                        title: "Modal",
+                        subtitle:
+                            "Clicking outside the sidebar or pressing Esc will close it when folded",
+                        end: CupertinoSwitch(value: true, onChanged: (val) {}),
+                      ),
+                      AdwActionRow(
+                        title: "Swipe to Open",
+                        end: CupertinoSwitch(value: true, onChanged: (val) {}),
+                      ),
+                      AdwActionRow(
+                        title: "Swipe to Close",
+                        end: CupertinoSwitch(value: true, onChanged: (val) {}),
+                      ),
+                    ],
                   ),
                 ),
               ],

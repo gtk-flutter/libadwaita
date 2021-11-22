@@ -179,6 +179,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  multi_window:
+    dependency: "direct main"
+    description:
+      name: multi_window
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
+  multi_window_interface:
+    dependency: transitive
+    description:
+      name: multi_window_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
+  multi_window_linux:
+    dependency: transitive
+    description:
+      name: multi_window_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
+  multi_window_macos:
+    dependency: transitive
+    description:
+      name: multi_window_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   path:
     dependency: transitive
     description:

@@ -136,6 +136,7 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
         : [content, seperator, flap];
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: widgets,
     );
   }

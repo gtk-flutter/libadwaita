@@ -25,11 +25,17 @@ class AdwPreferencesGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null) ...[
-          Text(title!, style: titleStyle ?? Theme.of(context).textTheme.headline6),
-          if (description != null) Text(description!, style: descriptionStyle ?? Theme.of(context).textTheme.bodyText2),
+          Text(title!,
+              style: titleStyle ?? Theme.of(context).textTheme.headline6),
+          if (description != null)
+            Text(
+              description!,
+              style: descriptionStyle ?? Theme.of(context).textTheme.bodyText2,
+            ),
           const SizedBox(height: 14),
         ],
         Container(

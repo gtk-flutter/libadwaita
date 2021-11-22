@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'dart:math';
 
 class SlideHide extends StatefulWidget {
   final Widget child;
