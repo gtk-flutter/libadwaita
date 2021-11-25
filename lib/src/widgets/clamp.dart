@@ -20,7 +20,10 @@ class AdwClamp extends StatelessWidget {
     this.maximumSize = 580,
     this.padding = EdgeInsets.zero,
     this.margin = const EdgeInsets.all(14),
-  })  : child = SingleChildScrollView(child: child),
+  })  : child = SingleChildScrollView(
+          child: child,
+          controller: controller,
+        ),
         super(key: key);
 
   final bool center;
