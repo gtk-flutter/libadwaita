@@ -28,19 +28,12 @@ class AdwPopupMenu extends StatefulWidget {
 }
 
 class _AdwPopupMenuState extends State<AdwPopupMenu> {
-  late GlobalKey _key;
-
-  @override
-  void initState() {
-    super.initState();
-    _key = GlobalKey();
-  }
-
   bool isActive = false;
+
   @override
   Widget build(BuildContext context) {
     return AdwHeaderButton(
-      icon: Center(key: _key, child: widget.icon),
+      icon: Center(child: widget.icon),
       isActive: isActive,
       onPressed: () {
         setState(() => isActive = true);
