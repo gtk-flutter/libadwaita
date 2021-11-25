@@ -120,6 +120,7 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
       isHidden: !_controller.isOpen,
       width: widget.flapWidth,
       child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: widget.flap,
         scrollDirection: Axis.horizontal,
       ),
