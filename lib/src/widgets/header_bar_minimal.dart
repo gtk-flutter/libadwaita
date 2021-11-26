@@ -98,15 +98,20 @@ class AdwHeaderBarMinimal extends StatefulWidget {
 }
 
 class _AdwHeaderBarMinimalState extends State<AdwHeaderBarMinimal> {
-  bool get hasWindowControls => widget.closeBtn != null || widget.minimizeBtn != null || widget.maximizeBtn != null;
+  bool get hasWindowControls =>
+      widget.closeBtn != null ||
+      widget.minimizeBtn != null ||
+      widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>> seperator = ValueNotifier(["", "minimize,maximize,close"]);
+  late ValueNotifier<List<String>> seperator =
+      ValueNotifier(["", "minimize,maximize,close"]);
 
   @override
   void initState() {
     super.initState();
 
-    late ValueNotifier<String> order = ValueNotifier(":minimize,maximize,close");
+    late ValueNotifier<String> order =
+        ValueNotifier(":minimize,maximize,close");
     updateSep() {
       if (mounted) {
         seperator.value = order.value.split(':');
@@ -137,52 +142,57 @@ class _AdwHeaderBarMinimalState extends State<AdwHeaderBarMinimal> {
       "close": widget.closeBtn,
     };
 
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onPanStart: (_) => widget.onHeaderDrag?.call(),
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).appBarTheme.backgroundColor,
-            border: Border(
-                top: BorderSide(color: Theme.of(context).backgroundColor),
-                bottom: BorderSide(color: context.borderColor)),
-          ),
-          height: widget.height,
-          width: double.infinity,
-          child: Stack(
-            children: [
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onDoubleTap: widget.onDoubleTap,
-              ),
-              ValueListenableBuilder<List<String>>(
-                  valueListenable: seperator,
-                  builder: (context, sep, _) => NavigationToolbar(
-                        leading: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (hasWindowControls && sep[0].split(',').isNotEmpty)
-                              SizedBox(width: widget.titlebarSpace),
-                            for (var i in sep[0].split(','))
-                              if (windowButtons[i] != null) windowButtons[i]!,
-                            widget.start,
-                          ],
-                        ),
-                        middle: widget.title,
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            widget.end,
-                            if (hasWindowControls && sep[1].split(',').isNotEmpty)
-                              SizedBox(width: widget.titlebarSpace),
-                            for (var i in sep[1].split(','))
-                              if (windowButtons[i] != null) windowButtons[i]!,
-                          ],
-                        ),
-                      )),
-            ],
+    return Material(
+      type: MaterialType.transparency,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onPanStart: (_) => widget.onHeaderDrag?.call(),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).appBarTheme.backgroundColor,
+              border: Border(
+                  top: BorderSide(color: Theme.of(context).backgroundColor),
+                  bottom: BorderSide(color: context.borderColor)),
+            ),
+            height: widget.height,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onDoubleTap: widget.onDoubleTap,
+                ),
+                ValueListenableBuilder<List<String>>(
+                    valueListenable: seperator,
+                    builder: (context, sep, _) => NavigationToolbar(
+                          leading: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (hasWindowControls &&
+                                  sep[0].split(',').isNotEmpty)
+                                SizedBox(width: widget.titlebarSpace),
+                              for (var i in sep[0].split(','))
+                                if (windowButtons[i] != null) windowButtons[i]!,
+                              widget.start,
+                            ],
+                          ),
+                          middle: widget.title,
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              widget.end,
+                              if (hasWindowControls &&
+                                  sep[1].split(',').isNotEmpty)
+                                SizedBox(width: widget.titlebarSpace),
+                              for (var i in sep[1].split(','))
+                                if (windowButtons[i] != null) windowButtons[i]!,
+                            ],
+                          ),
+                        )),
+              ],
+            ),
           ),
         ),
       ),
