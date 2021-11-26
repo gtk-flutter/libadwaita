@@ -44,29 +44,52 @@ class _FlapHomePageState extends State<FlapHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          AdwHeaderBar.bitsdojo(
-            appWindow: appWindow,
-            windowDecor: windowDecor,
-            start: Row(
-              children: [
-                AdwHeaderButton(
-                  icon: const Icon(Icons.view_sidebar, size: 15),
-                  isActive: _flapController.isOpen,
-                  onPressed: () => _flapController.toggle(context),
-                ),
-                AdwHeaderButton(
-                  icon: const Icon(Icons.nightlight_round, size: 15),
-                  onPressed: changeTheme,
-                ),
-              ],
-            ),
-            title: const Text("AdwFlap Demo"),
+    return Column(
+      children: [
+        AdwHeaderBar.bitsdojo(
+          appWindow: appWindow,
+          windowDecor: windowDecor,
+          start: Row(
+            children: [
+              AdwHeaderButton(
+                icon: const Icon(Icons.view_sidebar, size: 15),
+                isActive: _flapController.isOpen,
+                onPressed: () => _flapController.toggle(context),
+              ),
+              AdwHeaderButton(
+                icon: const Icon(Icons.nightlight_round, size: 15),
+                onPressed: changeTheme,
+              ),
+            ],
           ),
-          Expanded(
-            child: AdwFlap(
+          title: const Text("AdwFlap Demo"),
+        ),
+        Expanded(
+          child: AdwScaffold(
+            flapController: _flapController,
+            drawer: Drawer(
+              child: AdwSidebar(
+                currentIndex: _currentIndex,
+                children: [
+                  AdwSidebarItem(
+                    label: 'Folding',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Layout',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Interaction',
+                  )
+                ],
+                onSelected: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                    Navigator.of(context).pop();
+                  });
+                },
+              ),
+            ),
+            body: AdwFlap(
               flapController: _flapController,
               flap: Drawer(
                 child: AdwSidebar(
@@ -147,8 +170,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
