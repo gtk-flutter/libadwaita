@@ -55,7 +55,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
                 AdwHeaderButton(
                   icon: const Icon(Icons.view_sidebar, size: 15),
                   isActive: _flapController.isOpen,
-                  onPressed: _flapController.toggle,
+                  onPressed: () => _flapController.toggle(context),
                 ),
                 AdwHeaderButton(
                   icon: const Icon(Icons.nightlight_round, size: 15),

@@ -1,31 +1,57 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class FlapController extends ChangeNotifier {
   bool isOpen = false;
+  bool isModal = false;
 
-  void update(bool val) {
+  void onDrawerChanged(bool val) {
+    updateOpenState(val);
+  }
+
+  void updateOpenState(bool val) {
     if (val != isOpen) {
       isOpen = val;
       notifyListeners();
     }
   }
 
-  void open() {
+  void updateModalState(BuildContext context, bool val) {
+    if (val != isModal) {
+      isModal = val;
+      if (!isModal) {
+        if (Scaffold.of(context).isDrawerOpen) {
+          Navigator.of(context).pop();
+        }
+      }
+      notifyListeners();
+    }
+  }
+
+  void open(BuildContext context) {
     if (!isOpen) {
       isOpen = true;
+      if (isModal) {
+        Scaffold.of(context).openDrawer();
+      }
       notifyListeners();
     }
   }
 
-  void close() {
+  void close(BuildContext context) {
     if (isOpen) {
       isOpen = false;
+      if (isModal && Scaffold.of(context).isDrawerOpen) {
+        Navigator.of(context).pop();
+      }
       notifyListeners();
     }
   }
 
-  void toggle() {
-    isOpen = !isOpen;
-    notifyListeners();
+  void toggle(BuildContext context) {
+    if (isOpen) {
+      close(context);
+    } else {
+      open(context);
+    }
   }
 }

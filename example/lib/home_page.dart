@@ -49,6 +49,35 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      onDrawerChanged: _flapController.onDrawerChanged,
+      drawerEnableOpenDragGesture: _flapController.isModal,
+      drawer: Drawer(
+        child: AdwSidebar(
+          currentIndex: _currentIndex,
+          children: [
+            AdwSidebarItem(
+              label: 'Counter',
+            ),
+            AdwSidebarItem(
+              label: 'Lists',
+            ),
+            AdwSidebarItem(
+              label: 'Flap',
+            ),
+            AdwSidebarItem(
+              label: 'Settings',
+            )
+          ],
+          onSelected: (index) {
+            setState(
+              () {
+                _currentIndex = index;
+                Navigator.of(context).pop();
+              },
+            );
+          },
+        ),
+      ),
       body: Column(
         children: <Widget>[
           AdwHeaderBar.bitsdojo(
@@ -56,10 +85,16 @@ class _MyHomePageState extends State<MyHomePage> {
             windowDecor: windowDecor,
             start: Row(
               children: [
-                AdwHeaderButton(
-                  icon: const Icon(Icons.view_sidebar, size: 15),
-                  isActive: _flapController.isOpen,
-                  onPressed: _flapController.toggle,
+                Builder(
+                  builder: (context) {
+                    return AdwHeaderButton(
+                      icon: const Icon(Icons.view_sidebar, size: 15),
+                      isActive: _flapController.isOpen,
+                      onPressed: () {
+                        _flapController.toggle(context);
+                      },
+                    );
+                  },
                 ),
                 AdwHeaderButton(
                   icon: const Icon(Icons.nightlight_round, size: 15),
