@@ -4,7 +4,6 @@ import 'package:libadwaita/src/widgets/widgets.dart';
 
 class AdwScaffold extends StatefulWidget {
   final Widget body;
-  final Widget header;
   final FlapController? flapController;
   final Widget? drawer;
 
@@ -13,7 +12,6 @@ class AdwScaffold extends StatefulWidget {
     required this.body,
     this.flapController,
     this.drawer,
-    this.header = const SizedBox.shrink(),
   }) : super(key: key);
 
   @override
@@ -37,12 +35,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
       drawerEnableOpenDragGesture: _flapController?.isModal ?? false,
       onDrawerChanged: _flapController?.onDrawerChanged,
       drawer: widget.drawer,
-      body: Column(
-        children: [
-          widget.header,
-          Expanded(child: widget.body),
-        ],
-      ),
+      body: widget.body,
     );
   }
 }

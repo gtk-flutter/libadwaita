@@ -48,115 +48,121 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AdwScaffold(
-      header: AdwHeaderBar.bitsdojo(
-        appWindow: appWindow,
-        windowDecor: windowDecor,
-        start: Row(
-          children: [
-            Builder(
-              builder: (context) {
-                return AdwHeaderButton(
-                  icon: const Icon(Icons.view_sidebar, size: 15),
-                  isActive: _flapController.isOpen,
-                  onPressed: () {
-                    _flapController.toggle();
-                  },
-                );
-              },
-            ),
-            AdwHeaderButton(
-              icon: const Icon(Icons.nightlight_round, size: 15),
-              onPressed: changeTheme,
-            ),
-          ],
-        ),
-        title: const Text("Libadwaita Demo"),
-        end: Row(
-          children: [
-            AdwPopupMenu(
-              body: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    onTap: () {
-                      counter.value = 0;
-                      Navigator.of(context).pop();
-                    },
-                    title: const Text(
-                      'Reset Counter',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-      flapController: _flapController,
-      drawer: Drawer(
-        child: AdwSidebar(
-          currentIndex: _currentIndex,
-          children: [
-            AdwSidebarItem(
-              label: 'Counter',
-            ),
-            AdwSidebarItem(
-              label: 'Lists',
-            ),
-            AdwSidebarItem(
-              label: 'Flap',
-            ),
-            AdwSidebarItem(
-              label: 'Settings',
-            )
-          ],
-          onSelected: (index) {
-            setState(
-              () {
-                _currentIndex = index;
-                Navigator.of(context).pop();
-              },
-            );
-          },
-        ),
-      ),
-      body: AdwFlap(
-        flapController: _flapController,
-        foldPolicy: FoldPolicy.auto,
-        flap: Drawer(
-          child: AdwSidebar(
-            currentIndex: _currentIndex,
+    return Column(
+      children: [
+        AdwHeaderBar.bitsdojo(
+          appWindow: appWindow,
+          windowDecor: windowDecor,
+          start: Row(
             children: [
-              AdwSidebarItem(
-                label: 'Counter',
+              Builder(
+                builder: (context) {
+                  return AdwHeaderButton(
+                    icon: const Icon(Icons.view_sidebar, size: 15),
+                    isActive: _flapController.isOpen,
+                    onPressed: () {
+                      _flapController.toggle();
+                    },
+                  );
+                },
               ),
-              AdwSidebarItem(
-                label: 'Lists',
+              AdwHeaderButton(
+                icon: const Icon(Icons.nightlight_round, size: 15),
+                onPressed: changeTheme,
               ),
-              AdwSidebarItem(
-                label: 'Flap',
-              ),
-              AdwSidebarItem(
-                label: 'Settings',
-              )
             ],
-            onSelected: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
+          ),
+          title: const Text("Libadwaita Demo"),
+          end: Row(
+            children: [
+              AdwPopupMenu(
+                body: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      onTap: () {
+                        counter.value = 0;
+                        Navigator.of(context).pop();
+                      },
+                      title: const Text(
+                        'Reset Counter',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        index: _currentIndex,
-        children: [
-          CounterPage(counter: counter),
-          const ListsPage(),
-          const FlapPage(),
-          const SettingsPage(),
-        ],
-      ),
+        Expanded(
+          child: AdwScaffold(
+            flapController: _flapController,
+            drawer: Drawer(
+              child: AdwSidebar(
+                currentIndex: _currentIndex,
+                children: [
+                  AdwSidebarItem(
+                    label: 'Counter',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Lists',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Flap',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Settings',
+                  )
+                ],
+                onSelected: (index) {
+                  setState(
+                    () {
+                      _currentIndex = index;
+                      Navigator.of(context).pop();
+                    },
+                  );
+                },
+              ),
+            ),
+            body: AdwFlap(
+              flapController: _flapController,
+              foldPolicy: FoldPolicy.auto,
+              flap: Drawer(
+                child: AdwSidebar(
+                  currentIndex: _currentIndex,
+                  children: [
+                    AdwSidebarItem(
+                      label: 'Counter',
+                    ),
+                    AdwSidebarItem(
+                      label: 'Lists',
+                    ),
+                    AdwSidebarItem(
+                      label: 'Flap',
+                    ),
+                    AdwSidebarItem(
+                      label: 'Settings',
+                    )
+                  ],
+                  onSelected: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                ),
+              ),
+              index: _currentIndex,
+              children: [
+                CounterPage(counter: counter),
+                const ListsPage(),
+                const FlapPage(),
+                const SettingsPage(),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
