@@ -14,7 +14,8 @@ void main(List<String> args) async {
 }
 
 class MyApp extends StatelessWidget {
-  final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+  final ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(ThemeMode.system);
 
   MyApp({Key? key}) : super(key: key);
 
