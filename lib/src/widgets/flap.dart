@@ -68,6 +68,19 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
     }
 
     _controller.addListener(rebuild);
+    updateFlapData();
+    _controller.context = context;
+  }
+
+  void updateFlapData() {
+    _controller.policy = widget.foldPolicy;
+    _controller.position = widget.flapPosition;
+  }
+
+  @override
+  void didUpdateWidget(covariant AdwFlap oldWidget) {
+    updateFlapData();
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -91,21 +104,29 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    // probably shouldn;t do this but no one is looking :P
+    _controller.context = context;
+
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      switch (widget.foldPolicy) {
-        case FoldPolicy.never:
-          _controller.update(false);
-          break;
-        case FoldPolicy.always:
-          _controller.update(true);
-          break;
-        case FoldPolicy.auto:
-          if (wasWindowResized) {
-            _controller
-                .update(MediaQuery.of(context).size.width > widget.breakpoint);
-            wasWindowResized = false;
-          }
-          break;
+      // The stuff that happens when the window is resized
+      // We check for the mobile state and update it on every resize
+      // Do nothin if FoldPolicy is never / always, because they are not
+      // affected by window resizes.
+      // If FoldPolicy is auto, then close / open the sidebar depending on the
+      // state
+      if (wasWindowResized) {
+        var isMobile = MediaQuery.of(context).size.width < widget.breakpoint;
+        _controller.updateModalState(context, isMobile);
+
+        switch (widget.foldPolicy) {
+          case FoldPolicy.never:
+          case FoldPolicy.always:
+            break;
+          case FoldPolicy.auto:
+            _controller.updateOpenState(!isMobile);
+            break;
+        }
+        wasWindowResized = false;
       }
     });
 
@@ -117,7 +138,7 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
     );
 
     var flap = SlideHide(
-      isHidden: !_controller.isOpen,
+      isHidden: _controller.shouldHide(),
       width: widget.flapWidth,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),

@@ -48,51 +48,86 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          AdwHeaderBar.bitsdojo(
-            appWindow: appWindow,
-            windowDecor: windowDecor,
-            start: Row(
-              children: [
-                AdwHeaderButton(
-                  icon: const Icon(Icons.view_sidebar, size: 15),
-                  isActive: _flapController.isOpen,
-                  onPressed: _flapController.toggle,
-                ),
-                AdwHeaderButton(
-                  icon: const Icon(Icons.nightlight_round, size: 15),
-                  onPressed: changeTheme,
-                ),
-              ],
-            ),
-            title: const Text("Libadwaita Demo"),
-            end: Row(
-              children: [
-                AdwPopupMenu(
-                  body: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        onTap: () {
-                          counter.value = 0;
-                          Navigator.of(context).pop();
-                        },
-                        title: const Text(
-                          'Reset Counter',
-                          style: TextStyle(fontSize: 15),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+    return Column(
+      children: [
+        AdwHeaderBar.bitsdojo(
+          appWindow: appWindow,
+          windowDecor: windowDecor,
+          start: Row(
+            children: [
+              Builder(
+                builder: (context) {
+                  return AdwHeaderButton(
+                    icon: const Icon(Icons.view_sidebar, size: 15),
+                    isActive: _flapController.isOpen,
+                    onPressed: () {
+                      _flapController.toggle();
+                    },
+                  );
+                },
+              ),
+              AdwHeaderButton(
+                icon: const Icon(Icons.nightlight_round, size: 15),
+                onPressed: changeTheme,
+              ),
+            ],
           ),
-          Expanded(
-            child: AdwFlap(
+          title: const Text("Libadwaita Demo"),
+          end: Row(
+            children: [
+              AdwPopupMenu(
+                body: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      onTap: () {
+                        counter.value = 0;
+                        Navigator.of(context).pop();
+                      },
+                      title: const Text(
+                        'Reset Counter',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: AdwScaffold(
+            flapController: _flapController,
+            drawer: Drawer(
+              child: AdwSidebar(
+                currentIndex: _currentIndex,
+                children: [
+                  AdwSidebarItem(
+                    label: 'Counter',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Lists',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Flap',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Settings',
+                  )
+                ],
+                onSelected: (index) {
+                  setState(
+                    () {
+                      _currentIndex = index;
+                      Navigator.of(context).pop();
+                    },
+                  );
+                },
+              ),
+            ),
+            body: AdwFlap(
               flapController: _flapController,
+              foldPolicy: FoldPolicy.auto,
               flap: Drawer(
                 child: AdwSidebar(
                   currentIndex: _currentIndex,
@@ -126,8 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
