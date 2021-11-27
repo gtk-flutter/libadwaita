@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class FlapController extends ChangeNotifier {
-  bool isOpen = false;
+  bool isOpen = true;
   bool isModal = false;
 
   FoldPolicy policy = FoldPolicy.auto;
