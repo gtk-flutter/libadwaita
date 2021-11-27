@@ -37,9 +37,8 @@ class FlapController extends ChangeNotifier {
       // then the drawer will stay open and the sidebar will also expand. To
       // prevent this, we close the drawer if its already open on a desktop size
       // window.
-      // TODO(simrat39): Handle FoldPolicy.always
       if (!isModal) {
-        if (Scaffold.of(context).isDrawerOpen) {
+        if (Scaffold.of(context).isDrawerOpen && policy != FoldPolicy.always) {
           Navigator.of(context).pop();
         }
       }
