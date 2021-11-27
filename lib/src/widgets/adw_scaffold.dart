@@ -32,9 +32,13 @@ class _AdwScaffoldState extends State<AdwScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawerEnableOpenDragGesture: _flapController?.isModal ?? false,
+      drawerEnableOpenDragGesture: ((_flapController?.isModal ?? false) &&
+          _flapController?.position == FlapPosition.start),
+      endDrawerEnableOpenDragGesture: ((_flapController?.isModal ?? false) &&
+          _flapController?.position == FlapPosition.end),
       onDrawerChanged: _flapController?.onDrawerChanged,
       drawer: widget.drawer,
+      endDrawer: widget.drawer,
       body: widget.body,
     );
   }

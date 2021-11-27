@@ -74,6 +74,7 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
 
   void updateFlapData() {
     _controller.policy = widget.foldPolicy;
+    _controller.position = widget.flapPosition;
   }
 
   @override

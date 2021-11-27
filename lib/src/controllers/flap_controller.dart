@@ -4,10 +4,16 @@ import 'package:libadwaita/libadwaita.dart';
 class FlapController extends ChangeNotifier {
   bool isOpen = true;
   bool isModal = false;
+
   // bad practice but can live with it
+  /// INTERNAL STUFF, DON'T USE DIRECTLY
   BuildContext? context;
 
+  /// INTERNAL STUFF, DON'T USE DIRECTLY
   FoldPolicy policy = FoldPolicy.auto;
+
+  /// INTERNAL STUFF, DON'T USE DIRECTLY
+  FlapPosition position = FlapPosition.start;
 
   bool shouldHide() {
     switch (policy) {
@@ -40,7 +46,9 @@ class FlapController extends ChangeNotifier {
       // prevent this, we close the drawer if its already open on a desktop size
       // window.
       if (!isModal) {
-        if (Scaffold.of(context).isDrawerOpen && policy != FoldPolicy.always) {
+        if ((Scaffold.of(context).isDrawerOpen ||
+                Scaffold.of(context).isEndDrawerOpen) &&
+            policy != FoldPolicy.always) {
           Navigator.of(context).pop();
         }
       }
@@ -55,7 +63,14 @@ class FlapController extends ChangeNotifier {
       // mobile sized device OR the fold policy is set to always, we open the
       // drawer because this is how the actual libadwaita behaves
       if (isModal || policy == FoldPolicy.always) {
-        Scaffold.of(context ?? this.context!).openDrawer();
+        switch (position) {
+          case FlapPosition.start:
+            Scaffold.of(context ?? this.context!).openDrawer();
+            break;
+          case FlapPosition.end:
+            Scaffold.of(context ?? this.context!).openEndDrawer();
+            break;
+        }
       }
       notifyListeners();
     }
@@ -64,11 +79,12 @@ class FlapController extends ChangeNotifier {
   void close({BuildContext? context}) {
     if (isOpen) {
       isOpen = false;
+      var scaffold = Scaffold.of(context ?? this.context!);
       // Usually close only should set the isOpen variable, but if we have a
       // mobile sized device OR the fold policy is set to always, we close the
       // drawer (if its open) because this is how the actual libadwaita behaves
       if ((isModal || policy == FoldPolicy.always) &&
-          Scaffold.of(context ?? this.context!).isDrawerOpen) {
+          (scaffold.isDrawerOpen || scaffold.isEndDrawerOpen)) {
         Navigator.of(context ?? this.context!).pop();
       }
       notifyListeners();
