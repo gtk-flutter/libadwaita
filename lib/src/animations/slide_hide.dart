@@ -32,18 +32,22 @@ class _SlideHideState extends State<SlideHide>
     widthAnimation = Tween(begin: widget.width, end: 0.0)
         .animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
 
+    animate();
     super.initState();
   }
 
-  @override
-  void didUpdateWidget(covariant oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
+  void animate() {
     if (widget.isHidden) {
       _controller.forward();
     } else {
       _controller.reverse();
     }
+  }
+
+  @override
+  void didUpdateWidget(covariant oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    animate();
   }
 
   @override
