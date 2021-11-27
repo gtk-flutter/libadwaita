@@ -19,6 +19,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
   late ScrollController _scrollController;
   late ScrollController _scrollControllerOther;
   late FlapController _flapController;
+  FlapPosition flapPosition = FlapPosition.start;
 
   @override
   void initState() {
@@ -93,6 +94,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
             ),
             body: AdwFlap(
               flapController: _flapController,
+              flapPosition: flapPosition,
               flap: Drawer(
                 child: AdwSidebar(
                   currentIndex: _currentIndex,
@@ -135,13 +137,29 @@ class _FlapHomePageState extends State<FlapHomePage> {
                 ),
                 AdwClamp.scrollable(
                   center: true,
-                  child: const AdwPreferencesGroup(
+                  child: AdwPreferencesGroup(
                     children: [
                       AdwActionRow(
                         title: "Flap position",
-                        end: Text("Start | End"),
+                        end: ToggleButtons(
+                          children: const [
+                            Text("Start"),
+                            Text("End"),
+                          ],
+                          isSelected: [
+                            flapPosition.index == 0,
+                            flapPosition.index == 1
+                          ],
+                          onPressed: (val) => setState(() {
+                            if (val == 0) {
+                              flapPosition = FlapPosition.start;
+                            } else {
+                              flapPosition = FlapPosition.end;
+                            }
+                          }),
+                        ),
                       ),
-                      AdwActionRow(
+                      const AdwActionRow(
                         title: "Transition type",
                         end: Text("Over"),
                       )

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:adwaita/adwaita.dart' as adwaita;
 
 class FlapDemo extends StatelessWidget {
-  final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+  final ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(ThemeMode.system);
 
   FlapDemo({Key? key}) : super(key: key);
 
