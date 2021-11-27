@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:libadwaita/libadwaita.dart';
 
 class FlapController extends ChangeNotifier {
   bool isOpen = false;
   bool isModal = false;
+
+  FoldPolicy policy = FoldPolicy.auto;
+
+  bool shouldHide() {
+    switch (policy) {
+      case FoldPolicy.never:
+        return !isOpen;
+      case FoldPolicy.always:
+        return true;
+      case FoldPolicy.auto:
+        return isModal || !isOpen;
+    }
+  }
 
   void onDrawerChanged(bool val) {
     updateOpenState(val);
@@ -30,7 +44,7 @@ class FlapController extends ChangeNotifier {
   void open(BuildContext context) {
     if (!isOpen) {
       isOpen = true;
-      if (isModal) {
+      if (isModal || policy == FoldPolicy.always) {
         Scaffold.of(context).openDrawer();
       }
       notifyListeners();
@@ -40,7 +54,8 @@ class FlapController extends ChangeNotifier {
   void close(BuildContext context) {
     if (isOpen) {
       isOpen = false;
-      if (isModal && Scaffold.of(context).isDrawerOpen) {
+      if ((isModal || policy == FoldPolicy.always) &&
+          Scaffold.of(context).isDrawerOpen) {
         Navigator.of(context).pop();
       }
       notifyListeners();

@@ -68,6 +68,17 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
     }
 
     _controller.addListener(rebuild);
+    updateFlapData();
+  }
+
+  void updateFlapData() {
+    _controller.policy = widget.foldPolicy;
+  }
+
+  @override
+  void didUpdateWidget(covariant AdwFlap oldWidget) {
+    updateFlapData();
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -92,22 +103,19 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      switch (widget.foldPolicy) {
-        case FoldPolicy.never:
-          _controller.updateOpenState(false);
-          break;
-        case FoldPolicy.always:
-          _controller.updateOpenState(true);
-          break;
-        case FoldPolicy.auto:
-          if (wasWindowResized) {
-            var isMobile =
-                MediaQuery.of(context).size.width < widget.breakpoint;
+      if (wasWindowResized) {
+        var isMobile = MediaQuery.of(context).size.width < widget.breakpoint;
+        _controller.updateModalState(context, isMobile);
+
+        switch (widget.foldPolicy) {
+          case FoldPolicy.never:
+          case FoldPolicy.always:
+            break;
+          case FoldPolicy.auto:
             _controller.updateOpenState(!isMobile);
-            _controller.updateModalState(context, isMobile);
-            wasWindowResized = false;
-          }
-          break;
+            break;
+        }
+        wasWindowResized = false;
       }
     });
 
@@ -119,7 +127,7 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
     );
 
     var flap = SlideHide(
-      isHidden: _controller.isModal || (!_controller.isOpen),
+      isHidden: _controller.shouldHide(),
       width: widget.flapWidth,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),

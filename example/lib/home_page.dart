@@ -124,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: AdwFlap(
         flapController: _flapController,
+        foldPolicy: FoldPolicy.auto,
         flap: Drawer(
           child: AdwSidebar(
             currentIndex: _currentIndex,
