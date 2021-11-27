@@ -15,6 +15,10 @@ class FlapController extends ChangeNotifier {
   /// INTERNAL STUFF, DON'T USE DIRECTLY
   FlapPosition position = FlapPosition.start;
 
+  bool shouldEnableDrawerGesture(FlapPosition position) {
+    return isModal && this.position == position;
+  }
+
   bool shouldHide() {
     switch (policy) {
       case FoldPolicy.never:
