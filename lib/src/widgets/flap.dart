@@ -103,6 +103,12 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
+      // The stuff that happens when the window is resized
+      // We check for the mobile state and update it on every resize
+      // Do nothin if FoldPolicy is never / always, because they are not
+      // affected by window resizes.
+      // If FoldPolicy is auto, then close / open the sidebar depending on the
+      // state
       if (wasWindowResized) {
         var isMobile = MediaQuery.of(context).size.width < widget.breakpoint;
         _controller.updateModalState(context, isMobile);
