@@ -69,6 +69,7 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
 
     _controller.addListener(rebuild);
     updateFlapData();
+    _controller.context = context;
   }
 
   void updateFlapData() {
@@ -102,6 +103,9 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    // probably shouldn;t do this but no one is looking :P
+    _controller.context = context;
+
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       // The stuff that happens when the window is resized
       // We check for the mobile state and update it on every resize

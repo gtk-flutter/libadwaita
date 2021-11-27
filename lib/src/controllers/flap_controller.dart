@@ -4,6 +4,8 @@ import 'package:libadwaita/libadwaita.dart';
 class FlapController extends ChangeNotifier {
   bool isOpen = true;
   bool isModal = false;
+  // bad practice but can live with it
+  BuildContext? context;
 
   FoldPolicy policy = FoldPolicy.auto;
 
@@ -46,38 +48,38 @@ class FlapController extends ChangeNotifier {
     }
   }
 
-  void open(BuildContext context) {
+  void open({BuildContext? context}) {
     if (!isOpen) {
       isOpen = true;
       // Usually open only should set the isOpen variable, but if we have a
       // mobile sized device OR the fold policy is set to always, we open the
       // drawer because this is how the actual libadwaita behaves
       if (isModal || policy == FoldPolicy.always) {
-        Scaffold.of(context).openDrawer();
+        Scaffold.of(context ?? this.context!).openDrawer();
       }
       notifyListeners();
     }
   }
 
-  void close(BuildContext context) {
+  void close({BuildContext? context}) {
     if (isOpen) {
       isOpen = false;
       // Usually close only should set the isOpen variable, but if we have a
       // mobile sized device OR the fold policy is set to always, we close the
       // drawer (if its open) because this is how the actual libadwaita behaves
       if ((isModal || policy == FoldPolicy.always) &&
-          Scaffold.of(context).isDrawerOpen) {
-        Navigator.of(context).pop();
+          Scaffold.of(context ?? this.context!).isDrawerOpen) {
+        Navigator.of(context ?? this.context!).pop();
       }
       notifyListeners();
     }
   }
 
-  void toggle(BuildContext context) {
+  void toggle({BuildContext? context}) {
     if (isOpen) {
-      close(context);
+      close(context: context ?? this.context);
     } else {
-      open(context);
+      open(context: context ?? this.context);
     }
   }
 }
