@@ -152,13 +152,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
               ),
-              index: _currentIndex,
-              children: [
-                CounterPage(counter: counter),
-                const ListsPage(),
-                const FlapPage(),
-                const SettingsPage(),
-              ],
+              child: AdwViewStack(
+                children: [
+                  CounterPage(counter: counter),
+                  const ListsPage(),
+                  const FlapPage(),
+                  const SettingsPage(),
+                ],
+                index: _currentIndex,
+              ),
             ),
           ),
         ),

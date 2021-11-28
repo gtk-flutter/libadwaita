@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
-class AnimatedIndexedStack extends StatefulWidget {
-  const AnimatedIndexedStack({Key? key, this.index, required this.children})
-      : super(key: key);
+class AdwViewStack extends StatefulWidget {
+  const AdwViewStack({
+    Key? key,
+    this.index,
+    required this.children,
+    this.animationCurve = Curves.ease,
+    this.animationDuration = const Duration(milliseconds: 450),
+  }) : super(key: key);
 
   final int? index;
   final List<Widget> children;
+  final Curve animationCurve;
+  final Duration animationDuration;
 
   @override
-  _AnimatedIndexedStackState createState() => _AnimatedIndexedStackState();
+  _AdwViewStackState createState() => _AdwViewStackState();
 }
 
-class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
+class _AdwViewStackState extends State<AdwViewStack>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _yAnimation;
@@ -22,15 +29,21 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: widget.animationDuration,
     );
 
     _yAnimation = Tween(begin: -10.0, end: 0.0).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.ease),
+      CurvedAnimation(
+        parent: _animationController,
+        curve: widget.animationCurve,
+      ),
     );
 
     _scaleAnimation = Tween(begin: 0.9, end: 1.0).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.ease),
+      CurvedAnimation(
+        parent: _animationController,
+        curve: widget.animationCurve,
+      ),
     );
 
     _animationController.forward();
@@ -43,7 +56,7 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
   }
 
   @override
-  void didUpdateWidget(covariant AnimatedIndexedStack oldWidget) {
+  void didUpdateWidget(covariant AdwViewStack oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.index != widget.index) {
       setState(() {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/animations/animated_indexed_stack.dart';
 import 'package:libadwaita/src/animations/slide_hide.dart';
 import 'package:libadwaita/src/controllers/flap_controller.dart';
 import 'package:libadwaita/src/utils/colors.dart';
@@ -9,16 +8,13 @@ enum FlapPosition { start, end }
 
 class AdwFlap extends StatefulWidget {
   final Widget flap;
-  final List<Widget> children;
+  final Widget child;
   final Widget? seperator;
 
   final FoldPolicy foldPolicy;
   final FlapPosition flapPosition;
 
   final FlapController? flapController;
-
-  /// Keeps track of the content index
-  final int? index;
 
   /// The breakpoint for small devices
   final double breakpoint;
@@ -30,14 +26,13 @@ class AdwFlap extends StatefulWidget {
   const AdwFlap({
     Key? key,
     required this.flap,
-    required this.children,
+    required this.child,
     this.flapController,
     this.seperator,
     this.foldPolicy = FoldPolicy.auto,
     this.flapPosition = FlapPosition.start,
     this.breakpoint = 800,
     this.flapWidth = 256,
-    this.index,
   }) : super(key: key);
 
   @override
@@ -131,10 +126,7 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
     });
 
     var content = Expanded(
-      child: AnimatedIndexedStack(
-        index: widget.index,
-        children: widget.children,
-      ),
+      child: widget.child,
     );
 
     var flap = SlideHide(
