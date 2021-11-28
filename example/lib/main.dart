@@ -1,4 +1,5 @@
 import 'package:example/flap/flap_demo.dart';
+import 'package:example/view_switcher/view_switcher_demo.dart';
 import 'package:multi_window/multi_widget.dart';
 import 'package:multi_window/multi_window.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: MultiWidget({
               'flap': FlapDemo(),
+              'view_switcher': ViewSwitcherDemo(),
             }, fallback: MyHomePage(themeNotifier: themeNotifier)),
             themeMode: currentMode);
       },

@@ -3,6 +3,7 @@ import 'package:example/pages/counter_page.dart';
 import 'package:example/pages/flap_page.dart';
 import 'package:example/pages/lists_page.dart';
 import 'package:example/pages/settings_page.dart';
+import 'package:example/pages/view_switcher_page.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:window_decorations/window_decorations.dart';
@@ -112,6 +113,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     label: 'Flap',
                   ),
                   AdwSidebarItem(
+                    label: 'View Switcher',
+                  ),
+                  AdwSidebarItem(
                     label: 'Settings',
                   )
                 ],
@@ -142,6 +146,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       label: 'Flap',
                     ),
                     AdwSidebarItem(
+                      label: 'View Switcher',
+                    ),
+                    AdwSidebarItem(
                       label: 'Settings',
                     )
                   ],
@@ -157,6 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   CounterPage(counter: counter),
                   const ListsPage(),
                   const FlapPage(),
+                  const ViewSwitcherPage(),
                   const SettingsPage(),
                 ],
                 index: _currentIndex,
