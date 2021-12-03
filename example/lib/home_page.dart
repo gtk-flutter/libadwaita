@@ -160,6 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               child: AdwViewStack(
+                animationDuration: const Duration(milliseconds: 100),
                 children: [
                   CounterPage(counter: counter),
                   const ListsPage(),
