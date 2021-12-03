@@ -27,6 +27,7 @@ class _AdwHeaderButtonState extends State<AdwHeaderButton> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return InkWell(
       onTap: widget.onPressed,
       onHover: (hover) {
@@ -42,8 +43,16 @@ class _AdwHeaderButtonState extends State<AdwHeaderButton> {
               Radius.circular(8.0),
             ),
             color: hovering
-                ? Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03)
-                : Theme.of(context).appBarTheme.backgroundColor?.lighten(0.025),
+                ? isDarkMode
+                    ? Theme.of(context)
+                        .appBarTheme
+                        .backgroundColor
+                        ?.lighten(0.03)
+                    : Theme.of(context)
+                        .appBarTheme
+                        .backgroundColor
+                        ?.darken(0.05)
+                : null,
           ),
           child: widget.icon),
     );
