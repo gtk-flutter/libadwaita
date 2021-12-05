@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/animations/slide_hide.dart';
 import 'package:libadwaita/src/controllers/flap_controller.dart';
+import 'package:libadwaita/src/internal/resize_listener.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 enum FoldPolicy { never, always, auto }
@@ -39,10 +40,7 @@ class AdwFlap extends StatefulWidget {
   _AdwFlapState createState() => _AdwFlapState();
 }
 
-class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
-  late Size _lastSize;
-  bool wasWindowResized = true;
-
+class _AdwFlapState extends State<AdwFlap> {
   late FlapController _controller;
 
   void rebuild() {
@@ -52,9 +50,6 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-
-    _lastSize = WidgetsBinding.instance!.window.physicalSize;
-    WidgetsBinding.instance!.addObserver(this);
 
     if (widget.flapController == null) {
       _controller = FlapController();
@@ -80,50 +75,14 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
     _controller.removeListener(rebuild);
     super.dispose();
-  }
-
-  @override
-  void didChangeMetrics() {
-    setState(() {
-      var winSize = WidgetsBinding.instance!.window.physicalSize;
-
-      if (winSize != _lastSize) {
-        wasWindowResized = true;
-        _lastSize = winSize;
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     // probably shouldn;t do this but no one is looking :P
     _controller.context = context;
-
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      // The stuff that happens when the window is resized
-      // We check for the mobile state and update it on every resize
-      // Do nothin if FoldPolicy is never / always, because they are not
-      // affected by window resizes.
-      // If FoldPolicy is auto, then close / open the sidebar depending on the
-      // state
-      if (wasWindowResized) {
-        var isMobile = MediaQuery.of(context).size.width < widget.breakpoint;
-        _controller.updateModalState(context, isMobile);
-
-        switch (widget.foldPolicy) {
-          case FoldPolicy.never:
-          case FoldPolicy.always:
-            break;
-          case FoldPolicy.auto:
-            _controller.updateOpenState(!isMobile);
-            break;
-        }
-        wasWindowResized = false;
-      }
-    });
 
     var content = Expanded(
       child: widget.child,
@@ -149,9 +108,32 @@ class _AdwFlapState extends State<AdwFlap> with WidgetsBindingObserver {
         ? [flap, seperator, content]
         : [content, seperator, flap];
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: widgets,
+    return WindowResizeListener(
+      onResize: (Size size) {
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          // The stuff that happens when the window is resized
+          // We check for the mobile state and update it on every resize
+          // Do nothin if FoldPolicy is never / always, because they are not
+          // affected by window resizes.
+          // If FoldPolicy is auto, then close / open the sidebar depending on the
+          // state
+          var isMobile = MediaQuery.of(context).size.width < widget.breakpoint;
+          _controller.updateModalState(context, isMobile);
+
+          switch (widget.foldPolicy) {
+            case FoldPolicy.never:
+            case FoldPolicy.always:
+              break;
+            case FoldPolicy.auto:
+              _controller.updateOpenState(!isMobile);
+              break;
+          }
+        });
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: widgets,
+      ),
     );
   }
 }
