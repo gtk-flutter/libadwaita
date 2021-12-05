@@ -21,6 +21,8 @@ class _WindowResizeListenerState extends State<WindowResizeListener>
     _lastSize = WidgetsBinding.instance!.window.physicalSize;
     WidgetsBinding.instance!.addObserver(this);
 
+    widget.onResize(_lastSize);
+
     super.initState();
   }
 

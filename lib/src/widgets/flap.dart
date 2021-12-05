@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/animations/slide_hide.dart';
 import 'package:libadwaita/src/controllers/flap_controller.dart';
-import 'package:libadwaita/src/internal/resize_listener.dart';
+import 'package:libadwaita/src/internal/window_resize_listener.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 enum FoldPolicy { never, always, auto }
