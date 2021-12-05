@@ -48,7 +48,8 @@ class AdwHeaderBar extends StatelessWidget {
   ///   onPressed: onPressed,
   /// )
   /// ```
-  final Widget Function(String name, dynamic type, VoidCallback onPressed) windowDecor;
+  final Widget Function(String name, dynamic type, VoidCallback onPressed)
+      windowDecor;
 
   const AdwHeaderBar({
     Key? key,
@@ -113,7 +114,8 @@ class AdwHeaderBar extends StatelessWidget {
         onClose = showClose ? window.close : null,
         super(key: key);
 
-  bool get hasWindowControls => onClose != null || onMinimize != null || onMaximize != null;
+  bool get hasWindowControls =>
+      onClose != null || onMinimize != null || onMaximize != null;
 
   @override
   Widget build(BuildContext context) {

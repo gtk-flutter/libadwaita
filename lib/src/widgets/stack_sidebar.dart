@@ -42,7 +42,8 @@ class AdwStackSidebar extends StatefulWidget {
 class _AdwStackSidebarState extends State<AdwStackSidebar> {
   bool _popupNotOpen = true;
 
-  bool get canSplitPanes => widget.breakpoint < MediaQuery.of(context).size.width;
+  bool get canSplitPanes =>
+      widget.breakpoint < MediaQuery.of(context).size.width;
 
   /// Loads and removes the popup page for content on small screens
   void loadContentPage(BuildContext context) async {
@@ -56,7 +57,8 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
             builder: (BuildContext context) {
               return Scaffold(
                 body: widget.fullContentBuilder != null
-                    ? widget.fullContentBuilder!(widget.contentIndex, widget.content)
+                    ? widget.fullContentBuilder!(
+                        widget.contentIndex, widget.content)
                     : widget.content,
               );
             },
@@ -76,7 +78,8 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
   /// closes popup wind
   void _closePopup() {
     if (!_popupNotOpen) {
-      SchedulerBinding.instance!.addPostFrameCallback((_) => Navigator.pop(context));
+      SchedulerBinding.instance!
+          .addPostFrameCallback((_) => Navigator.pop(context));
     }
   }
 

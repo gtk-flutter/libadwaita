@@ -35,7 +35,8 @@ class AdwActionRow extends StatelessWidget {
       leading: start,
       onTap: onActivated,
       title: Text(title),
-      subtitle: subtitle != null && subtitle!.isNotEmpty ? Text(subtitle!) : null,
+      subtitle:
+          subtitle != null && subtitle!.isNotEmpty ? Text(subtitle!) : null,
       trailing: end,
     );
   }

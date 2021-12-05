@@ -54,7 +54,8 @@ class AdwSidebar extends StatelessWidget {
     this.color,
     this.border,
     // Create a vertical list of AdwSidebarItem on demand.
-    required Function(BuildContext context, int index, bool isSelected) itemBuilder,
+    required Function(BuildContext context, int index, bool isSelected)
+        itemBuilder,
     required int itemCount,
     this.controller,
     this.padding,
@@ -62,7 +63,8 @@ class AdwSidebar extends StatelessWidget {
         childrenDelegate = List.generate(
           itemCount,
           (index) => _AdwSidebarItemBuilder(
-            item: (context) => itemBuilder(context, index, currentIndex == index),
+            item: (context) =>
+                itemBuilder(context, index, currentIndex == index),
             isSelected: currentIndex == index,
             onSelected: () => onSelected(index),
           ),
@@ -142,7 +144,8 @@ class _AdwSidebarItemBuilder extends StatelessWidget {
       onTap: onSelected,
       child: Container(
         color: isSelected
-            ? currentItem.selectedColor ?? Theme.of(context).appBarTheme.backgroundColor?.lighten(0.05)
+            ? currentItem.selectedColor ??
+                Theme.of(context).appBarTheme.backgroundColor?.lighten(0.05)
             : currentItem.unselectedColor,
         padding: currentItem.padding,
         child: Row(

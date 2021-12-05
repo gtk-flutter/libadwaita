@@ -26,12 +26,14 @@ class AdwViewSwitcherTab extends StatelessWidget {
             child: Row(
               children: [
                 if (data.icon != null) icon,
-                if (data.icon != null && data.title != null) const SizedBox(width: 8),
+                if (data.icon != null && data.title != null)
+                  const SizedBox(width: 8),
                 if (data.title != null)
                   Text(
                     data.title!,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                   ),
               ],
@@ -43,13 +45,15 @@ class AdwViewSwitcherTab extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (data.icon != null) icon,
-                if (data.icon != null && data.title != null) const SizedBox(height: 2),
+                if (data.icon != null && data.title != null)
+                  const SizedBox(height: 2),
                 if (data.title != null)
                   Text(
                     data.title!,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontSize: 12,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                   ),
               ],
