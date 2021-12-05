@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AdwClamp extends StatelessWidget {
+  final bool isScrollable;
+  final ScrollController? controller;
+
   const AdwClamp({
     Key? key,
     required this.child,
@@ -8,22 +11,19 @@ class AdwClamp extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.margin = const EdgeInsets.all(14),
     this.center = true,
-  }) : super(key: key);
+  })  : isScrollable = false,
+        controller = null,
+        super(key: key);
 
-  AdwClamp.scrollable({
+  const AdwClamp.scrollable({
     Key? key,
-    required Widget child,
+    required this.child,
     this.center = true,
-
-    /// Scroll Controller for SingleChildScrollView
-    ScrollController? controller,
+    this.controller,
     this.maximumSize = 580,
     this.padding = EdgeInsets.zero,
     this.margin = const EdgeInsets.all(14),
-  })  : child = SingleChildScrollView(
-          child: child,
-          controller: controller,
-        ),
+  })  : isScrollable = true,
         super(key: key);
 
   final bool center;
@@ -41,11 +41,18 @@ class AdwClamp extends StatelessWidget {
       child: child,
     );
 
-    return center
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Flexible(child: container)],
+    var centered = center
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [Center(child: container)],
           )
         : container;
+
+    return isScrollable
+        ? SingleChildScrollView(
+            controller: controller,
+            child: centered,
+          )
+        : centered;
   }
 }
