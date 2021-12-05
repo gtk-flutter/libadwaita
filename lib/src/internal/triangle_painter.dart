@@ -32,9 +32,9 @@ class TriangleShadowPainter extends CustomPainter {
   TriangleShadowPainter({required this.color});
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+    // Paint paint = Paint()
+    //   ..color = color
+    //   ..style = PaintingStyle.fill;
 
     Path path = Path();
     path.moveTo(size.width / 2, 0);
