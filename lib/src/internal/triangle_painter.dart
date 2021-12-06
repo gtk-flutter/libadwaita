@@ -16,7 +16,17 @@ class TrianglePainter extends CustomPainter {
     path.lineTo(0, size.height);
     path.close();
 
+    Paint border = Paint()
+      ..color = Colors.black26
+      ..style = PaintingStyle.stroke;
+
+    Path borderPath = Path();
+    borderPath.moveTo(0, size.height);
+    borderPath.lineTo(size.width / 2, 0);
+    borderPath.lineTo(size.width, size.height);
+
     canvas.drawPath(path, paint);
+    canvas.drawPath(borderPath, border);
   }
 
   @override
@@ -42,7 +52,7 @@ class TriangleShadowPainter extends CustomPainter {
     path.lineTo(0, size.height);
     path.close();
 
-    canvas.drawShadow(path, Colors.grey.withAlpha(50), 4.0, false);
+    canvas.drawShadow(path, Colors.grey, 4.0, false);
   }
 
   @override

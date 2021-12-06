@@ -4,6 +4,7 @@ import 'package:example/pages/flap_page.dart';
 import 'package:example/pages/lists_page.dart';
 import 'package:example/pages/settings_page.dart';
 import 'package:example/pages/view_switcher_page.dart';
+import 'package:example/pages/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:window_decorations/window_decorations.dart';
@@ -104,6 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 currentIndex: _currentIndex,
                 children: [
                   AdwSidebarItem(
+                    label: 'Welcome',
+                  ),
+                  AdwSidebarItem(
                     label: 'Counter',
                   ),
                   AdwSidebarItem(
@@ -137,6 +141,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   currentIndex: _currentIndex,
                   children: [
                     AdwSidebarItem(
+                      label: 'Welcome',
+                    ),
+                    AdwSidebarItem(
                       label: 'Counter',
                     ),
                     AdwSidebarItem(
@@ -162,6 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: AdwViewStack(
                 animationDuration: const Duration(milliseconds: 100),
                 children: [
+                  const WelcomePage(),
                   CounterPage(counter: counter),
                   const ListsPage(),
                   const FlapPage(),

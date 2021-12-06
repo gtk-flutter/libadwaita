@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/internal/triangle_painter.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
 class _PopoverRoute extends PopupRoute {
   final Widget body;
@@ -56,10 +57,15 @@ class _PopoverRoute extends PopupRoute {
                 width: width,
                 height: height,
                 child: Material(
-                  type: MaterialType.card,
-                  borderRadius: BorderRadius.circular(8),
+                  elevation: 5,
+                  // type: MaterialType.card,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.black26),
+                  ),
                   color: backgroundColor,
                   child: body,
+                  // shadowColor: Colors.black,
                 ),
               ),
             ),
