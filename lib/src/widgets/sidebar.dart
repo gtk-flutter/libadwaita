@@ -76,7 +76,7 @@ class AdwSidebar extends StatelessWidget {
     return Container(
         constraints: BoxConstraints(maxWidth: width),
         decoration: BoxDecoration(
-          color: color ?? Theme.of(context).appBarTheme.backgroundColor,
+          color: color ?? Theme.of(context).backgroundColor,
         ),
         child: ListView(
           controller: controller,

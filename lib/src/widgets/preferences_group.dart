@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/utils/colors.dart';
 
 class AdwPreferencesGroup extends StatelessWidget {
   final List<Widget> children;
-  final double borderWidth;
   final double borderRadius;
   final String? title;
   final String? description;
@@ -14,7 +12,6 @@ class AdwPreferencesGroup extends StatelessWidget {
   const AdwPreferencesGroup({
     Key? key,
     required this.children,
-    this.borderWidth = 2,
     this.borderRadius = 18,
     this.title,
     this.titleStyle,
@@ -43,8 +40,7 @@ class AdwPreferencesGroup extends StatelessWidget {
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(borderRadius),
             border: Border.all(
-              color: context.borderColor,
-              width: borderWidth,
+              color: Colors.transparent,
             ),
           ),
           child: Column(

@@ -22,7 +22,7 @@ extension ColorBrightness on Color {
 }
 
 var borderLight = Colors.black.withOpacity(0.18);
-var borderDark = Colors.black.withOpacity(0.75);
+var borderDark = const Color(0xFF454545);
 
 extension BorderContext on BuildContext {
   Color get borderColor =>
