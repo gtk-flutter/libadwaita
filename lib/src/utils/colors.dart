@@ -28,3 +28,13 @@ extension BorderContext on BuildContext {
   Color get borderColor =>
       Theme.of(this).brightness == Brightness.dark ? borderDark : borderLight;
 }
+
+extension SelectContext on BuildContext {
+  Color get selectColor => Theme.of(this).brightness == Brightness.dark
+      ? Theme.of(this).backgroundColor.lighten(0.1)
+      : Theme.of(this).backgroundColor.darken(0.1);
+
+  Color get hoverColor => Theme.of(this).brightness == Brightness.dark
+      ? Theme.of(this).backgroundColor.lighten(0.05)
+      : Theme.of(this).backgroundColor.darken(0.05);
+}
