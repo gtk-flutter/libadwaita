@@ -12,7 +12,7 @@ class AdwPreferencesGroup extends StatelessWidget {
   const AdwPreferencesGroup({
     Key? key,
     required this.children,
-    this.borderRadius = 18,
+    this.borderRadius = 10,
     this.title,
     this.titleStyle,
     this.description,
