@@ -98,6 +98,7 @@ class _AdwComboRowState extends State<AdwComboRow> {
                 )),
             const SizedBox(width: 5),
             button,
+            const SizedBox(width: 10),
           ],
         )));
   }
