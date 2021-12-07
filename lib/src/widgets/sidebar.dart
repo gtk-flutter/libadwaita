@@ -151,7 +151,8 @@ class _AdwSidebarItemBuilderState extends State<_AdwSidebarItemBuilder> {
     if (widget.isSelected) {
       color = currentItem.selectedColor ?? context.selectColor;
     } else if (hovering) {
-      color = currentItem.selectedColor?.lighten(0.02) ?? context.hoverColor;
+      color =
+          currentItem.selectedColor?.lighten(0.02) ?? context.hoverMenuColor;
     }
     return Padding(
         padding: const EdgeInsets.all(1),

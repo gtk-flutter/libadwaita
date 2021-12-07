@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:libadwaita/src/widgets/row_interface.dart';
 
 class AdwActionRowStyle {}
 
@@ -32,7 +33,9 @@ class AdwActionRow extends StatelessWidget {
       autofocus: autofocus,
       enabled: enabled,
       contentPadding: contentPadding,
-      leading: start,
+      leading: start != null
+          ? SizedBox(height: double.infinity, child: start)
+          : null,
       onTap: onActivated,
       title: Text(title),
       subtitle:

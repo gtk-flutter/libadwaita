@@ -34,7 +34,11 @@ extension SelectContext on BuildContext {
       ? Theme.of(this).backgroundColor.lighten(0.1)
       : Theme.of(this).backgroundColor.darken(0.1);
 
-  Color get hoverColor => Theme.of(this).brightness == Brightness.dark
+  Color get hoverMenuColor => Theme.of(this).brightness == Brightness.dark
       ? Theme.of(this).backgroundColor.lighten(0.05)
       : Theme.of(this).backgroundColor.darken(0.05);
+
+  Color get hoverColor => Theme.of(this).brightness == Brightness.dark
+      ? Theme.of(this).backgroundColor.lighten(0.15)
+      : Theme.of(this).backgroundColor.darken(0.005);
 }

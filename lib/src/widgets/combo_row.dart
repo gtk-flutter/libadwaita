@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita/src/internal/popover.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/row_interface.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -62,47 +63,43 @@ class _AdwComboRowState extends State<AdwComboRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-        // color: Theme.of(context).cardColor,
-        decoration: widget.interface?.getDecoration(),
-        child: InkWell(
-            borderRadius: BorderRadius.circular(
-                widget.interface == null ? 1 : widget.interface!.borderRadius),
-            hoverColor: Colors.blue,
-            onTap: () {
-              if (_comboButtonState.currentState!.active) {
-                Navigator.of(context).pop();
-                _comboButtonState.currentState!.active = false;
-              } else {
-                _comboButtonState.currentState?.show();
-              }
-            },
-            child: Expanded(
-                child: Row(
-              children: [
-                Expanded(
-                    child: ListTile(
-                  autofocus: widget.autofocus,
-                  enabled: widget.enabled,
-                  contentPadding: widget.contentPadding,
-                  leading: widget.start,
-                  title: Text(widget.title),
-                  subtitle:
-                      widget.subtitle != null && widget.subtitle!.isNotEmpty
-                          ? Text(widget.subtitle!)
-                          : null,
+    return InkWell(
+        borderRadius: BorderRadius.circular(
+            widget.interface == null ? 1 : widget.interface!.borderRadius),
+        hoverColor: context.hoverColor,
+        onTap: () {
+          if (_comboButtonState.currentState!.active) {
+            Navigator.of(context).pop();
+            _comboButtonState.currentState!.active = false;
+          } else {
+            _comboButtonState.currentState?.show();
+          }
+        },
+        child: Expanded(
+            child: Row(
+          children: [
+            Expanded(
+                child: ListTile(
+              autofocus: widget.autofocus,
+              enabled: widget.enabled,
+              contentPadding: widget.contentPadding,
+              leading: widget.start,
+              title: Text(widget.title),
+              subtitle: widget.subtitle != null && widget.subtitle!.isNotEmpty
+                  ? Text(widget.subtitle!)
+                  : null,
+            )),
+            Expanded(child: Container()),
+            SizedBox(
+                width: 50,
+                child: Text(
+                  widget.choices[selected],
+                  overflow: TextOverflow.ellipsis,
                 )),
-                Expanded(child: Container()),
-                SizedBox(
-                    width: 50,
-                    child: Text(
-                      widget.choices[selected],
-                      overflow: TextOverflow.ellipsis,
-                    )),
-                const SizedBox(width: 5),
-                button,
-              ],
-            ))));
+            const SizedBox(width: 5),
+            button,
+          ],
+        )));
   }
 }
 

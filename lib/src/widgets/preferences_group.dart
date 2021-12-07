@@ -35,27 +35,18 @@ class AdwPreferencesGroup extends StatelessWidget {
             ),
           const SizedBox(height: 14),
         ],
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+        // This is a hack while waiting for https://github.com/flutter/flutter/issues/94785
+        // to be fixed
+        Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
-            border: Border.all(
-              color: Colors.transparent,
-            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(
               2 * children.length - 1,
-              (index) => index.isEven
-                  ? Padding(
-                      padding: EdgeInsets.only(
-                        top: index ~/ 2 == 0 ? 4 : 0,
-                        bottom: index ~/ 2 == children.length - 1 ? 4 : 0,
-                      ),
-                      child: children[index ~/ 2],
-                    )
-                  : const Divider(),
+              (index) => index.isEven ? children[index ~/ 2] : const Divider(),
             ),
           ),
         ),
