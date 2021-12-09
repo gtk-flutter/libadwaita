@@ -28,9 +28,13 @@ Unofficial implementation of Libadwaita Widgets in Flutter.
     - `AdwHeaderBarMinimal` - `AdwHeaderBar` without [window_decorations](https://pub.dev/packages/window_decorations) dependency
     - `AdwHeaderButton` - A Header button to be used with `AdwHeaderBar*`
     - `AdwPopupMenu` - A Popup Menu button
-    - [`PreferencesGroup`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html)
+    - [`AdwPreferencesGroup`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html)
+    - `AdwScaffold`
     - `AdwStackSidebar` - GtkStackSidebar renamed to match the flow
     - `AdwSidebar` - To be used with `AdwStackSidebar` or `AdwFlap`
+    - `AdwTextButton`
+    - `AdwTextField`
+    - `AdwViewStack`
     - [`AdwViewSwitcher`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcher.html)
     - `AdwViewSwitcherTab` - Tabs for AdwViewSwitcher
 

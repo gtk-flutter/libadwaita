@@ -1,6 +1,11 @@
 ## 1.0.0-rc.1
 
-- Add `AdwScaffold`, `AdwTextField` & `AdwTextButton`
+- Added the following widgets:
+    - `AdwScaffold`
+    - `AdwTextField`
+    - `AdwTextButton`
+    - `AdwViewStack`
+    - `WindowResizeListener`
 - Fix Window buttons null error
 - Update Example
 - Update `AdwActionRow` & `AdwStackSidebar`
