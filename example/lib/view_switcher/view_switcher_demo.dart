@@ -2,6 +2,11 @@ import 'package:example/view_switcher/view_switcher_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:adwaita/adwaita.dart' as adwaita;
 
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ViewSwitcherDemo());
+}
+
 class ViewSwitcherDemo extends StatelessWidget {
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);

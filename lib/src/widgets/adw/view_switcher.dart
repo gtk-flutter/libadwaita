@@ -24,34 +24,20 @@ class AdwViewSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        for (final tab in tabs.asMap().entries)
-          () {
-            var ctab = InkWell(
-              onTap:
-                  currentIndex != tab.key ? () => onViewChanged(tab.key) : null,
-              child: Container(
-                height: height,
-                decoration: BoxDecoration(
-                  color: tab.key == currentIndex
-                      ? Theme.of(context)
-                          .appBarTheme
-                          .backgroundColor
-                          ?.darken(0.05)
-                      : Colors.transparent,
-                ),
-                child: AdwViewSwitcherTab(
-                  data: tab.value,
-                  isSelected: tab.key == currentIndex,
-                  style: style,
-                ),
-              ),
-            );
-            return expanded ? Expanded(child: ctab) : ctab;
-          }()
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: tabs.asMap().entries.map((tab) {
+          return AdwViewSwitcherTab(
+            data: tab.value,
+            isSelected: tab.key == currentIndex,
+            style: style,
+            onTap:
+                currentIndex != tab.key ? () => onViewChanged(tab.key) : null,
+          );
+        }).toList(),
+      ),
     );
   }
 }
