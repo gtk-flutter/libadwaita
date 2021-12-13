@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/widgets/row_interface.dart';
 
 class AdwActionRowStyle {}
 

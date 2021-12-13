@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita/src/internal/popover.dart';
 import 'package:libadwaita/src/utils/colors.dart';
-import 'package:libadwaita/src/widgets/row_interface.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
@@ -14,7 +12,6 @@ class AdwComboRow extends StatefulWidget {
   final bool autofocus;
   final bool enabled;
   final EdgeInsets? contentPadding;
-  final AdwRowInterface? interface;
 
   const AdwComboRow(
       {Key? key,
@@ -25,8 +22,7 @@ class AdwComboRow extends StatefulWidget {
       this.subtitle,
       this.autofocus = false,
       this.enabled = true,
-      this.contentPadding,
-      this.interface})
+      this.contentPadding})
       : super(key: key);
 
   @override
@@ -64,8 +60,7 @@ class _AdwComboRowState extends State<AdwComboRow> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        borderRadius: BorderRadius.circular(
-            widget.interface == null ? 1 : widget.interface!.borderRadius),
+        borderRadius: BorderRadius.circular(1),
         hoverColor: context.hoverColor,
         onTap: () {
           if (_comboButtonState.currentState!.active) {
