@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-// ignore: implementation_imports
-import 'package:libadwaita/src/utils/colors.dart';
 
 class ListsPage extends StatefulWidget {
   const ListsPage({Key? key}) : super(key: key);
