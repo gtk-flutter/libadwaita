@@ -70,8 +70,7 @@ class _AdwComboRowState extends State<AdwComboRow> {
             _comboButtonState.currentState?.show();
           }
         },
-        child: Expanded(
-            child: Row(
+        child: Row(
           children: [
             Expanded(
                 child: ListTile(
@@ -95,7 +94,7 @@ class _AdwComboRowState extends State<AdwComboRow> {
             button,
             const SizedBox(width: 10),
           ],
-        )));
+        ));
   }
 }
 
