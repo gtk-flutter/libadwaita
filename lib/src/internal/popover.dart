@@ -1,5 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/internal/triangle_painter.dart';
+import 'package:flutter/widgets.dart';
+
+class BorderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1
+      ..color = Colors.black12;
+    var half = size.width / 2;
+    final path = Path();
+    path.moveTo(1, 12);
+    path.lineTo(half - 10, 12);
+    path.lineTo(half, 1);
+    path.lineTo(half + 10, 12);
+    path.lineTo(size.width - 1, 12);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+class PopOverClipper extends CustomClipper<Path> {
+  PopOverClipper();
+
+  @override
+  Path getClip(Size size) {
+    var half = size.width / 2;
+    final path = Path();
+    path.moveTo(0, 15);
+    path.lineTo(half - 10, 15);
+    path.lineTo(half, 5);
+    path.lineTo(half + 10, 15);
+    path.lineTo(size.width, 15);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0.0, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
 
 class _PopoverRoute extends PopupRoute {
   final Widget body;
@@ -31,42 +76,30 @@ class _PopoverRoute extends PopupRoute {
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
     return Align(
-      alignment: Alignment.topLeft,
-      child: Transform.translate(
-        offset: Offset(
-            position.dx + contentOffset.dx, position.dy + contentOffset.dy),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Stack(
-              children: [
-                CustomPaint(
-                  painter: TriangleShadowPainter(color: backgroundColor),
-                  size: const Size(36, 20),
-                ),
-                CustomPaint(
-                  painter: TrianglePainter(color: backgroundColor),
-                  size: const Size(34, 18),
-                ),
-              ],
-            ),
-            Transform.translate(
-              offset: const Offset(0, -5),
-              child: SizedBox(
-                width: width,
-                height: height,
-                child: Material(
-                  type: MaterialType.card,
-                  borderRadius: BorderRadius.circular(8),
-                  color: backgroundColor,
-                  child: body,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+        alignment: Alignment.topLeft,
+        child: Transform.translate(
+            offset: Offset(
+                position.dx + contentOffset.dx, position.dy + contentOffset.dy),
+            child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(maxWidth: width, maxHeight: height ?? 200),
+              child: ClipPath(
+                  clipper: PopOverClipper(),
+                  child: Card(
+                      shape: RoundedRectangleBorder(
+                          side:
+                              const BorderSide(color: Colors.black12, width: 1),
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: CustomPaint(
+                          painter: BorderPainter(),
+                          child: Container(
+                              margin: const EdgeInsets.only(
+                                  left: 0.0,
+                                  top: 10.0,
+                                  right: 0.0,
+                                  bottom: 0.0),
+                              child: body)))),
+            )));
   }
 
   @override

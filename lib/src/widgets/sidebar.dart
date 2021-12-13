@@ -76,7 +76,7 @@ class AdwSidebar extends StatelessWidget {
     return Container(
         constraints: BoxConstraints(maxWidth: width),
         decoration: BoxDecoration(
-          color: color ?? Theme.of(context).appBarTheme.backgroundColor,
+          color: color ?? Theme.of(context).backgroundColor,
         ),
         child: ListView(
           controller: controller,
@@ -114,7 +114,7 @@ class AdwSidebarItem {
   AdwSidebarItem({
     this.key,
     this.label,
-    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+    this.padding = const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
     this.selectedColor,
     this.unselectedColor,
     this.labelStyle,
@@ -123,7 +123,7 @@ class AdwSidebarItem {
   }) : assert(labelWidget != null || label != null);
 }
 
-class _AdwSidebarItemBuilder extends StatelessWidget {
+class _AdwSidebarItemBuilder extends StatefulWidget {
   final AdwSidebarItem Function(BuildContext context) item;
   final bool isSelected;
   final VoidCallback? onSelected;
@@ -136,33 +136,59 @@ class _AdwSidebarItemBuilder extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var currentItem = item(context);
-    var leading = currentItem.leading ?? const SizedBox();
+  _AdwSidebarItemBuilderState createState() => _AdwSidebarItemBuilderState();
+}
 
-    return InkWell(
-      onTap: onSelected,
-      child: Container(
-        color: isSelected
-            ? currentItem.selectedColor ??
-                Theme.of(context).appBarTheme.backgroundColor?.lighten(0.05)
-            : currentItem.unselectedColor,
-        padding: currentItem.padding,
-        child: Row(
-          children: [
-            leading,
-            const SizedBox(width: 12),
-            currentItem.labelWidget ??
-                Text(
-                  currentItem.label!,
-                  style: TextStyle(
-                    fontWeight: isSelected ? FontWeight.bold : null,
-                    fontSize: 15,
-                  ),
+class _AdwSidebarItemBuilderState extends State<_AdwSidebarItemBuilder> {
+  bool hovering = false;
+  _AdwSidebarItemBuilderState();
+
+  @override
+  Widget build(BuildContext context) {
+    var currentItem = widget.item(context);
+    var leading = currentItem.leading ?? const SizedBox();
+    var color = currentItem.unselectedColor;
+    if (widget.isSelected) {
+      color = currentItem.selectedColor ?? context.selectColor;
+    } else if (hovering) {
+      color =
+          currentItem.selectedColor?.lighten(0.02) ?? context.hoverMenuColor;
+    }
+    return Padding(
+        padding: const EdgeInsets.all(1),
+        child: Container(
+            padding: const EdgeInsets.only(left: 10, right: 58),
+            child: InkWell(
+              onHover: (value) {
+                setState(() {
+                  hovering = value;
+                });
+              },
+              onTap: widget.onSelected,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: color,
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.transparent,
+                    ),
+                    // Make rounded corners
+                    borderRadius: BorderRadius.circular(8)),
+                padding: currentItem.padding,
+                child: Row(
+                  children: [
+                    leading,
+                    const SizedBox(width: 12),
+                    currentItem.labelWidget ??
+                        Text(
+                          currentItem.label!,
+                          style: const TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                  ],
                 ),
-          ],
-        ),
-      ),
-    );
+              ),
+            )));
   }
 }

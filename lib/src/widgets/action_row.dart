@@ -32,7 +32,9 @@ class AdwActionRow extends StatelessWidget {
       autofocus: autofocus,
       enabled: enabled,
       contentPadding: contentPadding,
-      leading: start,
+      leading: start != null
+          ? SizedBox(height: double.infinity, child: start)
+          : null,
       onTap: onActivated,
       title: Text(title),
       subtitle:

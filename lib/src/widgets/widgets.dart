@@ -1,4 +1,5 @@
 export 'action_row.dart';
+export 'combo_row.dart';
 export 'clamp.dart';
 export 'flap.dart';
 export 'header_bar_minimal.dart';
