@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
 import 'package:gsettings/gsettings.dart';
-import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/libadwaita.dart';
 
 class AdwHeaderBar extends StatefulWidget {
   /// The leading widget for the headerbar
