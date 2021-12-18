@@ -9,18 +9,20 @@ class FlapController extends ChangeNotifier {
   /// INTERNAL STUFF, DON'T USE DIRECTLY
   BuildContext? context;
 
-  /// INTERNAL STUFF, DON'T USE DIRECTLY
-  FoldPolicy policy = FoldPolicy.auto;
+  FoldPolicy _policy = FoldPolicy.auto;
+  FlapPosition _position = FlapPosition.start;
+  bool _locked = false;
 
-  /// INTERNAL STUFF, DON'T USE DIRECTLY
-  FlapPosition position = FlapPosition.start;
+  set policy(FoldPolicy policy) => _policy = policy;
+  set position(FlapPosition position) => _position = position;
+  set locked(bool locked) => _locked = locked;
 
   bool shouldEnableDrawerGesture(FlapPosition position) {
-    return isModal && this.position == position;
+    return isModal && _position == position;
   }
 
   bool shouldHide() {
-    switch (policy) {
+    switch (_policy) {
       case FoldPolicy.never:
         return !isOpen;
       case FoldPolicy.always:
@@ -52,9 +54,11 @@ class FlapController extends ChangeNotifier {
       if (!isModal) {
         if ((Scaffold.of(context).isDrawerOpen ||
                 Scaffold.of(context).isEndDrawerOpen) &&
-            policy != FoldPolicy.always) {
+            _policy != FoldPolicy.always) {
           Navigator.of(context).pop();
         }
+      } else if (_locked && isOpen) {
+        Scaffold.of(context).openDrawer();
       }
       notifyListeners();
     }
@@ -66,8 +70,8 @@ class FlapController extends ChangeNotifier {
       // Usually open only should set the isOpen variable, but if we have a
       // mobile sized device OR the fold policy is set to always, we open the
       // drawer because this is how the actual libadwaita behaves
-      if (isModal || policy == FoldPolicy.always) {
-        switch (position) {
+      if (isModal || _policy == FoldPolicy.always) {
+        switch (_position) {
           case FlapPosition.start:
             Scaffold.of(context ?? this.context!).openDrawer();
             break;
@@ -87,7 +91,7 @@ class FlapController extends ChangeNotifier {
       // Usually close only should set the isOpen variable, but if we have a
       // mobile sized device OR the fold policy is set to always, we close the
       // drawer (if its open) because this is how the actual libadwaita behaves
-      if ((isModal || policy == FoldPolicy.always) &&
+      if ((isModal || _policy == FoldPolicy.always) &&
           (scaffold.isDrawerOpen || scaffold.isEndDrawerOpen)) {
         Navigator.of(context ?? this.context!).pop();
       }

@@ -21,6 +21,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
   late FlapController _flapController;
   FlapPosition flapPosition = FlapPosition.start;
   FoldPolicy foldPolicy = FoldPolicy.auto;
+  bool locked = false;
 
   @override
   void initState() {
@@ -94,6 +95,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
               ),
             ),
             body: AdwFlap(
+              locked: locked,
               flapController: _flapController,
               flapPosition: flapPosition,
               foldPolicy: foldPolicy,
@@ -132,7 +134,11 @@ class _FlapHomePageState extends State<FlapHomePage> {
                           subtitle:
                               "Sidebar visibility doesn't change when fold state changes",
                           end: CupertinoSwitch(
-                              value: false, onChanged: (val) {}),
+                              value: locked,
+                              onChanged: (val) {
+                                locked = val;
+                                setState(() {});
+                              }),
                         )
                       ],
                     ),

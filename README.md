@@ -6,7 +6,7 @@
 
 Unofficial implementation of Libadwaita Widgets in Flutter.
 
-![libadwaita example screenshot](https://user-images.githubusercontent.com/41370460/137439130-571c6d74-b3f5-4f01-8c11-3ea8de562dd3.jpg)
+![libadwaita example screenshot](https://user-images.githubusercontent.com/41370460/146646064-09e10e32-8635-43ed-bd9c-0ed191d30a97.png)
 
 **NOTE:** For getting colors from gtk 3.0 theme use version [`<=0.9.8+1`](https://pub.dev/packages/gtk/versions/0.9.8+1)
 
@@ -25,8 +25,7 @@ Unofficial implementation of Libadwaita Widgets in Flutter.
     - [`AdwClamp`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html)
     - [`AdwComboRow`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ComboRow.html)
     - [`AdwFlap`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Flap.html)
-    - [`AdwHeaderBar`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html)
-    - `AdwHeaderBarMinimal` - `AdwHeaderBar` without [window_decorations](https://pub.dev/packages/window_decorations) dependency
+    - [`AdwHeaderBar`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html) - use `.minimal` for using it without [`window_decorations`](https://pub.dev/packages/window_decorations) package.
     - `AdwHeaderButton` - A Header button to be used with `AdwHeaderBar*`
     - `AdwPopupMenu` - A Popup Menu button
     - [`AdwPreferencesGroup`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html)
@@ -35,7 +34,7 @@ Unofficial implementation of Libadwaita Widgets in Flutter.
     - `AdwSidebar` - To be used with `AdwStackSidebar` or `AdwFlap`
     - `AdwTextButton`
     - `AdwTextField`
-    - `AdwViewStack`
+    - [`AdwViewStack`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewStack.html)
     - [`AdwViewSwitcher`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcher.html)
     - `AdwViewSwitcherTab` - Tabs for AdwViewSwitcher
 

@@ -24,10 +24,16 @@ class AdwFlap extends StatefulWidget {
   /// Rest is allocated to content
   final double flapWidth;
 
+  /// Whether to keep the flap's open
+  /// state when screen is resized or
+  /// not
+  final bool locked;
+
   const AdwFlap({
     Key? key,
     required this.flap,
     required this.child,
+    this.locked = false,
     this.flapController,
     this.seperator,
     this.foldPolicy = FoldPolicy.auto,
@@ -65,6 +71,7 @@ class _AdwFlapState extends State<AdwFlap> {
   void updateFlapData() {
     _controller.policy = widget.foldPolicy;
     _controller.position = widget.flapPosition;
+    _controller.locked = widget.locked;
   }
 
   @override
