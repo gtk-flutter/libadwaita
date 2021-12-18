@@ -29,10 +29,13 @@ class MyApp extends StatelessWidget {
             theme: adwaita.lightTheme,
             darkTheme: adwaita.darkTheme,
             debugShowCheckedModeBanner: false,
-            home: MultiWidget({
-              'flap': FlapDemo(),
-              'view_switcher': ViewSwitcherDemo(),
-            }, fallback: MyHomePage(themeNotifier: themeNotifier)),
+            home: MultiWidget(
+              {
+                'flap': FlapDemo(),
+                'view_switcher': ViewSwitcherDemo(),
+              },
+              fallback: MyHomePage(themeNotifier: themeNotifier),
+            ),
             themeMode: currentMode);
       },
     );

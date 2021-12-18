@@ -20,6 +20,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
   late ScrollController _scrollControllerOther;
   late FlapController _flapController;
   FlapPosition flapPosition = FlapPosition.start;
+  FoldPolicy foldPolicy = FoldPolicy.auto;
 
   @override
   void initState() {
@@ -95,26 +96,25 @@ class _FlapHomePageState extends State<FlapHomePage> {
             body: AdwFlap(
               flapController: _flapController,
               flapPosition: flapPosition,
-              flap: Drawer(
-                child: AdwSidebar(
-                  currentIndex: _currentIndex,
-                  children: [
-                    AdwSidebarItem(
-                      label: 'Folding',
-                    ),
-                    AdwSidebarItem(
-                      label: 'Layout',
-                    ),
-                    AdwSidebarItem(
-                      label: 'Interaction',
-                    )
-                  ],
-                  onSelected: (index) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                ),
+              foldPolicy: foldPolicy,
+              flap: AdwSidebar(
+                currentIndex: _currentIndex,
+                children: [
+                  AdwSidebarItem(
+                    label: 'Folding',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Layout',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Interaction',
+                  )
+                ],
+                onSelected: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
               ),
               child: AdwViewStack(
                 index: _currentIndex,
@@ -123,9 +123,9 @@ class _FlapHomePageState extends State<FlapHomePage> {
                     center: true,
                     child: AdwPreferencesGroup(
                       children: [
-                        const AdwActionRow(
+                        const AdwComboRow(
                           title: "Fold Policy",
-                          end: Text("auto"),
+                          choices: ["auto", "always", "never"],
                         ),
                         AdwActionRow(
                           title: "Locked",

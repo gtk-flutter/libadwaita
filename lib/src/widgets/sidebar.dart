@@ -29,11 +29,11 @@ class AdwSidebar extends StatelessWidget {
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 265,
+    this.width = 260,
     this.color,
     this.border,
     this.controller,
-    this.padding,
+    this.padding = const EdgeInsets.symmetric(vertical: 5),
 
     /// List of all the Adw Sidebar Item's, use AdwSidebar.builder if you want to build them on demand.
     required List<AdwSidebarItem> children,
@@ -50,7 +50,7 @@ class AdwSidebar extends StatelessWidget {
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 265,
+    this.width = 260,
     this.color,
     this.border,
     // Create a vertical list of AdwSidebarItem on demand.
@@ -58,7 +58,7 @@ class AdwSidebar extends StatelessWidget {
         itemBuilder,
     required int itemCount,
     this.controller,
-    this.padding,
+    this.padding = const EdgeInsets.symmetric(vertical: 5),
   })  : assert(itemCount >= 0),
         childrenDelegate = List.generate(
           itemCount,
@@ -154,41 +154,35 @@ class _AdwSidebarItemBuilderState extends State<_AdwSidebarItemBuilder> {
       color =
           currentItem.selectedColor?.lighten(0.02) ?? context.hoverMenuColor;
     }
-    return Padding(
-        padding: const EdgeInsets.all(1),
-        child: Container(
-            padding: const EdgeInsets.only(left: 10, right: 58),
-            child: InkWell(
-              onHover: (value) {
-                setState(() {
-                  hovering = value;
-                });
-              },
-              onTap: widget.onSelected,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: color,
-                    border: Border.all(
-                      width: 1,
-                      color: Colors.transparent,
-                    ),
-                    // Make rounded corners
-                    borderRadius: BorderRadius.circular(8)),
-                padding: currentItem.padding,
-                child: Row(
-                  children: [
-                    leading,
-                    const SizedBox(width: 12),
-                    currentItem.labelWidget ??
-                        Text(
-                          currentItem.label!,
-                          style: const TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                  ],
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+        child: InkWell(
+          onHover: (value) => setState(() => hovering = value),
+          onTap: widget.onSelected,
+          child: Container(
+            decoration: BoxDecoration(
+                color: color,
+                border: Border.all(
+                  width: 1,
+                  color: Colors.transparent,
                 ),
-              ),
-            )));
+                // Make rounded corners
+                borderRadius: BorderRadius.circular(8)),
+            padding: currentItem.padding,
+            child: Row(
+              children: [
+                leading,
+                const SizedBox(width: 12),
+                currentItem.labelWidget ??
+                    Text(
+                      currentItem.label!,
+                      style: const TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+              ],
+            ),
+          ),
+        ));
   }
 }

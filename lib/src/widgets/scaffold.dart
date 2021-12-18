@@ -38,7 +38,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
       endDrawerEnableOpenDragGesture:
           _flapController?.shouldEnableDrawerGesture(FlapPosition.end) ?? false,
       onDrawerChanged: _flapController?.onDrawerChanged,
-      drawer: widget.drawer,
+      drawer: SizedBox(width: 200, child: widget.drawer),
       endDrawer: widget.drawer,
       body: widget.body,
     );

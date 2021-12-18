@@ -23,6 +23,7 @@ Unofficial implementation of Libadwaita Widgets in Flutter.
 - Following Widgets are currently ported to flutter, for more info visit [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/index.html#classes):
     - [`AdwActionRow`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ActionRow.html)
     - [`AdwClamp`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html)
+    - [`AdwComboRow`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ComboRow.html)
     - [`AdwFlap`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Flap.html)
     - [`AdwHeaderBar`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html)
     - `AdwHeaderBarMinimal` - `AdwHeaderBar` without [window_decorations](https://pub.dev/packages/window_decorations) dependency

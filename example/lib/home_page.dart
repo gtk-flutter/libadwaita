@@ -136,35 +136,33 @@ class _MyHomePageState extends State<MyHomePage> {
             body: AdwFlap(
               flapController: _flapController,
               foldPolicy: FoldPolicy.auto,
-              flap: Drawer(
-                child: AdwSidebar(
-                  currentIndex: _currentIndex,
-                  children: [
-                    AdwSidebarItem(
-                      label: 'Welcome',
-                    ),
-                    AdwSidebarItem(
-                      label: 'Counter',
-                    ),
-                    AdwSidebarItem(
-                      label: 'Lists',
-                    ),
-                    AdwSidebarItem(
-                      label: 'Flap',
-                    ),
-                    AdwSidebarItem(
-                      label: 'View Switcher',
-                    ),
-                    AdwSidebarItem(
-                      label: 'Settings',
-                    )
-                  ],
-                  onSelected: (index) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                ),
+              flap: AdwSidebar(
+                currentIndex: _currentIndex,
+                children: [
+                  AdwSidebarItem(
+                    label: 'Welcome',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Counter',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Lists',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Flap',
+                  ),
+                  AdwSidebarItem(
+                    label: 'View Switcher',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Settings',
+                  )
+                ],
+                onSelected: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
               ),
               child: AdwViewStack(
                 animationDuration: const Duration(milliseconds: 100),

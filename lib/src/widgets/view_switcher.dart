@@ -1,6 +1,5 @@
 import 'package:libadwaita/libadwaita.dart';
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/utils/colors.dart';
 
 class AdwViewSwitcher extends StatelessWidget {
   final List<ViewSwitcherData> tabs;

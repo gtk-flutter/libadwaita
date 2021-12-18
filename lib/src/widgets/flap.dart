@@ -32,8 +32,8 @@ class AdwFlap extends StatefulWidget {
     this.seperator,
     this.foldPolicy = FoldPolicy.auto,
     this.flapPosition = FlapPosition.start,
-    this.breakpoint = 800,
-    this.flapWidth = 256,
+    this.breakpoint = 900,
+    this.flapWidth = 260,
   }) : super(key: key);
 
   @override
