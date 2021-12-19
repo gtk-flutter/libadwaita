@@ -7,12 +7,20 @@ class AdwScaffold extends StatefulWidget {
   final FlapController? flapController;
   final Widget? drawer;
 
-  const AdwScaffold({
+  /// Remove this when ViewSwitcher becomes adaptive
+  final Widget? bottomNavigationBar;
+
+  AdwScaffold({
     Key? key,
     required this.body,
     this.flapController,
-    this.drawer,
-  }) : super(key: key);
+    Widget? drawer,
+    this.bottomNavigationBar,
+  })  :
+
+        /// Use less width to match libadwaita
+        drawer = SizedBox(width: 200, child: drawer),
+        super(key: key);
 
   @override
   _AdwScaffoldState createState() => _AdwScaffoldState();
@@ -38,9 +46,10 @@ class _AdwScaffoldState extends State<AdwScaffold> {
       endDrawerEnableOpenDragGesture:
           _flapController?.shouldEnableDrawerGesture(FlapPosition.end) ?? false,
       onDrawerChanged: _flapController?.onDrawerChanged,
-      drawer: SizedBox(width: 200, child: widget.drawer),
+      drawer: widget.drawer,
       endDrawer: widget.drawer,
       body: widget.body,
+      bottomNavigationBar: widget.bottomNavigationBar,
     );
   }
 }
