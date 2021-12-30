@@ -4,10 +4,10 @@ import 'package:libadwaita/src/utils/colors.dart';
 enum ButtonStatus { normal, hover, tapDown }
 
 class AdwHeaderButton extends StatefulWidget {
-  /// The icon of the button, use size of 17 for better results
+  /// The icon of the button. Default size would be `17`.
   final Widget icon;
 
-  /// Is this button active, generally it is for popup buttons
+  /// Controls the active status, generally used for popup buttons.
   final bool isActive;
 
   /// Triggered when the button is pressed.
