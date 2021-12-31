@@ -1,5 +1,6 @@
 // All the widgets imported from libadwaita
 export 'adw/action_row.dart';
+export 'adw/avatar.dart';
 export 'adw/combo_row.dart';
 export 'adw/clamp.dart';
 export 'adw/flap.dart';
