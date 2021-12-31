@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
+enum ButtonStatus { normal, hover, tapDown }
+
 class AdwHeaderButton extends StatefulWidget {
-  /// The icon of the button, use size of 17 for better results
+  /// The icon of the button. Default size would be `17`.
   final Widget icon;
 
-  /// Is this button active, generally it is for popup buttons
+  /// Controls the active status, generally used for popup buttons.
   final bool isActive;
 
   /// Triggered when the button is pressed.
@@ -23,38 +25,65 @@ class AdwHeaderButton extends StatefulWidget {
 }
 
 class _AdwHeaderButtonState extends State<AdwHeaderButton> {
-  bool hovering = false;
+  var status = ButtonStatus.normal;
+
+  Color? _resolveColor() {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      if (widget.isActive) {
+        return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03);
+      }
+
+      switch (status) {
+        case ButtonStatus.hover:
+          return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03);
+        case ButtonStatus.tapDown:
+          return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.20);
+        default:
+          return null;
+      }
+    } else {
+      if (widget.isActive) {
+        return Theme.of(context).appBarTheme.backgroundColor?.darken(0.05);
+      }
+
+      switch (status) {
+        case ButtonStatus.hover:
+          return Theme.of(context).appBarTheme.backgroundColor?.darken(0.05);
+        case ButtonStatus.tapDown:
+          return Theme.of(context).appBarTheme.backgroundColor?.darken(0.20);
+        default:
+          return null;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    return InkWell(
-      onTap: widget.onPressed,
-      onHover: (hover) {
-        setState(() => hovering = hover);
-      },
-      child: AnimatedContainer(
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => status = ButtonStatus.hover),
+      onExit: (_) => setState(() => status = ButtonStatus.normal),
+      child: GestureDetector(
+        onTap: widget.onPressed,
+        onTapDown: (_) => setState(() => status = ButtonStatus.tapDown),
+        onTapUp: (_) => setState(() => status = ButtonStatus.hover),
+        child: AnimatedContainer(
           height: 34,
-          width: 36,
+          width: 34,
           duration: const Duration(milliseconds: 200),
           curve: Curves.ease,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
               Radius.circular(8.0),
             ),
-            color: hovering
-                ? isDarkMode
-                    ? Theme.of(context)
-                        .appBarTheme
-                        .backgroundColor
-                        ?.lighten(0.03)
-                    : Theme.of(context)
-                        .appBarTheme
-                        .backgroundColor
-                        ?.darken(0.05)
-                : null,
+            color: _resolveColor(),
           ),
-          child: widget.icon),
+          child: IconTheme.merge(
+            data: Theme.of(context).iconTheme.copyWith(size: 17),
+            child: widget.icon,
+          ),
+        ),
+      ),
     );
   }
 }
