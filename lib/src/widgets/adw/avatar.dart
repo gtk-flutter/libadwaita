@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// This enum represents all possible color combinations a `AdwAvatar` widget
+/// can feature. They're extracted directly from the GTK `libadwaita` implementation.
 enum AdwAvatarColors {
   blue,
   cyan,
@@ -19,6 +21,8 @@ enum AdwAvatarColors {
   gray
 }
 
+/// Represents a set of background gradient colors and a foreground color for the
+/// `AdwAvatar` widget.
 class AdwAvatarColor {
   final Color foregroundColor;
   final List<Color> backgroundGradient;
@@ -29,6 +33,7 @@ class AdwAvatarColor {
   });
 }
 
+/// Color palette for both the foreground and background of a `AdwAvatar` widget.
 class AdwAvatarColorPalette {
   static const _palette = {
     AdwAvatarColors.blue: AdwAvatarColor(
@@ -131,6 +136,9 @@ class AdwAvatarColorPalette {
     ),
   };
 
+  /// Retunrs a set of values depending on the `color` variable.
+  ///
+  /// If the variable is `null`, it'll then return a random set of colors.
   static AdwAvatarColor getColor(AdwAvatarColors? color) {
     if (color != null) return _palette[color]!;
 
@@ -141,6 +149,9 @@ class AdwAvatarColorPalette {
   }
 }
 
+/// `AdwAvatar` is a widget that shows a round avatar. Usually, an icon or some
+/// letters. Automatic theme will be applied in those cases to make them look
+/// cohesive inside the avatar.
 class AdwAvatar extends StatelessWidget {
   const AdwAvatar({
     Key? key,
@@ -149,10 +160,16 @@ class AdwAvatar extends StatelessWidget {
     this.backgroundColor,
   }) : super(key: key);
 
+  /// Main view that will be rendered at the center of the avatar.
+  /// It will feature a default icon size of `size / 2`.
   final Widget child;
 
+  /// Size of the widget. Defaults to `40`.
   final double size;
 
+  /// Main color that will be used to decorate the widget.
+  ///
+  /// If `null`, a random set of colors will be picked.
   final AdwAvatarColors? backgroundColor;
 
   @override
