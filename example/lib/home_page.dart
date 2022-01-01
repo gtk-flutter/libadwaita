@@ -1,4 +1,5 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:example/pages/avatar_page.dart';
 import 'package:example/pages/counter_page.dart';
 import 'package:example/pages/flap_page.dart';
 import 'package:example/pages/lists_page.dart';
@@ -114,6 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     label: 'Lists',
                   ),
                   AdwSidebarItem(
+                    label: 'Avatar',
+                  ),
+                  AdwSidebarItem(
                     label: 'Flap',
                   ),
                   AdwSidebarItem(
@@ -149,6 +153,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     label: 'Lists',
                   ),
                   AdwSidebarItem(
+                    label: 'Avatar',
+                  ),
+                  AdwSidebarItem(
                     label: 'Flap',
                   ),
                   AdwSidebarItem(
@@ -170,6 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const WelcomePage(),
                   CounterPage(counter: counter),
                   const ListsPage(),
+                  const AvatarPage(),
                   const FlapPage(),
                   const ViewSwitcherPage(),
                   const SettingsPage(),
