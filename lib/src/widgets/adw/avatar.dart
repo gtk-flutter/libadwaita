@@ -158,6 +158,7 @@ class AdwAvatar extends StatelessWidget {
     required this.child,
     this.size = 40,
     this.backgroundColor,
+    this.backgroundImage,
   }) : super(key: key);
 
   /// Main view that will be rendered at the center of the avatar.
@@ -172,6 +173,11 @@ class AdwAvatar extends StatelessWidget {
   /// If `null`, a random set of colors will be picked.
   final AdwAvatarColors? backgroundColor;
 
+  /// Image that will be rendered at the background of the widget.
+  ///
+  /// No background color or child will be visible is an image is provided.
+  final ImageProvider? backgroundImage;
+
   @override
   Widget build(BuildContext context) {
     final colorPalette = AdwAvatarColorPalette.getColor(backgroundColor);
@@ -181,25 +187,33 @@ class AdwAvatar extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
+          image: backgroundImage != null
+              ? DecorationImage(
+                  image: backgroundImage!,
+                  fit: BoxFit.cover,
+                )
+              : null,
           gradient: LinearGradient(
             colors: colorPalette.backgroundGradient,
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
-        child: IconTheme.merge(
-          data: IconThemeData(
-            color: colorPalette.foregroundColor,
-            size: size / 2,
-          ),
-          child: DefaultTextStyle.merge(
-            style: TextStyle(
-              color: colorPalette.foregroundColor,
-              fontWeight: FontWeight.bold,
-            ),
-            child: Center(child: child),
-          ),
-        ),
+        child: backgroundImage == null
+            ? IconTheme.merge(
+                data: IconThemeData(
+                  color: colorPalette.foregroundColor,
+                  size: size / 2,
+                ),
+                child: DefaultTextStyle.merge(
+                  style: TextStyle(
+                    color: colorPalette.foregroundColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: Center(child: child),
+                ),
+              )
+            : null,
       ),
     );
   }
