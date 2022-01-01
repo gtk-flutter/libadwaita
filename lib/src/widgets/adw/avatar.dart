@@ -177,7 +177,7 @@ class AdwAvatar extends StatelessWidget {
     assert(text.isNotEmpty, 'Text should not be empty');
 
     // 1. Trim the string from leading and trailing whitespace.
-    // 2. Separate the string via whitespaces (can be multiple spaces between words)
+    // 2. Separate the string via whitespaces (can be multiple spaces between words).
     // 3. Select a max of 2 words and store it in a list.
     final words = text.trim().split(RegExp(r' +')).take(2);
 
