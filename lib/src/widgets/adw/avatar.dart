@@ -136,7 +136,7 @@ class AdwAvatarColorPalette {
     ),
   };
 
-  /// Retunrs a set of values depending on the `color` variable.
+  /// Returns a set of values depending on the `color` variable.
   ///
   /// If the variable is `null`, it'll then return a random set of colors.
   static AdwAvatarColor getColor(AdwAvatarColors? color) {
