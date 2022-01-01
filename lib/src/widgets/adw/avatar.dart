@@ -153,13 +153,48 @@ class AdwAvatarColorPalette {
 /// letters. Automatic theme will be applied in those cases to make them look
 /// cohesive inside the avatar.
 class AdwAvatar extends StatelessWidget {
+  static const defaultAvatarSize = 40.0;
+
   const AdwAvatar({
     Key? key,
     required this.child,
-    this.size = 40,
+    this.size = defaultAvatarSize,
     this.backgroundColor,
     this.backgroundImage,
   }) : super(key: key);
+
+  /// Constructor that allows the pass of a `String` object in order to render
+  /// the first letters of the first two words inside the widget.
+  ///
+  /// The `String` object should not be empty.
+  factory AdwAvatar.text({
+    Key? key,
+    required String text,
+    double size = defaultAvatarSize,
+    AdwAvatarColors? backgroundColor,
+    ImageProvider? backgroundImage,
+  }) {
+    assert(text.isNotEmpty, 'Text should not be empty');
+
+    // 1. Trim the string from leading and trailing whitespace.
+    // 2. Separate the string via whitespaces (can be multiple spaces between words)
+    // 3. Select a max of 2 words and store it in a list.
+    final words = text.trim().split(RegExp(r' +')).take(2);
+
+    // Pick the first letters of the words stored and join them in a string.
+    final letters = words.fold(
+      '',
+      (value, element) => '$value${element[0]}',
+    );
+
+    return AdwAvatar(
+      key: key,
+      child: Text(letters.toUpperCase()),
+      size: size,
+      backgroundColor: backgroundColor,
+      backgroundImage: backgroundImage,
+    );
+  }
 
   /// Main view that will be rendered at the center of the avatar.
   /// It will feature a default icon size of `size / 2`.
