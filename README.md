@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/gtk-flutter/libadwaita?color=indigo)](LICENSE)
 [![Maintainer](https://img.shields.io/badge/Maintainer-prateekmedia-informational)](https://github.com/prateekmedia)
 
-Unofficial implementation of Libadwaita Widgets in Flutter.
+Libadwaita's widgets for Flutter. Following Gnome HIG and available on all platforms.
 
 ![libadwaita example screenshot](https://user-images.githubusercontent.com/41370460/146646064-09e10e32-8635-43ed-bd9c-0ed191d30a97.png)
 
