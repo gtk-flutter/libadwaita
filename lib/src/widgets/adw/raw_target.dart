@@ -17,6 +17,8 @@ class RawAdwTarget extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(
       Radius.circular(8.0),
     ),
+    this.border,
+    this.shape = BoxShape.rectangle,
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.ease,
     this.isActive = false,
@@ -33,6 +35,10 @@ class RawAdwTarget extends StatefulWidget {
   final BoxConstraints? constraints;
 
   final BorderRadius borderRadius;
+
+  final BoxBorder? border;
+
+  final BoxShape shape;
 
   final Duration animationDuration;
 
@@ -81,6 +87,8 @@ class _RawAdwTargetState extends State<RawAdwTarget> {
           duration: widget.animationDuration,
           curve: widget.animationCurve,
           decoration: BoxDecoration(
+            border: widget.border,
+            shape: widget.shape,
             borderRadius: widget.borderRadius,
             color: widget.backgroundColorBuilder(context, _status),
           ),
