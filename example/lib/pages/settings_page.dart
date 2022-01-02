@@ -1,33 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
-
-  @override
-  _SettingsPageState createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  late ScrollController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return AdwClamp.scrollable(
       center: true,
-      controller: _controller,
       child: Column(
         children: [
           const AdwPreferencesGroup(
