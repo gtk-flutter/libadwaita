@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
+/// Button that is usually placed inside an `AdwHeaderBar` widget.
+///
+/// Via the `icon` parameter, a widget can be placed inside the button.
 class AdwHeaderButton extends StatelessWidget {
   /// The icon of the button. Default size would be `17`.
   final Widget icon;
