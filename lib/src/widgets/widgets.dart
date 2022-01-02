@@ -6,6 +6,7 @@ export 'adw/clamp.dart';
 export 'adw/flap.dart';
 export 'adw/header_bar.dart';
 export 'adw/preferences_group.dart';
+export 'adw/raw_target.dart';
 export 'adw/view_switcher.dart';
 export 'adw/view_switcher_tab.dart';
 export 'adw/view_stack.dart';
