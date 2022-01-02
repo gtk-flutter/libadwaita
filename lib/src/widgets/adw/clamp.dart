@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AdwClamp extends StatelessWidget {
-  final bool isScrollable;
-  final ScrollController? controller;
-
+class AdwClamp extends StatefulWidget {
   const AdwClamp({
     Key? key,
     required this.child,
@@ -26,6 +23,8 @@ class AdwClamp extends StatelessWidget {
   })  : isScrollable = true,
         super(key: key);
 
+  final bool isScrollable;
+  final ScrollController? controller;
   final bool center;
   final Widget child;
   final double maximumSize;
@@ -33,24 +32,43 @@ class AdwClamp extends StatelessWidget {
   final EdgeInsets margin;
 
   @override
+  State<StatefulWidget> createState() => _AdwClampState();
+}
+
+class _AdwClampState extends State<AdwClamp> {
+  late ScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var container = Container(
-      constraints: BoxConstraints(maxWidth: maximumSize),
-      margin: margin,
-      padding: padding,
-      child: child,
+    final container = Container(
+      constraints: BoxConstraints(maxWidth: widget.maximumSize),
+      margin: widget.margin,
+      padding: widget.padding,
+      child: widget.child,
     );
 
-    var centered = center
+    final centered = widget.center
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [Center(child: container)],
           )
         : container;
 
-    return isScrollable
+    return widget.isScrollable
         ? SingleChildScrollView(
-            controller: controller,
+            controller: widget.controller ?? _controller,
             child: centered,
           )
         : centered;
