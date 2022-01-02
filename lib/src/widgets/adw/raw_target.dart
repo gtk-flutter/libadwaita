@@ -7,18 +7,18 @@ typedef TargetColorBuilder = Color? Function(BuildContext, TargetStatus);
 
 typedef TargetWidgetBuilder = Widget Function(BuildContext, TargetStatus);
 
-/// Basic widget that can be used to create other more complex and customized
-/// buttons and other set of 'target' views.
+/// [RawAdwTarget] is a widget used as a base to build Adwaita-style widgets
+/// with pressed and hover properties.
 ///
-/// It offers the ability to reconstruct sets of properties depending on the
-/// current state of the view.
+/// Widgets that use [RawAdwTarget] as their base can rebuild
+/// their background through the [backgroundColorBuilder] callback.
 class RawAdwTarget extends StatefulWidget {
   const RawAdwTarget({
     Key? key,
     this.padding = EdgeInsets.zero,
     required this.builder,
     this.onPressed,
-    required this.backgroundColorBuilder,
+    this.backgroundColorBuilder,
     this.constraints,
     this.borderRadius = const BorderRadius.all(
       Radius.circular(8.0),
@@ -43,7 +43,7 @@ class RawAdwTarget extends StatefulWidget {
   final VoidCallback? onPressed;
 
   /// Builder function used to create the background color of the target widget.
-  final TargetColorBuilder backgroundColorBuilder;
+  final TargetColorBuilder? backgroundColorBuilder;
 
   /// Additional constraints to apply to the child.
   ///
@@ -146,7 +146,7 @@ class _RawAdwTargetState extends State<RawAdwTarget> {
             shape: widget.shape,
             boxShadow: widget.boxShadow,
             borderRadius: widget.borderRadius,
-            color: widget.backgroundColorBuilder(context, _status),
+            color: widget.backgroundColorBuilder?.call(context, _status),
           ),
           child: widget.builder(context, _status),
         ),
