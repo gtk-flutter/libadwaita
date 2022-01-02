@@ -1,5 +1,6 @@
 ## Libadwaita ❤️ Flutter
 
+![CI](https://github.com/gtk-flutter/libadwaita/actions/workflows/ci.yml/badge.svg)
 [![Pub.dev](https://img.shields.io/pub/v/libadwaita.svg)](https://pub.dev/packages/libadwaita)
 [![License](https://img.shields.io/github/license/gtk-flutter/libadwaita?color=indigo)](LICENSE)
 [![Maintainer](https://img.shields.io/badge/Maintainer-prateekmedia-informational)](https://github.com/prateekmedia)
