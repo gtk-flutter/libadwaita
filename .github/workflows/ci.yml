@@ -39,7 +39,7 @@ jobs:
           cd example
           flutter pub get
           cd ..
-          flutter analze
+          flutter analyze
       - run: flutter analyze
       - name: Build (Linux)
         run: |
