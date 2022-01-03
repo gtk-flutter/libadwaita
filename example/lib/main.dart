@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-            theme: adwaita.lightTheme,
-            darkTheme: adwaita.darkTheme,
+            theme: adwaita.AdwaitaThemeData.light(),
+            darkTheme: adwaita.AdwaitaThemeData.dark(),
             debugShowCheckedModeBanner: false,
             home: MultiWidget(
               {
