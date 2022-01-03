@@ -34,6 +34,12 @@ jobs:
           channel: 'stable'
       - run: dart --version
       - run: flutter --version
+      - name:
+        run: |
+        cd example
+        flutter pub get
+        cd ..
+        flutter analze
       - run: flutter analyze
       - name: Build (Linux)
         run: |
