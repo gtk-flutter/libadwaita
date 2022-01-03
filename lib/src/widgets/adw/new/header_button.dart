@@ -24,9 +24,11 @@ class AdwHeaderButton extends StatelessWidget {
   Color? _resolveBackgroundColor(BuildContext context, AdwButtonStatus status) {
     if (Theme.of(context).brightness == Brightness.dark) {
       switch (status) {
-        case AdwButtonStatus.hover:
+        case AdwButtonStatus.enabledHovered:
         case AdwButtonStatus.active:
           return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03);
+        case AdwButtonStatus.activeHovered:
+          return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.10);
         case AdwButtonStatus.tapDown:
           return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.20);
         default:
@@ -34,9 +36,11 @@ class AdwHeaderButton extends StatelessWidget {
       }
     } else {
       switch (status) {
-        case AdwButtonStatus.hover:
+        case AdwButtonStatus.enabledHovered:
         case AdwButtonStatus.active:
           return Theme.of(context).appBarTheme.backgroundColor?.darken(0.05);
+        case AdwButtonStatus.activeHovered:
+          return Theme.of(context).appBarTheme.backgroundColor?.darken(0.10);
         case AdwButtonStatus.tapDown:
           return Theme.of(context).appBarTheme.backgroundColor?.darken(0.20);
         default:

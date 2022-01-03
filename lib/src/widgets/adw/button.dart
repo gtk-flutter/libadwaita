@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Set of status that a [AdwButton] widget can be at any given time.
-enum AdwButtonStatus { enabled, active, hover, tapDown }
+enum AdwButtonStatus { enabled, active, enabledHovered, activeHovered, tapDown }
 
 typedef AdwButtonColorBuilder = Color? Function(BuildContext, AdwButtonStatus);
 
@@ -118,15 +118,25 @@ class _AdwButtonState extends State<AdwButton> {
   @override
   void didUpdateWidget(covariant AdwButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _status =
-        widget.isActive ? AdwButtonStatus.active : AdwButtonStatus.enabled;
+    if (_status == AdwButtonStatus.tapDown) {
+      _status = widget.isActive
+          ? AdwButtonStatus.activeHovered
+          : AdwButtonStatus.enabledHovered;
+    } else {
+      _status =
+          widget.isActive ? AdwButtonStatus.active : AdwButtonStatus.enabled;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _status = AdwButtonStatus.hover),
+      onEnter: (_) => setState(
+        () => _status = widget.isActive
+            ? AdwButtonStatus.activeHovered
+            : AdwButtonStatus.enabledHovered,
+      ),
       onExit: (_) => setState(
         () => _status =
             widget.isActive ? AdwButtonStatus.active : AdwButtonStatus.enabled,
@@ -134,11 +144,6 @@ class _AdwButtonState extends State<AdwButton> {
       child: GestureDetector(
         onTap: widget.onPressed,
         onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
-        onTapUp: (_) => setState(
-          () => _status = widget.isActive
-              ? AdwButtonStatus.active
-              : AdwButtonStatus.enabled,
-        ),
         child: AnimatedContainer(
           padding: widget.padding,
           constraints: widget.constraints,
