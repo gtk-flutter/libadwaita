@@ -67,4 +67,4 @@ Optional packages to use with this package:
 TLDR;
 
 - You are free to use [this](https://pub.dev/packages/libadwaita) package in whatever app you want,
-- If you improve the package then you should submit your patches / improvements to [this](https://github.com/prateekmedia/gtk-flutter) repository.
+- If you improve the package then you should submit your patches / improvements to [this](https://github.com/gtk-flutter/libadwaita) repository.
