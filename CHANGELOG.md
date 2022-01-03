@@ -3,6 +3,7 @@
 - Add `AdwComboRow`, `AdwAvatar`
 - Improve Headerbar and Header Button
 - Update Sidebar theming to look more closer to libadwaita one
+- Remove Scroll errors from example app by improving `AdwClamp`
 - Deprecate `AdwHeaderBarMinimal`, Now use `AdwHeaderBar.minimal`
 
 ## 1.0.0-rc.1
