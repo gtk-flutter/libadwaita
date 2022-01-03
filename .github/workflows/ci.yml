@@ -34,13 +34,12 @@ jobs:
           channel: 'stable'
       - run: dart --version
       - run: flutter --version
-      - name:
+      - name: analyze
         run: |
           cd example
           flutter pub get
           cd ..
-          flutter analyze
-      - run: flutter analyze
+          flutter analyze . example
       - name: Build (Linux)
         run: |
           sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev
