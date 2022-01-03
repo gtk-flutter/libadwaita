@@ -21,23 +21,23 @@ class AdwHeaderButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  Color? _resolveBackgroundColor(BuildContext context, TargetStatus status) {
+  Color? _resolveBackgroundColor(BuildContext context, AdwButtonStatus status) {
     if (Theme.of(context).brightness == Brightness.dark) {
       switch (status) {
-        case TargetStatus.hover:
-        case TargetStatus.active:
+        case AdwButtonStatus.hover:
+        case AdwButtonStatus.active:
           return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03);
-        case TargetStatus.tapDown:
+        case AdwButtonStatus.tapDown:
           return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.20);
         default:
           return null;
       }
     } else {
       switch (status) {
-        case TargetStatus.hover:
-        case TargetStatus.active:
+        case AdwButtonStatus.hover:
+        case AdwButtonStatus.active:
           return Theme.of(context).appBarTheme.backgroundColor?.darken(0.05);
-        case TargetStatus.tapDown:
+        case AdwButtonStatus.tapDown:
           return Theme.of(context).appBarTheme.backgroundColor?.darken(0.20);
         default:
           return null;
@@ -47,7 +47,7 @@ class AdwHeaderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RawAdwTarget(
+    return AdwButton(
       constraints: BoxConstraints.tight(const Size.square(34)),
       backgroundColorBuilder: _resolveBackgroundColor,
       onPressed: onPressed,

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-/// Set of status that a [RawAdwTarget] widget can be at any given time.
-enum TargetStatus { enabled, active, hover, tapDown }
+/// Set of status that a [AdwButton] widget can be at any given time.
+enum AdwButtonStatus { enabled, active, hover, tapDown }
 
-typedef TargetColorBuilder = Color? Function(BuildContext, TargetStatus);
+typedef AdwButtonColorBuilder = Color? Function(BuildContext, AdwButtonStatus);
 
-typedef TargetWidgetBuilder = Widget Function(BuildContext, TargetStatus);
+typedef AdwButtonWidgetBuilder = Widget Function(BuildContext, AdwButtonStatus);
 
-/// [RawAdwTarget] is a widget used as a base to build Adwaita-style widgets
+/// [AdwButton] is a widget used as a base to build Adwaita-style widgets
 /// with pressed and hover properties.
 ///
-/// Widgets that use [RawAdwTarget] as their base can rebuild
+/// Widgets that use [AdwButton] as their base can rebuild
 /// their background through the [backgroundColorBuilder] callback.
-class RawAdwTarget extends StatefulWidget {
-  const RawAdwTarget({
+class AdwButton extends StatefulWidget {
+  const AdwButton({
     Key? key,
     this.padding = EdgeInsets.zero,
     required this.builder,
@@ -36,14 +36,14 @@ class RawAdwTarget extends StatefulWidget {
   final EdgeInsets padding;
 
   /// Builder function used to create the child widget inside
-  /// the target widget.
-  final TargetWidgetBuilder builder;
+  /// the button widget.
+  final AdwButtonWidgetBuilder builder;
 
   /// Action to perform when the widget is tapped.
   final VoidCallback? onPressed;
 
-  /// Builder function used to create the background color of the target widget.
-  final TargetColorBuilder? backgroundColorBuilder;
+  /// Builder function used to create the background color of the button widget.
+  final AdwButtonColorBuilder? backgroundColorBuilder;
 
   /// Additional constraints to apply to the child.
   ///
@@ -102,39 +102,42 @@ class RawAdwTarget extends StatefulWidget {
   final bool isActive;
 
   @override
-  State<StatefulWidget> createState() => _RawAdwTargetState();
+  State<StatefulWidget> createState() => _AdwButtonState();
 }
 
-class _RawAdwTargetState extends State<RawAdwTarget> {
-  late TargetStatus _status;
+class _AdwButtonState extends State<AdwButton> {
+  late AdwButtonStatus _status;
 
   @override
   void initState() {
     super.initState();
-    _status = widget.isActive ? TargetStatus.active : TargetStatus.enabled;
+    _status =
+        widget.isActive ? AdwButtonStatus.active : AdwButtonStatus.enabled;
   }
 
   @override
-  void didUpdateWidget(covariant RawAdwTarget oldWidget) {
+  void didUpdateWidget(covariant AdwButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _status = widget.isActive ? TargetStatus.active : TargetStatus.enabled;
+    _status =
+        widget.isActive ? AdwButtonStatus.active : AdwButtonStatus.enabled;
   }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _status = TargetStatus.hover),
+      onEnter: (_) => setState(() => _status = AdwButtonStatus.hover),
       onExit: (_) => setState(
         () => _status =
-            widget.isActive ? TargetStatus.active : TargetStatus.enabled,
+            widget.isActive ? AdwButtonStatus.active : AdwButtonStatus.enabled,
       ),
       child: GestureDetector(
         onTap: widget.onPressed,
-        onTapDown: (_) => setState(() => _status = TargetStatus.tapDown),
+        onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
         onTapUp: (_) => setState(
-          () => _status =
-              widget.isActive ? TargetStatus.active : TargetStatus.enabled,
+          () => _status = widget.isActive
+              ? AdwButtonStatus.active
+              : AdwButtonStatus.enabled,
         ),
         child: AnimatedContainer(
           padding: widget.padding,
