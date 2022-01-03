@@ -43,3 +43,19 @@ jobs:
           flutter create --platforms=linux .
           flutter build linux
         if: matrix.os == 'ubuntu-latest'
+      - name: Build (Mac)
+        run: |
+          flutter config --enable-macos-desktop
+          cd example
+          flutter create --platforms=macos .
+          flutter doctor
+          flutter build macos
+        if: matrix.os == 'macos-latest'
+      - name: Build (Windows)
+        run: |
+          flutter config --enable-windows-desktop
+          cd example
+          flutter create --platforms=windows .
+          flutter doctor
+          flutter build windows
+        if: matrix.os == 'windows-latest'
