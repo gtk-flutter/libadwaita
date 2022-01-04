@@ -40,7 +40,11 @@ class AdwHeaderBar extends StatefulWidget {
   /// If you don't want that. use AdwHeaderBar.minimal*
   AdwHeaderBar({
     Key? key,
-    required Widget Function(String name, dynamic type, VoidCallback onPressed)
+    required Widget Function(
+      String name,
+      dynamic type,
+      void Function()? onPressed,
+    )
         windowDecor,
     dynamic themeType,
     this.onDoubleTap,
@@ -94,7 +98,11 @@ class AdwHeaderBar extends StatefulWidget {
 
   AdwHeaderBar.bitsdojo({
     Key? key,
-    required Widget Function(String name, dynamic type, VoidCallback onPressed)
+    required Widget Function(
+      String name,
+      dynamic type,
+      void Function()? onPressed,
+    )
         windowDecor,
     dynamic themeType,
 
@@ -151,7 +159,11 @@ class AdwHeaderBar extends StatefulWidget {
 
   AdwHeaderBar.nativeshell({
     Key? key,
-    required Widget Function(String name, dynamic type, VoidCallback onPressed)
+    required Widget Function(
+      String name,
+      dynamic type,
+      void Function()? onPressed,
+    )
         windowDecor,
     dynamic themeType,
 

@@ -1,5 +1,5 @@
 name: libadwaita
-description: Unofficial implementation of Libadwaita widgets and themes in Flutter.
+description: Libadwaita's widgets for Flutter. Following Gnome HIG and available on all platforms.
 version: 1.0.0-rc.2
 homepage: https://github.com/gtk-flutter/libadwaita
 
