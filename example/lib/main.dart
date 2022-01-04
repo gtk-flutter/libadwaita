@@ -5,7 +5,7 @@ import 'package:multi_window/multi_window.dart';
 
 import 'home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:adwaita/adwaita.dart' as adwaita;
+import 'package:adwaita/adwaita.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-            theme: adwaita.AdwaitaThemeData.light(),
-            darkTheme: adwaita.AdwaitaThemeData.dark(),
+            theme: AdwaitaThemeData.light(),
+            darkTheme: AdwaitaThemeData.dark(),
             debugShowCheckedModeBanner: false,
             home: MultiWidget(
               {
