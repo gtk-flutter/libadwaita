@@ -22,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
@@ -34,7 +34,12 @@ jobs:
           channel: 'stable'
       - run: dart --version
       - run: flutter --version
-      - run: flutter analyze
+      - name: analyze
+        run: |
+          cd example
+          flutter pub get
+          cd ..
+          flutter analyze . example
       - name: Build (Linux)
         run: |
           sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev
@@ -43,14 +48,6 @@ jobs:
           flutter create --platforms=linux .
           flutter build linux
         if: matrix.os == 'ubuntu-latest'
-      - name: Build (Mac)
-        run: |
-          flutter config --enable-macos-desktop
-          cd example
-          flutter create --platforms=macos .
-          flutter doctor
-          flutter build macos
-        if: matrix.os == 'macos-latest'
       - name: Build (Windows)
         run: |
           flutter config --enable-windows-desktop
