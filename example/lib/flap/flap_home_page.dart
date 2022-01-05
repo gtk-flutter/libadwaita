@@ -72,28 +72,6 @@ class _FlapHomePageState extends State<FlapHomePage> {
         Expanded(
           child: AdwScaffold(
             flapController: _flapController,
-            drawer: Drawer(
-              child: AdwSidebar(
-                currentIndex: _currentIndex,
-                children: const [
-                  AdwSidebarItem(
-                    label: 'Folding',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Layout',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Interaction',
-                  )
-                ],
-                onSelected: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                    Navigator.of(context).pop();
-                  });
-                },
-              ),
-            ),
             body: AdwFlap(
               locked: locked,
               flapController: _flapController,
