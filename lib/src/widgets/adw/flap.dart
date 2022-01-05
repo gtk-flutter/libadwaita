@@ -39,7 +39,7 @@ class AdwFlap extends StatefulWidget {
     this.foldPolicy = FoldPolicy.auto,
     this.flapPosition = FlapPosition.start,
     this.breakpoint = 900,
-    this.flapWidth = 260,
+    this.flapWidth = 270.0,
   }) : super(key: key);
 
   @override

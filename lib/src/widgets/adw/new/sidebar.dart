@@ -12,7 +12,7 @@ class AdwSidebar extends StatelessWidget {
 
   /// The padding of the sidebar.
   ///
-  /// Defaults to `EdgeInsets.symmetric(vertical: 5)`.
+  /// Defaults to `EdgeInsets.symmetric(vertical: 5, horizontal: 6)`.
   final EdgeInsets? padding;
 
   /// Scroll controller for sidebar.
@@ -23,7 +23,7 @@ class AdwSidebar extends StatelessWidget {
 
   /// The width of the sidebar.
   ///
-  /// Defaults to `260.0`.
+  /// Defaults to `270.0`.
   final double width;
 
   /// The background color of the sidebar.
@@ -40,11 +40,11 @@ class AdwSidebar extends StatelessWidget {
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 260.0,
+    this.width = 270.0,
     this.color,
     this.border,
     this.controller,
-    this.padding = const EdgeInsets.symmetric(vertical: 5),
+    this.padding = const EdgeInsets.symmetric(vertical: 5, horizontal: 6),
     required List<AdwSidebarItem> children,
   })  : _childrenDelegate = List.generate(
           children.length,
@@ -60,7 +60,7 @@ class AdwSidebar extends StatelessWidget {
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 260.0,
+    this.width = 270.0,
     this.color,
     this.border,
     this.controller,
@@ -133,7 +133,7 @@ class AdwSidebarItem {
   const AdwSidebarItem({
     this.key,
     this.label,
-    this.padding = const EdgeInsets.symmetric(horizontal: 6, vertical: 9),
+    this.padding = const EdgeInsets.symmetric(horizontal: 14),
     this.selectedColor,
     this.unselectedColor,
     this.labelStyle,
@@ -205,7 +205,8 @@ class _AdwSidebarItemBuilder extends StatelessWidget {
     final currentItem = item(context);
 
     return AdwButton(
-      margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+      constraints: const BoxConstraints.tightFor(height: 36),
+      margin: const EdgeInsets.symmetric(vertical: 1),
       padding: currentItem.padding,
       onPressed: onSelected,
       backgroundColorBuilder: (context, state) =>

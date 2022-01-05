@@ -101,48 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
         Expanded(
           child: AdwScaffold(
             flapController: _flapController,
-            drawer: Drawer(
-              child: AdwSidebar(
-                currentIndex: _currentIndex,
-                children: [
-                  AdwSidebarItem(
-                    label: 'Welcome',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Counter',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Lists',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Avatar',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Flap',
-                  ),
-                  AdwSidebarItem(
-                    label: 'View Switcher',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Settings',
-                  )
-                ],
-                onSelected: (index) {
-                  setState(
-                    () {
-                      _currentIndex = index;
-                      Navigator.of(context).pop();
-                    },
-                  );
-                },
-              ),
-            ),
             body: AdwFlap(
               flapController: _flapController,
               foldPolicy: FoldPolicy.auto,
               flap: AdwSidebar(
                 currentIndex: _currentIndex,
-                children: [
+                children: const [
                   AdwSidebarItem(
                     label: 'Welcome',
                   ),
