@@ -89,6 +89,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
                 onSelected: (index) {
                   setState(() {
                     _currentIndex = index;
+                    Navigator.of(context).pop();
                   });
                 },
               ),
