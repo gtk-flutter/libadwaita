@@ -16,6 +16,7 @@ class AdwButton extends StatefulWidget {
   const AdwButton({
     Key? key,
     this.padding = EdgeInsets.zero,
+    this.margin = EdgeInsets.zero,
     required this.builder,
     this.onPressed,
     this.backgroundColorBuilder,
@@ -33,7 +34,10 @@ class AdwButton extends StatefulWidget {
 
   /// Empty space to inscribe inside the [decoration]. The [child], if any, is
   /// placed inside this padding.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
+
+  /// Empty space to surround the [decoration] and [child].
+  final EdgeInsetsGeometry margin;
 
   /// Builder function used to create the child widget inside
   /// the button widget.
@@ -130,33 +134,37 @@ class _AdwButtonState extends State<AdwButton> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(
-        () => _status = widget.isActive
-            ? AdwButtonStatus.activeHovered
-            : AdwButtonStatus.enabledHovered,
-      ),
-      onExit: (_) => setState(
-        () => _status =
-            widget.isActive ? AdwButtonStatus.active : AdwButtonStatus.enabled,
-      ),
-      child: GestureDetector(
-        onTap: widget.onPressed,
-        onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
-        child: AnimatedContainer(
-          padding: widget.padding,
-          constraints: widget.constraints,
-          duration: widget.animationDuration,
-          curve: widget.animationCurve,
-          decoration: BoxDecoration(
-            border: widget.border,
-            shape: widget.shape,
-            boxShadow: widget.boxShadow,
-            borderRadius: widget.borderRadius,
-            color: widget.backgroundColorBuilder?.call(context, _status),
+    return Padding(
+      padding: widget.margin,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(
+          () => _status = widget.isActive
+              ? AdwButtonStatus.activeHovered
+              : AdwButtonStatus.enabledHovered,
+        ),
+        onExit: (_) => setState(
+          () => _status = widget.isActive
+              ? AdwButtonStatus.active
+              : AdwButtonStatus.enabled,
+        ),
+        child: GestureDetector(
+          onTap: widget.onPressed,
+          onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
+          child: AnimatedContainer(
+            padding: widget.padding,
+            constraints: widget.constraints,
+            duration: widget.animationDuration,
+            curve: widget.animationCurve,
+            decoration: BoxDecoration(
+              border: widget.border,
+              shape: widget.shape,
+              boxShadow: widget.boxShadow,
+              borderRadius: widget.borderRadius,
+              color: widget.backgroundColorBuilder?.call(context, _status),
+            ),
+            child: widget.builder(context, _status),
           ),
-          child: widget.builder(context, _status),
         ),
       ),
     );
