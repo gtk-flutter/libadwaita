@@ -1,38 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
+/// View that is normally used to place navigation and selection items
+/// at the side of the app.
 ///
+/// You can use the [AdwSidebar.builder] constructor to build the sidebar's
+/// children on demand.
 class AdwSidebar extends StatelessWidget {
-  /// The current index of the item selected
+  /// The current index of the item selected.
   final int? currentIndex;
 
-  /// The padding of the Sidebar
+  /// The padding of the sidebar.
+  ///
+  /// Defaults to `EdgeInsets.symmetric(vertical: 5)`.
   final EdgeInsets? padding;
 
-  /// Scroll controller for sidebar
+  /// Scroll controller for sidebar.
   final ScrollController? controller;
 
-  /// Called when one of the Sidebar item is selected
+  /// Called when one of the Sidebar item is selected.
   final Function(int index) onSelected;
 
-  /// The width of the sidebar
+  /// The width of the sidebar.
+  ///
+  /// Defaults to `260.0`.
   final double width;
 
-  /// The background color of the sidebar
+  /// The background color of the sidebar.
   final Color? color;
 
-  /// The border around the sidebar
+  /// The border around the sidebar.
   final Border? border;
 
-  ///
+  /// Delegate in charge of supplying children to the internal list
+  /// of this widget.
   final List<Widget> _childrenDelegate;
 
-  /// List of all the Adw Sidebar Item's, use AdwSidebar.builder if you want to build them on demand.
   AdwSidebar({
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 260,
+    this.width = 260.0,
     this.color,
     this.border,
     this.controller,
@@ -48,12 +56,11 @@ class AdwSidebar extends StatelessWidget {
         ),
         super(key: key);
 
-  /// Create a vertical list of AdwSidebarItem on demand.
   AdwSidebar.builder({
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 260,
+    this.width = 260.0,
     this.color,
     this.border,
     this.controller,
@@ -93,18 +100,22 @@ class AdwSidebar extends StatelessWidget {
   }
 }
 
-///
+/// Class that contains details about a specific sidebar item.
 class AdwSidebarItem {
-  /// The key of the gtk sidebar item child.
+  /// The key of the sidebar item child.
   final Key? key;
 
-  /// The label to render to the right of the button
+  /// The label to render to the right of the button.
   final String? label;
 
-  /// The background color of the item when it is selected, defaults to Theme's primary color
+  /// The background color of the item when it is selected.
+  ///
+  /// Defaults to Theme's primary color
   final Color? selectedColor;
 
-  /// The background color of the item when it is not selected, defaults to null
+  /// The background color of the item when it is not selected.
+  ///
+  /// Defaults to `null`.
   final Color? unselectedColor;
 
   /// The style of the label
@@ -113,10 +124,10 @@ class AdwSidebarItem {
   /// The label to render to the right of the button
   final Widget? labelWidget;
 
-  // the leading widget for sidebar item, use size of 19 for better results
+  /// Widget that would be placed at the left of the [labelWidget].
   final Widget? leading;
 
-  // The Padding of the item
+  /// The Padding of the item.
   final EdgeInsets padding;
 
   const AdwSidebarItem({
