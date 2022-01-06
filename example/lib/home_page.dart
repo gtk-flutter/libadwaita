@@ -4,6 +4,7 @@ import 'package:example/pages/counter_page.dart';
 import 'package:example/pages/flap_page.dart';
 import 'package:example/pages/lists_page.dart';
 import 'package:example/pages/settings_page.dart';
+import 'package:example/pages/style_classes_page.dart';
 import 'package:example/pages/view_switcher_page.dart';
 import 'package:example/pages/welcome.dart';
 import 'package:flutter/material.dart';
@@ -125,6 +126,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   AdwSidebarItem(
                     label: 'Settings',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Style Classes',
                   )
                 ],
                 onSelected: (index) {
@@ -161,6 +165,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   AdwSidebarItem(
                     label: 'Settings',
+                  ),
+                  AdwSidebarItem(
+                    label: 'Style Classes',
                   )
                 ],
                 onSelected: (index) {
@@ -179,6 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const FlapPage(),
                   const ViewSwitcherPage(),
                   const SettingsPage(),
+                  const StyleClassesPage(),
                 ],
                 index: _currentIndex,
               ),

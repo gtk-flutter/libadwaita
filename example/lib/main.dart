@@ -1,4 +1,5 @@
 import 'package:example/flap/flap_demo.dart';
+import 'package:example/style_classes/style_classes_window.dart';
 import 'package:example/view_switcher/view_switcher_demo.dart';
 import 'package:multi_window/multi_widget.dart';
 import 'package:multi_window/multi_window.dart';
@@ -26,17 +27,19 @@ class MyApp extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-            theme: AdwaitaThemeData.light(),
-            darkTheme: AdwaitaThemeData.dark(),
-            debugShowCheckedModeBanner: false,
-            home: MultiWidget(
-              {
-                'flap': FlapDemo(),
-                'view_switcher': ViewSwitcherDemo(),
-              },
-              fallback: MyHomePage(themeNotifier: themeNotifier),
-            ),
-            themeMode: currentMode);
+          theme: AdwaitaThemeData.light(),
+          darkTheme: AdwaitaThemeData.dark(),
+          debugShowCheckedModeBanner: false,
+          home: MultiWidget(
+            {
+              'flap': FlapDemo(),
+              'view_switcher': ViewSwitcherDemo(),
+              'style_classes': StyleClassesWindow(),
+            },
+            fallback: MyHomePage(themeNotifier: themeNotifier),
+          ),
+          themeMode: currentMode,
+        );
       },
     );
   }
