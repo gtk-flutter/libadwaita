@@ -154,65 +154,17 @@ class _AdwSidebarItemBuilder extends StatelessWidget {
     this.onSelected,
   }) : super(key: key);
 
-  Color? _resolveBackgroundColor(
-    BuildContext context,
-    AdwButtonStatus status,
-    AdwSidebarItem currentItem,
-  ) {
-    if (Theme.of(context).brightness == Brightness.dark) {
-      switch (status) {
-        case AdwButtonStatus.enabledHovered:
-          return currentItem.selectedColor?.lighten(0.02) ??
-              context.hoverMenuColor;
-
-        case AdwButtonStatus.active:
-          return currentItem.selectedColor ?? context.selectColor;
-
-        case AdwButtonStatus.activeHovered:
-          return (currentItem.selectedColor ?? context.selectColor)
-              .lighten(0.10);
-
-        case AdwButtonStatus.tapDown:
-          return (currentItem.selectedColor ?? context.selectColor)
-              .lighten(0.20);
-        default:
-          return currentItem.unselectedColor;
-      }
-    } else {
-      switch (status) {
-        case AdwButtonStatus.enabledHovered:
-          return currentItem.selectedColor?.darken(0.02) ??
-              context.hoverMenuColor;
-
-        case AdwButtonStatus.active:
-          return currentItem.selectedColor ?? context.selectColor;
-
-        case AdwButtonStatus.activeHovered:
-          return (currentItem.selectedColor ?? context.selectColor)
-              .darken(0.10);
-
-        case AdwButtonStatus.tapDown:
-          return (currentItem.selectedColor ?? context.selectColor)
-              .darken(0.20);
-        default:
-          return currentItem.unselectedColor;
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final currentItem = item(context);
 
-    return AdwButton(
+    return AdwButton.flat(
       constraints: const BoxConstraints.tightFor(height: 36),
       margin: const EdgeInsets.symmetric(vertical: 1),
       padding: currentItem.padding,
       onPressed: onSelected,
-      backgroundColorBuilder: (context, state) =>
-          _resolveBackgroundColor(context, state, currentItem),
       isActive: isSelected,
-      builder: (context, state) => Row(
+      child: Row(
         children: [
           if (currentItem.leading != null) ...[
             currentItem.leading!,
