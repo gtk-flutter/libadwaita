@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:adwaita/adwaita.dart';
 
 class ViewSwitcherDemo extends StatelessWidget {
-  final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.system);
+  final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 
   ViewSwitcherDemo({Key? key}) : super(key: key);
 
