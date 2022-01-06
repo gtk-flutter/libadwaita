@@ -10,17 +10,13 @@ class AdwScaffold extends StatefulWidget {
   /// Remove this when ViewSwitcher becomes adaptive
   final Widget? bottomNavigationBar;
 
-  AdwScaffold({
+  const AdwScaffold({
     Key? key,
     required this.body,
     this.flapController,
-    Widget? drawer,
+    this.drawer,
     this.bottomNavigationBar,
-  })  :
-
-        /// Use less width to match libadwaita
-        drawer = SizedBox(width: 200, child: drawer),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _AdwScaffoldState createState() => _AdwScaffoldState();

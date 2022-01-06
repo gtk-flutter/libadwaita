@@ -75,7 +75,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
             drawer: Drawer(
               child: AdwSidebar(
                 currentIndex: _currentIndex,
-                children: [
+                children: const [
                   AdwSidebarItem(
                     label: 'Folding',
                   ),
@@ -101,7 +101,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
               foldPolicy: foldPolicy,
               flap: AdwSidebar(
                 currentIndex: _currentIndex,
-                children: [
+                children: const [
                   AdwSidebarItem(
                     label: 'Folding',
                   ),

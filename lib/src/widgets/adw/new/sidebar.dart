@@ -1,66 +1,79 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/libadwaita.dart';
 
+/// View that is normally used to place navigation and selection items
+/// at the side of the app.
+///
+/// You can use the [AdwSidebar.builder] constructor to build the sidebar's
+/// children on demand.
 class AdwSidebar extends StatelessWidget {
-  /// The current index of the item selected
+  /// The current index of the item selected.
   final int? currentIndex;
 
-  /// The padding of the Sidebar
+  /// The padding of the sidebar.
+  ///
+  /// Defaults to `EdgeInsets.symmetric(vertical: 5, horizontal: 6)`.
   final EdgeInsets? padding;
 
-  /// Scroll controller for sidebar
+  /// Scroll controller for sidebar.
   final ScrollController? controller;
 
-  /// Called when one of the Sidebar item is selected
+  /// Called when one of the Sidebar item is selected.
   final Function(int index) onSelected;
 
-  /// The width of the sidebar
+  /// The width of the sidebar.
+  ///
+  /// Defaults to `270.0`.
   final double width;
 
-  /// The background color of the sidebar
+  /// The background color of the sidebar.
   final Color? color;
 
-  /// The border around the sidebar
+  /// The border around the sidebar.
   final Border? border;
 
-  final List<Widget> childrenDelegate;
+  /// Delegate in charge of supplying children to the internal list
+  /// of this widget.
+  final List<Widget> _childrenDelegate;
 
   AdwSidebar({
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 260,
+    this.width = 270.0,
     this.color,
     this.border,
     this.controller,
-    this.padding = const EdgeInsets.symmetric(vertical: 5),
-
-    /// List of all the Adw Sidebar Item's, use AdwSidebar.builder if you want to build them on demand.
+    this.padding = const EdgeInsets.symmetric(vertical: 5, horizontal: 6),
     required List<AdwSidebarItem> children,
-  })  : childrenDelegate = List.generate(
-            children.length,
-            (index) => _AdwSidebarItemBuilder(
-                  item: (context) => children[index],
-                  isSelected: index == currentIndex,
-                  onSelected: () => onSelected(index),
-                )),
+  })  : _childrenDelegate = List.generate(
+          children.length,
+          (index) => _AdwSidebarItemBuilder(
+            item: (context) => children[index],
+            isSelected: index == currentIndex,
+            onSelected: () => onSelected(index),
+          ),
+        ),
         super(key: key);
 
   AdwSidebar.builder({
     Key? key,
     required this.currentIndex,
     required this.onSelected,
-    this.width = 260,
+    this.width = 270.0,
     this.color,
     this.border,
-    // Create a vertical list of AdwSidebarItem on demand.
-    required Function(BuildContext context, int index, bool isSelected)
-        itemBuilder,
-    required int itemCount,
     this.controller,
     this.padding = const EdgeInsets.symmetric(vertical: 5),
+    required AdwSidebarItem Function(
+      BuildContext context,
+      int index,
+      bool isSelected,
+    )
+        itemBuilder,
+    required int itemCount,
   })  : assert(itemCount >= 0),
-        childrenDelegate = List.generate(
+        _childrenDelegate = List.generate(
           itemCount,
           (index) => _AdwSidebarItemBuilder(
             item: (context) =>
@@ -74,29 +87,35 @@ class AdwSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: BoxConstraints(maxWidth: width),
-        decoration: BoxDecoration(
-          color: color ?? Theme.of(context).backgroundColor,
-        ),
-        child: ListView(
-          controller: controller,
-          padding: padding,
-          children: childrenDelegate,
-        ));
+      constraints: BoxConstraints(maxWidth: width),
+      decoration: BoxDecoration(
+        color: color ?? Theme.of(context).backgroundColor,
+      ),
+      child: ListView(
+        controller: controller,
+        padding: padding,
+        children: _childrenDelegate,
+      ),
+    );
   }
 }
 
+/// Class that contains details about a specific sidebar item.
 class AdwSidebarItem {
-  /// The key of the gtk sidebar item child.
+  /// The key of the sidebar item child.
   final Key? key;
 
-  /// The label to render to the right of the button
+  /// The label to render to the right of the button.
   final String? label;
 
-  /// The background color of the item when it is selected, defaults to Theme's primary color
+  /// The background color of the item when it is selected.
+  ///
+  /// Defaults to Theme's primary color
   final Color? selectedColor;
 
-  /// The background color of the item when it is not selected, defaults to null
+  /// The background color of the item when it is not selected.
+  ///
+  /// Defaults to `null`.
   final Color? unselectedColor;
 
   /// The style of the label
@@ -105,16 +124,16 @@ class AdwSidebarItem {
   /// The label to render to the right of the button
   final Widget? labelWidget;
 
-  // the leading widget for sidebar item, use size of 19 for better results
+  /// Widget that would be placed at the left of the [labelWidget].
   final Widget? leading;
 
-  // The Padding of the item
+  /// The Padding of the item.
   final EdgeInsets padding;
 
-  AdwSidebarItem({
+  const AdwSidebarItem({
     this.key,
     this.label,
-    this.padding = const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+    this.padding = const EdgeInsets.symmetric(horizontal: 14),
     this.selectedColor,
     this.unselectedColor,
     this.labelStyle,
@@ -123,7 +142,7 @@ class AdwSidebarItem {
   }) : assert(labelWidget != null || label != null);
 }
 
-class _AdwSidebarItemBuilder extends StatefulWidget {
+class _AdwSidebarItemBuilder extends StatelessWidget {
   final AdwSidebarItem Function(BuildContext context) item;
   final bool isSelected;
   final VoidCallback? onSelected;
@@ -135,54 +154,80 @@ class _AdwSidebarItemBuilder extends StatefulWidget {
     this.onSelected,
   }) : super(key: key);
 
-  @override
-  _AdwSidebarItemBuilderState createState() => _AdwSidebarItemBuilderState();
-}
+  Color? _resolveBackgroundColor(
+    BuildContext context,
+    AdwButtonStatus status,
+    AdwSidebarItem currentItem,
+  ) {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      switch (status) {
+        case AdwButtonStatus.enabledHovered:
+          return currentItem.selectedColor?.lighten(0.02) ??
+              context.hoverMenuColor;
 
-class _AdwSidebarItemBuilderState extends State<_AdwSidebarItemBuilder> {
-  bool hovering = false;
-  _AdwSidebarItemBuilderState();
+        case AdwButtonStatus.active:
+          return currentItem.selectedColor ?? context.selectColor;
+
+        case AdwButtonStatus.activeHovered:
+          return (currentItem.selectedColor ?? context.selectColor)
+              .lighten(0.10);
+
+        case AdwButtonStatus.tapDown:
+          return (currentItem.selectedColor ?? context.selectColor)
+              .lighten(0.20);
+        default:
+          return currentItem.unselectedColor;
+      }
+    } else {
+      switch (status) {
+        case AdwButtonStatus.enabledHovered:
+          return currentItem.selectedColor?.darken(0.02) ??
+              context.hoverMenuColor;
+
+        case AdwButtonStatus.active:
+          return currentItem.selectedColor ?? context.selectColor;
+
+        case AdwButtonStatus.activeHovered:
+          return (currentItem.selectedColor ?? context.selectColor)
+              .darken(0.10);
+
+        case AdwButtonStatus.tapDown:
+          return (currentItem.selectedColor ?? context.selectColor)
+              .darken(0.20);
+        default:
+          return currentItem.unselectedColor;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var currentItem = widget.item(context);
-    var leading = currentItem.leading ?? const SizedBox();
-    var color = currentItem.unselectedColor;
-    if (widget.isSelected) {
-      color = currentItem.selectedColor ?? context.selectColor;
-    } else if (hovering) {
-      color =
-          currentItem.selectedColor?.lighten(0.02) ?? context.hoverMenuColor;
-    }
-    return Container(
-        margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-        child: InkWell(
-          onHover: (value) => setState(() => hovering = value),
-          onTap: widget.onSelected,
-          child: Container(
-            decoration: BoxDecoration(
-                color: color,
-                border: Border.all(
-                  width: 1,
-                  color: Colors.transparent,
-                ),
-                // Make rounded corners
-                borderRadius: BorderRadius.circular(8)),
-            padding: currentItem.padding,
-            child: Row(
-              children: [
-                leading,
-                const SizedBox(width: 12),
-                currentItem.labelWidget ??
-                    Text(
-                      currentItem.label!,
-                      style: const TextStyle(
-                        fontSize: 15,
-                      ),
+    final currentItem = item(context);
+
+    return AdwButton(
+      constraints: const BoxConstraints.tightFor(height: 36),
+      margin: const EdgeInsets.symmetric(vertical: 1),
+      padding: currentItem.padding,
+      onPressed: onSelected,
+      backgroundColorBuilder: (context, state) =>
+          _resolveBackgroundColor(context, state, currentItem),
+      isActive: isSelected,
+      builder: (context, state) => Row(
+        children: [
+          if (currentItem.leading != null) ...[
+            currentItem.leading!,
+            const SizedBox(width: 12),
+          ],
+          currentItem.labelWidget ??
+              Text(
+                currentItem.label!,
+                style: currentItem.labelStyle ??
+                    const TextStyle(
+                      fontSize: 15,
                     ),
-              ],
-            ),
-          ),
-        ));
+              ),
+        ],
+      ),
+    );
   }
 }

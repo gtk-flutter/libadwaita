@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
             drawer: Drawer(
               child: AdwSidebar(
                 currentIndex: _currentIndex,
-                children: [
+                children: const [
                   AdwSidebarItem(
                     label: 'Welcome',
                   ),
@@ -128,12 +128,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 ],
                 onSelected: (index) {
-                  setState(
-                    () {
-                      _currentIndex = index;
-                      Navigator.of(context).pop();
-                    },
-                  );
+                  setState(() {
+                    _currentIndex = index;
+                    Navigator.of(context).pop();
+                  });
                 },
               ),
             ),
@@ -142,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
               foldPolicy: FoldPolicy.auto,
               flap: AdwSidebar(
                 currentIndex: _currentIndex,
-                children: [
+                children: const [
                   AdwSidebarItem(
                     label: 'Welcome',
                   ),
