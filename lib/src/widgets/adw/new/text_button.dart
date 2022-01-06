@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@Deprecated('Use [AdwButton] widget instead')
 class AdwTextButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final VoidCallback? onLongPress;
