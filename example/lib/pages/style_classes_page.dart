@@ -13,11 +13,12 @@ class StyleClassesPage extends StatelessWidget {
         child: Column(
           children: [
             AdwButton(
-              child: Text('Pill Button'),
+              child: Text('Regular'),
               onPressed: () => null,
             ),
+            const SizedBox(height: 4),
             AdwButton.pill(
-              child: Text('Pill Button'),
+              child: Text('Run the demo'),
               onPressed: () => null,
             ),
             AdwButton.circular(
@@ -25,11 +26,7 @@ class StyleClassesPage extends StatelessWidget {
               onPressed: () => null,
             ),
             AdwButton.flat(
-              child: Text('Pill Button'),
-              onPressed: () => null,
-            ),
-            AdwButton.outline(
-              child: Text('Pill Button'),
+              child: Text('Flat'),
               onPressed: () => null,
             ),
             Icon(

@@ -44,7 +44,7 @@ class AdwSidebar extends StatelessWidget {
     this.color,
     this.border,
     this.controller,
-    this.padding = const EdgeInsets.symmetric(vertical: 5, horizontal: 6),
+    this.padding = const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
     required List<AdwSidebarItem> children,
   })  : _childrenDelegate = List.generate(
           children.length,
@@ -64,7 +64,7 @@ class AdwSidebar extends StatelessWidget {
     this.color,
     this.border,
     this.controller,
-    this.padding = const EdgeInsets.symmetric(vertical: 5),
+    this.padding = const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
     required AdwSidebarItem Function(
       BuildContext context,
       int index,
@@ -160,7 +160,8 @@ class _AdwSidebarItemBuilder extends StatelessWidget {
 
     return AdwButton.flat(
       constraints: const BoxConstraints.tightFor(height: 36),
-      margin: const EdgeInsets.symmetric(vertical: 1),
+      margin: const EdgeInsets.only(bottom: 2),
+      textStyle: const TextStyle(fontWeight: FontWeight.normal),
       padding: currentItem.padding,
       onPressed: onSelected,
       isActive: isSelected,

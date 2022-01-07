@@ -17,23 +17,34 @@ typedef AdwButtonWidgetBuilder = Widget Function(
 /// Widgets that use [AdwButton] as their base can rebuild
 /// their background through the [backgroundColorBuilder] callback.
 class AdwButton extends StatefulWidget {
+  static const defaultButtonConstrains = BoxConstraints(
+    minHeight: 24,
+    minWidth: 16,
+  );
+
+  static const defaultButtonPadding = EdgeInsets.symmetric(
+    vertical: 7,
+    horizontal: 17,
+  );
+
   const AdwButton({
     Key? key,
-    this.padding = const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+    this.padding = defaultButtonPadding,
     this.margin = EdgeInsets.zero,
     this.builder,
     this.child,
+    this.textStyle,
     this.onPressed,
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
-    this.constraints,
+    this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(8.0),
+      Radius.circular(6.0),
     ),
     this.border,
     this.shape = BoxShape.rectangle,
     this.boxShadow,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.animationCurve = Curves.ease,
+    this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : assert(builder != null || child != null),
         super(key: key);
@@ -44,12 +55,13 @@ class AdwButton extends StatefulWidget {
     this.margin = EdgeInsets.zero,
     this.builder,
     this.child,
+    this.textStyle,
     this.onPressed,
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
     this.border,
     this.boxShadow,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.animationCurve = Curves.ease,
+    this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : assert(builder != null || child != null),
         constraints = const BoxConstraints.tightFor(width: 34, height: 34),
@@ -63,13 +75,14 @@ class AdwButton extends StatefulWidget {
     this.margin = EdgeInsets.zero,
     this.builder,
     this.child,
+    this.textStyle,
     this.onPressed,
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
-    this.constraints,
+    this.constraints = defaultButtonConstrains,
     this.border,
     this.boxShadow,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.animationCurve = Curves.ease,
+    this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : borderRadius = const BorderRadius.all(
           Radius.circular(9999.0),
@@ -80,44 +93,22 @@ class AdwButton extends StatefulWidget {
 
   const AdwButton.flat({
     Key? key,
-    this.padding = const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+    this.padding = defaultButtonPadding,
     this.margin = EdgeInsets.zero,
     this.builder,
     this.child,
+    this.textStyle,
     this.onPressed,
     this.backgroundColorBuilder = flatBackgroundColorBuilder,
-    this.constraints,
+    this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(8.0),
+      Radius.circular(6.0),
     ),
     this.border,
     this.shape = BoxShape.rectangle,
     this.boxShadow,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.animationCurve = Curves.ease,
-    this.isActive = false,
-  })  : assert(builder != null || child != null),
-        super(key: key);
-
-  const AdwButton.outline({
-    Key? key,
-    this.padding = const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-    this.margin = EdgeInsets.zero,
-    this.builder,
-    this.child,
-    this.onPressed,
-    this.backgroundColorBuilder = flatBackgroundColorBuilder,
-    this.constraints,
-    this.borderRadius = const BorderRadius.all(
-      Radius.circular(8.0),
-    ),
-    this.border = const Border.fromBorderSide(
-      BorderSide(color: Colors.grey),
-    ),
-    this.shape = BoxShape.rectangle,
-    this.boxShadow,
-    this.animationDuration = const Duration(milliseconds: 200),
-    this.animationCurve = Curves.ease,
+    this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : assert(builder != null || child != null),
         super(key: key);
@@ -169,6 +160,9 @@ class AdwButton extends StatefulWidget {
   /// right-to-left.
   ///
   final BoxBorder? border;
+
+  /// Default text style applied to the child widget.
+  final TextStyle? textStyle;
 
   /// The shape to fill the background [color] into and
   /// to cast as the [boxShadow].
@@ -280,12 +274,18 @@ class _AdwButtonState extends State<AdwButton> {
               borderRadius: widget.borderRadius,
               color: widget.backgroundColorBuilder?.call(context, _status),
             ),
-            child: widget.child ??
-                widget.builder!(
-                  context,
-                  _status,
-                  widget.child,
-                ),
+            child: DefaultTextStyle.merge(
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14.6,
+              ).merge(widget.textStyle),
+              child: widget.child ??
+                  widget.builder!(
+                    context,
+                    _status,
+                    widget.child,
+                  ),
+            ),
           ),
         ),
       ),
@@ -322,7 +322,7 @@ extension AdwButtonBackgroundColor on Color {
         case AdwButtonStatus.active:
           return withOpacity(0.20);
         case AdwButtonStatus.activeHovered:
-          return withOpacity(0.245);
+          return withOpacity(0.24);
         case AdwButtonStatus.tapDown:
           return withOpacity(0.25);
         default:
@@ -338,13 +338,13 @@ extension AdwButtonBackgroundColor on Color {
     if (Theme.of(context).brightness == Brightness.light) {
       switch (status) {
         case AdwButtonStatus.enabledHovered:
-          return withOpacity(0.055);
+          return withOpacity(0.056);
         case AdwButtonStatus.active:
           return withOpacity(0.08);
         case AdwButtonStatus.activeHovered:
           return withOpacity(0.105);
         case AdwButtonStatus.tapDown:
-          return withOpacity(0.13);
+          return withOpacity(0.128);
         default:
           return null;
       }
