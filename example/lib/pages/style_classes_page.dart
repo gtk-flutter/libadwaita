@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:multi_window/multi_window.dart';
 
 class StyleClassesPage extends StatelessWidget {
   const StyleClassesPage({Key? key}) : super(key: key);
@@ -11,44 +10,21 @@ class StyleClassesPage extends StatelessWidget {
       child: AdwClamp.scrollable(
         center: true,
         child: Column(
-          children: [
+          children: const [
             AdwButton(
               child: Text('Regular'),
-              onPressed: () => null,
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             AdwButton.pill(
-              child: Text('Run the demo'),
-              onPressed: () => null,
+              child: Text('Pill Button'),
             ),
+            SizedBox(height: 4),
             AdwButton.circular(
               child: Icon(Icons.add),
-              onPressed: () => null,
             ),
+            SizedBox(height: 4),
             AdwButton.flat(
               child: Text('Flat'),
-              onPressed: () => null,
-            ),
-            Icon(
-              Icons.brush,
-              size: 128,
-              color: Theme.of(context).iconTheme.color!.withOpacity(0.48),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Style Classes",
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              "Various widget styles available for use.",
-            ),
-            const SizedBox(height: 16),
-            AdwTextButton(
-              onPressed: () async => await MultiWindow.create(
-                'style_classes',
-              ),
-              child: const Text("Run the demo"),
             ),
           ],
         ),
