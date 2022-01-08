@@ -233,6 +233,10 @@ class _AdwButtonState extends State<AdwButton> {
   @override
   void didUpdateWidget(covariant AdwButton oldWidget) {
     super.didUpdateWidget(oldWidget);
+    reset();
+  }
+
+  void reset() {
     if (_status == AdwButtonStatus.tapDown) {
       _status = widget.isActive
           ? AdwButtonStatus.activeHovered
@@ -262,6 +266,7 @@ class _AdwButtonState extends State<AdwButton> {
         child: GestureDetector(
           onTap: widget.onPressed,
           onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
+          onTapUp: (_) => setState(() => reset()),
           child: AnimatedContainer(
             padding: widget.padding,
             constraints: widget.constraints,
