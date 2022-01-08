@@ -29,7 +29,7 @@ class _CounterPageState extends State<CounterPage> {
                   '$value',
                   style: Theme.of(context).textTheme.headline4,
                 ),
-                AdwTextButton(
+                AdwButton.pill(
                   onPressed: _incrementCounter,
                   child: const Text("Add"),
                 ),

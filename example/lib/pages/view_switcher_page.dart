@@ -21,7 +21,7 @@ class ViewSwitcherPage extends StatelessWidget {
               "Widgets to switch the window's view.",
             ),
             const SizedBox(height: 16),
-            AdwTextButton(
+            AdwButton.pill(
               onPressed: () async {
                 await MultiWindow.create(
                   'view_switcher',

@@ -21,7 +21,7 @@ class FlapPage extends StatelessWidget {
               "A widget showing a flap next or above the content.",
             ),
             const SizedBox(height: 16),
-            AdwTextButton(
+            AdwButton.pill(
               onPressed: () async {
                 await MultiWindow.create(
                   'flap',
