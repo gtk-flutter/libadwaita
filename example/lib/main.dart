@@ -23,22 +23,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
-      valueListenable: themeNotifier,
-      builder: (_, ThemeMode currentMode, __) {
-        return MaterialApp(
-          theme: AdwaitaThemeData.light(),
-          darkTheme: AdwaitaThemeData.dark(),
-          debugShowCheckedModeBanner: false,
-          home: MultiWidget(
-            {
-              'flap': FlapDemo(),
-              'view_switcher': ViewSwitcherDemo(),
-            },
-            fallback: MyHomePage(themeNotifier: themeNotifier),
-          ),
-          themeMode: currentMode,
-        );
-      },
-    );
+        valueListenable: themeNotifier,
+        builder: (_, ThemeMode currentMode, __) {
+          return MaterialApp(
+              theme: AdwaitaThemeData.light(),
+              darkTheme: AdwaitaThemeData.dark(),
+              debugShowCheckedModeBanner: false,
+              home: MultiWidget(
+                {
+                  'flap': FlapDemo(),
+                  'view_switcher': ViewSwitcherDemo(),
+                },
+                fallback: MyHomePage(themeNotifier: themeNotifier),
+              ),
+              themeMode: currentMode);
+        });
   }
 }
