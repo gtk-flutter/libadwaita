@@ -1,4 +1,4 @@
-# 1.0.0-rc.2
+## 1.0.0-rc.2
 
 **BREAKING**
 - `AdwHeaderBarMinimal` is now `AdwHeaderBar.minimal`
@@ -13,7 +13,7 @@
 - Update View Switcher theming
 - Remove Scroll errors from example app by improving `AdwClamp`
 
-# 1.0.0-rc.1
+## 1.0.0-rc.1
 
 - Added the following widgets:
   - `AdwScaffold`
@@ -26,7 +26,7 @@
 - Update `AdwActionRow` & `AdwStackSidebar`
 - Improve `AdwFlap`
 
-# 1.0.0-rc.0
+## 1.0.0-rc.0
 
 - Seperate libadwaita (Widgets) and adwaita (Colors)
 - Rename Every widget from GtkSomething to AdwSomething
@@ -34,8 +34,8 @@
 - Add `AdwPreferenceGroup` and `AdwActionRow` from libadwaita.
 - Add `AdwStackSidebar` which is basically `GtkStackSidebar`
 - `AdwHeaderBar` parameter's
-    - Replace leading with start
-    - Replace trailing with end
-    - Replace center with title
+  - Replace leading with start
+  - Replace trailing with end
+  - Replace center with title
 
 For older Changelog visit: https://pub.dev/packages/gtk/changelog
