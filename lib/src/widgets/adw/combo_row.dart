@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/internal/popover.dart';
 import 'package:libadwaita/src/utils/colors.dart';
