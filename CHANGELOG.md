@@ -1,13 +1,13 @@
 ## 1.0.0-rc.2
 
-** BREAKING **
+**BREAKING**
 - `AdwHeaderBarMinimal` is now `AdwHeaderBar.minimal`
-- The `start` and `end` parameter of `AdwHeaderBar` are now `List<Widget>`
+- The `start` and `end` parameter of `AdwHeaderBar` are now `List<Widget>` instead of `Widget`
 - `AdwTextButton` is now `AdwButton.flat`
 - The `height` and `expanded` properties of ViewSwitcher are now deprecated 
 
-** Changes **
-- Add `AdwComboRow`, `AdwAvatar`, `AdwButton`(.pill, .circular, .flat)
+**Other Changes**
+- Add `AdwComboRow`, `AdwAvatar`, `AdwButton`(`.pill`, `.circular`, `.flat`)
 - Improve Header Button
 - Update Sidebar Theming
 - Update View Switcher theming
