@@ -5,58 +5,57 @@ class AdwViewSwitcherTab extends StatelessWidget {
   final ViewSwitcherData data;
   final ViewSwitcherStyle style;
   final bool isSelected;
-  final VoidCallback onSelected;
+  final VoidCallback? onSelected;
 
   const AdwViewSwitcherTab({
     Key? key,
     required this.data,
-    required this.isSelected,
-    required this.onSelected,
     required this.style,
+    this.isSelected = false,
+    this.onSelected,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final icon = Icon(
-      data.icon,
-      size: 18,
-    );
-
-    bool isDesktop = style == ViewSwitcherStyle.desktop;
+    final isDesktop = style == ViewSwitcherStyle.desktop;
 
     return AdwButton.flat(
       constraints: isDesktop
-          ? const BoxConstraints(minWidth: 120, maxHeight: 36)
+          ? const BoxConstraints(minWidth: 120, minHeight: 34, maxHeight: 36)
           : const BoxConstraints(minWidth: 75),
-      margin:
-          isDesktop ? const EdgeInsets.symmetric(vertical: 6) : EdgeInsets.zero,
+      margin: isDesktop
+          ? const EdgeInsets.symmetric(vertical: 6).copyWith(right: 3)
+          : EdgeInsets.zero,
       onPressed: onSelected,
       isActive: isSelected,
-      child: _RowOrColumn(
+      textStyle: TextStyle(
+        fontSize: isDesktop ? null : 11,
+      ),
+      borderRadius: isDesktop
+          ? const BorderRadius.all(Radius.circular(6.0))
+          : BorderRadius.zero,
+      child: _AdwViewSwitcherTabLayout(
         isRow: isDesktop,
         children: [
-          if (data.icon != null) icon,
+          if (data.icon != null)
+            Icon(
+              data.icon,
+              size: 18,
+            ),
           if (data.icon != null && data.title != null)
             const SizedBox(width: 8, height: 2),
-          if (data.title != null)
-            Text(
-              data.title!,
-              style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: isDesktop ? 14 : 11,
-                  ),
-            ),
+          if (data.title != null) Text(data.title!),
         ],
       ),
     );
   }
 }
 
-class _RowOrColumn extends StatelessWidget {
+class _AdwViewSwitcherTabLayout extends StatelessWidget {
   final List<Widget> children;
   final bool isRow;
 
-  const _RowOrColumn({
+  const _AdwViewSwitcherTabLayout({
     Key? key,
     required this.isRow,
     required this.children,
@@ -65,10 +64,14 @@ class _RowOrColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isRow
-        ? Row(mainAxisAlignment: MainAxisAlignment.center, children: children)
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
+          )
         : Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: children);
+            children: children,
+          );
   }
 }
