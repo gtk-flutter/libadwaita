@@ -52,21 +52,19 @@ class _FlapHomePageState extends State<FlapHomePage> {
         AdwHeaderBar.bitsdojo(
           appWindow: appWindow,
           windowDecor: windowDecor,
-          start: Row(
-            children: [
-              Builder(builder: (context) {
-                return AdwHeaderButton(
-                  icon: const Icon(Icons.view_sidebar, size: 15),
-                  isActive: _flapController.isOpen,
-                  onPressed: () => _flapController.toggle(),
-                );
-              }),
-              AdwHeaderButton(
-                icon: const Icon(Icons.nightlight_round, size: 15),
-                onPressed: changeTheme,
-              ),
-            ],
-          ),
+          start: [
+            Builder(builder: (context) {
+              return AdwHeaderButton(
+                icon: const Icon(Icons.view_sidebar, size: 15),
+                isActive: _flapController.isOpen,
+                onPressed: () => _flapController.toggle(),
+              );
+            }),
+            AdwHeaderButton(
+              icon: const Icon(Icons.nightlight_round, size: 15),
+              onPressed: changeTheme,
+            ),
+          ],
           title: const Text("AdwFlap Demo"),
         ),
         Expanded(

@@ -23,9 +23,8 @@ class AdwViewSwitcherTab extends StatelessWidget {
       constraints: isDesktop
           ? const BoxConstraints(minWidth: 120, minHeight: 34, maxHeight: 36)
           : const BoxConstraints(minWidth: 75),
-      margin: isDesktop
-          ? const EdgeInsets.symmetric(vertical: 6).copyWith(right: 3)
-          : EdgeInsets.zero,
+      margin:
+          isDesktop ? const EdgeInsets.fromLTRB(0, 6, 3, 6) : EdgeInsets.zero,
       onPressed: onSelected,
       isActive: isSelected,
       textStyle: TextStyle(

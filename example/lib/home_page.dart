@@ -57,47 +57,43 @@ class _MyHomePageState extends State<MyHomePage> {
         AdwHeaderBar.bitsdojo(
           appWindow: appWindow,
           windowDecor: windowDecor,
-          start: Row(
-            children: [
-              Builder(
-                builder: (context) {
-                  return AdwHeaderButton(
-                    icon: const Icon(Icons.view_sidebar, size: 15),
-                    isActive: _flapController.isOpen,
-                    onPressed: () {
-                      _flapController.toggle();
-                    },
-                  );
-                },
-              ),
-              AdwHeaderButton(
-                icon: const Icon(Icons.nightlight_round, size: 15),
-                onPressed: changeTheme,
-              ),
-            ],
-          ),
+          start: [
+            Builder(
+              builder: (context) {
+                return AdwHeaderButton(
+                  icon: const Icon(Icons.view_sidebar, size: 15),
+                  isActive: _flapController.isOpen,
+                  onPressed: () {
+                    _flapController.toggle();
+                  },
+                );
+              },
+            ),
+            AdwHeaderButton(
+              icon: const Icon(Icons.nightlight_round, size: 15),
+              onPressed: changeTheme,
+            ),
+          ],
           title: const Text("Libadwaita Demo"),
-          end: Row(
-            children: [
-              AdwPopupMenu(
-                body: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ListTile(
-                      onTap: () {
-                        counter.value = 0;
-                        Navigator.of(context).pop();
-                      },
-                      title: const Text(
-                        'Reset Counter',
-                        style: TextStyle(fontSize: 15),
-                      ),
+          end: [
+            AdwPopupMenu(
+              body: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    onTap: () {
+                      counter.value = 0;
+                      Navigator.of(context).pop();
+                    },
+                    title: const Text(
+                      'Reset Counter',
+                      style: TextStyle(fontSize: 15),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         Expanded(
           child: AdwScaffold(

@@ -1,10 +1,17 @@
 ## 1.0.0-rc.2
 
-- Add `AdwComboRow`, `AdwAvatar`
-- Improve Headerbar and Header Button
-- Update Sidebar theming to look more closer to libadwaita one
+** BREAKING **
+- `AdwHeaderBarMinimal` is now `AdwHeaderBar.minimal`
+- The `start` and `end` parameter of `AdwHeaderBar` are now `List<Widget>`
+- `AdwTextButton` is now `AdwButton.flat`
+- The `height` and `expanded` properties of ViewSwitcher are now deprecated 
+
+** Changes **
+- Add `AdwComboRow`, `AdwAvatar`, `AdwButton`(.pill, .circular, .flat)
+- Improve Header Button
+- Update Sidebar Theming
+- Update View Switcher theming
 - Remove Scroll errors from example app by improving `AdwClamp`
-- Deprecate `AdwHeaderBarMinimal`, Now use `AdwHeaderBar.minimal`
 
 ## 1.0.0-rc.1
 
