@@ -1,14 +1,12 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:flutter/material.dart';
 
 class AdwViewStack extends StatefulWidget {
-  const AdwViewStack(
-      {Key? key,
-      this.index,
-      required this.children,
-      this.animationDuration = const Duration(milliseconds: 450)})
-      : super(key: key);
+  const AdwViewStack({
+    Key? key,
+    this.index,
+    required this.children,
+    this.animationDuration = const Duration(milliseconds: 450),
+  }) : super(key: key);
 
   final int? index;
   final List<Widget> children;

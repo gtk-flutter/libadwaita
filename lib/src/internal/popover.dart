@@ -1,5 +1,3 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:flutter/material.dart';
 
 class BorderPainter extends CustomPainter {
@@ -74,8 +72,11 @@ class _PopoverRoute extends PopupRoute<dynamic> {
   String? get barrierLabel => 'Popover Scrim';
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
     return Align(
       alignment: Alignment.topLeft,
       child: Transform.translate(
@@ -110,8 +111,12 @@ class _PopoverRoute extends PopupRoute<dynamic> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     final y = (animation.value - 1) * 15;
     return AnimatedBuilder(
       animation: animation,

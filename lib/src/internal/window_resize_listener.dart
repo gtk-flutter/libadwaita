@@ -1,11 +1,11 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:flutter/material.dart';
 
 class WindowResizeListener extends StatefulWidget {
-  const WindowResizeListener(
-      {Key? key, required this.onResize, required this.child})
-      : super(key: key);
+  const WindowResizeListener({
+    Key? key,
+    required this.onResize,
+    required this.child,
+  }) : super(key: key);
 
   final Function(Size size) onResize;
   final Widget child;

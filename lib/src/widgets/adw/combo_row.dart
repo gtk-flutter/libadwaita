@@ -1,22 +1,20 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/internal/popover.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
-  const AdwComboRow(
-      {Key? key,
-      this.choices = const [],
-      this.start,
-      this.end,
-      required this.title,
-      this.subtitle,
-      this.autofocus = false,
-      this.enabled = true,
-      this.contentPadding})
-      : super(key: key);
+  const AdwComboRow({
+    Key? key,
+    this.choices = const [],
+    this.start,
+    this.end,
+    required this.title,
+    this.subtitle,
+    this.autofocus = false,
+    this.enabled = true,
+    this.contentPadding,
+  }) : super(key: key);
 
   final List<String> choices;
   final Widget? start;
@@ -104,12 +102,12 @@ class _AdwComboRowState extends State<AdwComboRow> {
 }
 
 class AdwComboButton extends StatefulWidget {
-  const AdwComboButton(
-      {Key? key,
-      this.choices = const [],
-      required this.setSelected,
-      required this.getSelected})
-      : super(key: key);
+  const AdwComboButton({
+    Key? key,
+    this.choices = const [],
+    required this.setSelected,
+    required this.getSelected,
+  }) : super(key: key);
 
   final List<String> choices;
   final ValueSetter<int> setSelected;
