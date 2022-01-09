@@ -9,7 +9,7 @@ import 'package:multi_window/multi_window.dart';
 
 import 'home_page.dart';
 
-void main(List<String> args) async {
+Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   MultiWindow.init(args);

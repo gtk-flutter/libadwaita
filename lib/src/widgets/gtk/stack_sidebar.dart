@@ -46,7 +46,7 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
       widget.breakpoint < MediaQuery.of(context).size.width;
 
   /// Loads and removes the popup page for content on small screens
-  void loadContentPage(BuildContext context) async {
+  Future<void> loadContentPage(BuildContext context) async {
     if (_popupNotOpen) {
       _popupNotOpen = false;
       SchedulerBinding.instance!.addPostFrameCallback((_) async {
