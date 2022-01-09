@@ -52,8 +52,8 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
       SchedulerBinding.instance!.addPostFrameCallback((_) async {
         // sets _popupNotOpen to true after popup is closed
         await Navigator.of(context)
-            .push(
-          MaterialPageRoute(
+            .push<void>(
+          MaterialPageRoute<void>(
             builder: (BuildContext context) {
               return Scaffold(
                 body: widget.fullContentBuilder != null
