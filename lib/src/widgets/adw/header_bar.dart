@@ -7,13 +7,13 @@ import 'package:libadwaita/libadwaita.dart';
 
 class AdwHeaderBar extends StatefulWidget {
   /// The leading widget for the headerbar
-  final Widget start;
+  final List<Widget> start;
 
   /// The center widget for the headerbar
   final Widget title;
 
   /// The trailing widget for the headerbar
-  final Widget end;
+  final List<Widget> end;
 
   final Widget? minimizeBtn;
 
@@ -49,9 +49,9 @@ class AdwHeaderBar extends StatefulWidget {
     dynamic themeType,
     this.onDoubleTap,
     this.onHeaderDrag,
-    this.start = const SizedBox(),
+    this.start = const [],
     this.title = const SizedBox(),
-    this.end = const SizedBox(),
+    this.end = const [],
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -85,9 +85,9 @@ class AdwHeaderBar extends StatefulWidget {
     Key? key,
     this.onDoubleTap,
     this.onHeaderDrag,
-    this.start = const SizedBox(),
+    this.start = const [],
     this.title = const SizedBox(),
-    this.end = const SizedBox(),
+    this.end = const [],
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -108,9 +108,9 @@ class AdwHeaderBar extends StatefulWidget {
 
     /// The appWindow object from bitsdojo_window package
     required appWindow,
-    this.start = const SizedBox(),
+    this.start = const [],
     this.title = const SizedBox(),
-    this.end = const SizedBox(),
+    this.end = const [],
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -141,9 +141,9 @@ class AdwHeaderBar extends StatefulWidget {
 
     /// The appWindow object from bitsdojo_window package
     required appWindow,
-    this.start = const SizedBox(),
+    this.start = const [],
     this.title = const SizedBox(),
-    this.end = const SizedBox(),
+    this.end = const [],
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -169,9 +169,9 @@ class AdwHeaderBar extends StatefulWidget {
 
     /// The Window.of(context) object from nativeshell package
     required window,
-    this.start = const SizedBox(),
+    this.start = const [],
     this.title = const SizedBox(),
-    this.end = const SizedBox(),
+    this.end = const [],
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -194,9 +194,9 @@ class AdwHeaderBar extends StatefulWidget {
 
     /// The Window.of(context) object from nativeshell package
     required window,
-    this.start = const SizedBox(),
+    this.start = const [],
     this.title = const SizedBox(),
-    this.end = const SizedBox(),
+    this.end = const [],
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -292,14 +292,22 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                                 SizedBox(width: widget.titlebarSpace),
                               for (var i in sep[0].split(','))
                                 if (windowButtons[i] != null) windowButtons[i]!,
-                              widget.start,
+                              ...widget.start.map(
+                                (e) => Padding(
+                                    padding: const EdgeInsets.only(right: 5),
+                                    child: e),
+                              ),
                             ],
                           ),
                           middle: widget.title,
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              widget.end,
+                              ...widget.end.map(
+                                (e) => Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: e),
+                              ),
                               if (hasWindowControls &&
                                   sep[1].split(',').isNotEmpty)
                                 SizedBox(width: widget.titlebarSpace),
