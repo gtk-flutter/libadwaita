@@ -224,7 +224,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
     super.initState();
 
     late final order = ValueNotifier<String>(':minimize,maximize,close');
-    updateSep() {
+    void updateSep() {
       if (mounted) {
         seperator.value = order.value.split(':');
       }
