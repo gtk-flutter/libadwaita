@@ -69,9 +69,10 @@ class _AdwFlapState extends State<AdwFlap> {
   }
 
   void updateFlapData() {
-    _controller.policy = widget.foldPolicy;
-    _controller.position = widget.flapPosition;
-    _controller.locked = widget.locked;
+    _controller
+      ..policy = widget.foldPolicy
+      ..position = widget.flapPosition
+      ..locked = widget.locked;
   }
 
   @override

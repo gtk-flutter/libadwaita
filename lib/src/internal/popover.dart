@@ -8,12 +8,12 @@ class BorderPainter extends CustomPainter {
       ..strokeWidth = 1
       ..color = Colors.black12;
     final half = size.width / 2;
-    final path = Path();
-    path.moveTo(1, 12);
-    path.lineTo(half - 10, 12);
-    path.lineTo(half, 1);
-    path.lineTo(half + 10, 12);
-    path.lineTo(size.width - 1, 12);
+    final path = Path()
+      ..moveTo(1, 12)
+      ..lineTo(half - 10, 12)
+      ..lineTo(half, 1)
+      ..lineTo(half + 10, 12)
+      ..lineTo(size.width - 1, 12);
     canvas.drawPath(path, paint);
   }
 
@@ -27,15 +27,15 @@ class PopOverClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final half = size.width / 2;
-    final path = Path();
-    path.moveTo(0, 15);
-    path.lineTo(half - 10, 15);
-    path.lineTo(half, 5);
-    path.lineTo(half + 10, 15);
-    path.lineTo(size.width, 15);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
+    final path = Path()
+      ..moveTo(0, 15)
+      ..lineTo(half - 10, 15)
+      ..lineTo(half, 5)
+      ..lineTo(half + 10, 15)
+      ..lineTo(size.width, 15)
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+      ..close();
     return path;
   }
 
