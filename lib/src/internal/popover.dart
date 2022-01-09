@@ -47,7 +47,7 @@ class PopOverClipper extends CustomClipper<Path> {
   }
 }
 
-class _PopoverRoute extends PopupRoute {
+class _PopoverRoute extends PopupRoute<dynamic> {
   final Widget body;
   final double width;
   final double? height;
