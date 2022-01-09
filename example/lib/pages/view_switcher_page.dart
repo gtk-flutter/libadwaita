@@ -9,11 +9,10 @@ class ViewSwitcherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: AdwClamp.scrollable(
-        center: true,
         child: Column(
           children: [
             Text(
-              "View Switcher",
+              'View Switcher',
               style: Theme.of(context).textTheme.headline6,
             ),
             const SizedBox(height: 10),
@@ -27,7 +26,7 @@ class ViewSwitcherPage extends StatelessWidget {
                   'view_switcher',
                 );
               },
-              child: const Text("Run the demo"),
+              child: const Text('Run the demo'),
             ),
           ],
         ),

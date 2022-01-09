@@ -91,27 +91,27 @@ class _AdwFlapState extends State<AdwFlap> {
     // probably shouldn;t do this but no one is looking :P
     _controller.context = context;
 
-    var content = Expanded(
+    final content = Expanded(
       child: widget.child,
     );
 
-    var flap = SlideHide(
+    final flap = SlideHide(
       isHidden: _controller.shouldHide(),
       width: widget.flapWidth,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
-        child: widget.flap,
         scrollDirection: Axis.horizontal,
+        child: widget.flap,
       ),
     );
 
-    var seperator = widget.seperator ??
+    final seperator = widget.seperator ??
         Container(
           width: 1,
           color: context.borderColor,
         );
 
-    var widgets = widget.flapPosition == FlapPosition.start
+    final widgets = widget.flapPosition == FlapPosition.start
         ? [flap, seperator, content]
         : [content, seperator, flap];
 
@@ -124,7 +124,7 @@ class _AdwFlapState extends State<AdwFlap> {
           // affected by window resizes.
           // If FoldPolicy is auto, then close / open the sidebar depending on the
           // state
-          var isMobile = size.width < widget.breakpoint;
+          final isMobile = size.width < widget.breakpoint;
           _controller.updateModalState(context, isMobile);
 
           switch (widget.foldPolicy) {

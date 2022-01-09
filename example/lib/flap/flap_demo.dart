@@ -1,6 +1,7 @@
-import 'flap_home_page.dart';
-import 'package:flutter/material.dart';
 import 'package:adwaita/adwaita.dart';
+import 'package:flutter/material.dart';
+
+import 'flap_home_page.dart';
 
 class FlapDemo extends StatelessWidget {
   final ValueNotifier<ThemeMode> themeNotifier =

@@ -27,19 +27,19 @@ class AdwTextField extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
+            Radius.circular(8),
           ),
           borderSide: BorderSide(
-              width: 1.0, style: BorderStyle.solid, color: Colors.transparent),
+            color: Colors.transparent,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
-            Radius.circular(8.0),
+            Radius.circular(8),
           ),
           borderSide: BorderSide(
-              width: 1.0,
-              style: BorderStyle.solid,
-              color: Theme.of(context).colorScheme.secondary),
+            color: Theme.of(context).colorScheme.secondary,
+          ),
         ),
         isDense: true,
         suffixIcon: icon != null

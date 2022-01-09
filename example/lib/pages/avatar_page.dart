@@ -7,13 +7,12 @@ class AvatarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdwClamp.scrollable(
-      center: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const AdwAvatar(
-            child: Icon(Icons.person),
             size: 128,
+            child: Icon(Icons.person),
           ),
           AdwPreferencesGroup(
             title: 'All colors',

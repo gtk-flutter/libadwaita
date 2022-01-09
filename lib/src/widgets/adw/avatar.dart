@@ -179,7 +179,7 @@ class AdwAvatar extends StatelessWidget {
     // 1. Trim the string from leading and trailing whitespace.
     // 2. Separate the string via whitespaces (can be multiple spaces between words).
     // 3. Select a max of 2 words and store it in a list.
-    final words = text.trim().split(RegExp(r' +')).take(2);
+    final words = text.trim().split(RegExp(' +')).take(2);
 
     // Pick the first letters of the words stored and join them in a string.
     final letters = words.fold(
@@ -189,10 +189,10 @@ class AdwAvatar extends StatelessWidget {
 
     return AdwAvatar(
       key: key,
-      child: Text(letters.toUpperCase()),
       size: size,
       backgroundColor: backgroundColor,
       backgroundImage: backgroundImage,
+      child: Text(letters.toUpperCase()),
     );
   }
 

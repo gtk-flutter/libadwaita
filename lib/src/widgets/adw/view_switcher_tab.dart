@@ -1,5 +1,5 @@
-import 'package:libadwaita/libadwaita.dart';
 import 'package:flutter/material.dart';
+import 'package:libadwaita/libadwaita.dart';
 
 class AdwViewSwitcherTab extends StatelessWidget {
   final ViewSwitcherData data;
@@ -31,7 +31,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
         fontSize: isDesktop ? null : 11,
       ),
       borderRadius: isDesktop
-          ? const BorderRadius.all(Radius.circular(6.0))
+          ? const BorderRadius.all(Radius.circular(6))
           : BorderRadius.zero,
       child: _AdwViewSwitcherTabLayout(
         isRow: isDesktop,

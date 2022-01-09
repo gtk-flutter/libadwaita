@@ -60,20 +60,20 @@ class _AdwComboRowState extends State<AdwComboRow> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        borderRadius: BorderRadius.circular(1),
-        hoverColor: context.hoverColor,
-        onTap: () {
-          if (_comboButtonState.currentState!.active) {
-            Navigator.of(context).pop();
-            _comboButtonState.currentState!.active = false;
-          } else {
-            _comboButtonState.currentState?.show();
-          }
-        },
-        child: Row(
-          children: [
-            Expanded(
-                child: ListTile(
+      borderRadius: BorderRadius.circular(1),
+      hoverColor: context.hoverColor,
+      onTap: () {
+        if (_comboButtonState.currentState!.active) {
+          Navigator.of(context).pop();
+          _comboButtonState.currentState!.active = false;
+        } else {
+          _comboButtonState.currentState?.show();
+        }
+      },
+      child: Row(
+        children: [
+          Expanded(
+            child: ListTile(
               autofocus: widget.autofocus,
               enabled: widget.enabled,
               contentPadding: widget.contentPadding,
@@ -82,19 +82,22 @@ class _AdwComboRowState extends State<AdwComboRow> {
               subtitle: widget.subtitle != null && widget.subtitle!.isNotEmpty
                   ? Text(widget.subtitle!)
                   : null,
-            )),
-            Expanded(child: Container()),
-            SizedBox(
-                width: 50,
-                child: Text(
-                  widget.choices[selected],
-                  overflow: TextOverflow.ellipsis,
-                )),
-            const SizedBox(width: 5),
-            button,
-            const SizedBox(width: 10),
-          ],
-        ));
+            ),
+          ),
+          Expanded(child: Container()),
+          SizedBox(
+            width: 50,
+            child: Text(
+              widget.choices[selected],
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(width: 5),
+          button,
+          const SizedBox(width: 10),
+        ],
+      ),
+    );
   }
 }
 
@@ -129,20 +132,22 @@ class _AdwComboButtonState extends State<AdwComboButton> {
     showPopover(
       context: context,
       child: Column(
-          children: List.generate(widget.choices.length, (int index) {
-        return ListTile(
-          title: Text(widget.choices[index]),
-          trailing:
-              index == widget.getSelected() ? const Icon(Icons.check) : null,
-          onTap: () {
-            setState(() {
-              widget.setSelected(
-                  index); //if you want to assign the index somewhere to check
-            });
-            Navigator.of(context).pop();
-          },
-        );
-      })),
+        children: List.generate(widget.choices.length, (int index) {
+          return ListTile(
+            title: Text(widget.choices[index]),
+            trailing:
+                index == widget.getSelected() ? const Icon(Icons.check) : null,
+            onTap: () {
+              setState(() {
+                widget.setSelected(
+                  index,
+                ); //if you want to assign the index somewhere to check
+              });
+              Navigator.of(context).pop();
+            },
+          );
+        }),
+      ),
       width: 150,
       height: null,
       backgroundColor: Theme.of(context).cardColor,

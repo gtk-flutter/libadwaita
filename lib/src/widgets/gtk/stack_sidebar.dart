@@ -51,14 +51,16 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
       _popupNotOpen = false;
       SchedulerBinding.instance!.addPostFrameCallback((_) async {
         // sets _popupNotOpen to true after popup is closed
-        Navigator.of(context)
+        await Navigator.of(context)
             .push(
           MaterialPageRoute(
             builder: (BuildContext context) {
               return Scaffold(
                 body: widget.fullContentBuilder != null
                     ? widget.fullContentBuilder!(
-                        widget.contentIndex, widget.content)
+                        widget.contentIndex,
+                        widget.content,
+                      )
                     : widget.content,
               );
             },
@@ -87,7 +89,7 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
   Widget build(BuildContext context) {
     if (canSplitPanes) {
       _closePopup();
-      List<Widget> content = [
+      final content = <Widget>[
         SizedBox(
           width: widget.sidebarWidth,
           child: widget.sidebar,

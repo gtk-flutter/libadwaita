@@ -53,19 +53,21 @@ class _FlapHomePageState extends State<FlapHomePage> {
           appWindow: appWindow,
           windowDecor: windowDecor,
           start: [
-            Builder(builder: (context) {
-              return AdwHeaderButton(
-                icon: const Icon(Icons.view_sidebar, size: 15),
-                isActive: _flapController.isOpen,
-                onPressed: () => _flapController.toggle(),
-              );
-            }),
+            Builder(
+              builder: (context) {
+                return AdwHeaderButton(
+                  icon: const Icon(Icons.view_sidebar, size: 15),
+                  isActive: _flapController.isOpen,
+                  onPressed: () => _flapController.toggle(),
+                );
+              },
+            ),
             AdwHeaderButton(
               icon: const Icon(Icons.nightlight_round, size: 15),
               onPressed: changeTheme,
             ),
           ],
-          title: const Text("AdwFlap Demo"),
+          title: const Text('AdwFlap Demo'),
         ),
         Expanded(
           child: AdwScaffold(
@@ -120,38 +122,33 @@ class _FlapHomePageState extends State<FlapHomePage> {
                 index: _currentIndex,
                 children: [
                   AdwClamp.scrollable(
-                    center: true,
                     child: AdwPreferencesGroup(
                       children: [
                         const AdwComboRow(
-                          title: "Fold Policy",
-                          choices: ["auto", "always", "never"],
+                          title: 'Fold Policy',
+                          choices: ['auto', 'always', 'never'],
                         ),
                         AdwActionRow(
-                          title: "Locked",
+                          title: 'Locked',
                           subtitle:
                               "Sidebar visibility doesn't change when fold state changes",
                           end: CupertinoSwitch(
-                              value: locked,
-                              onChanged: (val) {
-                                locked = val;
-                                setState(() {});
-                              }),
+                            value: locked,
+                            onChanged: (val) {
+                              locked = val;
+                              setState(() {});
+                            },
+                          ),
                         )
                       ],
                     ),
                   ),
                   AdwClamp.scrollable(
-                    center: true,
                     child: AdwPreferencesGroup(
                       children: [
                         AdwActionRow(
-                          title: "Flap position",
+                          title: 'Flap position',
                           end: ToggleButtons(
-                            children: const [
-                              Text("Start"),
-                              Text("End"),
-                            ],
                             isSelected: [
                               flapPosition.index == 0,
                               flapPosition.index == 1
@@ -163,33 +160,36 @@ class _FlapHomePageState extends State<FlapHomePage> {
                                 flapPosition = FlapPosition.end;
                               }
                             }),
+                            children: const [
+                              Text('Start'),
+                              Text('End'),
+                            ],
                           ),
                         ),
                         const AdwActionRow(
-                          title: "Transition type",
-                          end: Text("Over"),
+                          title: 'Transition type',
+                          end: Text('Over'),
                         )
                       ],
                     ),
                   ),
                   AdwClamp.scrollable(
-                    center: true,
                     child: AdwPreferencesGroup(
                       children: [
                         AdwActionRow(
-                          title: "Modal",
+                          title: 'Modal',
                           subtitle:
-                              "Clicking outside the sidebar or pressing Esc will close it when folded",
+                              'Clicking outside the sidebar or pressing Esc will close it when folded',
                           end:
                               CupertinoSwitch(value: true, onChanged: (val) {}),
                         ),
                         AdwActionRow(
-                          title: "Swipe to Open",
+                          title: 'Swipe to Open',
                           end:
                               CupertinoSwitch(value: true, onChanged: (val) {}),
                         ),
                         AdwActionRow(
-                          title: "Swipe to Close",
+                          title: 'Swipe to Close',
                           end:
                               CupertinoSwitch(value: true, onChanged: (val) {}),
                         ),

@@ -26,8 +26,10 @@ class AdwPreferencesGroup extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null) ...[
-          Text(title!,
-              style: titleStyle ?? Theme.of(context).textTheme.headline6),
+          Text(
+            title!,
+            style: titleStyle ?? Theme.of(context).textTheme.headline6,
+          ),
           if (description != null)
             Text(
               description!,

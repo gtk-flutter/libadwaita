@@ -9,16 +9,15 @@ class FlapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: AdwClamp.scrollable(
-        center: true,
         child: Column(
           children: [
             Text(
-              "Flap",
+              'Flap',
               style: Theme.of(context).textTheme.headline6,
             ),
             const SizedBox(height: 10),
             const Text(
-              "A widget showing a flap next or above the content.",
+              'A widget showing a flap next or above the content.',
             ),
             const SizedBox(height: 16),
             AdwButton.pill(
@@ -27,7 +26,7 @@ class FlapPage extends StatelessWidget {
                   'flap',
                 );
               },
-              child: const Text("Run the demo"),
+              child: const Text('Run the demo'),
             ),
           ],
         ),

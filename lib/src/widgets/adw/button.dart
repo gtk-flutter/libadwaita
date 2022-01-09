@@ -38,7 +38,7 @@ class AdwButton extends StatefulWidget {
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
     this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(6.0),
+      Radius.circular(6),
     ),
     this.border,
     this.shape = BoxShape.rectangle,
@@ -85,7 +85,7 @@ class AdwButton extends StatefulWidget {
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : borderRadius = const BorderRadius.all(
-          Radius.circular(9999.0),
+          Radius.circular(9999),
         ),
         shape = BoxShape.rectangle,
         assert(builder != null || child != null),
@@ -102,7 +102,7 @@ class AdwButton extends StatefulWidget {
     this.backgroundColorBuilder = flatBackgroundColorBuilder,
     this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(6.0),
+      Radius.circular(6),
     ),
     this.border,
     this.shape = BoxShape.rectangle,
@@ -266,7 +266,7 @@ class _AdwButtonState extends State<AdwButton> {
         child: GestureDetector(
           onTap: widget.onPressed,
           onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
-          onTapUp: (_) => setState(() => reset()),
+          onTapUp: (_) => setState(reset),
           child: AnimatedContainer(
             padding: widget.padding,
             constraints: widget.constraints,

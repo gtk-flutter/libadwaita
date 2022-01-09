@@ -8,7 +8,6 @@ class StyleClassesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: AdwClamp.scrollable(
-        center: true,
         child: Column(
           children: const [
             AdwButton(

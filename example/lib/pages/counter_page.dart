@@ -17,7 +17,6 @@ class _CounterPageState extends State<CounterPage> {
   Widget build(BuildContext context) {
     return Center(
       child: AdwClamp.scrollable(
-        center: true,
         child: ValueListenableBuilder(
           valueListenable: widget.counter,
           builder: (_, value, child) {
@@ -31,7 +30,7 @@ class _CounterPageState extends State<CounterPage> {
                 ),
                 AdwButton.pill(
                   onPressed: _incrementCounter,
-                  child: const Text("Add"),
+                  child: const Text('Add'),
                 ),
               ],
             );

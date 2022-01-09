@@ -1,5 +1,5 @@
-import 'package:libadwaita/libadwaita.dart';
 import 'package:flutter/material.dart';
+import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita/src/internal/popover.dart';
 
 class AdwPopupMenu extends StatefulWidget {

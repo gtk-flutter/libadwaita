@@ -34,7 +34,7 @@ class _WindowResizeListenerState extends State<WindowResizeListener>
 
   @override
   void didChangeMetrics() {
-    var winSize = WidgetsBinding.instance!.window.physicalSize;
+    final winSize = WidgetsBinding.instance!.window.physicalSize;
 
     if (winSize != _lastSize) {
       widget.onResize(winSize);

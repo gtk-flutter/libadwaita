@@ -29,7 +29,7 @@ class _SlideHideState extends State<SlideHide>
       duration: const Duration(milliseconds: 300),
     );
 
-    widthAnimation = Tween(begin: widget.width, end: 0.0)
+    widthAnimation = Tween(begin: widget.width, end: 0)
         .animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
 
     animate();
@@ -59,8 +59,8 @@ class _SlideHideState extends State<SlideHide>
           opacity: 1,
           child: SizedBox(
             height: double.infinity,
-            child: widget.child,
             width: widthAnimation.value,
+            child: widget.child,
           ),
         );
       },

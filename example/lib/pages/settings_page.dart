@@ -7,57 +7,57 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdwClamp.scrollable(
-      center: true,
       child: Column(
         children: [
           const AdwPreferencesGroup(
-            title: "Pages",
+            title: 'Pages',
             description:
-                "Preferences are organized in pages, this example has the following pages:",
+                'Preferences are organized in pages, this example has the following pages:',
             children: [
               AdwActionRow(
-                title: "Layout",
+                title: 'Layout',
               ),
               AdwActionRow(
-                title: "Search",
+                title: 'Search',
               ),
             ],
           ),
           const SizedBox(height: 12),
           const AdwPreferencesGroup(
-            title: "Groups",
+            title: 'Groups',
             description:
-                "Preferences are grouped together, a group can have a title and a description. Descriptions will be wrapped if they are too long. This page has the following groups:",
+                'Preferences are grouped together, a group can have a title and a description. Descriptions will be wrapped if they are too long. This page has the following groups:',
             children: [
-              AdwActionRow(title: "An untitled group"),
-              AdwActionRow(title: "Pages"),
-              AdwActionRow(title: "Groups"),
-              AdwActionRow(title: "Preferences"),
+              AdwActionRow(title: 'An untitled group'),
+              AdwActionRow(title: 'Pages'),
+              AdwActionRow(title: 'Groups'),
+              AdwActionRow(title: 'Preferences'),
             ],
           ),
           const SizedBox(height: 12),
           AdwPreferencesGroup(
-            title: "Subpages",
-            description: "Preferences windows can have subpages.",
+            title: 'Subpages',
+            description: 'Preferences windows can have subpages.',
             children: [
               AdwActionRow(
-                title: "Go to a subpage",
+                title: 'Go to a subpage',
                 end: const Icon(Icons.chevron_right),
-                onActivated: () => debugPrint("Hi"),
+                onActivated: () => debugPrint('Hi'),
               ),
               const AdwActionRow(
-                title: "Go to another subpage",
+                title: 'Go to another subpage',
                 end: Icon(Icons.chevron_right),
               ),
             ],
           ),
           const SizedBox(height: 12),
           AdwTextField(
-              initialValue: "some text",
-              keyboardType: TextInputType.number,
-              labelText: "Text field label",
-              icon: Icons.insert_photo,
-              onChanged: (String s) {}),
+            initialValue: 'some text',
+            keyboardType: TextInputType.number,
+            labelText: 'Text field label',
+            icon: Icons.insert_photo,
+            onChanged: (String s) {},
+          ),
         ],
       ),
     );

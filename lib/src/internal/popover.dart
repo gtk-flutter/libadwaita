@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class BorderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
+    final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1
       ..color = Colors.black12;
-    var half = size.width / 2;
+    final half = size.width / 2;
     final path = Path();
     path.moveTo(1, 12);
     path.lineTo(half - 10, 12);
@@ -26,7 +26,7 @@ class PopOverClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    var half = size.width / 2;
+    final half = size.width / 2;
     final path = Path();
     path.moveTo(0, 15);
     path.lineTo(half - 10, 15);
@@ -34,7 +34,7 @@ class PopOverClipper extends CustomClipper<Path> {
     path.lineTo(half + 10, 15);
     path.lineTo(size.width, 15);
     path.lineTo(size.width, size.height);
-    path.lineTo(0.0, size.height);
+    path.lineTo(0, size.height);
     path.close();
     return path;
   }
@@ -69,42 +69,48 @@ class _PopoverRoute extends PopupRoute {
   bool get barrierDismissible => true;
 
   @override
-  String? get barrierLabel => "Popover Scrim";
+  String? get barrierLabel => 'Popover Scrim';
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
     return Align(
-        alignment: Alignment.topLeft,
-        child: Transform.translate(
-            offset: Offset(
-                position.dx + contentOffset.dx, position.dy + contentOffset.dy),
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(maxWidth: width, maxHeight: height ?? 200),
-              child: ClipPath(
-                  clipper: PopOverClipper(),
-                  child: Card(
-                      shape: RoundedRectangleBorder(
-                          side:
-                              const BorderSide(color: Colors.black12, width: 1),
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: CustomPaint(
-                          painter: BorderPainter(),
-                          child: Container(
-                              margin: const EdgeInsets.only(
-                                  left: 0.0,
-                                  top: 10.0,
-                                  right: 0.0,
-                                  bottom: 0.0),
-                              child: body)))),
-            )));
+      alignment: Alignment.topLeft,
+      child: Transform.translate(
+        offset: Offset(
+          position.dx + contentOffset.dx,
+          position.dy + contentOffset.dy,
+        ),
+        child: ConstrainedBox(
+          constraints:
+              BoxConstraints(maxWidth: width, maxHeight: height ?? 200),
+          child: ClipPath(
+            clipper: PopOverClipper(),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.black12),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: CustomPaint(
+                painter: BorderPainter(),
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    top: 10,
+                  ),
+                  child: body,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    var y = (animation.value - 1) * 15;
+    final y = (animation.value - 1) * 15;
     return AnimatedBuilder(
       animation: animation,
       child: child,
@@ -112,8 +118,8 @@ class _PopoverRoute extends PopupRoute {
         return Opacity(
           opacity: animation.value,
           child: Transform.translate(
-            child: child,
             offset: Offset(0, y),
+            child: child,
           ),
         );
       },
@@ -132,14 +138,14 @@ Future showPopover({
   required Offset contentOffset,
   required double? height,
 }) {
-  final NavigatorState navigator = Navigator.of(context, rootNavigator: true);
+  final navigator = Navigator.of(context, rootNavigator: true);
 
   final renderObject = context.findRenderObject();
-  var translation = renderObject?.getTransformTo(null).getTranslation();
-  Offset position = Offset(translation!.x, translation.y);
+  final translation = renderObject?.getTransformTo(null).getTranslation();
+  var position = Offset(translation!.x, translation.y);
 
   final rbox = renderObject as RenderBox;
-  final Size size = rbox.size;
+  final size = rbox.size;
   position += Offset(size.width / 2, size.height);
   position += Offset(-width / 2, 0);
 

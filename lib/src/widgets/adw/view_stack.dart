@@ -21,8 +21,8 @@ class _AdwViewStackState extends State<AdwViewStack>
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      child: widget.children[widget.index ?? 0],
       duration: widget.animationDuration,
+      child: widget.children[widget.index ?? 0],
     );
   }
 }
