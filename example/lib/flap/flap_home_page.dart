@@ -5,9 +5,9 @@ import 'package:libadwaita/libadwaita.dart';
 import 'package:window_decorations/window_decorations.dart';
 
 class FlapHomePage extends StatefulWidget {
-  final ValueNotifier<ThemeMode> themeNotifier;
-
   const FlapHomePage({Key? key, required this.themeNotifier}) : super(key: key);
+
+  final ValueNotifier<ThemeMode> themeNotifier;
 
   @override
   State<FlapHomePage> createState() => _FlapHomePageState();

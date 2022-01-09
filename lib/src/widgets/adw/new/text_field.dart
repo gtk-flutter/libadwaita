@@ -3,13 +3,6 @@
 import 'package:flutter/material.dart';
 
 class AdwTextField extends StatelessWidget {
-  final TextEditingController? controller;
-  final TextInputType? keyboardType;
-  final String? labelText;
-  final Function(String)? onChanged;
-  final IconData? icon;
-  final String? initialValue;
-
   const AdwTextField(
       {Key? key,
       this.controller,
@@ -19,6 +12,13 @@ class AdwTextField extends StatelessWidget {
       this.icon,
       this.initialValue})
       : super(key: key);
+
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final String? labelText;
+  final Function(String)? onChanged;
+  final IconData? icon;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {

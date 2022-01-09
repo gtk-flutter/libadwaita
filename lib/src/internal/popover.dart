@@ -48,13 +48,6 @@ class PopOverClipper extends CustomClipper<Path> {
 }
 
 class _PopoverRoute extends PopupRoute<dynamic> {
-  final Widget body;
-  final double width;
-  final double? height;
-  final Offset position;
-  final Offset contentOffset;
-  final Color backgroundColor;
-
   _PopoverRoute({
     required this.body,
     required this.width,
@@ -63,6 +56,13 @@ class _PopoverRoute extends PopupRoute<dynamic> {
     required this.contentOffset,
     required this.backgroundColor,
   });
+
+  final Widget body;
+  final double width;
+  final double? height;
+  final Offset position;
+  final Offset contentOffset;
+  final Color backgroundColor;
 
   @override
   Color? get barrierColor => Colors.transparent;

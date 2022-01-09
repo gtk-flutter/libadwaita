@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class AdwViewSwitcherTab extends StatelessWidget {
-  final ViewSwitcherData data;
-  final ViewSwitcherStyle style;
-  final bool isSelected;
-  final VoidCallback? onSelected;
-
   const AdwViewSwitcherTab({
     Key? key,
     required this.data,
@@ -14,6 +9,11 @@ class AdwViewSwitcherTab extends StatelessWidget {
     this.isSelected = false,
     this.onSelected,
   }) : super(key: key);
+
+  final ViewSwitcherData data;
+  final ViewSwitcherStyle style;
+  final bool isSelected;
+  final VoidCallback? onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +51,14 @@ class AdwViewSwitcherTab extends StatelessWidget {
 }
 
 class _AdwViewSwitcherTabLayout extends StatelessWidget {
-  final List<Widget> children;
-  final bool isRow;
-
   const _AdwViewSwitcherTabLayout({
     Key? key,
     required this.isRow,
     required this.children,
   }) : super(key: key);
+
+  final List<Widget> children;
+  final bool isRow;
 
   @override
   Widget build(BuildContext context) {

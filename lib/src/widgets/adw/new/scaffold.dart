@@ -3,13 +3,6 @@ import 'package:libadwaita/src/controllers/flap_controller.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 
 class AdwScaffold extends StatefulWidget {
-  final Widget body;
-  final FlapController? flapController;
-  final Widget? drawer;
-
-  /// Remove this when ViewSwitcher becomes adaptive
-  final Widget? bottomNavigationBar;
-
   AdwScaffold({
     Key? key,
     required this.body,
@@ -21,6 +14,13 @@ class AdwScaffold extends StatefulWidget {
         /// Use less width to match libadwaita
         drawer = drawer != null ? SizedBox(width: 200, child: drawer) : null,
         super(key: key);
+
+  final Widget body;
+  final FlapController? flapController;
+  final Widget? drawer;
+
+  /// Remove this when ViewSwitcher becomes adaptive
+  final Widget? bottomNavigationBar;
 
   @override
   _AdwScaffoldState createState() => _AdwScaffoldState();

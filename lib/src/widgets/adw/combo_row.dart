@@ -6,15 +6,6 @@ import 'package:libadwaita/src/utils/colors.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
-  final List<String> choices;
-  final Widget? start;
-  final Widget? end;
-  final String title;
-  final String? subtitle;
-  final bool autofocus;
-  final bool enabled;
-  final EdgeInsets? contentPadding;
-
   const AdwComboRow(
       {Key? key,
       this.choices = const [],
@@ -27,20 +18,29 @@ class AdwComboRow extends StatefulWidget {
       this.contentPadding})
       : super(key: key);
 
+  final List<String> choices;
+  final Widget? start;
+  final Widget? end;
+  final String title;
+  final String? subtitle;
+  final bool autofocus;
+  final bool enabled;
+  final EdgeInsets? contentPadding;
+
   @override
   State<AdwComboRow> createState() => _AdwComboRowState();
 }
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _AdwComboRowState extends State<AdwComboRow> {
+  _AdwComboRowState();
+
   bool taped = false;
   int selected = 0;
   final GlobalKey<_AdwComboButtonState> _comboButtonState =
       GlobalKey<_AdwComboButtonState>();
 
   late AdwComboButton button;
-
-  _AdwComboRowState();
 
   @override
   void initState() {
@@ -104,10 +104,6 @@ class _AdwComboRowState extends State<AdwComboRow> {
 }
 
 class AdwComboButton extends StatefulWidget {
-  final List<String> choices;
-  final ValueSetter<int> setSelected;
-  final ValueGetter<int> getSelected;
-
   const AdwComboButton(
       {Key? key,
       this.choices = const [],
@@ -115,15 +111,19 @@ class AdwComboButton extends StatefulWidget {
       required this.getSelected})
       : super(key: key);
 
+  final List<String> choices;
+  final ValueSetter<int> setSelected;
+  final ValueGetter<int> getSelected;
+
   @override
   State<AdwComboButton> createState() => _AdwComboButtonState();
 }
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _AdwComboButtonState extends State<AdwComboButton> {
-  bool active = false;
-
   _AdwComboButtonState();
+
+  bool active = false;
 
   @override
   Widget build(BuildContext context) {

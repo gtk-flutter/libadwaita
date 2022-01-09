@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'flap_home_page.dart';
 
 class FlapDemo extends StatelessWidget {
+  FlapDemo({Key? key}) : super(key: key);
+
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
-
-  FlapDemo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

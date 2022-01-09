@@ -12,9 +12,9 @@ import 'package:libadwaita/libadwaita.dart';
 import 'package:window_decorations/window_decorations.dart';
 
 class MyHomePage extends StatefulWidget {
-  final ValueNotifier<ThemeMode> themeNotifier;
-
   const MyHomePage({Key? key, required this.themeNotifier}) : super(key: key);
+
+  final ValueNotifier<ThemeMode> themeNotifier;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();

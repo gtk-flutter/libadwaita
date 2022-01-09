@@ -3,6 +3,18 @@ import 'package:flutter/scheduler.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 class AdwStackSidebar extends StatefulWidget {
+  const AdwStackSidebar({
+    Key? key,
+    required this.sidebar,
+    required this.content,
+    this.seperator,
+    required this.onContentPopupClosed,
+    this.breakpoint = 800,
+    this.sidebarWidth = 250,
+    this.contentIndex,
+    this.fullContentBuilder,
+  }) : super(key: key);
+
   final Widget sidebar;
   final Widget content;
   final Widget? seperator;
@@ -22,18 +34,6 @@ class AdwStackSidebar extends StatefulWidget {
 
   // Content builder on smaller screen
   final Function(int? contentIndex, Widget content)? fullContentBuilder;
-
-  const AdwStackSidebar({
-    Key? key,
-    required this.sidebar,
-    required this.content,
-    this.seperator,
-    required this.onContentPopupClosed,
-    this.breakpoint = 800,
-    this.sidebarWidth = 250,
-    this.contentIndex,
-    this.fullContentBuilder,
-  }) : super(key: key);
 
   @override
   _AdwStackSidebarState createState() => _AdwStackSidebarState();

@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AdwPreferencesGroup extends StatelessWidget {
-  final List<Widget> children;
-  final double borderRadius;
-  final String? title;
-  final String? description;
-
-  final TextStyle? titleStyle;
-  final TextStyle? descriptionStyle;
-
   const AdwPreferencesGroup({
     Key? key,
     required this.children,
@@ -18,6 +10,14 @@ class AdwPreferencesGroup extends StatelessWidget {
     this.description,
     this.descriptionStyle,
   }) : super(key: key);
+
+  final List<Widget> children;
+  final double borderRadius;
+  final String? title;
+  final String? description;
+
+  final TextStyle? titleStyle;
+  final TextStyle? descriptionStyle;
 
   @override
   Widget build(BuildContext context) {

@@ -7,35 +7,6 @@ import 'package:libadwaita/libadwaita.dart';
 /// You can use the [AdwSidebar.builder] constructor to build the sidebar's
 /// children on demand.
 class AdwSidebar extends StatelessWidget {
-  /// The current index of the item selected.
-  final int? currentIndex;
-
-  /// The padding of the sidebar.
-  ///
-  /// Defaults to `EdgeInsets.symmetric(vertical: 5, horizontal: 6)`.
-  final EdgeInsets? padding;
-
-  /// Scroll controller for sidebar.
-  final ScrollController? controller;
-
-  /// Called when one of the Sidebar item is selected.
-  final Function(int index) onSelected;
-
-  /// The width of the sidebar.
-  ///
-  /// Defaults to `270.0`.
-  final double width;
-
-  /// The background color of the sidebar.
-  final Color? color;
-
-  /// The border around the sidebar.
-  final Border? border;
-
-  /// Delegate in charge of supplying children to the internal list
-  /// of this widget.
-  final List<Widget> _childrenDelegate;
-
   AdwSidebar({
     Key? key,
     required this.currentIndex,
@@ -84,6 +55,35 @@ class AdwSidebar extends StatelessWidget {
         ),
         super(key: key);
 
+  /// The current index of the item selected.
+  final int? currentIndex;
+
+  /// The padding of the sidebar.
+  ///
+  /// Defaults to `EdgeInsets.symmetric(vertical: 5, horizontal: 6)`.
+  final EdgeInsets? padding;
+
+  /// Scroll controller for sidebar.
+  final ScrollController? controller;
+
+  /// Called when one of the Sidebar item is selected.
+  final Function(int index) onSelected;
+
+  /// The width of the sidebar.
+  ///
+  /// Defaults to `270.0`.
+  final double width;
+
+  /// The background color of the sidebar.
+  final Color? color;
+
+  /// The border around the sidebar.
+  final Border? border;
+
+  /// Delegate in charge of supplying children to the internal list
+  /// of this widget.
+  final List<Widget> _childrenDelegate;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -102,6 +102,17 @@ class AdwSidebar extends StatelessWidget {
 
 /// Class that contains details about a specific sidebar item.
 class AdwSidebarItem {
+  const AdwSidebarItem({
+    this.key,
+    this.label,
+    this.padding = const EdgeInsets.symmetric(horizontal: 14),
+    this.selectedColor,
+    this.unselectedColor,
+    this.labelStyle,
+    this.labelWidget,
+    this.leading,
+  }) : assert(labelWidget != null || label != null);
+
   /// The key of the sidebar item child.
   final Key? key;
 
@@ -129,30 +140,19 @@ class AdwSidebarItem {
 
   /// The Padding of the item.
   final EdgeInsets padding;
-
-  const AdwSidebarItem({
-    this.key,
-    this.label,
-    this.padding = const EdgeInsets.symmetric(horizontal: 14),
-    this.selectedColor,
-    this.unselectedColor,
-    this.labelStyle,
-    this.labelWidget,
-    this.leading,
-  }) : assert(labelWidget != null || label != null);
 }
 
 class _AdwSidebarItemBuilder extends StatelessWidget {
-  final AdwSidebarItem Function(BuildContext context) item;
-  final bool isSelected;
-  final VoidCallback? onSelected;
-
   const _AdwSidebarItemBuilder({
     Key? key,
     required this.item,
     required this.isSelected,
     this.onSelected,
   }) : super(key: key);
+
+  final AdwSidebarItem Function(BuildContext context) item;
+  final bool isSelected;
+  final VoidCallback? onSelected;
 
   @override
   Widget build(BuildContext context) {

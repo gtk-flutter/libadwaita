@@ -8,6 +8,19 @@ enum FoldPolicy { never, always, auto }
 enum FlapPosition { start, end }
 
 class AdwFlap extends StatefulWidget {
+  const AdwFlap({
+    Key? key,
+    required this.flap,
+    required this.child,
+    this.locked = false,
+    this.flapController,
+    this.seperator,
+    this.foldPolicy = FoldPolicy.auto,
+    this.flapPosition = FlapPosition.start,
+    this.breakpoint = 900,
+    this.flapWidth = 270.0,
+  }) : super(key: key);
+
   final Widget flap;
   final Widget child;
   final Widget? seperator;
@@ -28,19 +41,6 @@ class AdwFlap extends StatefulWidget {
   /// state when screen is resized or
   /// not
   final bool locked;
-
-  const AdwFlap({
-    Key? key,
-    required this.flap,
-    required this.child,
-    this.locked = false,
-    this.flapController,
-    this.seperator,
-    this.foldPolicy = FoldPolicy.auto,
-    this.flapPosition = FlapPosition.start,
-    this.breakpoint = 900,
-    this.flapWidth = 270.0,
-  }) : super(key: key);
 
   @override
   _AdwFlapState createState() => _AdwFlapState();

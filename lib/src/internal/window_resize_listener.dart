@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 
 class WindowResizeListener extends StatefulWidget {
-  final Function(Size size) onResize;
-  final Widget child;
-
   const WindowResizeListener(
       {Key? key, required this.onResize, required this.child})
       : super(key: key);
+
+  final Function(Size size) onResize;
+  final Widget child;
 
   @override
   _WindowResizeListenerState createState() => _WindowResizeListenerState();

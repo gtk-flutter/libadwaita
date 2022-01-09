@@ -17,16 +17,6 @@ typedef AdwButtonWidgetBuilder = Widget Function(
 /// Widgets that use [AdwButton] as their base can rebuild
 /// their background through the [backgroundColorBuilder] callback.
 class AdwButton extends StatefulWidget {
-  static const defaultButtonConstrains = BoxConstraints(
-    minHeight: 24,
-    minWidth: 16,
-  );
-
-  static const defaultButtonPadding = EdgeInsets.symmetric(
-    vertical: 7,
-    horizontal: 17,
-  );
-
   const AdwButton({
     Key? key,
     this.padding = defaultButtonPadding,
@@ -112,6 +102,16 @@ class AdwButton extends StatefulWidget {
     this.isActive = false,
   })  : assert(builder != null || child != null),
         super(key: key);
+
+  static const defaultButtonConstrains = BoxConstraints(
+    minHeight: 24,
+    minWidth: 16,
+  );
+
+  static const defaultButtonPadding = EdgeInsets.symmetric(
+    vertical: 7,
+    horizontal: 17,
+  );
 
   /// Empty space to inscribe inside the [decoration]. The [child], if any, is
   /// placed inside this padding.

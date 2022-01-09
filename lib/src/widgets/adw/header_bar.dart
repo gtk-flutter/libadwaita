@@ -6,36 +6,6 @@ import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class AdwHeaderBar extends StatefulWidget {
-  /// The leading widget for the headerbar
-  final List<Widget> start;
-
-  /// The center widget for the headerbar
-  final Widget title;
-
-  /// The trailing widget for the headerbar
-  final List<Widget> end;
-
-  final Widget? minimizeBtn;
-
-  final Widget? maximizeBtn;
-
-  final Widget? closeBtn;
-
-  /// The height of the headerbar
-  final double height;
-
-  /// The padding inside the headerbar
-  final EdgeInsets padding;
-
-  /// The space b/w trailing elements and titlebar
-  final double titlebarSpace;
-
-  /// Called when headerbar is dragged
-  final VoidCallback? onHeaderDrag;
-
-  /// Called when headerbar is double tapped
-  final VoidCallback? onDoubleTap;
-
   /// To be used with window_decorations package
   /// If you don't want that. use AdwHeaderBar.minimal*
   AdwHeaderBar({
@@ -206,6 +176,36 @@ class AdwHeaderBar extends StatefulWidget {
         maximizeBtn = null,
         closeBtn = closeBtn?.call(window.close as void Function()),
         super(key: key);
+
+  /// The leading widget for the headerbar
+  final List<Widget> start;
+
+  /// The center widget for the headerbar
+  final Widget title;
+
+  /// The trailing widget for the headerbar
+  final List<Widget> end;
+
+  final Widget? minimizeBtn;
+
+  final Widget? maximizeBtn;
+
+  final Widget? closeBtn;
+
+  /// The height of the headerbar
+  final double height;
+
+  /// The padding inside the headerbar
+  final EdgeInsets padding;
+
+  /// The space b/w trailing elements and titlebar
+  final double titlebarSpace;
+
+  /// Called when headerbar is dragged
+  final VoidCallback? onHeaderDrag;
+
+  /// Called when headerbar is double tapped
+  final VoidCallback? onDoubleTap;
 
   @override
   State<AdwHeaderBar> createState() => _AdwHeaderBarState();

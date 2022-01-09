@@ -3,6 +3,14 @@ import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita/src/internal/popover.dart';
 
 class AdwPopupMenu extends StatefulWidget {
+  const AdwPopupMenu({
+    Key? key,
+    required this.body,
+    this.icon = const Icon(Icons.menu, size: 17),
+    this.popupWidth = 200,
+    this.popupHeight,
+  }) : super(key: key);
+
   /// The body of the popup
   final Widget body;
 
@@ -14,14 +22,6 @@ class AdwPopupMenu extends StatefulWidget {
 
   /// The height of the popup
   final double? popupHeight;
-
-  const AdwPopupMenu({
-    Key? key,
-    required this.body,
-    this.icon = const Icon(Icons.menu, size: 17),
-    this.popupWidth = 200,
-    this.popupHeight,
-  }) : super(key: key);
 
   @override
   State<AdwPopupMenu> createState() => _AdwPopupMenuState();

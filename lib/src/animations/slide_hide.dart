@@ -1,16 +1,16 @@
 import 'package:flutter/widgets.dart';
 
 class SlideHide extends StatefulWidget {
-  final Widget child;
-  final bool isHidden;
-  final double width;
-
   const SlideHide({
     Key? key,
     required this.child,
     required this.isHidden,
     required this.width,
   }) : super(key: key);
+
+  final Widget child;
+  final bool isHidden;
+  final double width;
 
   @override
   _SlideHideState createState() => _SlideHideState();

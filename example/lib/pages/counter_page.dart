@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class CounterPage extends StatefulWidget {
-  final ValueNotifier<int> counter;
-
   const CounterPage({Key? key, required this.counter}) : super(key: key);
+
+  final ValueNotifier<int> counter;
 
   @override
   _CounterPageState createState() => _CounterPageState();

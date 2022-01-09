@@ -2,13 +2,6 @@ import 'package:flutter/material.dart';
 
 @Deprecated('Use [AdwButton] widget instead')
 class AdwTextButton extends StatelessWidget {
-  final VoidCallback? onPressed;
-  final VoidCallback? onLongPress;
-  final FocusNode? focusNode;
-  final bool autofocus;
-  final Clip clipBehavior;
-  final Widget child;
-
   const AdwTextButton({
     Key? key,
     required this.onPressed,
@@ -20,6 +13,13 @@ class AdwTextButton extends StatelessWidget {
   }) : super(
           key: key,
         );
+
+  final VoidCallback? onPressed;
+  final VoidCallback? onLongPress;
+  final FocusNode? focusNode;
+  final bool autofocus;
+  final Clip clipBehavior;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

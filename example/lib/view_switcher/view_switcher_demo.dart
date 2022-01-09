@@ -3,10 +3,10 @@ import 'package:example/view_switcher/view_switcher_home_page.dart';
 import 'package:flutter/material.dart';
 
 class ViewSwitcherDemo extends StatelessWidget {
+  ViewSwitcherDemo({Key? key}) : super(key: key);
+
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
-
-  ViewSwitcherDemo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

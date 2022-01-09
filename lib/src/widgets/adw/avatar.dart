@@ -24,13 +24,13 @@ enum AdwAvatarColors {
 /// Represents a set of background gradient colors and a foreground color for the
 /// `AdwAvatar` widget.
 class AdwAvatarColor {
-  final Color foregroundColor;
-  final List<Color> backgroundGradient;
-
   const AdwAvatarColor({
     required this.foregroundColor,
     required this.backgroundGradient,
   });
+
+  final Color foregroundColor;
+  final List<Color> backgroundGradient;
 }
 
 /// Color palette for both the foreground and background of a `AdwAvatar` widget.
@@ -153,8 +153,6 @@ class AdwAvatarColorPalette {
 /// letters. Automatic theme will be applied in those cases to make them look
 /// cohesive inside the avatar.
 class AdwAvatar extends StatelessWidget {
-  static const defaultAvatarSize = 40.0;
-
   const AdwAvatar({
     Key? key,
     required this.child,
@@ -195,6 +193,8 @@ class AdwAvatar extends StatelessWidget {
       child: Text(letters.toUpperCase()),
     );
   }
+
+  static const defaultAvatarSize = 40.0;
 
   /// Main view that will be rendered at the center of the avatar.
   /// It will feature a default icon size of `size / 2`.
