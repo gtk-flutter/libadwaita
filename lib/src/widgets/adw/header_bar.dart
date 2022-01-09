@@ -120,17 +120,17 @@ class AdwHeaderBar extends StatefulWidget {
   })  : closeBtn = windowDecor(
           'close',
           themeType,
-          showClose ? appWindow?.close : null,
+          showClose ? appWindow?.close as void Function()? : null,
         ),
         maximizeBtn = windowDecor(
           'maximize',
           themeType,
-          showMaximize ? appWindow?.maximize : null,
+          showMaximize ? appWindow?.maximize as void Function()? : null,
         ),
         minimizeBtn = windowDecor(
           'minimize',
           themeType,
-          showMinimize ? appWindow?.minimize : null,
+          showMinimize ? appWindow?.minimize as void Function()? : null,
         ),
         onHeaderDrag = appWindow?.startDragging,
         onDoubleTap = appWindow?.maximizeOrRestore,
@@ -150,11 +150,12 @@ class AdwHeaderBar extends StatefulWidget {
     Widget Function(VoidCallback onTap)? minimizeBtn,
     Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
-  })  : onHeaderDrag = appWindow?.startDragging,
-        onDoubleTap = appWindow?.maximizeOrRestore,
-        minimizeBtn = minimizeBtn?.call(appWindow?.minimize),
-        maximizeBtn = maximizeBtn?.call(appWindow?.maximizeOrRestore),
-        closeBtn = closeBtn?.call(appWindow?.close),
+  })  : onHeaderDrag = appWindow?.startDragging as void Function()?,
+        onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
+        minimizeBtn = minimizeBtn?.call(appWindow?.minimize as void Function()),
+        maximizeBtn =
+            maximizeBtn?.call(appWindow?.maximizeOrRestore as void Function()),
+        closeBtn = closeBtn?.call(appWindow?.close as void Function()),
         super(key: key);
 
   AdwHeaderBar.nativeshell({
@@ -183,7 +184,7 @@ class AdwHeaderBar extends StatefulWidget {
         closeBtn = windowDecor(
           'close',
           themeType,
-          showClose ? window.close : null,
+          showClose ? window.close as void Function()? : null,
         ),
         super(key: key);
 
@@ -199,11 +200,11 @@ class AdwHeaderBar extends StatefulWidget {
     this.titlebarSpace = 4,
     this.height = 51,
     Widget Function(VoidCallback onTap)? closeBtn,
-  })  : onHeaderDrag = window?.performDrag,
+  })  : onHeaderDrag = window?.performDrag as void Function()?,
         onDoubleTap = null,
         minimizeBtn = null,
         maximizeBtn = null,
-        closeBtn = closeBtn?.call(window.close),
+        closeBtn = closeBtn?.call(window.close as void Function()),
         super(key: key);
 
   @override

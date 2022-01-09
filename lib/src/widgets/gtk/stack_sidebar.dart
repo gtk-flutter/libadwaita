@@ -60,7 +60,7 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
                     ? widget.fullContentBuilder!(
                         widget.contentIndex,
                         widget.content,
-                      )
+                      ) as Widget?
                     : widget.content,
               );
             },
