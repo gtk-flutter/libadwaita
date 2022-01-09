@@ -132,8 +132,8 @@ class AdwHeaderBar extends StatefulWidget {
           themeType,
           showMinimize ? appWindow?.minimize as void Function()? : null,
         ),
-        onHeaderDrag = appWindow?.startDragging,
-        onDoubleTap = appWindow?.maximizeOrRestore,
+        onHeaderDrag = appWindow?.startDragging as void Function()?,
+        onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
         super(key: key);
 
   AdwHeaderBar.minimalBitsdojo({
@@ -177,7 +177,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.titlebarSpace = 4,
     this.height = 51,
     bool showClose = true,
-  })  : onHeaderDrag = window?.performDrag,
+  })  : onHeaderDrag = window?.performDrag as void Function()?,
         onDoubleTap = null,
         minimizeBtn = null,
         maximizeBtn = null,
