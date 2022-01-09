@@ -5,7 +5,11 @@ enum AdwButtonStatus { enabled, active, enabledHovered, activeHovered, tapDown }
 
 typedef AdwButtonColorBuilder = Color? Function(BuildContext, AdwButtonStatus);
 
-typedef AdwButtonWidgetBuilder = Widget Function(BuildContext, AdwButtonStatus);
+typedef AdwButtonWidgetBuilder = Widget Function(
+  BuildContext,
+  AdwButtonStatus,
+  Widget?,
+);
 
 /// [AdwButton] is a widget used as a base to build Adwaita-style widgets
 /// with pressed and hover properties.
@@ -13,24 +17,101 @@ typedef AdwButtonWidgetBuilder = Widget Function(BuildContext, AdwButtonStatus);
 /// Widgets that use [AdwButton] as their base can rebuild
 /// their background through the [backgroundColorBuilder] callback.
 class AdwButton extends StatefulWidget {
+  static const defaultButtonConstrains = BoxConstraints(
+    minHeight: 24,
+    minWidth: 16,
+  );
+
+  static const defaultButtonPadding = EdgeInsets.symmetric(
+    vertical: 7,
+    horizontal: 17,
+  );
+
   const AdwButton({
     Key? key,
-    this.padding = EdgeInsets.zero,
+    this.padding = defaultButtonPadding,
     this.margin = EdgeInsets.zero,
-    required this.builder,
+    this.builder,
+    this.child,
+    this.textStyle,
     this.onPressed,
-    this.backgroundColorBuilder,
-    this.constraints,
+    this.backgroundColorBuilder = defaultBackgroundColorBuilder,
+    this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(8.0),
+      Radius.circular(6.0),
     ),
     this.border,
     this.shape = BoxShape.rectangle,
     this.boxShadow,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.animationCurve = Curves.ease,
+    this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
-  }) : super(key: key);
+  })  : assert(builder != null || child != null),
+        super(key: key);
+
+  const AdwButton.circular({
+    Key? key,
+    this.padding = EdgeInsets.zero,
+    this.margin = EdgeInsets.zero,
+    this.builder,
+    this.child,
+    this.textStyle,
+    this.onPressed,
+    this.backgroundColorBuilder = defaultBackgroundColorBuilder,
+    this.border,
+    this.boxShadow,
+    this.animationDuration = const Duration(milliseconds: 200),
+    this.animationCurve = Curves.easeOutQuad,
+    this.isActive = false,
+  })  : assert(builder != null || child != null),
+        constraints = const BoxConstraints.tightFor(width: 34, height: 34),
+        shape = BoxShape.circle,
+        borderRadius = null,
+        super(key: key);
+
+  const AdwButton.pill({
+    Key? key,
+    this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 32),
+    this.margin = EdgeInsets.zero,
+    this.builder,
+    this.child,
+    this.textStyle,
+    this.onPressed,
+    this.backgroundColorBuilder = defaultBackgroundColorBuilder,
+    this.constraints = defaultButtonConstrains,
+    this.border,
+    this.boxShadow,
+    this.animationDuration = const Duration(milliseconds: 200),
+    this.animationCurve = Curves.easeOutQuad,
+    this.isActive = false,
+  })  : borderRadius = const BorderRadius.all(
+          Radius.circular(9999.0),
+        ),
+        shape = BoxShape.rectangle,
+        assert(builder != null || child != null),
+        super(key: key);
+
+  const AdwButton.flat({
+    Key? key,
+    this.padding = defaultButtonPadding,
+    this.margin = EdgeInsets.zero,
+    this.builder,
+    this.child,
+    this.textStyle,
+    this.onPressed,
+    this.backgroundColorBuilder = flatBackgroundColorBuilder,
+    this.constraints = defaultButtonConstrains,
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(6.0),
+    ),
+    this.border,
+    this.shape = BoxShape.rectangle,
+    this.boxShadow,
+    this.animationDuration = const Duration(milliseconds: 200),
+    this.animationCurve = Curves.easeOutQuad,
+    this.isActive = false,
+  })  : assert(builder != null || child != null),
+        super(key: key);
 
   /// Empty space to inscribe inside the [decoration]. The [child], if any, is
   /// placed inside this padding.
@@ -41,7 +122,12 @@ class AdwButton extends StatefulWidget {
 
   /// Builder function used to create the child widget inside
   /// the button widget.
-  final AdwButtonWidgetBuilder builder;
+  ///
+  /// You can get the [child] parameter using this build method.
+  final AdwButtonWidgetBuilder? builder;
+
+  /// Widget that will be rendered inside this button.
+  final Widget? child;
 
   /// Action to perform when the widget is tapped.
   final VoidCallback? onPressed;
@@ -60,7 +146,7 @@ class AdwButton extends StatefulWidget {
   /// [BoxShape.rectangle].
   ///
   /// {@macro flutter.painting.BoxDecoration.clip}
-  final BorderRadius borderRadius;
+  final BorderRadius? borderRadius;
 
   /// A border to draw above the background [color].
   ///
@@ -74,6 +160,9 @@ class AdwButton extends StatefulWidget {
   /// right-to-left.
   ///
   final BoxBorder? border;
+
+  /// Default text style applied to the child widget.
+  final TextStyle? textStyle;
 
   /// The shape to fill the background [color] into and
   /// to cast as the [boxShadow].
@@ -105,6 +194,28 @@ class AdwButton extends StatefulWidget {
   /// Usually for popup buttons.
   final bool isActive;
 
+  static Color? defaultBackgroundColorBuilder(
+    BuildContext context,
+    AdwButtonStatus status,
+  ) {
+    if (Theme.of(context).brightness == Brightness.light) {
+      return Colors.black.resolveDefaultAdwButtonColor(context, status);
+    } else {
+      return Colors.white.resolveDefaultAdwButtonColor(context, status);
+    }
+  }
+
+  static Color? flatBackgroundColorBuilder(
+    BuildContext context,
+    AdwButtonStatus status,
+  ) {
+    if (Theme.of(context).brightness == Brightness.light) {
+      return Colors.black.resolveFlatAdwButtonColor(context, status);
+    } else {
+      return Colors.white.resolveFlatAdwButtonColor(context, status);
+    }
+  }
+
   @override
   State<StatefulWidget> createState() => _AdwButtonState();
 }
@@ -122,6 +233,10 @@ class _AdwButtonState extends State<AdwButton> {
   @override
   void didUpdateWidget(covariant AdwButton oldWidget) {
     super.didUpdateWidget(oldWidget);
+    reset();
+  }
+
+  void reset() {
     if (_status == AdwButtonStatus.tapDown) {
       _status = widget.isActive
           ? AdwButtonStatus.activeHovered
@@ -151,6 +266,7 @@ class _AdwButtonState extends State<AdwButton> {
         child: GestureDetector(
           onTap: widget.onPressed,
           onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
+          onTapUp: (_) => setState(() => reset()),
           child: AnimatedContainer(
             padding: widget.padding,
             constraints: widget.constraints,
@@ -163,10 +279,93 @@ class _AdwButtonState extends State<AdwButton> {
               borderRadius: widget.borderRadius,
               color: widget.backgroundColorBuilder?.call(context, _status),
             ),
-            child: widget.builder(context, _status),
+            child: DefaultTextStyle.merge(
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14.6,
+              ).merge(widget.textStyle),
+              child: widget.child ??
+                  widget.builder!(
+                    context,
+                    _status,
+                    widget.child,
+                  ),
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+extension AdwButtonBackgroundColor on Color {
+  Color? resolveDefaultAdwButtonColor(
+    BuildContext context,
+    AdwButtonStatus status,
+  ) {
+    if (Theme.of(context).brightness == Brightness.light) {
+      switch (status) {
+        case AdwButtonStatus.enabled:
+          return withOpacity(0.08);
+        case AdwButtonStatus.enabledHovered:
+          return withOpacity(0.12);
+        case AdwButtonStatus.active:
+          return withOpacity(0.16);
+        case AdwButtonStatus.activeHovered:
+          return withOpacity(0.20);
+        case AdwButtonStatus.tapDown:
+          return withOpacity(0.20);
+        default:
+          return null;
+      }
+    } else {
+      switch (status) {
+        case AdwButtonStatus.enabled:
+          return withOpacity(0.10);
+        case AdwButtonStatus.enabledHovered:
+          return withOpacity(0.15);
+        case AdwButtonStatus.active:
+          return withOpacity(0.20);
+        case AdwButtonStatus.activeHovered:
+          return withOpacity(0.24);
+        case AdwButtonStatus.tapDown:
+          return withOpacity(0.25);
+        default:
+          return null;
+      }
+    }
+  }
+
+  Color? resolveFlatAdwButtonColor(
+    BuildContext context,
+    AdwButtonStatus status,
+  ) {
+    if (Theme.of(context).brightness == Brightness.light) {
+      switch (status) {
+        case AdwButtonStatus.enabledHovered:
+          return withOpacity(0.056);
+        case AdwButtonStatus.active:
+          return withOpacity(0.08);
+        case AdwButtonStatus.activeHovered:
+          return withOpacity(0.105);
+        case AdwButtonStatus.tapDown:
+          return withOpacity(0.128);
+        default:
+          return null;
+      }
+    } else {
+      switch (status) {
+        case AdwButtonStatus.enabledHovered:
+          return withOpacity(0.07);
+        case AdwButtonStatus.active:
+          return withOpacity(0.10);
+        case AdwButtonStatus.activeHovered:
+          return withOpacity(0.13);
+        case AdwButtonStatus.tapDown:
+          return withOpacity(0.19);
+        default:
+          return null;
+      }
+    }
   }
 }

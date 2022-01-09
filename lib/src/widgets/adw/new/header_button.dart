@@ -21,42 +21,14 @@ class AdwHeaderButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  Color? _resolveBackgroundColor(BuildContext context, AdwButtonStatus status) {
-    if (Theme.of(context).brightness == Brightness.dark) {
-      switch (status) {
-        case AdwButtonStatus.enabledHovered:
-        case AdwButtonStatus.active:
-          return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.03);
-        case AdwButtonStatus.activeHovered:
-          return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.10);
-        case AdwButtonStatus.tapDown:
-          return Theme.of(context).appBarTheme.backgroundColor?.lighten(0.20);
-        default:
-          return null;
-      }
-    } else {
-      switch (status) {
-        case AdwButtonStatus.enabledHovered:
-        case AdwButtonStatus.active:
-          return Theme.of(context).appBarTheme.backgroundColor?.darken(0.05);
-        case AdwButtonStatus.activeHovered:
-          return Theme.of(context).appBarTheme.backgroundColor?.darken(0.10);
-        case AdwButtonStatus.tapDown:
-          return Theme.of(context).appBarTheme.backgroundColor?.darken(0.20);
-        default:
-          return null;
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return AdwButton(
+    return AdwButton.flat(
       constraints: BoxConstraints.tight(const Size.square(34)),
-      backgroundColorBuilder: _resolveBackgroundColor,
+      padding: EdgeInsets.zero,
       onPressed: onPressed,
       isActive: isActive,
-      builder: (context, status) => IconTheme.merge(
+      child: IconTheme.merge(
         data: const IconThemeData(size: 17),
         child: icon,
       ),
