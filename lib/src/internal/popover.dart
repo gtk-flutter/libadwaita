@@ -146,7 +146,7 @@ Future showPopover({
   final translation = renderObject?.getTransformTo(null).getTranslation();
   var position = Offset(translation!.x, translation.y);
 
-  final rbox = renderObject as RenderBox;
+  final rbox = renderObject! as RenderBox;
   final size = rbox.size;
   position += Offset(size.width / 2, size.height);
   position += Offset(-width / 2, 0);
