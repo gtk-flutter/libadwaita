@@ -1,9 +1,6 @@
-// ignore_for_file: always_use_package_imports
-
 import 'package:adwaita/adwaita.dart';
+import 'package:example/flap/flap_home_page.dart';
 import 'package:flutter/material.dart';
-
-import 'flap_home_page.dart';
 
 class FlapDemo extends StatelessWidget {
   FlapDemo({Key? key}) : super(key: key);

@@ -1,13 +1,10 @@
-// ignore_for_file: always_use_package_imports
-
 import 'package:adwaita/adwaita.dart';
 import 'package:example/flap/flap_demo.dart';
+import 'package:example/home_page.dart';
 import 'package:example/view_switcher/view_switcher_demo.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_window/multi_widget.dart';
 import 'package:multi_window/multi_window.dart';
-
-import 'home_page.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
