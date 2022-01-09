@@ -27,7 +27,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
     return AdwButton.flat(
       constraints: isDesktop
           ? const BoxConstraints(minWidth: 120, maxHeight: 36)
-          : const BoxConstraints(minWidth: 100, maxHeight: 36),
+          : const BoxConstraints(minWidth: 75),
       margin:
           isDesktop ? const EdgeInsets.symmetric(vertical: 6) : EdgeInsets.zero,
       onPressed: onSelected,
