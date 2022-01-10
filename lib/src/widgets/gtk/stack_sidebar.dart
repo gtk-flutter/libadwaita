@@ -3,6 +3,18 @@ import 'package:flutter/scheduler.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 class AdwStackSidebar extends StatefulWidget {
+  const AdwStackSidebar({
+    Key? key,
+    required this.sidebar,
+    required this.content,
+    this.seperator,
+    required this.onContentPopupClosed,
+    this.breakpoint = 800,
+    this.sidebarWidth = 250,
+    this.contentIndex,
+    this.fullContentBuilder,
+  }) : super(key: key);
+
   final Widget sidebar;
   final Widget content;
   final Widget? seperator;
@@ -23,18 +35,6 @@ class AdwStackSidebar extends StatefulWidget {
   // Content builder on smaller screen
   final Function(int? contentIndex, Widget content)? fullContentBuilder;
 
-  const AdwStackSidebar({
-    Key? key,
-    required this.sidebar,
-    required this.content,
-    this.seperator,
-    required this.onContentPopupClosed,
-    this.breakpoint = 800,
-    this.sidebarWidth = 250,
-    this.contentIndex,
-    this.fullContentBuilder,
-  }) : super(key: key);
-
   @override
   _AdwStackSidebarState createState() => _AdwStackSidebarState();
 }
@@ -46,19 +46,21 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
       widget.breakpoint < MediaQuery.of(context).size.width;
 
   /// Loads and removes the popup page for content on small screens
-  void loadContentPage(BuildContext context) async {
+  Future<void> loadContentPage(BuildContext context) async {
     if (_popupNotOpen) {
       _popupNotOpen = false;
       SchedulerBinding.instance!.addPostFrameCallback((_) async {
         // sets _popupNotOpen to true after popup is closed
-        Navigator.of(context)
-            .push(
-          MaterialPageRoute(
+        await Navigator.of(context)
+            .push<void>(
+          MaterialPageRoute<void>(
             builder: (BuildContext context) {
               return Scaffold(
                 body: widget.fullContentBuilder != null
                     ? widget.fullContentBuilder!(
-                        widget.contentIndex, widget.content)
+                        widget.contentIndex,
+                        widget.content,
+                      ) as Widget?
                     : widget.content,
               );
             },
@@ -87,7 +89,7 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
   Widget build(BuildContext context) {
     if (canSplitPanes) {
       _closePopup();
-      List<Widget> content = [
+      final content = <Widget>[
         SizedBox(
           width: widget.sidebarWidth,
           child: widget.sidebar,

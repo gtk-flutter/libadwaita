@@ -26,19 +26,19 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
               title: AdwViewSwitcher(
                 tabs: const [
                   ViewSwitcherData(
-                    title: "World",
+                    title: 'World',
                     icon: Icons.public,
                   ),
                   ViewSwitcherData(
-                    title: "Alarm",
+                    title: 'Alarm',
                     icon: Icons.alarm,
                   ),
                   ViewSwitcherData(
-                    title: "Stopwatch",
+                    title: 'Stopwatch',
                     icon: Icons.stop,
                   ),
                   ViewSwitcherData(
-                    title: "Timer",
+                    title: 'Timer',
                     icon: Icons.timer,
                   ),
                 ],
@@ -52,16 +52,16 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
                   index: value,
                   children: const [
                     Center(
-                      child: Text("World"),
+                      child: Text('World'),
                     ),
                     Center(
-                      child: Text("Alarm"),
+                      child: Text('Alarm'),
                     ),
                     Center(
-                      child: Text("Stopwatch"),
+                      child: Text('Stopwatch'),
                     ),
                     Center(
-                      child: Text("Timer"),
+                      child: Text('Timer'),
                     ),
                   ],
                 ),

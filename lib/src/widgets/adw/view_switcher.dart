@@ -1,13 +1,7 @@
-import 'package:libadwaita/libadwaita.dart';
 import 'package:flutter/material.dart';
+import 'package:libadwaita/libadwaita.dart';
 
 class AdwViewSwitcher extends StatelessWidget {
-  final List<ViewSwitcherData> tabs;
-  final ValueChanged<int> onViewChanged;
-  final ViewSwitcherStyle? style;
-  final int currentIndex;
-  final double height;
-
   const AdwViewSwitcher({
     Key? key,
     required this.tabs,
@@ -23,6 +17,12 @@ class AdwViewSwitcher extends StatelessWidget {
         bool? expanded,
   })  : assert(tabs.length >= 2),
         super(key: key);
+
+  final List<ViewSwitcherData> tabs;
+  final ValueChanged<int> onViewChanged;
+  final ViewSwitcherStyle? style;
+  final int currentIndex;
+  final double height;
 
   @override
   Widget build(BuildContext context) {

@@ -6,36 +6,6 @@ import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class AdwHeaderBar extends StatefulWidget {
-  /// The leading widget for the headerbar
-  final List<Widget> start;
-
-  /// The center widget for the headerbar
-  final Widget title;
-
-  /// The trailing widget for the headerbar
-  final List<Widget> end;
-
-  final Widget? minimizeBtn;
-
-  final Widget? maximizeBtn;
-
-  final Widget? closeBtn;
-
-  /// The height of the headerbar
-  final double height;
-
-  /// The padding inside the headerbar
-  final EdgeInsets padding;
-
-  /// The space b/w trailing elements and titlebar
-  final double titlebarSpace;
-
-  /// Called when headerbar is dragged
-  final VoidCallback? onHeaderDrag;
-
-  /// Called when headerbar is double tapped
-  final VoidCallback? onDoubleTap;
-
   /// To be used with window_decorations package
   /// If you don't want that. use AdwHeaderBar.minimal*
   AdwHeaderBar({
@@ -120,20 +90,20 @@ class AdwHeaderBar extends StatefulWidget {
   })  : closeBtn = windowDecor(
           'close',
           themeType,
-          showClose ? appWindow?.close : null,
+          showClose ? appWindow?.close as void Function()? : null,
         ),
         maximizeBtn = windowDecor(
           'maximize',
           themeType,
-          showMaximize ? appWindow?.maximize : null,
+          showMaximize ? appWindow?.maximize as void Function()? : null,
         ),
         minimizeBtn = windowDecor(
           'minimize',
           themeType,
-          showMinimize ? appWindow?.minimize : null,
+          showMinimize ? appWindow?.minimize as void Function()? : null,
         ),
-        onHeaderDrag = appWindow?.startDragging,
-        onDoubleTap = appWindow?.maximizeOrRestore,
+        onHeaderDrag = appWindow?.startDragging as void Function()?,
+        onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
         super(key: key);
 
   AdwHeaderBar.minimalBitsdojo({
@@ -150,11 +120,12 @@ class AdwHeaderBar extends StatefulWidget {
     Widget Function(VoidCallback onTap)? minimizeBtn,
     Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
-  })  : onHeaderDrag = appWindow?.startDragging,
-        onDoubleTap = appWindow?.maximizeOrRestore,
-        minimizeBtn = minimizeBtn?.call(appWindow?.minimize),
-        maximizeBtn = maximizeBtn?.call(appWindow?.maximizeOrRestore),
-        closeBtn = closeBtn?.call(appWindow?.close),
+  })  : onHeaderDrag = appWindow?.startDragging as void Function()?,
+        onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
+        minimizeBtn = minimizeBtn?.call(appWindow?.minimize as void Function()),
+        maximizeBtn =
+            maximizeBtn?.call(appWindow?.maximizeOrRestore as void Function()),
+        closeBtn = closeBtn?.call(appWindow?.close as void Function()),
         super(key: key);
 
   AdwHeaderBar.nativeshell({
@@ -175,17 +146,15 @@ class AdwHeaderBar extends StatefulWidget {
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
-    bool showMinimize = true,
-    bool showMaximize = true,
     bool showClose = true,
-  })  : onHeaderDrag = window?.performDrag,
+  })  : onHeaderDrag = window?.performDrag as void Function()?,
         onDoubleTap = null,
         minimizeBtn = null,
         maximizeBtn = null,
         closeBtn = windowDecor(
           'close',
           themeType,
-          showClose ? window.close : null,
+          showClose ? window.close as void Function()? : null,
         ),
         super(key: key);
 
@@ -200,15 +169,43 @@ class AdwHeaderBar extends StatefulWidget {
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
-    Widget Function(VoidCallback onTap)? minimizeBtn,
-    Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
-  })  : onHeaderDrag = window?.performDrag,
+  })  : onHeaderDrag = window?.performDrag as void Function()?,
         onDoubleTap = null,
         minimizeBtn = null,
         maximizeBtn = null,
-        closeBtn = closeBtn?.call(window.close),
+        closeBtn = closeBtn?.call(window.close as void Function()),
         super(key: key);
+
+  /// The leading widget for the headerbar
+  final List<Widget> start;
+
+  /// The center widget for the headerbar
+  final Widget title;
+
+  /// The trailing widget for the headerbar
+  final List<Widget> end;
+
+  final Widget? minimizeBtn;
+
+  final Widget? maximizeBtn;
+
+  final Widget? closeBtn;
+
+  /// The height of the headerbar
+  final double height;
+
+  /// The padding inside the headerbar
+  final EdgeInsets padding;
+
+  /// The space b/w trailing elements and titlebar
+  final double titlebarSpace;
+
+  /// Called when headerbar is dragged
+  final VoidCallback? onHeaderDrag;
+
+  /// Called when headerbar is double tapped
+  final VoidCallback? onDoubleTap;
 
   @override
   State<AdwHeaderBar> createState() => _AdwHeaderBarState();
@@ -221,23 +218,22 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       widget.maximizeBtn != null;
 
   late ValueNotifier<List<String>> seperator =
-      ValueNotifier(["", "minimize,maximize,close"]);
+      ValueNotifier(['', 'minimize,maximize,close']);
 
   @override
   void initState() {
     super.initState();
 
-    late ValueNotifier<String> order =
-        ValueNotifier(":minimize,maximize,close");
-    updateSep() {
+    late final order = ValueNotifier<String>(':minimize,maximize,close');
+    void updateSep() {
       if (mounted) {
         seperator.value = order.value.split(':');
       }
     }
 
     if (Platform.isLinux) {
-      ValueNotifier<DBusString?> buttonLayout = ValueNotifier(null);
-      var schema = GSettings('org.gnome.desktop.wm.preferences');
+      final buttonLayout = ValueNotifier<DBusString?>(null);
+      final schema = GSettings('org.gnome.desktop.wm.preferences');
       WidgetsBinding.instance?.addPostFrameCallback((_) async {
         buttonLayout.value = await schema.get('button-layout') as DBusString;
         if (buttonLayout.value != null) {
@@ -246,17 +242,17 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
         updateSep();
       });
     } else if (Platform.isMacOS) {
-      order.value = "close,maximize,minimize:";
+      order.value = 'close,maximize,minimize:';
       updateSep();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    Map<String, Widget?> windowButtons = {
-      "maximize": widget.maximizeBtn,
-      "minimize": widget.minimizeBtn,
-      "close": widget.closeBtn,
+    final windowButtons = <String, Widget?>{
+      'maximize': widget.maximizeBtn,
+      'minimize': widget.minimizeBtn,
+      'close': widget.closeBtn,
     };
 
     return Material(
@@ -270,8 +266,9 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
             decoration: BoxDecoration(
               color: Theme.of(context).appBarTheme.backgroundColor,
               border: Border(
-                  top: BorderSide(color: Theme.of(context).backgroundColor),
-                  bottom: BorderSide(color: context.borderColor)),
+                top: BorderSide(color: Theme.of(context).backgroundColor),
+                bottom: BorderSide(color: context.borderColor),
+              ),
             ),
             height: widget.height,
             width: double.infinity,
@@ -282,40 +279,41 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                   onDoubleTap: widget.onDoubleTap,
                 ),
                 ValueListenableBuilder<List<String>>(
-                    valueListenable: seperator,
-                    builder: (context, sep, _) => NavigationToolbar(
-                          leading: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (hasWindowControls &&
-                                  sep[0].split(',').isNotEmpty)
-                                SizedBox(width: widget.titlebarSpace),
-                              for (var i in sep[0].split(','))
-                                if (windowButtons[i] != null) windowButtons[i]!,
-                              ...widget.start.map(
-                                (e) => Padding(
-                                    padding: const EdgeInsets.only(right: 5),
-                                    child: e),
-                              ),
-                            ],
+                  valueListenable: seperator,
+                  builder: (context, sep, _) => NavigationToolbar(
+                    leading: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (hasWindowControls && sep[0].split(',').isNotEmpty)
+                          SizedBox(width: widget.titlebarSpace),
+                        for (var i in sep[0].split(','))
+                          if (windowButtons[i] != null) windowButtons[i]!,
+                        ...widget.start.map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: e,
                           ),
-                          middle: widget.title,
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ...widget.end.map(
-                                (e) => Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: e),
-                              ),
-                              if (hasWindowControls &&
-                                  sep[1].split(',').isNotEmpty)
-                                SizedBox(width: widget.titlebarSpace),
-                              for (var i in sep[1].split(','))
-                                if (windowButtons[i] != null) windowButtons[i]!,
-                            ],
+                        ),
+                      ],
+                    ),
+                    middle: widget.title,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ...widget.end.map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: e,
                           ),
-                        )),
+                        ),
+                        if (hasWindowControls && sep[1].split(',').isNotEmpty)
+                          SizedBox(width: widget.titlebarSpace),
+                        for (var i in sep[1].split(','))
+                          if (windowButtons[i] != null) windowButtons[i]!,
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -12,9 +12,9 @@ import 'package:libadwaita/libadwaita.dart';
 import 'package:window_decorations/window_decorations.dart';
 
 class MyHomePage extends StatefulWidget {
-  final ValueNotifier<ThemeMode> themeNotifier;
-
   const MyHomePage({Key? key, required this.themeNotifier}) : super(key: key);
+
+  final ValueNotifier<ThemeMode> themeNotifier;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: changeTheme,
             ),
           ],
-          title: const Text("Libadwaita Demo"),
+          title: const Text('Libadwaita Demo'),
           end: [
             AdwPopupMenu(
               body: Column(
@@ -137,7 +137,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             body: AdwFlap(
               flapController: _flapController,
-              foldPolicy: FoldPolicy.auto,
               flap: AdwSidebar(
                 currentIndex: _currentIndex,
                 children: const [
@@ -174,6 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: AdwViewStack(
                 animationDuration: const Duration(milliseconds: 100),
+                index: _currentIndex,
                 children: [
                   const WelcomePage(),
                   CounterPage(counter: counter),
@@ -184,7 +184,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SettingsPage(),
                   const StyleClassesPage(),
                 ],
-                index: _currentIndex,
               ),
             ),
           ),

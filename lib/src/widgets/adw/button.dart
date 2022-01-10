@@ -17,16 +17,6 @@ typedef AdwButtonWidgetBuilder = Widget Function(
 /// Widgets that use [AdwButton] as their base can rebuild
 /// their background through the [backgroundColorBuilder] callback.
 class AdwButton extends StatefulWidget {
-  static const defaultButtonConstrains = BoxConstraints(
-    minHeight: 24,
-    minWidth: 16,
-  );
-
-  static const defaultButtonPadding = EdgeInsets.symmetric(
-    vertical: 7,
-    horizontal: 17,
-  );
-
   const AdwButton({
     Key? key,
     this.padding = defaultButtonPadding,
@@ -38,7 +28,7 @@ class AdwButton extends StatefulWidget {
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
     this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(6.0),
+      Radius.circular(6),
     ),
     this.border,
     this.shape = BoxShape.rectangle,
@@ -85,7 +75,7 @@ class AdwButton extends StatefulWidget {
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : borderRadius = const BorderRadius.all(
-          Radius.circular(9999.0),
+          Radius.circular(9999),
         ),
         shape = BoxShape.rectangle,
         assert(builder != null || child != null),
@@ -102,7 +92,7 @@ class AdwButton extends StatefulWidget {
     this.backgroundColorBuilder = flatBackgroundColorBuilder,
     this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(6.0),
+      Radius.circular(6),
     ),
     this.border,
     this.shape = BoxShape.rectangle,
@@ -112,6 +102,16 @@ class AdwButton extends StatefulWidget {
     this.isActive = false,
   })  : assert(builder != null || child != null),
         super(key: key);
+
+  static const defaultButtonConstrains = BoxConstraints(
+    minHeight: 24,
+    minWidth: 16,
+  );
+
+  static const defaultButtonPadding = EdgeInsets.symmetric(
+    vertical: 7,
+    horizontal: 17,
+  );
 
   /// Empty space to inscribe inside the [decoration]. The [child], if any, is
   /// placed inside this padding.
@@ -266,7 +266,7 @@ class _AdwButtonState extends State<AdwButton> {
         child: GestureDetector(
           onTap: widget.onPressed,
           onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
-          onTapUp: (_) => setState(() => reset()),
+          onTapUp: (_) => setState(reset),
           child: AnimatedContainer(
             padding: widget.padding,
             constraints: widget.constraints,

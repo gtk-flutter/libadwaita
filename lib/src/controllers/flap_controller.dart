@@ -87,7 +87,7 @@ class FlapController extends ChangeNotifier {
   void close({BuildContext? context}) {
     if (isOpen) {
       isOpen = false;
-      var scaffold = Scaffold.of(context ?? this.context!);
+      final scaffold = Scaffold.of(context ?? this.context!);
       // Usually close only should set the isOpen variable, but if we have a
       // mobile sized device OR the fold policy is set to always, we close the
       // drawer (if its open) because this is how the actual libadwaita behaves

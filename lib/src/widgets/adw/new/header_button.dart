@@ -5,6 +5,13 @@ import 'package:libadwaita/libadwaita.dart';
 ///
 /// Via the `icon` parameter, a widget can be placed inside the button.
 class AdwHeaderButton extends StatelessWidget {
+  const AdwHeaderButton({
+    Key? key,
+    required this.icon,
+    this.isActive = false,
+    this.onPressed,
+  }) : super(key: key);
+
   /// The icon of the button. Default size would be `17`.
   final Widget icon;
 
@@ -13,13 +20,6 @@ class AdwHeaderButton extends StatelessWidget {
 
   /// Triggered when the button is pressed.
   final VoidCallback? onPressed;
-
-  const AdwHeaderButton({
-    Key? key,
-    required this.icon,
-    this.isActive = false,
-    this.onPressed,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

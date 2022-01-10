@@ -1,12 +1,12 @@
-import 'flap_home_page.dart';
-import 'package:flutter/material.dart';
 import 'package:adwaita/adwaita.dart';
+import 'package:example/flap/flap_home_page.dart';
+import 'package:flutter/material.dart';
 
 class FlapDemo extends StatelessWidget {
+  FlapDemo({Key? key}) : super(key: key);
+
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
-
-  FlapDemo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

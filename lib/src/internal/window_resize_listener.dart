@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class WindowResizeListener extends StatefulWidget {
+  const WindowResizeListener({
+    Key? key,
+    required this.onResize,
+    required this.child,
+  }) : super(key: key);
+
   final Function(Size size) onResize;
   final Widget child;
-
-  const WindowResizeListener(
-      {Key? key, required this.onResize, required this.child})
-      : super(key: key);
 
   @override
   _WindowResizeListenerState createState() => _WindowResizeListenerState();
@@ -34,7 +36,7 @@ class _WindowResizeListenerState extends State<WindowResizeListener>
 
   @override
   void didChangeMetrics() {
-    var winSize = WidgetsBinding.instance!.window.physicalSize;
+    final winSize = WidgetsBinding.instance!.window.physicalSize;
 
     if (winSize != _lastSize) {
       widget.onResize(winSize);

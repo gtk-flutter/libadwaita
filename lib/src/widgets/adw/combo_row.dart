@@ -4,6 +4,18 @@ import 'package:libadwaita/src/utils/colors.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
+  const AdwComboRow({
+    Key? key,
+    this.choices = const [],
+    this.start,
+    this.end,
+    required this.title,
+    this.subtitle,
+    this.autofocus = false,
+    this.enabled = true,
+    this.contentPadding,
+  }) : super(key: key);
+
   final List<String> choices;
   final Widget? start;
   final Widget? end;
@@ -13,32 +25,20 @@ class AdwComboRow extends StatefulWidget {
   final bool enabled;
   final EdgeInsets? contentPadding;
 
-  const AdwComboRow(
-      {Key? key,
-      this.choices = const [],
-      this.start,
-      this.end,
-      required this.title,
-      this.subtitle,
-      this.autofocus = false,
-      this.enabled = true,
-      this.contentPadding})
-      : super(key: key);
-
   @override
   State<AdwComboRow> createState() => _AdwComboRowState();
 }
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _AdwComboRowState extends State<AdwComboRow> {
+  _AdwComboRowState();
+
   bool taped = false;
   int selected = 0;
   final GlobalKey<_AdwComboButtonState> _comboButtonState =
       GlobalKey<_AdwComboButtonState>();
 
   late AdwComboButton button;
-
-  _AdwComboRowState();
 
   @override
   void initState() {
@@ -60,20 +60,20 @@ class _AdwComboRowState extends State<AdwComboRow> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        borderRadius: BorderRadius.circular(1),
-        hoverColor: context.hoverColor,
-        onTap: () {
-          if (_comboButtonState.currentState!.active) {
-            Navigator.of(context).pop();
-            _comboButtonState.currentState!.active = false;
-          } else {
-            _comboButtonState.currentState?.show();
-          }
-        },
-        child: Row(
-          children: [
-            Expanded(
-                child: ListTile(
+      borderRadius: BorderRadius.circular(1),
+      hoverColor: context.hoverColor,
+      onTap: () {
+        if (_comboButtonState.currentState!.active) {
+          Navigator.of(context).pop();
+          _comboButtonState.currentState!.active = false;
+        } else {
+          _comboButtonState.currentState?.show();
+        }
+      },
+      child: Row(
+        children: [
+          Expanded(
+            child: ListTile(
               autofocus: widget.autofocus,
               enabled: widget.enabled,
               contentPadding: widget.contentPadding,
@@ -82,33 +82,36 @@ class _AdwComboRowState extends State<AdwComboRow> {
               subtitle: widget.subtitle != null && widget.subtitle!.isNotEmpty
                   ? Text(widget.subtitle!)
                   : null,
-            )),
-            Expanded(child: Container()),
-            SizedBox(
-                width: 50,
-                child: Text(
-                  widget.choices[selected],
-                  overflow: TextOverflow.ellipsis,
-                )),
-            const SizedBox(width: 5),
-            button,
-            const SizedBox(width: 10),
-          ],
-        ));
+            ),
+          ),
+          Expanded(child: Container()),
+          SizedBox(
+            width: 50,
+            child: Text(
+              widget.choices[selected],
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(width: 5),
+          button,
+          const SizedBox(width: 10),
+        ],
+      ),
+    );
   }
 }
 
 class AdwComboButton extends StatefulWidget {
+  const AdwComboButton({
+    Key? key,
+    this.choices = const [],
+    required this.setSelected,
+    required this.getSelected,
+  }) : super(key: key);
+
   final List<String> choices;
   final ValueSetter<int> setSelected;
   final ValueGetter<int> getSelected;
-
-  const AdwComboButton(
-      {Key? key,
-      this.choices = const [],
-      required this.setSelected,
-      required this.getSelected})
-      : super(key: key);
 
   @override
   State<AdwComboButton> createState() => _AdwComboButtonState();
@@ -116,9 +119,9 @@ class AdwComboButton extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _AdwComboButtonState extends State<AdwComboButton> {
-  bool active = false;
-
   _AdwComboButtonState();
+
+  bool active = false;
 
   @override
   Widget build(BuildContext context) {
@@ -129,20 +132,22 @@ class _AdwComboButtonState extends State<AdwComboButton> {
     showPopover(
       context: context,
       child: Column(
-          children: List.generate(widget.choices.length, (int index) {
-        return ListTile(
-          title: Text(widget.choices[index]),
-          trailing:
-              index == widget.getSelected() ? const Icon(Icons.check) : null,
-          onTap: () {
-            setState(() {
-              widget.setSelected(
-                  index); //if you want to assign the index somewhere to check
-            });
-            Navigator.of(context).pop();
-          },
-        );
-      })),
+        children: List.generate(widget.choices.length, (int index) {
+          return ListTile(
+            title: Text(widget.choices[index]),
+            trailing:
+                index == widget.getSelected() ? const Icon(Icons.check) : null,
+            onTap: () {
+              setState(() {
+                widget.setSelected(
+                  index,
+                ); //if you want to assign the index somewhere to check
+              });
+              Navigator.of(context).pop();
+            },
+          );
+        }),
+      ),
       width: 150,
       height: null,
       backgroundColor: Theme.of(context).cardColor,

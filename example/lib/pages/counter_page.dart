@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class CounterPage extends StatefulWidget {
-  final ValueNotifier<int> counter;
-
   const CounterPage({Key? key, required this.counter}) : super(key: key);
+
+  final ValueNotifier<int> counter;
 
   @override
   _CounterPageState createState() => _CounterPageState();
@@ -17,7 +17,6 @@ class _CounterPageState extends State<CounterPage> {
   Widget build(BuildContext context) {
     return Center(
       child: AdwClamp.scrollable(
-        center: true,
         child: ValueListenableBuilder(
           valueListenable: widget.counter,
           builder: (_, value, child) {
@@ -31,7 +30,7 @@ class _CounterPageState extends State<CounterPage> {
                 ),
                 AdwButton.pill(
                   onPressed: _incrementCounter,
-                  child: const Text("Add"),
+                  child: const Text('Add'),
                 ),
               ],
             );
