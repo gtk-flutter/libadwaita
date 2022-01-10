@@ -23,6 +23,16 @@ enum AdwAvatarColors {
   gray
 }
 
+extension AvatarColorsExtension on AdwAvatarColors? {
+  AdwAvatarColor get getColor => AdwAvatarColorPalette.getColor(this);
+
+  Color get foregroundColor => getColor.foregroundColor;
+
+  List<Color> get backgroundGradient => getColor.backgroundGradient;
+  Color get backgroundColorLight => backgroundGradient[0];
+  Color get backgroundColor => backgroundGradient[1];
+}
+
 /// Represents a set of background gradient colors
 /// and a foreground color for the `AdwAvatar` widget.
 class AdwAvatarColor {
@@ -219,7 +229,7 @@ class AdwAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorPalette = AdwAvatarColorPalette.getColor(backgroundColor);
+    final colorPalette = backgroundColor.getColor;
     return SizedBox(
       width: size,
       height: size,

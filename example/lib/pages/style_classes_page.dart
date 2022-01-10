@@ -9,21 +9,26 @@ class StyleClassesPage extends StatelessWidget {
     return Center(
       child: AdwClamp.scrollable(
         child: Column(
-          children: const [
-            AdwButton(
+          children: [
+            const AdwButton(
               child: Text('Regular'),
             ),
-            SizedBox(height: 4),
-            AdwButton.pill(
+            const SizedBox(height: 4),
+            const AdwButton.pill(
               child: Text('Pill Button'),
             ),
-            SizedBox(height: 4),
-            AdwButton.circular(
+            const SizedBox(height: 4),
+            const AdwButton.circular(
               child: Icon(Icons.add),
             ),
-            SizedBox(height: 4),
-            AdwButton.flat(
+            const SizedBox(height: 4),
+            const AdwButton.flat(
               child: Text('Flat'),
+            ),
+            AdwButton(
+              opaque: true,
+              backgroundColor: AdwAvatarColors.blue.backgroundColor,
+              child: const Text('Suggested'),
             ),
           ],
         ),

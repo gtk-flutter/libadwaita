@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 /// Set of status that a [AdwButton] widget can be at any given time.
 enum AdwButtonStatus { enabled, active, enabledHovered, activeHovered, tapDown }
 
-typedef AdwButtonColorBuilder = Color? Function(BuildContext, AdwButtonStatus);
+typedef AdwButtonColorBuilder = Color? Function(
+  BuildContext,
+  Color? backgroundColor,
+  AdwButtonStatus, {
+  bool opaque,
+});
 
 typedef AdwButtonWidgetBuilder = Widget Function(
   BuildContext,
@@ -28,6 +33,8 @@ class AdwButton extends StatefulWidget {
     this.child,
     this.textStyle,
     this.onPressed,
+    this.opaque = false,
+    this.backgroundColor,
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
     this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
@@ -53,6 +60,8 @@ class AdwButton extends StatefulWidget {
     this.child,
     this.textStyle,
     this.onPressed,
+    this.opaque = false,
+    this.backgroundColor,
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
     this.border,
     this.boxShadow,
@@ -73,6 +82,8 @@ class AdwButton extends StatefulWidget {
     this.child,
     this.textStyle,
     this.onPressed,
+    this.opaque = false,
+    this.backgroundColor,
     this.backgroundColorBuilder = defaultBackgroundColorBuilder,
     this.constraints = defaultButtonConstrains,
     this.border,
@@ -95,6 +106,7 @@ class AdwButton extends StatefulWidget {
     this.child,
     this.textStyle,
     this.onPressed,
+    this.backgroundColor,
     this.backgroundColorBuilder = flatBackgroundColorBuilder,
     this.constraints = defaultButtonConstrains,
     this.borderRadius = const BorderRadius.all(
@@ -106,7 +118,8 @@ class AdwButton extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
-  })  : assert(builder != null || child != null, _bothBuilderAndChildError),
+  })  : opaque = false,
+        assert(builder != null || child != null, _bothBuilderAndChildError),
         super(key: key);
 
   static const defaultButtonConstrains = BoxConstraints(
@@ -137,6 +150,15 @@ class AdwButton extends StatefulWidget {
 
   /// Action to perform when the widget is tapped.
   final VoidCallback? onPressed;
+
+  /// Whether the [AdwButton] has some tranparaceny or
+  /// is it fully opaque
+  final bool opaque;
+
+  /// The backgroundColor of the [AdwButton].
+  /// This is then passed to [backgroundColorBuilder]
+  /// to build this button for different [AdwButtonStatus]
+  final Color? backgroundColor;
 
   /// Builder function used to create the background color of the button widget.
   final AdwButtonColorBuilder? backgroundColorBuilder;
@@ -202,24 +224,30 @@ class AdwButton extends StatefulWidget {
 
   static Color? defaultBackgroundColorBuilder(
     BuildContext context,
-    AdwButtonStatus status,
-  ) {
-    if (Theme.of(context).brightness == Brightness.light) {
-      return Colors.black.resolveDefaultAdwButtonColor(context, status);
-    } else {
-      return Colors.white.resolveDefaultAdwButtonColor(context, status);
-    }
+    Color? backgroundColor,
+    AdwButtonStatus status, {
+    bool opaque = false,
+  }) {
+    return (backgroundColor ?? (context.isDark ? Colors.black : Colors.white))
+        .resolveDefaultAdwButtonColor(
+      context,
+      status,
+      opaque: opaque,
+    );
   }
 
   static Color? flatBackgroundColorBuilder(
     BuildContext context,
-    AdwButtonStatus status,
-  ) {
-    if (Theme.of(context).brightness == Brightness.light) {
-      return Colors.black.resolveFlatAdwButtonColor(context, status);
-    } else {
-      return Colors.white.resolveFlatAdwButtonColor(context, status);
-    }
+    Color? backgroundColor,
+    AdwButtonStatus status, {
+    bool opaque = false,
+  }) {
+    return (backgroundColor ?? (context.isDark ? Colors.black : Colors.white))
+        .resolveFlatAdwButtonColor(
+      context,
+      status,
+      opaque: opaque,
+    );
   }
 
   @override
@@ -283,7 +311,12 @@ class _AdwButtonState extends State<AdwButton> {
               shape: widget.shape,
               boxShadow: widget.boxShadow,
               borderRadius: widget.borderRadius,
-              color: widget.backgroundColorBuilder?.call(context, _status),
+              color: widget.backgroundColorBuilder?.call(
+                context,
+                widget.backgroundColor,
+                _status,
+                opaque: widget.opaque,
+              ),
             ),
             child: DefaultTextStyle.merge(
               style: const TextStyle(
@@ -304,70 +337,61 @@ class _AdwButtonState extends State<AdwButton> {
   }
 }
 
-extension AdwButtonBackgroundColor on Color {
+extension _AdwButtonBackgroundColor on Color {
   Color? resolveDefaultAdwButtonColor(
     BuildContext context,
-    AdwButtonStatus status,
-  ) {
-    if (Theme.of(context).brightness == Brightness.light) {
+    AdwButtonStatus status, {
+    bool opaque = false,
+  }) {
+    if (opaque) {
       switch (status) {
         case AdwButtonStatus.enabled:
-          return withOpacity(0.08);
+          return withOpacity(1);
         case AdwButtonStatus.enabledHovered:
-          return withOpacity(0.12);
+          return withOpacity(context.isDark ? 0.85 : 0.88);
         case AdwButtonStatus.active:
-          return withOpacity(0.16);
+          return withOpacity(context.isDark ? 0.80 : 0.84);
         case AdwButtonStatus.activeHovered:
-          return withOpacity(0.20);
+          return withOpacity(context.isDark ? 0.76 : 0.80);
         case AdwButtonStatus.tapDown:
-          return withOpacity(0.20);
+          return withOpacity(context.isDark ? 0.75 : 0.80);
       }
     } else {
       switch (status) {
         case AdwButtonStatus.enabled:
-          return withOpacity(0.10);
+          return withOpacity(context.isDark ? 0.10 : 0.08);
         case AdwButtonStatus.enabledHovered:
-          return withOpacity(0.15);
+          return withOpacity(context.isDark ? 0.15 : 0.12);
         case AdwButtonStatus.active:
-          return withOpacity(0.20);
+          return withOpacity(context.isDark ? 0.20 : 0.16);
         case AdwButtonStatus.activeHovered:
-          return withOpacity(0.24);
+          return withOpacity(context.isDark ? 0.24 : 0.20);
         case AdwButtonStatus.tapDown:
-          return withOpacity(0.25);
+          return withOpacity(context.isDark ? 0.25 : 0.20);
       }
     }
   }
 
   Color? resolveFlatAdwButtonColor(
     BuildContext context,
-    AdwButtonStatus status,
-  ) {
-    if (Theme.of(context).brightness == Brightness.light) {
-      switch (status) {
-        case AdwButtonStatus.enabledHovered:
-          return withOpacity(0.056);
-        case AdwButtonStatus.active:
-          return withOpacity(0.08);
-        case AdwButtonStatus.activeHovered:
-          return withOpacity(0.105);
-        case AdwButtonStatus.tapDown:
-          return withOpacity(0.128);
-        case AdwButtonStatus.enabled:
-          return null;
-      }
-    } else {
-      switch (status) {
-        case AdwButtonStatus.enabledHovered:
-          return withOpacity(0.07);
-        case AdwButtonStatus.active:
-          return withOpacity(0.10);
-        case AdwButtonStatus.activeHovered:
-          return withOpacity(0.13);
-        case AdwButtonStatus.tapDown:
-          return withOpacity(0.19);
-        case AdwButtonStatus.enabled:
-          return null;
-      }
+    AdwButtonStatus status, {
+    bool opaque = false,
+  }) {
+    switch (status) {
+      case AdwButtonStatus.enabledHovered:
+        return withOpacity(context.isDark ? 0.07 : 0.056);
+      case AdwButtonStatus.active:
+        return withOpacity(context.isDark ? 0.10 : 0.08);
+      case AdwButtonStatus.activeHovered:
+        return withOpacity(context.isDark ? 0.13 : 0.105);
+      case AdwButtonStatus.tapDown:
+        return withOpacity(context.isDark ? 0.19 : 0.128);
+      case AdwButtonStatus.enabled:
+        return null;
     }
   }
+}
+
+extension _ContextExt on BuildContext {
+  bool get isDark => Theme.of(this).brightness == Brightness.light;
 }
