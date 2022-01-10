@@ -126,14 +126,14 @@ class _AdwFlapState extends State<AdwFlap> {
           // If FoldPolicy is auto, then close / open the sidebar depending on the
           // state
           final isMobile = size.width < widget.breakpoint;
-          _controller.updateModalState(context, isMobile);
+          _controller.updateModalState(context, state: isMobile);
 
           switch (widget.foldPolicy) {
             case FoldPolicy.never:
             case FoldPolicy.always:
               break;
             case FoldPolicy.auto:
-              _controller.updateOpenState(!isMobile);
+              _controller.updateOpenState(state: !isMobile);
               break;
           }
         });

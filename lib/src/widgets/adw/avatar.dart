@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-/// This enum represents all possible color combinations a `AdwAvatar` widget
-/// can feature. They're extracted directly from the GTK `libadwaita` implementation.
+/// This enum represents all possible
+/// color combinations a `AdwAvatar` widget
+/// can feature. They're extracted directly
+/// from the GTK `libadwaita` implementation.
 enum AdwAvatarColors {
   blue,
   cyan,
@@ -21,8 +23,8 @@ enum AdwAvatarColors {
   gray
 }
 
-/// Represents a set of background gradient colors and a foreground color for the
-/// `AdwAvatar` widget.
+/// Represents a set of background gradient colors
+/// and a foreground color for the `AdwAvatar` widget.
 class AdwAvatarColor {
   const AdwAvatarColor({
     required this.foregroundColor,
@@ -33,7 +35,8 @@ class AdwAvatarColor {
   final List<Color> backgroundGradient;
 }
 
-/// Color palette for both the foreground and background of a `AdwAvatar` widget.
+/// Color palette for both the foreground
+/// and background of a `AdwAvatar` widget.
 class AdwAvatarColorPalette {
   static const _palette = {
     AdwAvatarColors.blue: AdwAvatarColor(
@@ -175,7 +178,8 @@ class AdwAvatar extends StatelessWidget {
     assert(text.isNotEmpty, 'Text should not be empty');
 
     // 1. Trim the string from leading and trailing whitespace.
-    // 2. Separate the string via whitespaces (can be multiple spaces between words).
+    // 2. Separate the string via whitespaces (can be multiple
+    // spaces between words).
     // 3. Select a max of 2 words and store it in a list.
     final words = text.trim().split(RegExp(' +')).take(2);
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+const String _amountError = 'The amount should be b/w the range of 0 to 1';
+
 extension ColorBrightness on Color {
   Color darken([double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
+    assert(amount >= 0 && amount <= 1, _amountError);
 
     final hsl = HSLColor.fromColor(this);
     final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
@@ -11,7 +13,7 @@ extension ColorBrightness on Color {
   }
 
   Color lighten([double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
+    assert(amount >= 0 && amount <= 1, _amountError);
 
     final hsl = HSLColor.fromColor(this);
     final hslLight =

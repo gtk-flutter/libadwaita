@@ -11,8 +11,8 @@ class SettingsPage extends StatelessWidget {
         children: [
           const AdwPreferencesGroup(
             title: 'Pages',
-            description:
-                'Preferences are organized in pages, this example has the following pages:',
+            description: '''
+Preferences are organized in pages, this example has the following pages:''',
             children: [
               AdwActionRow(
                 title: 'Layout',
@@ -25,8 +25,9 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: 12),
           const AdwPreferencesGroup(
             title: 'Groups',
-            description:
-                'Preferences are grouped together, a group can have a title and a description. Descriptions will be wrapped if they are too long. This page has the following groups:',
+            description: '''
+Preferences are grouped together, a group can have a title and a description. 
+Descriptions will be wrapped if they are too long. This page has the following groups:''',
             children: [
               AdwActionRow(title: 'An untitled group'),
               AdwActionRow(title: 'Pages'),

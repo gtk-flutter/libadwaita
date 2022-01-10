@@ -45,7 +45,7 @@ class _SlideHideState extends State<SlideHide>
   }
 
   @override
-  void didUpdateWidget(covariant oldWidget) {
+  void didUpdateWidget(SlideHide oldWidget) {
     super.didUpdateWidget(oldWidget);
     animate();
   }

@@ -11,6 +11,9 @@ typedef AdwButtonWidgetBuilder = Widget Function(
   Widget?,
 );
 
+const String _bothBuilderAndChildError = """
+Either use builder or use child, Both can't be assigned at one""";
+
 /// [AdwButton] is a widget used as a base to build Adwaita-style widgets
 /// with pressed and hover properties.
 ///
@@ -36,7 +39,10 @@ class AdwButton extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
-  })  : assert(builder != null || child != null),
+  })  : assert(
+          builder != null || child != null,
+          _bothBuilderAndChildError,
+        ),
         super(key: key);
 
   const AdwButton.circular({
@@ -53,7 +59,7 @@ class AdwButton extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
-  })  : assert(builder != null || child != null),
+  })  : assert(builder != null || child != null, _bothBuilderAndChildError),
         constraints = const BoxConstraints.tightFor(width: 34, height: 34),
         shape = BoxShape.circle,
         borderRadius = null,
@@ -78,7 +84,7 @@ class AdwButton extends StatefulWidget {
           Radius.circular(9999),
         ),
         shape = BoxShape.rectangle,
-        assert(builder != null || child != null),
+        assert(builder != null || child != null, _bothBuilderAndChildError),
         super(key: key);
 
   const AdwButton.flat({
@@ -100,7 +106,7 @@ class AdwButton extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
-  })  : assert(builder != null || child != null),
+  })  : assert(builder != null || child != null, _bothBuilderAndChildError),
         super(key: key);
 
   static const defaultButtonConstrains = BoxConstraints(
@@ -113,11 +119,11 @@ class AdwButton extends StatefulWidget {
     horizontal: 17,
   );
 
-  /// Empty space to inscribe inside the [decoration]. The [child], if any, is
-  /// placed inside this padding.
+  /// Empty space to inscribe inside the [BoxDecoration].
+  ///  The [child], if any, is placed inside this padding.
   final EdgeInsetsGeometry padding;
 
-  /// Empty space to surround the [decoration] and [child].
+  /// Empty space to surround the [BoxDecoration] and [child].
   final EdgeInsetsGeometry margin;
 
   /// Builder function used to create the child widget inside
@@ -148,7 +154,7 @@ class AdwButton extends StatefulWidget {
   /// {@macro flutter.painting.BoxDecoration.clip}
   final BorderRadius? borderRadius;
 
-  /// A border to draw above the background [color].
+  /// A border to draw above the background color.
   ///
   /// Follows the [shape] and [borderRadius].
   ///
@@ -164,7 +170,7 @@ class AdwButton extends StatefulWidget {
   /// Default text style applied to the child widget.
   final TextStyle? textStyle;
 
-  /// The shape to fill the background [color] into and
+  /// The shape to fill the background color into and
   /// to cast as the [boxShadow].
   ///
   /// If this is [BoxShape.circle] then [borderRadius] is ignored.
@@ -281,7 +287,7 @@ class _AdwButtonState extends State<AdwButton> {
             ),
             child: DefaultTextStyle.merge(
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 fontSize: 14.6,
               ).merge(widget.textStyle),
               child: widget.child ??
@@ -315,8 +321,6 @@ extension AdwButtonBackgroundColor on Color {
           return withOpacity(0.20);
         case AdwButtonStatus.tapDown:
           return withOpacity(0.20);
-        default:
-          return null;
       }
     } else {
       switch (status) {
@@ -330,8 +334,6 @@ extension AdwButtonBackgroundColor on Color {
           return withOpacity(0.24);
         case AdwButtonStatus.tapDown:
           return withOpacity(0.25);
-        default:
-          return null;
       }
     }
   }
@@ -350,7 +352,7 @@ extension AdwButtonBackgroundColor on Color {
           return withOpacity(0.105);
         case AdwButtonStatus.tapDown:
           return withOpacity(0.128);
-        default:
+        case AdwButtonStatus.enabled:
           return null;
       }
     } else {
@@ -363,7 +365,7 @@ extension AdwButtonBackgroundColor on Color {
           return withOpacity(0.13);
         case AdwButtonStatus.tapDown:
           return withOpacity(0.19);
-        default:
+        case AdwButtonStatus.enabled:
           return null;
       }
     }

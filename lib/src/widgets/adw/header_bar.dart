@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:io';
 
 import 'package:dbus/dbus.dart';
@@ -22,6 +24,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
+    this.textStyle,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -58,6 +61,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
+    this.textStyle,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -77,10 +81,11 @@ class AdwHeaderBar extends StatefulWidget {
     dynamic themeType,
 
     /// The appWindow object from bitsdojo_window package
-    required appWindow,
+    required dynamic appWindow,
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
+    this.textStyle,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -110,10 +115,11 @@ class AdwHeaderBar extends StatefulWidget {
     Key? key,
 
     /// The appWindow object from bitsdojo_window package
-    required appWindow,
+    required dynamic appWindow,
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
+    this.textStyle,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -139,10 +145,11 @@ class AdwHeaderBar extends StatefulWidget {
     dynamic themeType,
 
     /// The Window.of(context) object from nativeshell package
-    required window,
+    required dynamic window,
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
+    this.textStyle,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -162,10 +169,11 @@ class AdwHeaderBar extends StatefulWidget {
     Key? key,
 
     /// The Window.of(context) object from nativeshell package
-    required window,
+    required dynamic window,
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
+    this.textStyle,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -185,6 +193,9 @@ class AdwHeaderBar extends StatefulWidget {
 
   /// The trailing widget for the headerbar
   final List<Widget> end;
+
+  /// Default text style applied to the child widget.
+  final TextStyle? textStyle;
 
   final Widget? minimizeBtn;
 
@@ -280,37 +291,45 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                 ),
                 ValueListenableBuilder<List<String>>(
                   valueListenable: seperator,
-                  builder: (context, sep, _) => NavigationToolbar(
-                    leading: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (hasWindowControls && sep[0].split(',').isNotEmpty)
-                          SizedBox(width: widget.titlebarSpace),
-                        for (var i in sep[0].split(','))
-                          if (windowButtons[i] != null) windowButtons[i]!,
-                        ...widget.start.map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.only(right: 5),
-                            child: e,
+                  builder: (context, sep, _) => DefaultTextStyle.merge(
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ).merge(widget.textStyle),
+                    child: NavigationToolbar(
+                      leading: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (hasWindowControls && sep[0].split(',').isNotEmpty)
+                            SizedBox(width: widget.titlebarSpace),
+                          for (var i in sep[0].split(','))
+                            if (windowButtons[i] != null) windowButtons[i]!,
+                          ...widget.start.map(
+                            (e) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 3),
+                              child: e,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    middle: widget.title,
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ...widget.end.map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: e,
+                        ],
+                      ),
+                      middle: widget.title,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ...widget.end.map(
+                            (e) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 3),
+                              child: e,
+                            ),
                           ),
-                        ),
-                        if (hasWindowControls && sep[1].split(',').isNotEmpty)
-                          SizedBox(width: widget.titlebarSpace),
-                        for (var i in sep[1].split(','))
-                          if (windowButtons[i] != null) windowButtons[i]!,
-                      ],
+                          if (hasWindowControls && sep[1].split(',').isNotEmpty)
+                            SizedBox(width: widget.titlebarSpace),
+                          for (var i in sep[1].split(','))
+                            if (windowButtons[i] != null) windowButtons[i]!,
+                        ],
+                      ),
                     ),
                   ),
                 ),

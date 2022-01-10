@@ -33,7 +33,7 @@ class ListsPage extends StatelessWidget {
               ),
               AdwActionRow(
                 title: 'Rows can have suffix widgets',
-                end: TextButton(
+                end: AdwButton(
                   onPressed: () {},
                   child: const Text('Frobnicate'),
                 ),

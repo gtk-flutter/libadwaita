@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
+const String _bothLabelAndLabelWidget = """
+Either use label or use labelWidget, both can't be assigned at once.""";
+
 /// View that is normally used to place navigation and selection items
 /// at the side of the app.
 ///
@@ -43,7 +46,7 @@ class AdwSidebar extends StatelessWidget {
     )
         itemBuilder,
     required int itemCount,
-  })  : assert(itemCount >= 0),
+  })  : assert(itemCount >= 0, 'Item Count cannot not be negative!'),
         _childrenDelegate = List.generate(
           itemCount,
           (index) => _AdwSidebarItemBuilder(
@@ -111,7 +114,10 @@ class AdwSidebarItem {
     this.labelStyle,
     this.labelWidget,
     this.leading,
-  }) : assert(labelWidget != null || label != null);
+  }) : assert(
+          labelWidget != null || label != null,
+          _bothLabelAndLabelWidget,
+        );
 
   /// The key of the sidebar item child.
   final Key? key;

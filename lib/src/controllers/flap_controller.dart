@@ -32,20 +32,19 @@ class FlapController extends ChangeNotifier {
     }
   }
 
-  void onDrawerChanged(bool val) {
-    updateOpenState(val);
-  }
+  // ignore: avoid_positional_boolean_parameters
+  void onDrawerChanged(bool state) => updateOpenState(state: state);
 
-  void updateOpenState(bool val) {
-    if (val != isOpen) {
-      isOpen = val;
+  void updateOpenState({required bool state}) {
+    if (state != isOpen) {
+      isOpen = state;
       notifyListeners();
     }
   }
 
-  void updateModalState(BuildContext context, bool val) {
-    if (val != isModal) {
-      isModal = val;
+  void updateModalState(BuildContext context, {required bool state}) {
+    if (state != isModal) {
+      isModal = state;
       // This function will be called on every resize. Thus when we resize from
       // a mobile sized window to a desktop sized window and the drawer is open,
       // then the drawer will stay open and the sidebar will also expand. To

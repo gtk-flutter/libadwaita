@@ -130,8 +130,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
                         ),
                         AdwActionRow(
                           title: 'Locked',
-                          subtitle:
-                              "Sidebar visibility doesn't change when fold state changes",
+                          subtitle: """
+Sidebar visibility doesn't change when fold state changes""",
                           end: CupertinoSwitch(
                             value: locked,
                             onChanged: (val) {
@@ -178,8 +178,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
                       children: [
                         AdwActionRow(
                           title: 'Modal',
-                          subtitle:
-                              'Clicking outside the sidebar or pressing Esc will close it when folded',
+                          subtitle: '''
+Clicking outside the sidebar or pressing Esc will close it when folded''',
                           end:
                               CupertinoSwitch(value: true, onChanged: (val) {}),
                         ),
