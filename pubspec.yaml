@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   gsettings: ">=0.2.1 <1.0.0"
 
-dev_dependencies: 
+dev_dependencies:
   very_good_analysis: ^2.4.0
 
 flutter:

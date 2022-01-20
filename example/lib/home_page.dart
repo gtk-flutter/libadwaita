@@ -9,7 +9,6 @@ import 'package:example/pages/view_switcher_page.dart';
 import 'package:example/pages/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:window_decorations/window_decorations.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.themeNotifier}) : super(key: key);
@@ -56,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         AdwHeaderBar.bitsdojo(
           appWindow: appWindow,
-          windowDecor: windowDecor,
           start: [
             Builder(
               builder: (context) {

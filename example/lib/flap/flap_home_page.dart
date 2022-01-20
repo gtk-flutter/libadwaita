@@ -2,7 +2,6 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:window_decorations/window_decorations.dart';
 
 class FlapHomePage extends StatefulWidget {
   const FlapHomePage({Key? key, required this.themeNotifier}) : super(key: key);
@@ -51,7 +50,6 @@ class _FlapHomePageState extends State<FlapHomePage> {
       children: [
         AdwHeaderBar.bitsdojo(
           appWindow: appWindow,
-          windowDecor: windowDecor,
           start: [
             Builder(
               builder: (context) {

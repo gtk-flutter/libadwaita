@@ -52,8 +52,9 @@ class AdwButton extends StatefulWidget {
         ),
         super(key: key);
 
-  const AdwButton.circular({
+  AdwButton.circular({
     Key? key,
+    double size = 34,
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
     this.builder,
@@ -69,7 +70,7 @@ class AdwButton extends StatefulWidget {
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : assert(builder != null || child != null, _bothBuilderAndChildError),
-        constraints = const BoxConstraints.tightFor(width: 34, height: 34),
+        constraints = BoxConstraints.tightFor(width: size, height: size),
         shape = BoxShape.circle,
         borderRadius = null,
         super(key: key);

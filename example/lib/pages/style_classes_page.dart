@@ -11,23 +11,26 @@ class StyleClassesPage extends StatelessWidget {
         child: Column(
           children: [
             const AdwButton(
+              margin: EdgeInsets.symmetric(vertical: 4),
               child: Text('Regular'),
             ),
-            const SizedBox(height: 4),
             const AdwButton.pill(
+              margin: EdgeInsets.symmetric(vertical: 4),
               child: Text('Pill Button'),
             ),
-            const SizedBox(height: 4),
-            const AdwButton.circular(
-              child: Icon(Icons.add),
+            AdwButton.circular(
+              margin: const EdgeInsets.symmetric(vertical: 4),
+              child: const Icon(Icons.add),
             ),
-            const SizedBox(height: 4),
             const AdwButton.flat(
+              margin: EdgeInsets.symmetric(vertical: 4),
               child: Text('Flat'),
             ),
             AdwButton(
               opaque: true,
+              margin: const EdgeInsets.symmetric(vertical: 4),
               backgroundColor: AdwAvatarColors.blue.backgroundColor,
+              textStyle: const TextStyle(color: Colors.white),
               child: const Text('Suggested'),
             ),
           ],
