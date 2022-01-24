@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/libadwaita.dart';
 
+enum _ButtonType { close, maximize, minimize }
+
 class AdwHeaderBar extends StatefulWidget {
   /// To be used with window_decorations package
   /// If you don't want that. use AdwHeaderBar.minimal*
@@ -25,16 +27,16 @@ class AdwHeaderBar extends StatefulWidget {
     VoidCallback? onMaximize,
     VoidCallback? onClose,
   })  : closeBtn = _WindowButtonBuilder(
-          icon: 'close',
+          buttonType: _ButtonType.close,
           onPressed: onClose,
         ),
         maximizeBtn = _WindowButtonBuilder(
           onPressed: onMaximize,
-          icon: 'maximize',
+          buttonType: _ButtonType.maximize,
         ),
         minimizeBtn = _WindowButtonBuilder(
           onPressed: onMinimize,
-          icon: 'minimize',
+          buttonType: _ButtonType.minimize,
         ),
         super(key: key);
 
@@ -116,19 +118,19 @@ class AdwHeaderBar extends StatefulWidget {
   })  : closeBtn = showClose
             ? _WindowButtonBuilder(
                 onPressed: appWindow?.close as void Function()?,
-                icon: 'close',
+                buttonType: _ButtonType.close,
               )
             : null,
         maximizeBtn = showMaximize
             ? _WindowButtonBuilder(
                 onPressed: appWindow?.maximize as void Function()?,
-                icon: 'maximize',
+                buttonType: _ButtonType.maximize,
               )
             : null,
         minimizeBtn = showMinimize
             ? _WindowButtonBuilder(
                 onPressed: appWindow?.minimize as void Function()?,
-                icon: 'minimize',
+                buttonType: _ButtonType.minimize,
               )
             : null,
         onHeaderDrag = appWindow?.startDragging as void Function()?,
@@ -218,7 +220,7 @@ class AdwHeaderBar extends StatefulWidget {
         maximizeBtn = null,
         closeBtn = _WindowButtonBuilder(
           onPressed: showClose ? window.close as void Function()? : null,
-          icon: 'close',
+          buttonType: _ButtonType.close,
         ),
         super(key: key);
 
@@ -313,12 +315,12 @@ class AdwHeaderBar extends StatefulWidget {
 class _WindowButtonBuilder extends StatelessWidget {
   const _WindowButtonBuilder({
     Key? key,
-    required this.icon,
+    required this.buttonType,
     required this.onPressed,
   }) : super(key: key);
 
   final VoidCallback? onPressed;
-  final String icon;
+  final _ButtonType buttonType;
 
   @override
   Widget build(BuildContext context) {
@@ -328,12 +330,12 @@ class _WindowButtonBuilder extends StatelessWidget {
             onPressed: onPressed,
             child: CustomPaint(
               painter: () {
-                switch (icon) {
-                  case 'close':
+                switch (buttonType) {
+                  case _ButtonType.close:
                     return CloseWBPainter();
-                  case 'maximize':
+                  case _ButtonType.maximize:
                     return MaximizeWBPainter();
-                  case 'minimize':
+                  case _ButtonType.minimize:
                     return MinimizeWBPainter();
                 }
               }(),
