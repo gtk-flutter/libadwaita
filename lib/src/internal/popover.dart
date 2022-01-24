@@ -117,19 +117,9 @@ class _PopoverRoute extends PopupRoute<dynamic> {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    final y = (animation.value - 1) * 15;
-    return AnimatedBuilder(
-      animation: animation,
+    return FadeTransition(
+      opacity: animation,
       child: child,
-      builder: (context, child) {
-        return Opacity(
-          opacity: animation.value,
-          child: Transform.translate(
-            offset: Offset(0, y),
-            child: child,
-          ),
-        );
-      },
     );
   }
 
