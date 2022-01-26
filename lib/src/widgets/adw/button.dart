@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:libadwaita/libadwaita.dart';
 
 /// Set of status that a [AdwButton] widget can be at any given time.
 enum AdwButtonStatus { enabled, active, enabledHovered, activeHovered, tapDown }
@@ -229,8 +230,7 @@ class AdwButton extends StatefulWidget {
     AdwButtonStatus status, {
     bool opaque = false,
   }) {
-    return (backgroundColor ?? (context.isDark ? Colors.black : Colors.white))
-        .resolveDefaultAdwButtonColor(
+    return (backgroundColor ?? context.textColor).resolveDefaultAdwButtonColor(
       context,
       status,
       opaque: opaque,

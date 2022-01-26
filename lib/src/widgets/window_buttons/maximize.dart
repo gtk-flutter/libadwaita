@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MaximizeWBPainter extends CustomPainter {
+  MaximizeWBPainter({required this.color});
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     final path0 = Path()
@@ -19,7 +22,7 @@ class MaximizeWBPainter extends CustomPainter {
 
     final paintFill0 = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.black;
+      ..color = color;
     canvas.drawPath(path0, paintFill0);
   }
 

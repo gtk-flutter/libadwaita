@@ -10,7 +10,7 @@ import 'package:libadwaita/libadwaita.dart';
 enum _ButtonType { close, maximize, minimize }
 
 class AdwHeaderBar extends StatefulWidget {
-  /// To be used with window_decorations package
+  /// If you use with window_decorations
   /// If you don't want that. use AdwHeaderBar.minimal*
   AdwHeaderBar({
     Key? key,
@@ -329,14 +329,15 @@ class _WindowButtonBuilder extends StatelessWidget {
             size: 20,
             onPressed: onPressed,
             child: CustomPaint(
+              size: const Size(16, 16),
               painter: () {
                 switch (buttonType) {
                   case _ButtonType.close:
-                    return CloseWBPainter();
+                    return CloseWBPainter(color: context.textColor);
                   case _ButtonType.maximize:
-                    return MaximizeWBPainter();
+                    return MaximizeWBPainter(color: context.textColor);
                   case _ButtonType.minimize:
-                    return MinimizeWBPainter();
+                    return MinimizeWBPainter(color: context.textColor);
                 }
               }(),
             ),

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MinimizeWBPainter extends CustomPainter {
+  MinimizeWBPainter({required this.color});
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paintFill0 = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.black;
+      ..color = color;
     canvas.drawRRect(
       RRect.fromRectAndCorners(
         Rect.fromLTWH(

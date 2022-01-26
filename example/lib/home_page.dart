@@ -77,14 +77,40 @@ class _MyHomePageState extends State<MyHomePage> {
             AdwPopupMenu(
               body: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  ListTile(
-                    onTap: () {
+                  AdwButton.flat(
+                    onPressed: () {
                       counter.value = 0;
                       Navigator.of(context).pop();
                     },
-                    title: const Text(
+                    padding: AdwButton.defaultButtonPadding.copyWith(
+                      top: 10,
+                      bottom: 10,
+                    ),
+                    child: const Text(
                       'Reset Counter',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(),
+                  AdwButton.flat(
+                    padding: AdwButton.defaultButtonPadding.copyWith(
+                      top: 10,
+                      bottom: 10,
+                    ),
+                    child: const Text(
+                      'Preferences',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  AdwButton.flat(
+                    padding: AdwButton.defaultButtonPadding.copyWith(
+                      top: 10,
+                      bottom: 10,
+                    ),
+                    child: const Text(
+                      'About this Demo',
                       style: TextStyle(fontSize: 15),
                     ),
                   ),

@@ -12,8 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
   gsettings: ">=0.2.1 <1.0.0"
+  popover: ^0.2.6+3
 
 dev_dependencies:
+  svg_to_paint: ^1.0.10
   very_good_analysis: ^2.4.0
 
 flutter:

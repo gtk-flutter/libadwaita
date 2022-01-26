@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:libadwaita/src/internal/popover.dart';
+import 'package:popover/popover.dart';
 
 class AdwPopupMenu extends StatefulWidget {
   const AdwPopupMenu({
@@ -39,11 +39,21 @@ class _AdwPopupMenuState extends State<AdwPopupMenu> {
         setState(() => isActive = true);
         showPopover(
           context: context,
-          child: widget.body,
+          shadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.40),
+              blurRadius: 6,
+            ),
+          ],
+          barrierColor: Colors.transparent,
+          bodyBuilder: (_) => Padding(
+            padding: const EdgeInsets.all(4),
+            child: widget.body,
+          ),
           width: widget.popupWidth,
           height: widget.popupHeight,
           backgroundColor: Theme.of(context).cardColor,
-          contentOffset: const Offset(0, 4),
+          // contentOffset: const Offset(0, 4),
         ).whenComplete(() => setState(() => isActive = false));
       },
     );
