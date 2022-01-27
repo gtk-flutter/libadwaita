@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:popover/popover.dart';
+import 'package:popover_gtk/popover.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
@@ -140,7 +140,7 @@ class _AdwComboButtonState extends State<AdwComboButton> {
       barrierColor: Colors.transparent,
       shadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.40),
+          color: context.borderColor,
           blurRadius: 6,
         ),
       ],

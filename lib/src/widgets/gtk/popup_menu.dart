@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:popover/popover.dart';
+import 'package:popover_gtk/popover.dart';
 
 class AdwPopupMenu extends StatefulWidget {
   const AdwPopupMenu({
@@ -41,7 +41,7 @@ class _AdwPopupMenuState extends State<AdwPopupMenu> {
           context: context,
           shadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.40),
+              color: context.borderColor,
               blurRadius: 6,
             ),
           ],

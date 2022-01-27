@@ -328,7 +328,6 @@ class _WindowButtonBuilder extends StatelessWidget {
     return onPressed != null
         ? AdwButton.circular(
             size: 25,
-            backgroundColorBuilder: AdwButton.defaultBackgroundColorBuilder,
             onPressed: onPressed,
             child: Center(
               child: SvgPicture.asset(
