@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/libadwaita.dart';
 
@@ -326,21 +327,29 @@ class _WindowButtonBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return onPressed != null
         ? AdwButton.circular(
-            size: 20,
+            size: 25,
+            backgroundColorBuilder: AdwButton.defaultBackgroundColorBuilder,
             onPressed: onPressed,
-            child: CustomPaint(
-              size: const Size(16, 16),
-              painter: () {
-                switch (buttonType) {
-                  case _ButtonType.close:
-                    return CloseWBPainter(color: context.textColor);
-                  case _ButtonType.maximize:
-                    return MaximizeWBPainter(color: context.textColor);
-                  case _ButtonType.minimize:
-                    return MinimizeWBPainter(color: context.textColor);
-                }
-              }(),
+            child: Center(
+              child: SvgPicture.asset(
+                'packages/libadwaita/assets/icons/${buttonType.name}.svg',
+                width: 16,
+                height: 16,
+                color: context.textColor,
+              ),
             ),
+            // CustomPaint(
+            //   size: const Size(16, 16),
+            //   painter: () {
+            //     switch (buttonType) {
+            //       case _ButtonType.close:
+            //         return CloseWBPainter(color: context.textColor);
+            //       case _ButtonType.maximize:
+            //         return MaximizeWBPainter(color: context.textColor);
+            //       case _ButtonType.minimize:
+            //         return MinimizeWBPainter(color: context.textColor);
+            //     }
+            //   }(),),
           )
         : const SizedBox();
   }
