@@ -4,11 +4,8 @@ import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/libadwaita.dart';
-
-enum _ButtonType { close, maximize, minimize }
 
 class AdwHeaderBar extends StatefulWidget {
   /// If you use with window_decorations
@@ -21,23 +18,24 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
     VoidCallback? onMinimize,
     VoidCallback? onMaximize,
     VoidCallback? onClose,
-  })  : closeBtn = _WindowButtonBuilder(
-          buttonType: _ButtonType.close,
+  })  : closeBtn = AdwWindowButtonBuilder(
+          buttonType: WindowButtonType.close,
           onPressed: onClose,
         ),
-        maximizeBtn = _WindowButtonBuilder(
+        maximizeBtn = AdwWindowButtonBuilder(
           onPressed: onMaximize,
-          buttonType: _ButtonType.maximize,
+          buttonType: WindowButtonType.maximize,
         ),
-        minimizeBtn = _WindowButtonBuilder(
+        minimizeBtn = AdwWindowButtonBuilder(
           onPressed: onMinimize,
-          buttonType: _ButtonType.minimize,
+          buttonType: WindowButtonType.minimize,
         ),
         super(key: key);
 
@@ -56,6 +54,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -93,6 +92,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -110,6 +110,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -117,21 +118,21 @@ class AdwHeaderBar extends StatefulWidget {
     bool showMaximize = true,
     bool showClose = true,
   })  : closeBtn = showClose
-            ? _WindowButtonBuilder(
+            ? AdwWindowButtonBuilder(
                 onPressed: appWindow?.close as void Function()?,
-                buttonType: _ButtonType.close,
+                buttonType: WindowButtonType.close,
               )
             : null,
         maximizeBtn = showMaximize
-            ? _WindowButtonBuilder(
+            ? AdwWindowButtonBuilder(
                 onPressed: appWindow?.maximize as void Function()?,
-                buttonType: _ButtonType.maximize,
+                buttonType: WindowButtonType.maximize,
               )
             : null,
         minimizeBtn = showMinimize
-            ? _WindowButtonBuilder(
+            ? AdwWindowButtonBuilder(
                 onPressed: appWindow?.minimize as void Function()?,
-                buttonType: _ButtonType.minimize,
+                buttonType: WindowButtonType.minimize,
               )
             : null,
         onHeaderDrag = appWindow?.startDragging as void Function()?,
@@ -154,6 +155,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -188,6 +190,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -211,6 +214,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -219,9 +223,9 @@ class AdwHeaderBar extends StatefulWidget {
         onDoubleTap = null,
         minimizeBtn = null,
         maximizeBtn = null,
-        closeBtn = _WindowButtonBuilder(
+        closeBtn = AdwWindowButtonBuilder(
           onPressed: showClose ? window.close as void Function()? : null,
-          buttonType: _ButtonType.close,
+          buttonType: WindowButtonType.close,
         ),
         super(key: key);
 
@@ -241,6 +245,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -265,6 +270,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 4,
     this.height = 51,
@@ -284,6 +290,10 @@ class AdwHeaderBar extends StatefulWidget {
 
   /// The trailing widget for the headerbar
   final List<Widget> end;
+
+  /// If true, background color and border color
+  /// will be transparent
+  final bool isTransparent;
 
   /// Default text style applied to the child widget.
   final TextStyle? textStyle;
@@ -311,47 +321,6 @@ class AdwHeaderBar extends StatefulWidget {
 
   @override
   State<AdwHeaderBar> createState() => _AdwHeaderBarState();
-}
-
-class _WindowButtonBuilder extends StatelessWidget {
-  const _WindowButtonBuilder({
-    Key? key,
-    required this.buttonType,
-    required this.onPressed,
-  }) : super(key: key);
-
-  final VoidCallback? onPressed;
-  final _ButtonType buttonType;
-
-  @override
-  Widget build(BuildContext context) {
-    return onPressed != null
-        ? AdwButton.circular(
-            size: 25,
-            onPressed: onPressed,
-            child: Center(
-              child: SvgPicture.asset(
-                'packages/libadwaita/assets/icons/${buttonType.name}.svg',
-                width: 16,
-                height: 16,
-                color: context.textColor,
-              ),
-            ),
-            // CustomPaint(
-            //   size: const Size(16, 16),
-            //   painter: () {
-            //     switch (buttonType) {
-            //       case _ButtonType.close:
-            //         return CloseWBPainter(color: context.textColor);
-            //       case _ButtonType.maximize:
-            //         return MaximizeWBPainter(color: context.textColor);
-            //       case _ButtonType.minimize:
-            //         return MinimizeWBPainter(color: context.textColor);
-            //     }
-            //   }(),),
-          )
-        : const SizedBox();
-  }
 }
 
 class _AdwHeaderBarState extends State<AdwHeaderBar> {
@@ -407,11 +376,15 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
           alignment: Alignment.topCenter,
           child: Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).appBarTheme.backgroundColor,
-              border: Border(
-                top: BorderSide(color: Theme.of(context).backgroundColor),
-                bottom: BorderSide(color: context.borderColor),
-              ),
+              color: !widget.isTransparent
+                  ? Theme.of(context).appBarTheme.backgroundColor
+                  : null,
+              border: !widget.isTransparent
+                  ? Border(
+                      top: BorderSide(color: Theme.of(context).backgroundColor),
+                      bottom: BorderSide(color: context.borderColor),
+                    )
+                  : null,
             ),
             height: widget.height,
             width: double.infinity,
