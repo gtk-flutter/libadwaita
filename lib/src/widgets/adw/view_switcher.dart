@@ -7,6 +7,7 @@ class AdwViewSwitcher extends StatelessWidget {
     required this.tabs,
     required this.onViewChanged,
     required this.currentIndex,
+    this.badgeColor,
     this.style,
     @Deprecated('This parameter is no longer in use')
         double height = 55,
@@ -18,6 +19,7 @@ class AdwViewSwitcher extends StatelessWidget {
   })  : assert(tabs.length >= 2, 'Minimum 2 tabs are required'),
         super(key: key);
 
+  final AdwColors? badgeColor;
   final List<ViewSwitcherData> tabs;
   final ValueChanged<int> onViewChanged;
   final ViewSwitcherStyle? style;
@@ -38,6 +40,7 @@ class AdwViewSwitcher extends StatelessWidget {
             for (final tab in tabs.asMap().entries)
               AdwViewSwitcherTab(
                 data: tab.value,
+                badgeColor: badgeColor,
                 style: newStyle,
                 isSelected: tab.key == currentIndex,
                 onSelected: currentIndex != tab.key

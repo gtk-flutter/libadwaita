@@ -307,7 +307,7 @@ class _AdwSwitchState extends State<AdwSwitch> with TickerProviderStateMixin {
       opacity: widget.onChanged == null ? _kAdwSwitchDisabledOpacity : 1.0,
       child: _AdwSwitchRenderObjectWidget(
         value: widget.value,
-        activeColor: widget.activeColor ?? AdwAvatarColors.blue.backgroundColor,
+        activeColor: widget.activeColor ?? AdwColors.blue.backgroundColor,
         trackColor: widget.trackColor ?? context.checkboxColor,
         thumbColor: widget.thumbColor ?? Colors.white,
         onChanged: widget.onChanged,

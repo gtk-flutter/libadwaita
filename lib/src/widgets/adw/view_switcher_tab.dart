@@ -6,10 +6,12 @@ class AdwViewSwitcherTab extends StatelessWidget {
     Key? key,
     required this.data,
     required this.style,
+    this.badgeColor,
     this.isSelected = false,
     this.onSelected,
   }) : super(key: key);
 
+  final AdwColors? badgeColor;
   final ViewSwitcherData data;
   final ViewSwitcherStyle style;
   final bool isSelected;
@@ -37,9 +39,29 @@ class AdwViewSwitcherTab extends StatelessWidget {
         isRow: isDesktop,
         children: [
           if (data.icon != null)
-            Icon(
-              data.icon,
-              size: 18,
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: Icon(
+                    data.icon,
+                    size: 16,
+                  ),
+                ),
+                if (data.badge != null)
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: AdwAvatar(
+                      size: 13,
+                      backgroundColor: badgeColor ?? AdwColors.blue,
+                      child: Text(
+                        data.badge!,
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    ),
+                  ),
+              ],
             ),
           if (data.icon != null && data.title != null)
             const SizedBox(width: 8, height: 2),

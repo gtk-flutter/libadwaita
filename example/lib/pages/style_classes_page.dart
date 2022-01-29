@@ -29,7 +29,7 @@ class StyleClassesPage extends StatelessWidget {
             AdwButton(
               opaque: true,
               margin: const EdgeInsets.symmetric(vertical: 4),
-              backgroundColor: AdwAvatarColors.blue.backgroundColor,
+              backgroundColor: AdwColors.blue.backgroundColor,
               textStyle: const TextStyle(color: Colors.white),
               child: const Text('Suggested'),
             ),

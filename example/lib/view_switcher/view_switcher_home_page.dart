@@ -34,6 +34,7 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
                   ViewSwitcherData(
                     title: 'Stopwatch',
                     icon: Icons.stop,
+                    badge: '1',
                   ),
                   ViewSwitcherData(
                     title: 'Timer',
