@@ -30,6 +30,8 @@ extension BorderContext on BuildContext {
   bool get _isDark => Theme.of(this).brightness == Brightness.dark;
 
   Color get borderColor => _isDark ? borderDark : borderLight;
+  Color get checkboxColor =>
+      _isDark ? const Color(0xFF535353) : const Color(0xFFE0E0E0);
 
   Color get selectColor => _isDark
       ? Theme.of(this).backgroundColor.lighten()

@@ -78,7 +78,11 @@ class ListsPage extends StatelessWidget {
                 ),
               )
             ],
-          )
+          ),
+          AdwSwitch(
+            state: false,
+            onChanged: (v) {},
+          ),
         ]
             .map(
               (e) => Padding(

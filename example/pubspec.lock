@@ -245,11 +245,9 @@ packages:
   popover_gtk:
     dependency: transitive
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "24665909711bfdef94daef19c2d9c621bf2a420e"
-      url: "https://github.com/gtk-flutter/popover.git"
-    source: git
+      name: popover_gtk
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.2.6+3"
   process:
     dependency: transitive

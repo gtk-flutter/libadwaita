@@ -3,8 +3,6 @@ description: Libadwaita's widgets for Flutter. Following Gnome HIG and available
 version: 1.0.0-rc.2
 homepage: https://github.com/gtk-flutter/libadwaita
 
-publish: none # remove this when popover_gtk is published
-
 environment:
   sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
@@ -13,11 +11,9 @@ dependencies:
   dbus: ">=0.6.6 <1.0.0"
   flutter:
     sdk: flutter
-  flutter_svg: ^1.0.3
+  flutter_svg: ">=1.0.3 < 2.0.0"
   gsettings: ">=0.2.1 <1.0.0"
-  popover_gtk:
-    git:
-      url: https://github.com/gtk-flutter/popover.git
+  popover_gtk: ">=0.2.6+3 < 1.0.0"
 
 dev_dependencies:
   svg_to_paint: ^1.0.10

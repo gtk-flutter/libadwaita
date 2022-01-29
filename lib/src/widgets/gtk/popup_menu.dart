@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:popover_gtk/popover.dart';
+import 'package:popover_gtk/popover_gtk.dart';
 
 class AdwPopupMenu extends StatefulWidget {
   const AdwPopupMenu({

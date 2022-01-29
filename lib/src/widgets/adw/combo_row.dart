@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:popover_gtk/popover.dart';
+import 'package:popover_gtk/popover_gtk.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
