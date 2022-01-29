@@ -474,7 +474,7 @@ class _RenderAdwSwitch extends RenderConstrainedBox {
 
   @override
   void handleEvent(PointerEvent event, BoxHitTestEntry entry) {
-    assert(debugHandleEvent(event, entry));
+    assert(debugHandleEvent(event, entry), 'Debug Handle Event failed!');
     if (event is PointerDownEvent && isInteractive) {
       _state._drag.addPointer(event);
       _state._tap.addPointer(event);
