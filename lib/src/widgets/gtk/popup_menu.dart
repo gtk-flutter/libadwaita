@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/src/widgets/widgets.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 
 class AdwPopupMenu extends StatefulWidget {
@@ -53,7 +54,6 @@ class _AdwPopupMenuState extends State<AdwPopupMenu> {
           width: widget.popupWidth,
           height: widget.popupHeight,
           backgroundColor: Theme.of(context).cardColor,
-          // contentOffset: const Offset(0, 4),
         ).whenComplete(() => setState(() => isActive = false));
       },
     );

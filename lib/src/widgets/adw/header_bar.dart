@@ -5,47 +5,19 @@ import 'dart:io';
 import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
 import 'package:gsettings/gsettings.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/src/widgets/widgets.dart';
 
 class AdwHeaderBar extends StatefulWidget {
   /// If you use with window_decorations
-  /// If you don't want that. use AdwHeaderBar.minimal*
+  /// If you don't want that. use AdwHeaderBar.custom
   AdwHeaderBar({
     Key? key,
-    this.onDoubleTap,
-    this.onHeaderDrag,
-    this.start = const [],
-    this.title = const SizedBox(),
-    this.end = const [],
-    this.textStyle,
-    this.isTransparent = false,
-    this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
-    this.height = 51,
-    VoidCallback? onMinimize,
-    VoidCallback? onMaximize,
-    VoidCallback? onClose,
-  })  : closeBtn = AdwWindowButtonBuilder(
-          buttonType: WindowButtonType.close,
-          onPressed: onClose,
-        ),
-        maximizeBtn = AdwWindowButtonBuilder(
-          onPressed: onMaximize,
-          buttonType: WindowButtonType.maximize,
-        ),
-        minimizeBtn = AdwWindowButtonBuilder(
-          onPressed: onMinimize,
-          buttonType: WindowButtonType.minimize,
-        ),
-        super(key: key);
-
-  AdwHeaderBar.windowDecor({
-    Key? key,
-    required Widget Function(
+    Widget Function(
       String name,
       dynamic type,
       void Function()? onPressed,
-    )
+    )?
         windowDecor,
     dynamic themeType,
     this.onDoubleTap,
@@ -61,27 +33,24 @@ class AdwHeaderBar extends StatefulWidget {
     VoidCallback? onMinimize,
     VoidCallback? onMaximize,
     VoidCallback? onClose,
-  })  : closeBtn = onClose != null
-            ? windowDecor(
-                'close',
-                themeType,
-                onClose,
-              )
-            : null,
-        maximizeBtn = onMaximize != null
-            ? windowDecor(
-                'maximize',
-                themeType,
-                onMaximize,
-              )
-            : null,
-        minimizeBtn = onMinimize != null
-            ? windowDecor(
-                'minimize',
-                themeType,
-                onMinimize,
-              )
-            : null,
+  })  : closeBtn = AdwWindowButton(
+          onPressed: onClose,
+          themeType: themeType,
+          windowDecor: windowDecor,
+          buttonType: AdwWindowButtonType.close,
+        ),
+        maximizeBtn = AdwWindowButton(
+          onPressed: onMaximize,
+          themeType: themeType,
+          windowDecor: windowDecor,
+          buttonType: AdwWindowButtonType.maximize,
+        ),
+        minimizeBtn = AdwWindowButton(
+          themeType: themeType,
+          onPressed: onMinimize,
+          windowDecor: windowDecor,
+          buttonType: AdwWindowButtonType.minimize,
+        ),
         super(key: key);
 
   const AdwHeaderBar.custom({
@@ -106,6 +75,13 @@ class AdwHeaderBar extends StatefulWidget {
 
     /// The appWindow object from bitsdojo_window package
     required dynamic appWindow,
+    Widget Function(
+      String name,
+      dynamic type,
+      void Function()? onPressed,
+    )?
+        windowDecor,
+    dynamic themeType,
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
@@ -118,65 +94,29 @@ class AdwHeaderBar extends StatefulWidget {
     bool showMaximize = true,
     bool showClose = true,
   })  : closeBtn = showClose
-            ? AdwWindowButtonBuilder(
+            ? AdwWindowButton(
                 onPressed: appWindow?.close as void Function()?,
-                buttonType: WindowButtonType.close,
+                themeType: themeType,
+                windowDecor: windowDecor,
+                buttonType: AdwWindowButtonType.close,
               )
             : null,
         maximizeBtn = showMaximize
-            ? AdwWindowButtonBuilder(
+            ? AdwWindowButton(
                 onPressed: appWindow?.maximize as void Function()?,
-                buttonType: WindowButtonType.maximize,
+                themeType: themeType,
+                windowDecor: windowDecor,
+                buttonType: AdwWindowButtonType.maximize,
               )
             : null,
         minimizeBtn = showMinimize
-            ? AdwWindowButtonBuilder(
+            ? AdwWindowButton(
                 onPressed: appWindow?.minimize as void Function()?,
-                buttonType: WindowButtonType.minimize,
+                themeType: themeType,
+                windowDecor: windowDecor,
+                buttonType: AdwWindowButtonType.minimize,
               )
             : null,
-        onHeaderDrag = appWindow?.startDragging as void Function()?,
-        onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
-        super(key: key);
-
-  AdwHeaderBar.windowDecorBitsdojo({
-    Key? key,
-    required Widget Function(
-      String name,
-      dynamic type,
-      void Function()? onPressed,
-    )
-        windowDecor,
-    dynamic themeType,
-
-    /// The appWindow object from bitsdojo_window package
-    required dynamic appWindow,
-    this.start = const [],
-    this.title = const SizedBox(),
-    this.end = const [],
-    this.textStyle,
-    this.isTransparent = false,
-    this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
-    this.height = 51,
-    bool showMinimize = true,
-    bool showMaximize = true,
-    bool showClose = true,
-  })  : closeBtn = windowDecor(
-          'close',
-          themeType,
-          showClose ? appWindow?.close as void Function()? : null,
-        ),
-        maximizeBtn = windowDecor(
-          'maximize',
-          themeType,
-          showMaximize ? appWindow?.maximize as void Function()? : null,
-        ),
-        minimizeBtn = windowDecor(
-          'minimize',
-          themeType,
-          showMinimize ? appWindow?.minimize as void Function()? : null,
-        ),
         onHeaderDrag = appWindow?.startDragging as void Function()?,
         onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
         super(key: key);
@@ -210,37 +150,13 @@ class AdwHeaderBar extends StatefulWidget {
 
     /// The Window.of(context) object from nativeshell package
     required dynamic window,
-    this.start = const [],
-    this.title = const SizedBox(),
-    this.end = const [],
-    this.textStyle,
-    this.isTransparent = false,
-    this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
-    this.height = 51,
-    bool showClose = true,
-  })  : onHeaderDrag = window?.performDrag as void Function()?,
-        onDoubleTap = null,
-        minimizeBtn = null,
-        maximizeBtn = null,
-        closeBtn = AdwWindowButtonBuilder(
-          onPressed: showClose ? window.close as void Function()? : null,
-          buttonType: WindowButtonType.close,
-        ),
-        super(key: key);
-
-  AdwHeaderBar.windowDecorNativeshell({
-    Key? key,
-    required Widget Function(
+    Widget Function(
       String name,
       dynamic type,
       void Function()? onPressed,
-    )
+    )?
         windowDecor,
     dynamic themeType,
-
-    /// The Window.of(context) object from nativeshell package
-    required dynamic window,
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
@@ -254,10 +170,11 @@ class AdwHeaderBar extends StatefulWidget {
         onDoubleTap = null,
         minimizeBtn = null,
         maximizeBtn = null,
-        closeBtn = windowDecor(
-          'close',
-          themeType,
-          showClose ? window.close as void Function()? : null,
+        closeBtn = AdwWindowButton(
+          onPressed: showClose ? window.close as void Function()? : null,
+          themeType: themeType,
+          windowDecor: windowDecor,
+          buttonType: AdwWindowButtonType.close,
         ),
         super(key: key);
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/widgets/adw/button.dart';
 
 const String _bothLabelAndLabelWidget = """
 Either use label or use labelWidget, both can't be assigned at once.""";

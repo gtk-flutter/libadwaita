@@ -8,13 +8,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/src/widgets/widgets.dart';
 
 // Examples can assume:
 // bool _lights = false;
 // void setState(VoidCallback fn) { }
 
-/// An gtk-style switch.
+/// A gtk-style switch.
 ///
 /// Used to toggle the on/off state of a single setting.
 ///
@@ -48,7 +49,7 @@ import 'package:libadwaita/libadwaita.dart';
 ///  * [Switch], the material design equivalent.
 ///  * <https://developer.apple.com/ios/human-interface-guidelines/controls/switches/>
 class AdwSwitch extends StatefulWidget {
-  /// Creates an gtk-style switch.
+  /// Creates a gtk-style switch.
   ///
   /// The [value] parameter must not be null.
   /// The [dragStartBehavior] parameter defaults to [DragStartBehavior.start]
@@ -621,17 +622,17 @@ const List<BoxShadow> _kSliderBoxShadows = <BoxShadow>[
   ),
 ];
 
-/// Paints an gtk-style slider thumb or switch thumb.
+/// Paints a gtk-style slider thumb or switch thumb.
 ///
 /// Used by [AdwSwitch]
 class AdwThumbPainter {
-  /// Creates an object that paints an gtk-style slider thumb.
+  /// Creates an object that paints a gtk-style slider thumb.
   const AdwThumbPainter({
     this.color = Colors.white,
     this.shadows = _kSliderBoxShadows,
   });
 
-  /// Creates an object that paints an gtk-style switch thumb.
+  /// Creates an object that paints a gtk-style switch thumb.
   const AdwThumbPainter.switchThumb({
     Color color = Colors.white,
     List<BoxShadow> shadows = _kSwitchBoxShadows,

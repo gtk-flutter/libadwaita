@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/models/models.dart';
+import 'package:libadwaita/src/widgets/widgets.dart';
 
 class AdwViewSwitcher extends StatelessWidget {
   const AdwViewSwitcher({

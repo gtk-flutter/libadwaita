@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
 /// Set of status that a [AdwButton] widget can be at any given time.
 enum AdwButtonStatus { enabled, active, enabledHovered, activeHovered, tapDown }

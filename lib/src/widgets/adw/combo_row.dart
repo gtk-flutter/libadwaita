@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/src/widgets/adw/button.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -174,7 +175,6 @@ class _AdwComboButtonState extends State<AdwComboButton> {
       width: 200,
       height: null,
       backgroundColor: Theme.of(context).cardColor,
-      // contentOffset: const Offset(0, 4),
     ).whenComplete(() => setState(() => active = false));
   }
 }

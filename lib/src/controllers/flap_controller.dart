@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/widgets/adw/flap.dart';
 
 class FlapController extends ChangeNotifier {
   bool isOpen = true;
