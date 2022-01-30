@@ -20,7 +20,7 @@ export 'adw/new/scaffold.dart';
 export 'adw/new/sidebar.dart';
 export 'adw/new/text_button.dart';
 export 'adw/new/text_field.dart';
-export 'adw/new/window_button_builder.dart';
+export 'adw/new/window_button.dart';
 
 // All the widgets imported from Gtk4
 export 'gtk/popup_menu.dart';
