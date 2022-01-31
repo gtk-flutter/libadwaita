@@ -32,15 +32,19 @@ See the example app in the `example` folder for more info.
 ### AdwHeaderBar
 Their are 6 types of AdwHeaderBar constructor:
 
-If you want to use default adwaita style window icons or icons using window_decorations package then you have to you any one of the below three HeaderBar's:
-- AdwHeaderBar => Default HeaderBar
-- AdwHeaderBar.bitsdojo => HeaderBar to be used with `bitsdojo` package
-- AdwHeaderBar.nativeshell => HeaderBar to be used with `nativeshell` package
+If you want to use default adwaita style window icons or icons using window_decorations package then you have to use any one of the following HeaderBar's:
+| Widget | Docs |
+| ------ | ---- |
+| `AdwHeaderBar` | Default HeaderBar |
+| `AdwHeaderBar.bitsdojo` | HeaderBar to be used with [`bitsdojo`](#bitsdojo_window) package |
+| `AdwHeaderBar.nativeshell` | HeaderBar to be used with [`nativeshell`](#nativeshell) package |
 
 If you want to have a custom icon for window button then you have to use any one of the following HeaderBar's:
-- AdwHeaderBar.custom => Default HeaderBar with custom icon
-- AdwHeaderBar.customBitsdojo => HeaderBar to be used with `bitsdojo` package with custom icon
-- AdwHeaderBar.customNativeshell => HeaderBar to be used with `nativeshell` package with custom icon
+| Widget | Docs |
+| ------ | ---- |
+| `AdwHeaderBar.custom` | HeaderBar with custom icon |
+| `AdwHeaderBar.customBitsdojo` | HeaderBar to be used with [`bitsdojo`](#bitsdojo_window) package with custom icon |
+| `AdwHeaderBar.customNativeshell` | HeaderBar to be used with [`nativeshell`](#nativeshell) package with custom icon |
 
 ## Relavant Links
 - [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/index.html#classes)
@@ -48,19 +52,17 @@ If you want to have a custom icon for window button then you have to use any one
 
 ## Additional information
 
-This package is dependent on
+### **This package works great with**
 
-- [adwaita](https://pub.dev/packages/adwaita) or [yaru](https://github.com/ubuntu/yaru.dart) - For theming
-- [`popover_gtk`](https://pub.dev/packages/popover_gtk) for `AdwPopupMenu`.
+[**`adwaita`**](https://pub.dev/packages/adwaita) / [**`yaru`**](https://github.com/ubuntu/yaru.dart)  
+For theming
 
-Optional packages to use with this package:
+### **Optional packages**
 
-### **[`adwaita_icons`](https://pub.dev/packages/adwaita_icons)**
+#### [**`adwaita_icons`**](https://pub.dev/packages/adwaita_icons)
 For Adwaita Icons
 
-### **bitsdojo_window**
-Link: https://pub.dev/packages/bitsdojo_window
-
+#### [**`bitsdojo_window`**](https://pub.dev/packages/bitsdojo_window)
 Example:
 ```dart
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -72,9 +74,7 @@ AdwHeaderBar.bitsdojo_window(
 )
 ```
 
-#### **nativeshell**
-Link: https://pub.dev/packages/nativeshell  
-
+#### [**`nativeshell`**](https://pub.dev/packages/nativeshell  )
 Example:
 ```dart
 import 'package:nativeshell/nativeshell.dart';
@@ -86,9 +86,7 @@ AdwHeaderBar.nativeshell(
 )
 ```
 
-#### **window_decorations**
-Link: https://pub.dev/packages/window_decorations  
-
+#### [**`window_decorations`**](https://pub.dev/packages/window_decorations)
 Example:
 ```dart
 import 'package:window_decorations/window_decorations.dart';
