@@ -30,7 +30,7 @@ See the example app in the `example` folder for more info.
 ## Documentation
 
 ### AdwHeaderBar
-Their are 6 types of AdwHeaderBar constructor:
+There are 6 types of `AdwHeaderBar` constructor:
 
 If you want to use default adwaita style window icons or icons using window_decorations package then you have to use any one of the following HeaderBar's:
 | Widget | Docs |
@@ -63,6 +63,10 @@ For theming
 For Adwaita Icons
 
 #### [**`bitsdojo_window`**](https://pub.dev/packages/bitsdojo_window)
+Can be used with
+- `AdwHeaderBar.bitsdojo`
+- `AdwHeaderBar.customBitsdojo`
+
 Example:
 ```dart
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -75,6 +79,10 @@ AdwHeaderBar.bitsdojo_window(
 ```
 
 #### [**`nativeshell`**](https://pub.dev/packages/nativeshell  )
+Can be used with
+- `AdwHeaderBar.nativeshell`
+- `AdwHeaderBar.customNativeshell`
+
 Example:
 ```dart
 import 'package:nativeshell/nativeshell.dart';
@@ -87,6 +95,11 @@ AdwHeaderBar.nativeshell(
 ```
 
 #### [**`window_decorations`**](https://pub.dev/packages/window_decorations)
+Can be used with
+- `AdwHeaderBar`
+- `AdwHeaderBar.bitsdojo`
+- `AdwHeaderBar.nativeshell`
+
 Example:
 ```dart
 import 'package:window_decorations/window_decorations.dart';
