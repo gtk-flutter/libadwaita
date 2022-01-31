@@ -71,7 +71,7 @@ Example:
 ```dart
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
-AdwHeaderBar.bitsdojo_window(
+AdwHeaderBar.bitsdojo(
   ...
   appWindow: appWindow,
   ...
