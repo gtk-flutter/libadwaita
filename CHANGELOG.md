@@ -1,3 +1,22 @@
+## 1.0.0
+
+### **BREAKING**
+- `AdwHeaderBar.minimal` is now `AdwHeaderBar.custom`
+
+### **Changes to widgets**
+**HeaderBar**
+- Now the `AdwHeaderBar` is not dependent on any package, `windowDecor` object is now optional
+- Add `isTransparent` parameter => Makes `AdwHeaderBar`'s background and border color
+
+**Popover**
+- Revisit popup menu by using `popover_gtk` package (popover package with fade transition) (#35)
+
+**ViewSwitcherTab**
+- Add badge in `AdwViewSwitcher`
+
+**New Widgets**
+- `AdwSwitch` => port of `GtkSwitch` from gtk4
+
 ## 1.0.0-rc.2
 
 **BREAKING**

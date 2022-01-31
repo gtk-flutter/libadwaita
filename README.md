@@ -23,26 +23,13 @@ Libadwaita's widgets for Flutter. Following Gnome HIG and available on all platf
 
 - This only provides widgets, for theming you should consider [adwaita](https://pub.dev/packages/adwaita) or [yaru](https://github.com/ubuntu/yaru.dart) package.
 - If you want custom titlebar then you can follow the steps for that on [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) package.
-- Following Widgets are currently ported to flutter, for more info visit [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/index.html#classes):
-
-  - [`AdwActionRow`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ActionRow.html)
-  - [`AdwClamp`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html)
-  - [`AdwComboRow`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ComboRow.html)
-  - [`AdwFlap`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Flap.html)
-  - [`AdwHeaderBar`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html) - use `.minimal` for using it without [`window_decorations`](https://pub.dev/packages/window_decorations) package.
-  - `AdwHeaderButton` - A Header button to be used with `AdwHeaderBar*`
-  - `AdwPopupMenu` - A Popup Menu button
-  - [`AdwPreferencesGroup`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html)
-  - `AdwScaffold`
-  - `AdwStackSidebar` - GtkStackSidebar renamed to match the flow
-  - `AdwSidebar` - To be used with `AdwStackSidebar` or `AdwFlap`
-  - `AdwTextButton`
-  - `AdwTextField`
-  - [`AdwViewStack`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewStack.html)
-  - [`AdwViewSwitcher`](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcher.html)
-  - `AdwViewSwitcherTab` - Tabs for AdwViewSwitcher
+- Here is the list of widgets imported from libadwaita library : [widgets.dart](https://github.com/gtk-flutter/libadwaita/blob/main/lib/src/widgets/widgets.dart).
 
 See the example app in the `example` folder for more info.
+
+## Relavant Links
+- [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/index.html#classes)
+
 
 ## Additional information
 
