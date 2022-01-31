@@ -2,6 +2,7 @@
 
 ### **BREAKING**
 - `AdwHeaderBar.minimal` is now `AdwHeaderBar.custom`
+- Remove `label` parameter from `AdwTextField`
 
 ### **Changes to widgets**
 **HeaderBar**
@@ -11,11 +12,12 @@
 **Popover**
 - Revisit popup menu by using `popover_gtk` package (popover package with fade transition) (#35)
 
-**ViewSwitcherTab**
-- Add badge in `AdwViewSwitcher`
+**ViewSwitcher**
+- Add `badge` in `AdwViewSwitcher`
 
 **New Widgets**
 - `AdwSwitch` => port of `GtkSwitch` from gtk4
+- `AdwAboutWindow` => port of upcoming `AdwAboutWindow` from libadwaita
 
 ## 1.0.0-rc.2
 

@@ -1,6 +1,6 @@
 name: libadwaita
 description: Libadwaita's widgets for Flutter. Following Gnome HIG and available on all platforms.
-version: 1.0.0-rc.2
+version: 1.0.0
 homepage: https://github.com/gtk-flutter/libadwaita
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ">=1.0.3 < 2.0.0"
   gsettings: ">=0.2.1 <1.0.0"
+  package_info_plus: ^1.3.0
   popover_gtk: ">=0.2.6+3 < 1.0.0"
 
 dev_dependencies:

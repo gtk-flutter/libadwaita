@@ -12,7 +12,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
     this.onSelected,
   }) : super(key: key);
 
-  final AdwColors? badgeColor;
+  final Color? badgeColor;
   final ViewSwitcherData data;
   final ViewSwitcherStyle style;
   final bool isSelected;
@@ -24,18 +24,14 @@ class AdwViewSwitcherTab extends StatelessWidget {
 
     return AdwButton.flat(
       constraints: isDesktop
-          ? const BoxConstraints(minWidth: 120, minHeight: 34, maxHeight: 36)
+          ? const BoxConstraints(minWidth: 120, maxHeight: 38)
           : const BoxConstraints(minWidth: 75),
       margin:
           isDesktop ? const EdgeInsets.fromLTRB(0, 6, 3, 6) : EdgeInsets.zero,
       onPressed: onSelected,
       isActive: isSelected,
-      textStyle: TextStyle(
-        fontSize: isDesktop ? null : 11,
-      ),
-      borderRadius: isDesktop
-          ? const BorderRadius.all(Radius.circular(6))
-          : BorderRadius.zero,
+      textStyle: TextStyle(fontSize: isDesktop ? null : 11),
+      borderRadius: isDesktop ? BorderRadius.circular(6) : BorderRadius.zero,
       child: _AdwViewSwitcherTabLayout(
         isRow: isDesktop,
         children: [
@@ -43,30 +39,43 @@ class AdwViewSwitcherTab extends StatelessWidget {
             Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 4),
-                  child: Icon(
-                    data.icon,
-                    size: 16,
-                  ),
+                  padding: isDesktop
+                      ? const EdgeInsets.only(top: 4, bottom: 4, right: 8)
+                      : const EdgeInsets.only(top: 3.5, right: 4, left: 4),
+                  child: Icon(data.icon, size: 17),
                 ),
                 if (data.badge != null)
                   Positioned(
                     top: 0,
                     right: 0,
-                    child: AdwAvatar(
-                      size: 13,
-                      backgroundColor: badgeColor ?? AdwColors.blue,
-                      child: Text(
-                        data.badge!,
-                        style: const TextStyle(fontSize: 11),
+                    child: SizedBox(
+                      height: 14,
+                      width: 14,
+                      child: CircleAvatar(
+                        backgroundColor:
+                            badgeColor ?? AdwColors.blue.backgroundColor,
+                        child: Text(
+                          data.badge!,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),
               ],
             ),
           if (data.icon != null && data.title != null)
-            const SizedBox(width: 8, height: 2),
-          if (data.title != null) Text(data.title!),
+            const SizedBox(height: 1.5),
+          if (data.title != null)
+            Padding(
+              padding: isDesktop
+                  ? const EdgeInsets.symmetric(vertical: 4)
+                  : EdgeInsets.zero,
+              child: Text(data.title!),
+            ),
         ],
       ),
     );

@@ -109,6 +109,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       top: 10,
                       bottom: 10,
                     ),
+                    onPressed: () => showDialog<Widget>(
+                      context: context,
+                      builder: (ctx) => AdwAboutWindow(
+                        appIcon: Image.asset('assets/logo.png'),
+                      ),
+                    ),
                     child: const Text(
                       'About this Demo',
                       style: TextStyle(fontSize: 15),

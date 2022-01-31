@@ -1,6 +1,7 @@
 // ignore_for_file: directives_ordering
 
 // All the widgets imported from libadwaita
+export 'adw/about_window.dart';
 export 'adw/action_row.dart';
 export 'adw/avatar.dart';
 export 'adw/button.dart';

@@ -304,13 +304,27 @@ class _AdwSwitchState extends State<AdwSwitch> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (needsPositionAnimation) _resumePositionAnimation();
+    final switchTheme = Theme.of(context).switchTheme;
+
     return Opacity(
       opacity: widget.onChanged == null ? _kAdwSwitchDisabledOpacity : 1.0,
       child: _AdwSwitchRenderObjectWidget(
         value: widget.value,
-        activeColor: widget.activeColor ?? AdwColors.blue.backgroundColor,
-        trackColor: widget.trackColor ?? context.checkboxColor,
-        thumbColor: widget.thumbColor ?? Colors.white,
+        activeColor: widget.activeColor ??
+            (switchTheme.thumbColor != null
+                ? switchTheme.thumbColor!.resolve({MaterialState.selected}) ??
+                    AdwColors.blue.backgroundColor
+                : AdwColors.blue.backgroundColor),
+        trackColor: widget.trackColor ??
+            (switchTheme.trackColor != null
+                ? switchTheme.trackColor!.resolve({MaterialState.focused}) ??
+                    context.checkboxColor
+                : context.checkboxColor),
+        thumbColor: widget.thumbColor ??
+            (switchTheme.thumbColor != null
+                ? switchTheme.thumbColor!.resolve({MaterialState.focused}) ??
+                    Colors.white
+                : Colors.white),
         onChanged: widget.onChanged,
         textDirection: Directionality.of(context),
         state: this,

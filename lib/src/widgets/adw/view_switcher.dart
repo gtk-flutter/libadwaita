@@ -20,7 +20,7 @@ class AdwViewSwitcher extends StatelessWidget {
   })  : assert(tabs.length >= 2, 'Minimum 2 tabs are required'),
         super(key: key);
 
-  final AdwColors? badgeColor;
+  final Color? badgeColor;
   final List<ViewSwitcherData> tabs;
   final ValueChanged<int> onViewChanged;
   final ViewSwitcherStyle? style;

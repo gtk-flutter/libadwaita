@@ -39,6 +39,7 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
                   ViewSwitcherData(
                     title: 'Timer',
                     icon: Icons.timer,
+                    badge: '1',
                   ),
                 ],
                 onViewChanged: (idx) => index.value = idx,

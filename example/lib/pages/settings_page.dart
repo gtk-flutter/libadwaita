@@ -55,7 +55,6 @@ Descriptions will be wrapped if they are too long. This page has the following g
           AdwTextField(
             initialValue: 'some text',
             keyboardType: TextInputType.number,
-            labelText: 'Text field label',
             icon: Icons.insert_photo,
             onChanged: (String s) {},
           ),
