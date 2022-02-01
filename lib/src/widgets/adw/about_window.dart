@@ -9,12 +9,36 @@ class AdwAboutWindow extends StatelessWidget {
     this.endIcon,
     this.width = 360,
     this.headerbar,
+    this.copyright,
+    this.issueTrackerLink,
+    this.license,
+    this.credits,
   }) : super(key: key);
 
+  /// The HeaderBar for About Window, defaults to transparent [AdwHeaderBar]
   final AdwHeaderBar? headerbar;
+
+  /// The width of the about window dialog
   final double width;
+
+  /// The app icon to show in the about window
   final Widget appIcon;
+
+  /// The end icon of The Credits and Legal button,
+  /// defaults to chevron_right Material Icon
   final Widget? endIcon;
+
+  /// The Copyright notice for Legal Screen
+  final String? copyright;
+
+  /// The link for the issue tracker
+  final String? issueTrackerLink;
+
+  /// The License for the app
+  final String? license;
+
+  /// The content's of Credits screen
+  final List<AdwPreferencesGroup>? credits;
 
   @override
   Widget build(BuildContext context) {
