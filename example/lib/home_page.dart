@@ -9,6 +9,7 @@ import 'package:example/pages/view_switcher_page.dart';
 import 'package:example/pages/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.themeNotifier}) : super(key: key);
@@ -51,6 +52,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final developers = {
+      'Prateek Sunal': 'prateekmedia',
+      'Malcolm Mielle': 'MalcolmMielle',
+      'sim': 'simrat39',
+      'Jesús Rodríguez': 'jesusrp98',
+      'Polo': 'pablojimpas',
+    };
+
     return Column(
       children: [
         AdwHeaderBar.bitsdojo(
@@ -112,7 +121,31 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () => showDialog<Widget>(
                       context: context,
                       builder: (ctx) => AdwAboutWindow(
+                        issueTrackerLink:
+                            'https://github.com/gtk-flutter/libadwaita/issues',
                         appIcon: Image.asset('assets/logo.png'),
+                        credits: [
+                          AdwPreferencesGroup(
+                            title: 'Developers',
+                            titleStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            children: developers.entries
+                                .map(
+                                  (e) => AdwActionRow(
+                                    title: e.key,
+                                    onActivated: () =>
+                                        launch('https://github.com/${e.value}'),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ],
+                        copyright: 'Copyright 2021-2022 Gtk-Flutter developers',
+                        license: const Text(
+                          'LGPL-3.0, This program comes with no warranty.',
+                        ),
                       ),
                     ),
                     child: const Text(

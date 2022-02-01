@@ -4,17 +4,19 @@ class AdwPreferencesGroup extends StatelessWidget {
   const AdwPreferencesGroup({
     Key? key,
     required this.children,
-    this.borderRadius = 10,
+    this.borderRadius = 12,
     this.title,
     this.titleStyle,
     this.description,
     this.descriptionStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 5),
   }) : super(key: key);
 
   final List<Widget> children;
   final double borderRadius;
   final String? title;
   final String? description;
+  final EdgeInsets padding;
 
   final TextStyle? titleStyle;
   final TextStyle? descriptionStyle;
@@ -25,18 +27,27 @@ class AdwPreferencesGroup extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (title != null) ...[
-          Text(
-            title!,
-            style: titleStyle ?? Theme.of(context).textTheme.headline6,
+        Padding(
+          padding: padding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (title != null) ...[
+                Text(
+                  title!,
+                  style: titleStyle ?? Theme.of(context).textTheme.headline6,
+                ),
+                if (description != null)
+                  Text(
+                    description!,
+                    style: descriptionStyle ??
+                        Theme.of(context).textTheme.bodyText2,
+                  ),
+                const SizedBox(height: 8),
+              ],
+            ],
           ),
-          if (description != null)
-            Text(
-              description!,
-              style: descriptionStyle ?? Theme.of(context).textTheme.bodyText2,
-            ),
-          const SizedBox(height: 14),
-        ],
+        ),
         // This is a hack while waiting for https://github.com/flutter/flutter/issues/94785
         // to be fixed
         Card(
@@ -48,7 +59,9 @@ class AdwPreferencesGroup extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(
               2 * children.length - 1,
-              (index) => index.isEven ? children[index ~/ 2] : const Divider(),
+              (index) => index.isEven
+                  ? children[index ~/ 2]
+                  : const Divider(height: 4),
             ),
           ),
         ),
