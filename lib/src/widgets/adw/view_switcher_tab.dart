@@ -57,7 +57,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
                         child: Text(
                           data.badge!,
                           style: const TextStyle(
-                            fontSize: 10,
+                            fontSize: 9,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
