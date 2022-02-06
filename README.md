@@ -9,7 +9,7 @@
 
 Libadwaita's widgets for Flutter. Following Gnome HIG and available on all platforms.
 
-![libadwaita example screenshot](https://user-images.githubusercontent.com/41370460/146646064-09e10e32-8635-43ed-bd9c-0ed191d30a97.png)
+![libadwaita example screenshot](https://user-images.githubusercontent.com/41370460/152694947-5ae52147-f7e2-4139-9727-dd51693eb549.png)
 
 **NOTE:** For getting colors from gtk 3.0 theme use version [`<=0.9.8+1`](https://pub.dev/packages/gtk/versions/0.9.8+1)
 
