@@ -10,11 +10,11 @@ environment:
 dependencies:
   adwaita: "0.1.0"
   bitsdojo_window: ">=0.1.1+1 <1.0.0"
+  desktop_multi_window: ">=0.0.1 <1.0.0"
   flutter:
     sdk: flutter
   libadwaita:
     path: ../
-  multi_window: ">=0.2.0 <1.0.0"
 
 dev_dependencies:
   flutter_test:

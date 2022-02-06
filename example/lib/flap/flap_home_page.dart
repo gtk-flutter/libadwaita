@@ -1,5 +1,4 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
@@ -130,7 +129,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
                           title: 'Locked',
                           subtitle: """
 Sidebar visibility doesn't change when fold state changes""",
-                          end: CupertinoSwitch(
+                          end: AdwSwitch(
                             value: locked,
                             onChanged: (val) {
                               locked = val;
@@ -178,18 +177,15 @@ Sidebar visibility doesn't change when fold state changes""",
                           title: 'Modal',
                           subtitle: '''
 Clicking outside the sidebar or pressing Esc will close it when folded''',
-                          end:
-                              CupertinoSwitch(value: true, onChanged: (val) {}),
+                          end: AdwSwitch(value: true, onChanged: (val) {}),
                         ),
                         AdwActionRow(
                           title: 'Swipe to Open',
-                          end:
-                              CupertinoSwitch(value: true, onChanged: (val) {}),
+                          end: AdwSwitch(value: true, onChanged: (val) {}),
                         ),
                         AdwActionRow(
                           title: 'Swipe to Close',
-                          end:
-                              CupertinoSwitch(value: true, onChanged: (val) {}),
+                          end: AdwSwitch(value: true, onChanged: (val) {}),
                         ),
                       ],
                     ),

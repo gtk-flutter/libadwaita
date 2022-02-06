@@ -1,6 +1,8 @@
+import 'dart:convert';
+
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:multi_window/multi_window.dart';
 
 class FlapPage extends StatelessWidget {
   const FlapPage({Key? key}) : super(key: key);
@@ -21,11 +23,13 @@ class FlapPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             AdwButton.pill(
-              onPressed: () async {
-                await MultiWindow.create(
-                  'flap',
-                );
-              },
+              onPressed: () async => await DesktopMultiWindow.createWindow(
+                jsonEncode({'name': 'flap'}),
+              )
+                ..setFrame(Offset.zero & const Size(1280, 720))
+                ..center()
+                ..setTitle('Flap Example')
+                ..show(),
               child: const Text('Run the demo'),
             ),
           ],

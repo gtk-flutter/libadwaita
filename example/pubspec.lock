@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.6"
+  desktop_multi_window:
+    dependency: "direct main"
+    description:
+      name: desktop_multi_window
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -198,34 +205,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  multi_window:
-    dependency: "direct main"
-    description:
-      name: multi_window
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
-  multi_window_interface:
-    dependency: transitive
-    description:
-      name: multi_window_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
-  multi_window_linux:
-    dependency: transitive
-    description:
-      name: multi_window_linux
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
-  multi_window_macos:
-    dependency: transitive
-    description:
-      name: multi_window_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   package_info_plus:
     dependency: transitive
     description:
@@ -470,5 +449,5 @@ packages:
     source: hosted
     version: "5.3.1"
 sdks:
-  dart: ">=2.14.0 <3.0.0"
+  dart: ">=2.15.0 <3.0.0"
   flutter: ">=2.5.0"
