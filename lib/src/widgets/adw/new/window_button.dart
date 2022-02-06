@@ -30,7 +30,8 @@ class AdwWindowButton extends StatelessWidget {
         ? windowDecor != null
             ? windowDecor!(buttonType.name, themeType, onPressed)
             : AdwButton.circular(
-                size: 25,
+                size: 24,
+                margin: const EdgeInsets.all(6),
                 onPressed: onPressed,
                 child: Center(
                   child: SvgPicture.asset(

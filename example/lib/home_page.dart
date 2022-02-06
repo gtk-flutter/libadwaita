@@ -125,12 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             'https://github.com/gtk-flutter/libadwaita/issues',
                         appIcon: Image.asset('assets/logo.png'),
                         credits: [
-                          AdwPreferencesGroup(
+                          AdwPreferencesGroup.credits(
                             title: 'Developers',
-                            titleStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
                             children: developers.entries
                                 .map(
                                   (e) => AdwActionRow(
@@ -142,9 +138,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 .toList(),
                           ),
                         ],
-                        copyright: 'Copyright 2021-2022 Gtk-Flutter developers',
+                        copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
                         license: const Text(
-                          'LGPL-3.0, This program comes with no warranty.',
+                          'GNU LGPL-3.0, This program comes with no warranty.',
                         ),
                       ),
                     ),

@@ -12,6 +12,20 @@ class AdwPreferencesGroup extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   }) : super(key: key);
 
+  const AdwPreferencesGroup.credits({
+    Key? key,
+    required this.children,
+    this.borderRadius = 12,
+    this.title,
+    this.titleStyle = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    ),
+    this.description,
+    this.descriptionStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+  }) : super(key: key);
+
   final List<Widget> children;
   final double borderRadius;
   final String? title;
