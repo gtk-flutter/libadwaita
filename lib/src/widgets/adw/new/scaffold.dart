@@ -15,7 +15,7 @@ class AdwScaffold extends StatefulWidget {
 
   final Widget body;
 
-  final Widget? flap;
+  final AdwSidebar Function(bool isDrawer)? flap;
 
   final FlapController? flapController;
 
@@ -43,9 +43,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
     final headerbar = widget.headerbar?.call(widget.viewSwitcher);
     final flap = widget.flap != null
         ? SizedBox(
-            width: 200,
-            child: Drawer(child: widget.flap),
-          )
+            width: 200, child: Drawer(elevation: 25, child: widget.flap!(true)))
         : null;
     return Column(
       children: [
@@ -63,7 +61,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
             endDrawer: flap,
             body: widget.flap != null
                 ? AdwFlap(
-                    flap: widget.flap!,
+                    flap: widget.flap!(false),
                     controller: widget.flapController,
                     style: widget.flapStyle,
                     child: widget.body,

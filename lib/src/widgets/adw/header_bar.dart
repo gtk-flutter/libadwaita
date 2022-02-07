@@ -326,26 +326,14 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                             SizedBox(width: widget.titlebarSpace),
                           for (var i in sep[0].split(','))
                             if (windowButtons[i] != null) windowButtons[i]!,
-                          ...widget.start.map(
-                            (e) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3),
-                              child: e,
-                            ),
-                          ),
+                          ...widget.start
                         ],
                       ),
                       middle: widget.title,
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ...widget.end.map(
-                            (e) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3),
-                              child: e,
-                            ),
-                          ),
+                          ...widget.end,
                           if (hasWindowControls && sep[1].split(',').isNotEmpty)
                             SizedBox(width: widget.titlebarSpace),
                           for (var i in sep[1].split(','))

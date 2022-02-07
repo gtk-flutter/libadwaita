@@ -66,8 +66,9 @@ class _FlapHomePageState extends State<FlapHomePage> {
         ],
         title: const Text('AdwFlap Demo'),
       ),
-      flap: AdwSidebar(
+      flap: (isDrawer) => AdwSidebar(
         currentIndex: _currentIndex,
+        isDrawer: isDrawer,
         children: const [
           AdwSidebarItem(
             label: 'Folding',
@@ -79,12 +80,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
             label: 'Interaction',
           )
         ],
-        onSelected: (index) {
-          setState(() {
-            _currentIndex = index;
-            Navigator.of(context).pop();
-          });
-        },
+        onSelected: (index) => setState(() => _currentIndex = index),
       ),
       flapStyle: FlapStyle(
         locked: locked,

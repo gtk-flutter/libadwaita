@@ -16,7 +16,7 @@ class AdwSidebar extends StatelessWidget {
     required this.onSelected,
     this.width = 270.0,
     this.color,
-    this.border,
+    this.isDrawer = false,
     this.controller,
     this.padding = const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
     required List<AdwSidebarItem> children,
@@ -24,6 +24,7 @@ class AdwSidebar extends StatelessWidget {
           children.length,
           (index) => _AdwSidebarItemBuilder(
             item: (context) => children[index],
+            isDrawer: isDrawer,
             isSelected: index == currentIndex,
             onSelected: () => onSelected(index),
           ),
@@ -36,7 +37,7 @@ class AdwSidebar extends StatelessWidget {
     required this.onSelected,
     this.width = 270.0,
     this.color,
-    this.border,
+    this.isDrawer = false,
     this.controller,
     this.padding = const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
     required AdwSidebarItem Function(
@@ -53,6 +54,7 @@ class AdwSidebar extends StatelessWidget {
             item: (context) =>
                 itemBuilder(context, index, currentIndex == index),
             isSelected: currentIndex == index,
+            isDrawer: isDrawer,
             onSelected: () => onSelected(index),
           ),
         ),
@@ -72,6 +74,9 @@ class AdwSidebar extends StatelessWidget {
   /// Called when one of the Sidebar item is selected.
   final Function(int index) onSelected;
 
+  /// Is the Sidebar present in the Drawer of the Scaffold
+  final bool isDrawer;
+
   /// The width of the sidebar.
   ///
   /// Defaults to `270.0`.
@@ -79,9 +84,6 @@ class AdwSidebar extends StatelessWidget {
 
   /// The background color of the sidebar.
   final Color? color;
-
-  /// The border around the sidebar.
-  final Border? border;
 
   /// Delegate in charge of supplying children to the internal list
   /// of this widget.
@@ -153,12 +155,14 @@ class _AdwSidebarItemBuilder extends StatelessWidget {
     Key? key,
     required this.item,
     required this.isSelected,
+    required this.isDrawer,
     this.onSelected,
   }) : super(key: key);
 
   final AdwSidebarItem Function(BuildContext context) item;
   final bool isSelected;
   final VoidCallback? onSelected;
+  final bool isDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +173,12 @@ class _AdwSidebarItemBuilder extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 2),
       textStyle: const TextStyle(fontWeight: FontWeight.normal),
       padding: currentItem.padding,
-      onPressed: onSelected,
+      onPressed: () {
+        onSelected?.call();
+        if (isDrawer) {
+          Navigator.of(context).pop();
+        }
+      },
       isActive: isSelected,
       child: Row(
         children: [

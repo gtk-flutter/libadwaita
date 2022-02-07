@@ -65,16 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
       headerbar: (_) => AdwHeaderBar.bitsdojo(
         appWindow: appWindow,
         start: [
-          Builder(
-            builder: (context) {
-              return AdwHeaderButton(
-                icon: const Icon(Icons.view_sidebar, size: 15),
-                isActive: _flapController.isOpen,
-                onPressed: () {
-                  _flapController.toggle();
-                },
-              );
-            },
+          AdwHeaderButton(
+            icon: const Icon(Icons.view_sidebar_outlined, size: 19),
+            isActive: _flapController.isOpen,
+            onPressed: () => _flapController.toggle(),
           ),
           AdwHeaderButton(
             icon: const Icon(Icons.nightlight_round, size: 15),
@@ -154,8 +148,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      flap: AdwSidebar(
+      flap: (isDrawer) => AdwSidebar(
         currentIndex: _currentIndex,
+        isDrawer: isDrawer,
         children: const [
           AdwSidebarItem(
             label: 'Welcome',
@@ -182,12 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Style Classes',
           )
         ],
-        onSelected: (index) {
-          setState(() {
-            _currentIndex = index;
-            Navigator.of(context).pop();
-          });
-        },
+        onSelected: (index) => setState(() => _currentIndex = index),
       ),
       body: AdwViewStack(
         animationDuration: const Duration(milliseconds: 100),
