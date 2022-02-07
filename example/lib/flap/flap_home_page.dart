@@ -45,157 +45,129 @@ class _FlapHomePageState extends State<FlapHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AdwHeaderBar.bitsdojo(
-          appWindow: appWindow,
-          start: [
-            Builder(
-              builder: (context) {
-                return AdwHeaderButton(
-                  icon: const Icon(Icons.view_sidebar, size: 15),
-                  isActive: _flapController.isOpen,
-                  onPressed: () => _flapController.toggle(),
-                );
-              },
-            ),
-            AdwHeaderButton(
-              icon: const Icon(Icons.nightlight_round, size: 15),
-              onPressed: changeTheme,
-            ),
-          ],
-          title: const Text('AdwFlap Demo'),
-        ),
-        Expanded(
-          child: AdwScaffold(
-            flapController: _flapController,
-            drawer: Drawer(
-              child: AdwSidebar(
-                currentIndex: _currentIndex,
-                children: const [
-                  AdwSidebarItem(
-                    label: 'Folding',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Layout',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Interaction',
-                  )
-                ],
-                onSelected: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                    Navigator.of(context).pop();
-                  });
-                },
-              ),
-            ),
-            body: AdwFlap(
-              locked: locked,
-              flapController: _flapController,
-              flapPosition: flapPosition,
-              foldPolicy: foldPolicy,
-              flap: AdwSidebar(
-                currentIndex: _currentIndex,
-                children: const [
-                  AdwSidebarItem(
-                    label: 'Folding',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Layout',
-                  ),
-                  AdwSidebarItem(
-                    label: 'Interaction',
-                  )
-                ],
-                onSelected: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-              ),
-              child: AdwViewStack(
-                index: _currentIndex,
-                children: [
-                  AdwClamp.scrollable(
-                    child: AdwPreferencesGroup(
-                      children: [
-                        const AdwComboRow(
-                          title: 'Fold Policy',
-                          choices: ['auto', 'always', 'never'],
-                        ),
-                        AdwActionRow(
-                          title: 'Locked',
-                          subtitle: """
+    return AdwScaffold(
+      flapController: _flapController,
+      headerbar: (_) => AdwHeaderBar.bitsdojo(
+        appWindow: appWindow,
+        start: [
+          Builder(
+            builder: (context) {
+              return AdwHeaderButton(
+                icon: const Icon(Icons.view_sidebar, size: 15),
+                isActive: _flapController.isOpen,
+                onPressed: () => _flapController.toggle(),
+              );
+            },
+          ),
+          AdwHeaderButton(
+            icon: const Icon(Icons.nightlight_round, size: 15),
+            onPressed: changeTheme,
+          ),
+        ],
+        title: const Text('AdwFlap Demo'),
+      ),
+      flap: AdwSidebar(
+        currentIndex: _currentIndex,
+        children: const [
+          AdwSidebarItem(
+            label: 'Folding',
+          ),
+          AdwSidebarItem(
+            label: 'Layout',
+          ),
+          AdwSidebarItem(
+            label: 'Interaction',
+          )
+        ],
+        onSelected: (index) {
+          setState(() {
+            _currentIndex = index;
+            Navigator.of(context).pop();
+          });
+        },
+      ),
+      flapStyle: FlapStyle(
+        locked: locked,
+        flapPosition: flapPosition,
+        foldPolicy: foldPolicy,
+      ),
+      body: AdwViewStack(
+        index: _currentIndex,
+        children: [
+          AdwClamp.scrollable(
+            child: AdwPreferencesGroup(
+              children: [
+                const AdwComboRow(
+                  title: 'Fold Policy',
+                  choices: ['auto', 'always', 'never'],
+                ),
+                AdwActionRow(
+                  title: 'Locked',
+                  subtitle: """
 Sidebar visibility doesn't change when fold state changes""",
-                          end: AdwSwitch(
-                            value: locked,
-                            onChanged: (val) {
-                              locked = val;
-                              setState(() {});
-                            },
-                          ),
-                        )
-                      ],
-                    ),
+                  end: AdwSwitch(
+                    value: locked,
+                    onChanged: (val) {
+                      locked = val;
+                      setState(() {});
+                    },
                   ),
-                  AdwClamp.scrollable(
-                    child: AdwPreferencesGroup(
-                      children: [
-                        AdwActionRow(
-                          title: 'Flap position',
-                          end: AdwToggleButton(
-                            isSelected: [
-                              flapPosition.index == 0,
-                              flapPosition.index == 1
-                            ],
-                            onPressed: (val) => setState(() {
-                              if (val == 0) {
-                                flapPosition = FlapPosition.start;
-                              } else {
-                                flapPosition = FlapPosition.end;
-                              }
-                            }),
-                            children: const [
-                              Text('Start'),
-                              Text('End'),
-                            ],
-                          ),
-                        ),
-                        const AdwActionRow(
-                          title: 'Transition type',
-                          end: Text('Over'),
-                        )
-                      ],
-                    ),
-                  ),
-                  AdwClamp.scrollable(
-                    child: AdwPreferencesGroup(
-                      children: [
-                        AdwActionRow(
-                          title: 'Modal',
-                          subtitle: '''
-Clicking outside the sidebar or pressing Esc will close it when folded''',
-                          end: AdwSwitch(value: true, onChanged: (val) {}),
-                        ),
-                        AdwActionRow(
-                          title: 'Swipe to Open',
-                          end: AdwSwitch(value: true, onChanged: (val) {}),
-                        ),
-                        AdwActionRow(
-                          title: 'Swipe to Close',
-                          end: AdwSwitch(value: true, onChanged: (val) {}),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
           ),
-        ),
-      ],
+          AdwClamp.scrollable(
+            child: AdwPreferencesGroup(
+              children: [
+                AdwActionRow(
+                  title: 'Flap position',
+                  end: AdwToggleButton(
+                    isSelected: [
+                      flapPosition.index == 0,
+                      flapPosition.index == 1
+                    ],
+                    onPressed: (val) => setState(() {
+                      if (val == 0) {
+                        flapPosition = FlapPosition.start;
+                      } else {
+                        flapPosition = FlapPosition.end;
+                      }
+                    }),
+                    children: const [
+                      Text('Start'),
+                      Text('End'),
+                    ],
+                  ),
+                ),
+                const AdwActionRow(
+                  title: 'Transition type',
+                  end: Text('Over'),
+                )
+              ],
+            ),
+          ),
+          AdwClamp.scrollable(
+            child: AdwPreferencesGroup(
+              children: [
+                AdwActionRow(
+                  title: 'Modal',
+                  subtitle: '''
+Clicking outside the sidebar or pressing Esc will close it when folded''',
+                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                ),
+                AdwActionRow(
+                  title: 'Swipe to Open',
+                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                ),
+                AdwActionRow(
+                  title: 'Swipe to Close',
+                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

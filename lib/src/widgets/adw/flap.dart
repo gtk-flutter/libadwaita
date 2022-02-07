@@ -7,28 +7,19 @@ import 'package:libadwaita/src/utils/colors.dart';
 enum FoldPolicy { never, always, auto }
 enum FlapPosition { start, end }
 
-class AdwFlap extends StatefulWidget {
-  const AdwFlap({
-    Key? key,
-    required this.flap,
-    required this.child,
-    this.locked = false,
-    this.flapController,
+class FlapStyle {
+  FlapStyle({
     this.seperator,
-    this.foldPolicy = FoldPolicy.auto,
-    this.flapPosition = FlapPosition.start,
+    this.locked = false,
     this.breakpoint = 900,
     this.flapWidth = 270.0,
-  }) : super(key: key);
+    this.foldPolicy = FoldPolicy.auto,
+    this.flapPosition = FlapPosition.start,
+  });
 
-  final Widget flap;
-  final Widget child;
   final Widget? seperator;
-
   final FoldPolicy foldPolicy;
   final FlapPosition flapPosition;
-
-  final FlapController? flapController;
 
   /// The breakpoint for small devices
   final double breakpoint;
@@ -41,6 +32,25 @@ class AdwFlap extends StatefulWidget {
   /// state when screen is resized or
   /// not
   final bool locked;
+}
+
+class AdwFlap extends StatefulWidget {
+  AdwFlap({
+    Key? key,
+    required this.flap,
+    required this.child,
+    this.controller,
+    FlapStyle? style,
+  })  : style = style ?? FlapStyle(),
+        super(key: key);
+
+  final Widget flap;
+
+  final Widget child;
+
+  final FlapStyle style;
+
+  final FlapController? controller;
 
   @override
   _AdwFlapState createState() => _AdwFlapState();
@@ -57,10 +67,10 @@ class _AdwFlapState extends State<AdwFlap> {
   void initState() {
     super.initState();
 
-    if (widget.flapController == null) {
+    if (widget.controller == null) {
       _controller = FlapController();
     } else {
-      _controller = widget.flapController!;
+      _controller = widget.controller!;
     }
 
     _controller.addListener(rebuild);
@@ -70,9 +80,9 @@ class _AdwFlapState extends State<AdwFlap> {
 
   void updateFlapData() {
     _controller
-      ..policy = widget.foldPolicy
-      ..position = widget.flapPosition
-      ..locked = widget.locked;
+      ..policy = widget.style.foldPolicy
+      ..position = widget.style.flapPosition
+      ..locked = widget.style.locked;
   }
 
   @override
@@ -98,7 +108,7 @@ class _AdwFlapState extends State<AdwFlap> {
 
     final flap = SlideHide(
       isHidden: _controller.shouldHide(),
-      width: widget.flapWidth,
+      width: widget.style.flapWidth,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -106,13 +116,13 @@ class _AdwFlapState extends State<AdwFlap> {
       ),
     );
 
-    final seperator = widget.seperator ??
+    final seperator = widget.style.seperator ??
         Container(
           width: 1,
           color: context.borderColor,
         );
 
-    final widgets = widget.flapPosition == FlapPosition.start
+    final widgets = widget.style.flapPosition == FlapPosition.start
         ? [flap, seperator, content]
         : [content, seperator, flap];
 
@@ -125,10 +135,10 @@ class _AdwFlapState extends State<AdwFlap> {
           // affected by window resizes.
           // If FoldPolicy is auto, then close / open the sidebar depending on the
           // state
-          final isMobile = size.width < widget.breakpoint;
+          final isMobile = size.width < widget.style.breakpoint;
           _controller.updateModalState(context, state: isMobile);
 
-          switch (widget.foldPolicy) {
+          switch (widget.style.foldPolicy) {
             case FoldPolicy.never:
             case FoldPolicy.always:
               break;

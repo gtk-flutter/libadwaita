@@ -5,6 +5,10 @@
 - Remove `label` parameter from `AdwTextField`
 
 ### **Changes to widgets**
+**Flap**
+- Renamed `flapController` to `controller`
+- Moved most of the things into `FlapStyle` class to simplify its usage in `AdwScaffold`
+
 **HeaderBar**
 - Now the `AdwHeaderBar` is not dependent on any package, `windowDecor` object is now optional
 - Add `isTransparent` parameter => Makes `AdwHeaderBar`'s background and border color

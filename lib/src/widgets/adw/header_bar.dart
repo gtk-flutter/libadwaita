@@ -23,7 +23,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.onDoubleTap,
     this.onHeaderDrag,
     this.start = const [],
-    this.title = const SizedBox(),
+    this.title,
     this.end = const [],
     this.textStyle,
     this.isTransparent = false,
@@ -203,7 +203,7 @@ class AdwHeaderBar extends StatefulWidget {
   final List<Widget> start;
 
   /// The center widget for the headerbar
-  final Widget title;
+  final Widget? title;
 
   /// The trailing widget for the headerbar
   final List<Widget> end;

@@ -1,3 +1,5 @@
+// ignore_for_file: unawaited_futures
+
 import 'dart:convert';
 
 import 'package:desktop_multi_window/desktop_multi_window.dart';
