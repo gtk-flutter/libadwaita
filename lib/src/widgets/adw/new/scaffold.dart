@@ -43,7 +43,9 @@ class _AdwScaffoldState extends State<AdwScaffold> {
     final headerbar = widget.headerbar?.call(widget.viewSwitcher);
     final flap = widget.flap != null
         ? SizedBox(
-            width: 200, child: Drawer(elevation: 25, child: widget.flap!(true)))
+            width: 200,
+            child: Drawer(elevation: 25, child: widget.flap!(true)),
+          )
         : null;
     return Column(
       children: [
