@@ -6,6 +6,7 @@ class ListsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final switchVal = ValueNotifier(false);
     return AdwClamp.scrollable(
       child: Column(
         children: [
@@ -78,7 +79,16 @@ class ListsPage extends StatelessWidget {
                 ),
               )
             ],
-          )
+          ),
+          ValueListenableBuilder<bool>(
+            valueListenable: switchVal,
+            builder: (context, val, _) => AdwSwitch(
+              value: val,
+              onChanged: (v) {
+                switchVal.value = v;
+              },
+            ),
+          ),
         ]
             .map(
               (e) => Padding(

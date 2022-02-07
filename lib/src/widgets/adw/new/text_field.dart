@@ -5,7 +5,6 @@ class AdwTextField extends StatelessWidget {
     Key? key,
     this.controller,
     this.keyboardType,
-    this.labelText,
     this.onChanged,
     this.icon,
     this.initialValue,
@@ -13,7 +12,6 @@ class AdwTextField extends StatelessWidget {
 
   final TextEditingController? controller;
   final TextInputType? keyboardType;
-  final String? labelText;
   final Function(String)? onChanged;
   final IconData? icon;
   final String? initialValue;
@@ -48,7 +46,6 @@ class AdwTextField extends StatelessWidget {
                 color: Theme.of(context).textTheme.headline1?.color,
               )
             : null,
-        labelText: labelText,
       ),
       onChanged: onChanged,
     );

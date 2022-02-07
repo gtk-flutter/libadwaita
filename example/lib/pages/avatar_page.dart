@@ -18,10 +18,10 @@ class AvatarPage extends StatelessWidget {
             title: 'All colors',
             children: [
               for (var index
-                  in List.generate(AdwAvatarColors.values.length, (i) => i))
+                  in List.generate(AdwColors.values.length, (i) => i))
                 AdwActionRow(
                   start: AdwAvatar(
-                    backgroundColor: AdwAvatarColors.values[index],
+                    backgroundColor: AdwColors.values[index],
                     child: Text(index.toString()),
                   ),
                   title: 'Johnny Appleseed',

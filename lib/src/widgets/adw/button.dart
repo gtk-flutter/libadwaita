@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 
 /// Set of status that a [AdwButton] widget can be at any given time.
 enum AdwButtonStatus { enabled, active, enabledHovered, activeHovered, tapDown }
@@ -52,8 +53,9 @@ class AdwButton extends StatefulWidget {
         ),
         super(key: key);
 
-  const AdwButton.circular({
+  AdwButton.circular({
     Key? key,
+    double size = 34,
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
     this.builder,
@@ -69,7 +71,7 @@ class AdwButton extends StatefulWidget {
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : assert(builder != null || child != null, _bothBuilderAndChildError),
-        constraints = const BoxConstraints.tightFor(width: 34, height: 34),
+        constraints = BoxConstraints.tightFor(width: size, height: size),
         shape = BoxShape.circle,
         borderRadius = null,
         super(key: key);
@@ -228,8 +230,7 @@ class AdwButton extends StatefulWidget {
     AdwButtonStatus status, {
     bool opaque = false,
   }) {
-    return (backgroundColor ?? (context.isDark ? Colors.black : Colors.white))
-        .resolveDefaultAdwButtonColor(
+    return (backgroundColor ?? context.textColor).resolveDefaultAdwButtonColor(
       context,
       status,
       opaque: opaque,

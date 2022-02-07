@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/internal/popover.dart';
 import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/src/widgets/adw/button.dart';
+import 'package:popover_gtk/popover_gtk.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
@@ -84,17 +85,23 @@ class _AdwComboRowState extends State<AdwComboRow> {
                   : null,
             ),
           ),
-          Expanded(child: Container()),
-          SizedBox(
-            width: 50,
-            child: Text(
-              widget.choices[selected],
-              overflow: TextOverflow.ellipsis,
+          Flexible(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const SizedBox(width: 10),
+                Flexible(
+                  child: Text(
+                    widget.choices[selected],
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                button,
+                const SizedBox(width: 10),
+              ],
             ),
           ),
-          const SizedBox(width: 5),
-          button,
-          const SizedBox(width: 10),
         ],
       ),
     );
@@ -131,27 +138,43 @@ class _AdwComboButtonState extends State<AdwComboButton> {
   void show() {
     showPopover(
       context: context,
-      child: Column(
+      barrierColor: Colors.transparent,
+      shadow: [
+        BoxShadow(
+          color: context.borderColor,
+          blurRadius: 6,
+        ),
+      ],
+      bodyBuilder: (_) => Column(
+        mainAxisSize: MainAxisSize.min,
         children: List.generate(widget.choices.length, (int index) {
-          return ListTile(
-            title: Text(widget.choices[index]),
-            trailing:
-                index == widget.getSelected() ? const Icon(Icons.check) : null,
-            onTap: () {
+          return AdwButton.flat(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
+                    widget.choices[index],
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                if (index == widget.getSelected())
+                  const Icon(Icons.check, size: 20),
+              ],
+            ),
+            onPressed: () {
               setState(() {
-                widget.setSelected(
-                  index,
-                ); //if you want to assign the index somewhere to check
+                widget.setSelected(index);
+                //if you want to assign the index somewhere to check
               });
               Navigator.of(context).pop();
             },
           );
         }),
       ),
-      width: 150,
+      width: 200,
       height: null,
       backgroundColor: Theme.of(context).cardColor,
-      contentOffset: const Offset(0, 4),
     ).whenComplete(() => setState(() => active = false));
   }
 }

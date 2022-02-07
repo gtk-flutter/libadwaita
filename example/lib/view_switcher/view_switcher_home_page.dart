@@ -1,7 +1,6 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:window_decorations/window_decorations.dart';
 
 class ViewSwitcherHomePage extends StatefulWidget {
   const ViewSwitcherHomePage({Key? key}) : super(key: key);
@@ -22,7 +21,6 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
           children: [
             AdwHeaderBar.bitsdojo(
               appWindow: appWindow,
-              windowDecor: windowDecor,
               title: AdwViewSwitcher(
                 tabs: const [
                   ViewSwitcherData(
@@ -36,10 +34,12 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
                   ViewSwitcherData(
                     title: 'Stopwatch',
                     icon: Icons.stop,
+                    badge: '9',
                   ),
                   ViewSwitcherData(
                     title: 'Timer',
                     icon: Icons.timer,
+                    badge: '1',
                   ),
                 ],
                 onViewChanged: (idx) => index.value = idx,

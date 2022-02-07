@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/widgets/adw/button.dart';
 
 /// Button that is usually placed inside an `AdwHeaderBar` widget.
 ///
