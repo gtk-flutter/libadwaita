@@ -28,7 +28,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.textStyle,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
+    this.titlebarSpace = 6,
     this.height = 51,
     VoidCallback? onMinimize,
     VoidCallback? onMaximize,
@@ -63,7 +63,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.textStyle,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
+    this.titlebarSpace = 6,
     this.height = 51,
     this.minimizeBtn,
     this.maximizeBtn,
@@ -88,7 +88,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.textStyle,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
+    this.titlebarSpace = 6,
     this.height = 51,
     bool showMinimize = true,
     bool showMaximize = true,
@@ -132,7 +132,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.textStyle,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
+    this.titlebarSpace = 6,
     this.height = 51,
     Widget Function(VoidCallback onTap)? minimizeBtn,
     Widget Function(VoidCallback onTap)? maximizeBtn,
@@ -163,7 +163,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.textStyle,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
+    this.titlebarSpace = 6,
     this.height = 51,
     bool showClose = true,
   })  : onHeaderDrag = window?.performDrag as void Function()?,
@@ -189,7 +189,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.textStyle,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
-    this.titlebarSpace = 4,
+    this.titlebarSpace = 6,
     this.height = 51,
     Widget Function(VoidCallback onTap)? closeBtn,
   })  : onHeaderDrag = window?.performDrag as void Function()?,
@@ -227,7 +227,7 @@ class AdwHeaderBar extends StatefulWidget {
   /// The padding inside the headerbar
   final EdgeInsets padding;
 
-  /// The space b/w trailing elements and titlebar
+  /// The horizontal spacing before or after the window buttons
   final double titlebarSpace;
 
   /// Called when headerbar is dragged
@@ -350,7 +350,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                             SizedBox(width: widget.titlebarSpace),
                           for (var i in sep[1].split(','))
                             if (windowButtons[i] != null) windowButtons[i]!,
-                          const SizedBox(width: 15),
+                          SizedBox(width: widget.titlebarSpace),
                         ],
                       ),
                     ),
