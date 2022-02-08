@@ -40,7 +40,9 @@ class _AdwScaffoldState extends State<AdwScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final headerbar = widget.headerbar?.call(widget.viewSwitcher);
+    final isMobile = MediaQuery.of(context).size.width <= 600;
+    final headerbar =
+        widget.headerbar?.call(!isMobile ? widget.viewSwitcher : null);
     final flap = widget.flap != null
         ? SizedBox(
             width: 200,
@@ -69,11 +71,11 @@ class _AdwScaffoldState extends State<AdwScaffold> {
                     child: widget.body,
                   )
                 : widget.body,
-            bottomNavigationBar: widget.viewSwitcher != null
+            bottomNavigationBar: widget.viewSwitcher != null && isMobile
                 ? SizedBox(
                     height: 51,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         widget.viewSwitcher!,
                       ],
