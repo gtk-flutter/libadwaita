@@ -9,7 +9,7 @@ class AdwViewSwitcher extends StatelessWidget {
     required this.onViewChanged,
     required this.currentIndex,
     this.badgeColor,
-    this.style,
+    this.policy,
     @Deprecated('This parameter is no longer in use')
         double height = 55,
     @Deprecated(
@@ -23,17 +23,17 @@ class AdwViewSwitcher extends StatelessWidget {
   final Color? badgeColor;
   final List<ViewSwitcherData> tabs;
   final ValueChanged<int> onViewChanged;
-  final ViewSwitcherStyle? style;
+  final ViewSwitcherPolicy? policy;
   final int currentIndex;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final newStyle = style ??
+        final newPolicy = policy ??
             (constraints.maxWidth > 600
-                ? ViewSwitcherStyle.desktop
-                : ViewSwitcherStyle.mobile);
+                ? ViewSwitcherPolicy.wide
+                : ViewSwitcherPolicy.narrow);
 
         return Row(
           mainAxisSize: MainAxisSize.min,
@@ -42,7 +42,7 @@ class AdwViewSwitcher extends StatelessWidget {
               AdwViewSwitcherTab(
                 data: tab.value,
                 badgeColor: badgeColor,
-                style: newStyle,
+                policy: newPolicy,
                 isSelected: tab.key == currentIndex,
                 onSelected: currentIndex != tab.key
                     ? () => onViewChanged(tab.key)

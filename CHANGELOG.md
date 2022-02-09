@@ -3,8 +3,13 @@
 ### **BREAKING**
 - `AdwHeaderBar.minimal` is now `AdwHeaderBar.custom`
 - Remove `label` parameter from `AdwTextField`
+- `ViewSwitcherStyle` is now `ViewSwitcherPolicy`
+- `ViewSwitcherStyle.desktop` and `ViewSwitcherStyle.mobile` are also renamed to `ViewSwitcherPolicy.wide` and `ViewSwitcherPolicy.narrow`
 
 ### **Changes to widgets**
+**ComboRow**
+- Dropdown is now scrollable if too many elements are there
+
 **Flap**
 - Renamed `flapController` to `controller`
 - Moved most of the things into `FlapStyle` class to simplify its usage in `AdwScaffold`

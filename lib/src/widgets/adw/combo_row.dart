@@ -145,32 +145,34 @@ class _AdwComboButtonState extends State<AdwComboButton> {
           blurRadius: 6,
         ),
       ],
-      bodyBuilder: (_) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(widget.choices.length, (int index) {
-          return AdwButton.flat(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    widget.choices[index],
-                    overflow: TextOverflow.ellipsis,
+      bodyBuilder: (_) => SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(widget.choices.length, (int index) {
+            return AdwButton.flat(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      widget.choices[index],
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-                if (index == widget.getSelected())
-                  const Icon(Icons.check, size: 20),
-              ],
-            ),
-            onPressed: () {
-              setState(() {
-                widget.setSelected(index);
-                //if you want to assign the index somewhere to check
-              });
-              Navigator.of(context).pop();
-            },
-          );
-        }),
+                  if (index == widget.getSelected())
+                    const Icon(Icons.check, size: 20),
+                ],
+              ),
+              onPressed: () {
+                setState(() {
+                  widget.setSelected(index);
+                  //if you want to assign the index somewhere to check
+                });
+                Navigator.of(context).pop();
+              },
+            );
+          }),
+        ),
       ),
       width: 200,
       height: null,

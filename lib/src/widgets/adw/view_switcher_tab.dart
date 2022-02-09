@@ -6,7 +6,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
   const AdwViewSwitcherTab({
     Key? key,
     required this.data,
-    required this.style,
+    required this.policy,
     this.badgeColor,
     this.isSelected = false,
     this.onSelected,
@@ -14,13 +14,13 @@ class AdwViewSwitcherTab extends StatelessWidget {
 
   final Color? badgeColor;
   final ViewSwitcherData data;
-  final ViewSwitcherStyle style;
+  final ViewSwitcherPolicy policy;
   final bool isSelected;
   final VoidCallback? onSelected;
 
   @override
   Widget build(BuildContext context) {
-    final isDesktop = style == ViewSwitcherStyle.desktop;
+    final isDesktop = policy == ViewSwitcherPolicy.wide;
 
     return AdwButton.flat(
       constraints: isDesktop
