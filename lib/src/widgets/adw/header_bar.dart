@@ -246,33 +246,32 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       widget.minimizeBtn != null ||
       widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>> seperator =
-      ValueNotifier(['', 'minimize,maximize,close']);
+  late ValueNotifier<List<String>> seperator = ValueNotifier(['', '']);
 
   @override
   void initState() {
     super.initState();
 
-    late final order = ValueNotifier<String>(':minimize,maximize,close');
-    void updateSep() {
-      if (mounted) {
-        seperator.value = order.value.split(':');
-      }
+    void updateSep(String order) {
+      if (!mounted) return;
+      seperator.value = order.split(':');
     }
 
-    if (Platform.isLinux) {
-      final buttonLayout = ValueNotifier<DBusString?>(null);
-      final schema = GSettings('org.gnome.desktop.wm.preferences');
-      WidgetsBinding.instance?.addPostFrameCallback((_) async {
-        buttonLayout.value = await schema.get('button-layout') as DBusString;
-        if (buttonLayout.value != null) {
-          order.value = buttonLayout.value!.value;
-        }
-        updateSep();
-      });
+    if (Platform.isWindows) {
+      updateSep(':minimize,maximize,close');
     } else if (Platform.isMacOS) {
-      order.value = 'close,maximize,minimize:';
-      updateSep();
+      updateSep('close,maximize,minimize:');
+    } else if (Platform.isLinux) {
+      updateSep(':close');
+
+      final schema = GSettings('org.gnome.desktop.wm.preferences');
+
+      WidgetsBinding.instance?.addPostFrameCallback((_) async {
+        final buttonLayout = await schema.get('button-layout') as DBusString?;
+        if (buttonLayout != null) {
+          updateSep(buttonLayout.value);
+        }
+      });
     }
   }
 
