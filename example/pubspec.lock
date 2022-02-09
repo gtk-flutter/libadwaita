@@ -98,7 +98,7 @@ packages:
       name: dbus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.6"
+    version: "0.7.1"
   desktop_multi_window:
     dependency: "direct main"
     description:
@@ -155,7 +155,7 @@ packages:
       name: gsettings
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.3"
+    version: "0.2.5"
   http:
     dependency: transitive
     description:
