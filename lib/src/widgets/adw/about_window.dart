@@ -182,6 +182,15 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                               ]
                             : currentPage == 1
                                 ? widget.credits!
+                                    .map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 10,
+                                        ),
+                                        child: e,
+                                      ),
+                                    )
+                                    .toList()
                                 : [
                                     if (widget.copyright != null)
                                       Text(widget.copyright!),

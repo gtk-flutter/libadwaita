@@ -21,6 +21,11 @@
 **Popover**
 - Revisit popup menu by using `popover_gtk` package (popover package with fade transition) (#35)
 
+**TextField**
+- Add `autofocus` parameter
+- Add `prefixIcon` parameter
+- Add `onSubmitted` parameter
+
 **ViewSwitcher**
 - Add `badge` in `AdwViewSwitcher`
 

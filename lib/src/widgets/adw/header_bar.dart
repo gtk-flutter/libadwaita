@@ -314,8 +314,8 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                   valueListenable: seperator,
                   builder: (context, sep, _) => DefaultTextStyle.merge(
                     style: const TextStyle(
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
                     ).merge(widget.textStyle),
                     child: NavigationToolbar(
                       leading: Row(
