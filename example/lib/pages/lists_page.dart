@@ -7,6 +7,9 @@ class ListsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final switchVal = ValueNotifier(false);
+    const choices = ['Test', 'Second', 'Third and a long name'];
+    final selectionIndex = ValueNotifier<int>(0);
+
     return AdwClamp.scrollable(
       child: Column(
         children: [
@@ -41,11 +44,21 @@ class ListsPage extends StatelessWidget {
               )
             ],
           ),
-          const AdwPreferencesGroup(
+          AdwPreferencesGroup(
             children: [
-              AdwComboRow(
-                choices: ['Test', 'Second', 'Third and a long name'],
-                title: 'Combo row',
+              ValueListenableBuilder<int>(
+                valueListenable: selectionIndex,
+                builder: (context, val, _) {
+                  return AdwComboRow(
+                    choices: choices,
+                    title: 'Combo row',
+                    selectedIndex: val,
+                    onSelected: (val) {
+                      print(val);
+                      selectionIndex.value = val;
+                    },
+                  );
+                },
               )
             ],
           ),

@@ -10,6 +10,8 @@ class AdwComboRow extends StatefulWidget {
     this.choices = const [],
     this.start,
     this.end,
+    required this.selectedIndex,
+    required this.onSelected,
     required this.title,
     this.subtitle,
     this.autofocus = false,
@@ -18,6 +20,8 @@ class AdwComboRow extends StatefulWidget {
   }) : super(key: key);
 
   final List<String> choices;
+  final int selectedIndex;
+  final ValueSetter<int> onSelected;
   final Widget? start;
   final Widget? end;
   final String title;
@@ -34,29 +38,10 @@ class AdwComboRow extends StatefulWidget {
 class _AdwComboRowState extends State<AdwComboRow> {
   _AdwComboRowState();
 
-  bool taped = false;
-  int selected = 0;
   final GlobalKey<_AdwComboButtonState> _comboButtonState =
       GlobalKey<_AdwComboButtonState>();
 
   late AdwComboButton button;
-
-  @override
-  void initState() {
-    button = AdwComboButton(
-      key: _comboButtonState,
-      choices: widget.choices,
-      getSelected: () {
-        return selected;
-      },
-      setSelected: (select) {
-        setState(() {
-          selected = select;
-        });
-      },
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,12 +77,19 @@ class _AdwComboRowState extends State<AdwComboRow> {
                 const SizedBox(width: 10),
                 Flexible(
                   child: Text(
-                    widget.choices[selected],
+                    widget.choices[widget.selectedIndex],
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(width: 5),
-                button,
+                AdwComboButton(
+                  key: _comboButtonState,
+                  choices: widget.choices,
+                  selectedIndex: widget.selectedIndex,
+                  onSelected: (val) {
+                    widget.onSelected(val);
+                  },
+                ),
                 const SizedBox(width: 10),
               ],
             ),
@@ -112,13 +104,13 @@ class AdwComboButton extends StatefulWidget {
   const AdwComboButton({
     Key? key,
     this.choices = const [],
-    required this.setSelected,
-    required this.getSelected,
+    required this.onSelected,
+    required this.selectedIndex,
   }) : super(key: key);
 
   final List<String> choices;
-  final ValueSetter<int> setSelected;
-  final ValueGetter<int> getSelected;
+  final ValueSetter<int> onSelected;
+  final int selectedIndex;
 
   @override
   State<AdwComboButton> createState() => _AdwComboButtonState();
@@ -131,9 +123,7 @@ class _AdwComboButtonState extends State<AdwComboButton> {
   bool active = false;
 
   @override
-  Widget build(BuildContext context) {
-    return const Icon(Icons.arrow_drop_down);
-  }
+  Widget build(BuildContext context) => const Icon(Icons.arrow_drop_down);
 
   void show() {
     showPopover(
@@ -148,8 +138,9 @@ class _AdwComboButtonState extends State<AdwComboButton> {
       bodyBuilder: (_) => SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: List.generate(widget.choices.length, (int index) {
-            return AdwButton.flat(
+          children: List.generate(
+            widget.choices.length,
+            (int index) => AdwButton.flat(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -159,19 +150,16 @@ class _AdwComboButtonState extends State<AdwComboButton> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  if (index == widget.getSelected())
+                  if (index == widget.selectedIndex)
                     const Icon(Icons.check, size: 20),
                 ],
               ),
               onPressed: () {
-                setState(() {
-                  widget.setSelected(index);
-                  //if you want to assign the index somewhere to check
-                });
+                widget.onSelected(index);
                 Navigator.of(context).pop();
               },
-            );
-          }),
+            ),
+          ),
         ),
       ),
       width: 200,

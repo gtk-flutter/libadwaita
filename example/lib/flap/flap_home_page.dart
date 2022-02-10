@@ -45,6 +45,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var selectionIndex = 0;
+
     return AdwScaffold(
       flapController: _flapController,
       headerbar: (_) => AdwHeaderBar.bitsdojo(
@@ -93,9 +95,11 @@ class _FlapHomePageState extends State<FlapHomePage> {
           AdwClamp.scrollable(
             child: AdwPreferencesGroup(
               children: [
-                const AdwComboRow(
+                AdwComboRow(
                   title: 'Fold Policy',
-                  choices: ['auto', 'always', 'never'],
+                  selectedIndex: selectionIndex,
+                  onSelected: (val) => setState(() => selectionIndex = val),
+                  choices: const ['auto', 'always', 'never'],
                 ),
                 AdwActionRow(
                   title: 'Locked',
