@@ -53,10 +53,7 @@ class ListsPage extends StatelessWidget {
                     choices: choices,
                     title: 'Combo row',
                     selectedIndex: val,
-                    onSelected: (val) {
-                      print(val);
-                      selectionIndex.value = val;
-                    },
+                    onSelected: (val) => selectionIndex.value = val,
                   );
                 },
               )
