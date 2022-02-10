@@ -18,7 +18,6 @@ class AdwViewSwitcher extends StatelessWidget {
     )
         bool? expanded,
     this.paddingIcon,
-    this.paddingTitle,
   })  : assert(tabs.length >= 2, 'Minimum 2 tabs are required'),
         super(key: key);
 
@@ -28,7 +27,6 @@ class AdwViewSwitcher extends StatelessWidget {
   final ViewSwitcherPolicy? policy;
   final int currentIndex;
   final EdgeInsets? paddingIcon;
-  final EdgeInsets? paddingTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,6 @@ class AdwViewSwitcher extends StatelessWidget {
               AdwViewSwitcherTab(
                 data: tab.value,
                 paddingIcon: paddingIcon,
-                paddingTitle: paddingTitle,
                 badgeColor: badgeColor,
                 policy: newPolicy,
                 isSelected: tab.key == currentIndex,

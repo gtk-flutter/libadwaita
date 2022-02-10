@@ -11,7 +11,6 @@ class AdwViewSwitcherTab extends StatelessWidget {
     this.isSelected = false,
     this.onSelected,
     this.paddingIcon,
-    this.paddingTitle,
   }) : super(key: key);
 
   final Color? badgeColor;
@@ -20,7 +19,6 @@ class AdwViewSwitcherTab extends StatelessWidget {
   final bool isSelected;
   final VoidCallback? onSelected;
   final EdgeInsets? paddingIcon;
-  final EdgeInsets? paddingTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +72,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
             ),
           if (data.icon != null && data.title != null)
             const SizedBox(height: 1.5),
-          if (data.title != null)
-            Padding(
-              padding: paddingTitle ??
-                  (isDesktop
-                      ? const EdgeInsets.symmetric(vertical: 4)
-                      : EdgeInsets.zero),
-              child: Text(data.title!),
-            ),
+          if (data.title != null) Text(data.title!),
         ],
       ),
     );
