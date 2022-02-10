@@ -46,23 +46,6 @@ class AdwTextField extends StatelessWidget {
       onFieldSubmitted: onSubmitted,
       keyboardType: keyboardType,
       decoration: InputDecoration(
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
-          ),
-          borderSide: BorderSide(
-            color: Colors.transparent,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(8),
-          ),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-        isDense: true,
         prefixIcon: prefixIcon != null
             ? Icon(
                 prefixIcon,
