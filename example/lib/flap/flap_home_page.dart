@@ -20,6 +20,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
   FlapPosition flapPosition = FlapPosition.start;
   FoldPolicy foldPolicy = FoldPolicy.auto;
   bool locked = false;
+  int selectionIndex = 0;
 
   @override
   void initState() {
@@ -45,8 +46,6 @@ class _FlapHomePageState extends State<FlapHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var selectionIndex = 0;
-
     return AdwScaffold(
       flapController: _flapController,
       headerbar: (_) => AdwHeaderBar.bitsdojo(
@@ -87,7 +86,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
       flapStyle: FlapStyle(
         locked: locked,
         flapPosition: flapPosition,
-        foldPolicy: foldPolicy,
+        foldPolicy: FoldPolicy.values[selectionIndex],
       ),
       body: AdwViewStack(
         index: _currentIndex,
@@ -99,7 +98,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
                   title: 'Fold Policy',
                   selectedIndex: selectionIndex,
                   onSelected: (val) => setState(() => selectionIndex = val),
-                  choices: const ['auto', 'always', 'never'],
+                  choices: FoldPolicy.values.map((e) => e.name).toList(),
                 ),
                 AdwActionRow(
                   title: 'Locked',
@@ -139,10 +138,12 @@ Sidebar visibility doesn't change when fold state changes""",
                     ],
                   ),
                 ),
-                const AdwActionRow(
+                AdwComboRow(
                   title: 'Transition type',
-                  end: Text('Over'),
-                )
+                  selectedIndex: 0,
+                  onSelected: (val) {},
+                  choices: const ['Over', 'Under', 'Slide'],
+                ),
               ],
             ),
           ),

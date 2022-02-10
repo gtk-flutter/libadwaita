@@ -156,6 +156,7 @@ class _AdwComboButtonState extends State<AdwComboButton> {
               ),
               onPressed: () {
                 widget.onSelected(index);
+                setState(() {});
                 Navigator.of(context).pop();
               },
             ),
