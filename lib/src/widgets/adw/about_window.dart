@@ -102,6 +102,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                   widget.headerbar?.call([leading], text) ??
                       AdwHeaderBar(
                         start: [leading],
+                        autoPositionWindowButtons: false,
                         onClose: Navigator.of(context).pop,
                         isTransparent: true,
                         title: text,
