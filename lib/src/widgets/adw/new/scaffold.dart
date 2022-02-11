@@ -49,42 +49,45 @@ class _AdwScaffoldState extends State<AdwScaffold> {
             child: Drawer(elevation: 25, child: widget.flap!(true)),
           )
         : null;
-    return Column(
-      children: [
-        if (headerbar != null) headerbar,
-        Expanded(
-          child: Scaffold(
-            drawerEnableOpenDragGesture: _flapController
-                    ?.shouldEnableDrawerGesture(FlapPosition.start) ??
-                false,
-            endDrawerEnableOpenDragGesture:
-                _flapController?.shouldEnableDrawerGesture(FlapPosition.end) ??
-                    false,
-            onDrawerChanged: _flapController?.onDrawerChanged,
-            drawer: flap,
-            endDrawer: flap,
-            body: widget.flap != null
-                ? AdwFlap(
-                    flap: widget.flap!(false),
-                    controller: widget.flapController,
-                    style: widget.flapStyle,
-                    child: widget.body,
-                  )
-                : widget.body,
-            bottomNavigationBar: widget.viewSwitcher != null && isMobile
-                ? SizedBox(
-                    height: 51,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        widget.viewSwitcher!,
-                      ],
-                    ),
-                  )
-                : null,
-          ),
-        )
-      ],
+
+    return SafeArea(
+      child: Column(
+        children: [
+          if (headerbar != null) headerbar,
+          Expanded(
+            child: Scaffold(
+              drawerEnableOpenDragGesture: _flapController
+                      ?.shouldEnableDrawerGesture(FlapPosition.start) ??
+                  false,
+              endDrawerEnableOpenDragGesture: _flapController
+                      ?.shouldEnableDrawerGesture(FlapPosition.end) ??
+                  false,
+              onDrawerChanged: _flapController?.onDrawerChanged,
+              drawer: flap,
+              endDrawer: flap,
+              body: widget.flap != null
+                  ? AdwFlap(
+                      flap: widget.flap!(false),
+                      controller: widget.flapController,
+                      style: widget.flapStyle,
+                      child: widget.body,
+                    )
+                  : widget.body,
+              bottomNavigationBar: widget.viewSwitcher != null && isMobile
+                  ? SizedBox(
+                      height: 51,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          widget.viewSwitcher!,
+                        ],
+                      ),
+                    )
+                  : null,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

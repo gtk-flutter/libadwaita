@@ -3,16 +3,10 @@
 import 'dart:io';
 
 import 'package:dbus/dbus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
-
-final _isDesktop =
-    !kIsWeb && Platform.isLinux && Platform.isMacOS && Platform.isWindows;
-
-dynamic _appwindow(dynamic appWindow) => _isDesktop ? appWindow : null;
 
 class AdwHeaderBar extends StatefulWidget {
   /// If you use with window_decorations
@@ -104,7 +98,7 @@ class AdwHeaderBar extends StatefulWidget {
     bool showClose = true,
   })  : closeBtn = showClose
             ? AdwWindowButton(
-                onPressed: _appwindow(appWindow)?.close as void Function()?,
+                onPressed: appWindow?.close as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
                 buttonType: AdwWindowButtonType.close,
@@ -112,7 +106,7 @@ class AdwHeaderBar extends StatefulWidget {
             : null,
         maximizeBtn = showMaximize
             ? AdwWindowButton(
-                onPressed: _appwindow(appWindow)?.maximize as void Function()?,
+                onPressed: appWindow?.maximize as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
                 buttonType: AdwWindowButtonType.maximize,
@@ -120,15 +114,14 @@ class AdwHeaderBar extends StatefulWidget {
             : null,
         minimizeBtn = showMinimize
             ? AdwWindowButton(
-                onPressed: _appwindow(appWindow)?.minimize as void Function()?,
+                onPressed: appWindow?.minimize as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
                 buttonType: AdwWindowButtonType.minimize,
               )
             : null,
-        onHeaderDrag = _appwindow(appWindow)?.startDragging as void Function()?,
-        onDoubleTap =
-            _appwindow(appWindow)?.maximizeOrRestore as void Function()?,
+        onHeaderDrag = appWindow?.startDragging as void Function()?,
+        onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
         super(key: key);
 
   AdwHeaderBar.customBitsdojo({
@@ -148,15 +141,12 @@ class AdwHeaderBar extends StatefulWidget {
     Widget Function(VoidCallback onTap)? minimizeBtn,
     Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
-  })  : onHeaderDrag = _appwindow(appWindow)?.startDragging as void Function()?,
-        onDoubleTap =
-            _appwindow(appWindow)?.maximizeOrRestore as void Function()?,
-        minimizeBtn = minimizeBtn
-            ?.call(_appwindow(appWindow)?.minimize as void Function()),
-        maximizeBtn = maximizeBtn
-            ?.call(_appwindow(appWindow)?.maximizeOrRestore as void Function()),
-        closeBtn =
-            closeBtn?.call(_appwindow(appWindow)?.close as void Function()),
+  })  : onHeaderDrag = appWindow?.startDragging as void Function()?,
+        onDoubleTap = appWindow?.maximizeOrRestore as void Function()?,
+        minimizeBtn = minimizeBtn?.call(appWindow?.minimize as void Function()),
+        maximizeBtn =
+            maximizeBtn?.call(appWindow?.maximizeOrRestore as void Function()),
+        closeBtn = closeBtn?.call(appWindow?.close as void Function()),
         super(key: key);
 
   AdwHeaderBar.nativeshell({
