@@ -26,6 +26,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title,
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -61,6 +62,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -86,6 +88,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -130,6 +133,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -161,6 +165,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -187,6 +192,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -224,6 +230,12 @@ class AdwHeaderBar extends StatefulWidget {
   /// The height of the headerbar
   final double height;
 
+  /// Whether to automatically place the window buttons according to
+  /// the Platform, defaults to true
+  /// If false then it will follow the general Windows like window buttons
+  /// placement
+  final bool autoPositionWindowButtons;
+
   /// The padding inside the headerbar
   final EdgeInsets padding;
 
@@ -246,32 +258,39 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       widget.minimizeBtn != null ||
       widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>> seperator = ValueNotifier(['', '']);
+  late ValueNotifier<List<String>> seperator = ValueNotifier([
+    '',
+    'minimize,maximize,close',
+  ]);
 
   @override
   void initState() {
     super.initState();
 
-    void updateSep(String order) {
-      if (!mounted) return;
-      seperator.value = order.split(':');
-    }
+    if (widget.autoPositionWindowButtons) {
+      void updateSep(String order) {
+        if (!mounted) return;
+        seperator.value = order.split(':');
+      }
 
-    if (Platform.isWindows) {
-      updateSep(':minimize,maximize,close');
-    } else if (Platform.isMacOS) {
-      updateSep('close,maximize,minimize:');
-    } else if (Platform.isLinux) {
-      updateSep(':close');
+      if (Platform.isWindows) {
+        updateSep(':minimize,maximize,close');
+      } else if (Platform.isMacOS) {
+        updateSep('close,maximize,minimize:');
+      } else if (Platform.isLinux) {
+        updateSep(':close');
 
-      final schema = GSettings('org.gnome.desktop.wm.preferences');
+        final schema = GSettings('org.gnome.desktop.wm.preferences');
 
-      WidgetsBinding.instance?.addPostFrameCallback((_) async {
-        final buttonLayout = await schema.get('button-layout') as DBusString?;
-        if (buttonLayout != null) {
-          updateSep(buttonLayout.value);
-        }
-      });
+        WidgetsBinding.instance?.addPostFrameCallback((_) async {
+          final buttonLayout = await schema.get('button-layout') as DBusString?;
+          if (buttonLayout != null) {
+            updateSep(buttonLayout.value);
+          }
+        });
+      } else {
+        updateSep(':');
+      }
     }
   }
 
