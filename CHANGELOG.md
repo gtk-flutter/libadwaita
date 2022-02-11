@@ -75,4 +75,4 @@
   - Replace trailing with end
   - Replace center with title
 
-For older Changelog visit: https://pub.dev/packages/gtk/changelog
+Older CHANGELOG can be found [here](https://pub.dev/packages/gtk/changelog)
