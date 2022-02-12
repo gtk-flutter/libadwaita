@@ -3,10 +3,16 @@
 import 'dart:io';
 
 import 'package:dbus/dbus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
+
+/// To be used with bitsdojo_window package to filter the appWindow objects
+/// otherwise build will fail on Mobile and web platforms
+dynamic getAppwindow(dynamic appWindow) =>
+    (kIsWeb && Platform.isIOS && Platform.isAndroid) ? appWindow : null;
 
 class AdwHeaderBar extends StatefulWidget {
   /// If you use with window_decorations
