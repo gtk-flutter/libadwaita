@@ -7,6 +7,14 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
 dependencies:
   dbus: ">=0.7.1 <1.0.0"
   flutter:
