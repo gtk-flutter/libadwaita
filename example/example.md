@@ -3,7 +3,7 @@
 ## Demo App
 [Here]('https://github.com/gtk-flutter/libadwaita/tree/main/example') is a demo app made with libadwaita package.
 
-## Minimal [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) usage:
+## Minimal [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) usage
 ```yaml
 #pubspec.yaml
 dependencies:
@@ -55,7 +55,7 @@ class MyHomePage extends StatelessWidget {
 }
 ```
 
-## Minimal [`nativeshell`](https://pub.dev/packages/nativeshell) usage:
+## Minimal [`nativeshell`](https://pub.dev/packages/nativeshell) usage
 ```yaml
 #pubspec.yaml
 dependencies:
@@ -124,7 +124,7 @@ class MainWindowState extends WindowState {
 }
 ```
 
-## Minimal [`window_decorations`](https://pub.dev/packages/window_decorations) usage:
+## Minimal [`window_decorations`](https://pub.dev/packages/window_decorations) usage
 ```yaml
 #pubspec.yaml
 dependencies:
