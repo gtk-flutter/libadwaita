@@ -8,6 +8,12 @@ import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 
+/// To be used with nativeshell package as it doesn't have this method
+Future<void> _maximizeOrRestore(dynamic window) async {
+  final dynamic flags = await window.getWindowStateFlags();
+  await window.setMaximized(!(flags.maximized as bool));
+}
+
 class AdwHeaderBar extends StatefulWidget {
   /// If you use with window_decorations
   /// If you don't want that. use AdwHeaderBar.custom
@@ -170,11 +176,23 @@ class AdwHeaderBar extends StatefulWidget {
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
     this.height = 51,
+    bool showMinimize = true,
+    bool showMaximize = true,
     bool showClose = true,
   })  : onHeaderDrag = window?.performDrag as void Function()?,
         onDoubleTap = null,
-        minimizeBtn = null,
-        maximizeBtn = null,
+        minimizeBtn = AdwWindowButton(
+          onPressed: showMinimize ? () => window.setMinimized(true) : null,
+          themeType: themeType,
+          windowDecor: windowDecor,
+          buttonType: AdwWindowButtonType.minimize,
+        ),
+        maximizeBtn = AdwWindowButton(
+          onPressed: showMaximize ? () => _maximizeOrRestore(window) : null,
+          themeType: themeType,
+          windowDecor: windowDecor,
+          buttonType: AdwWindowButtonType.maximize,
+        ),
         closeBtn = AdwWindowButton(
           onPressed: showClose ? window.close as void Function()? : null,
           themeType: themeType,
@@ -197,11 +215,13 @@ class AdwHeaderBar extends StatefulWidget {
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
     this.height = 51,
+    Widget Function(VoidCallback onTap)? minimizeBtn,
+    Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
   })  : onHeaderDrag = window?.performDrag as void Function()?,
-        onDoubleTap = null,
-        minimizeBtn = null,
-        maximizeBtn = null,
+        onDoubleTap = (() => _maximizeOrRestore(window)),
+        minimizeBtn = minimizeBtn?.call(() => window.setMinimized(true)),
+        maximizeBtn = maximizeBtn?.call(() => _maximizeOrRestore(window)),
         closeBtn = closeBtn?.call(window.close as void Function()),
         super(key: key);
 
