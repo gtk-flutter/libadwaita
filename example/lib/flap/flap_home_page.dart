@@ -49,7 +49,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
     return AdwScaffold(
       flapController: _flapController,
       headerbar: (_) => AdwHeaderBar.bitsdojo(
-        appWindow: getAppwindow(appWindow),
+        appWindow: appWindow,
         start: [
           Builder(
             builder: (context) {

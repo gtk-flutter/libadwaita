@@ -39,7 +39,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AdwScaffold(
       headerbar: (_) => AdwHeaderBar.bitsdojo(
-        appWindow: getAppwindow(appWindow),
+        appWindow: appWindow,
         start: const [
           AdwHeaderButton(
             icon: Icon(Icons.nightlight_round, size: 15),
