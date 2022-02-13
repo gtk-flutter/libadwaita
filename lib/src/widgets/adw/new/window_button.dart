@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 
-enum AdwWindowButtonType { close, maximize, minimize }
+enum WindowButtonType { close, maximize, minimize }
 
 class AdwWindowButton extends StatelessWidget {
   const AdwWindowButton({
@@ -14,15 +14,21 @@ class AdwWindowButton extends StatelessWidget {
     this.windowDecor,
   }) : super(key: key);
 
+  /// The ThemeType from the window_decorations package, nullable
   final dynamic themeType;
 
+  /// The windowDecor object from window_decorations package
   final Widget Function(
     String name,
     dynamic type,
     void Function()? windowDecor,
   )? windowDecor;
+
+  /// Executed when this button is pressed
   final VoidCallback? onPressed;
-  final AdwWindowButtonType buttonType;
+
+  /// The WindowButtonType for this window
+  final WindowButtonType buttonType;
 
   @override
   Widget build(BuildContext context) {

@@ -17,8 +17,13 @@ class FlapStyle {
     this.flapPosition = FlapPosition.start,
   });
 
+  /// The seperator b/w flap and the content
   final Widget? seperator;
+
+  /// The FoldPolicy of this flap, defaults to auto
   final FoldPolicy foldPolicy;
+
+  /// The FlapPosition of this flap, defaults to start
   final FlapPosition flapPosition;
 
   /// The breakpoint for small devices
@@ -44,12 +49,16 @@ class AdwFlap extends StatefulWidget {
   })  : style = style ?? FlapStyle(),
         super(key: key);
 
+  /// The flap widget itself, Mainly is a `AdwSidebar` instance
   final Widget flap;
 
+  /// The content of the page
   final Widget child;
 
+  /// The style of this flap
   final FlapStyle style;
 
+  /// The controller for this flap
   final FlapController? controller;
 
   @override

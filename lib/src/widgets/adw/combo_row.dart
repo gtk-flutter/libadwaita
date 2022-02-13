@@ -3,7 +3,6 @@ import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/adw/button.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 
-/// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
   const AdwComboRow({
     Key? key,
@@ -19,22 +18,41 @@ class AdwComboRow extends StatefulWidget {
     this.contentPadding,
   }) : super(key: key);
 
+  /// The choices available for this combo row
   final List<String> choices;
+
+  /// The index of the selected choice
   final int selectedIndex;
+
+  /// Executed when a choice is selected
   final ValueSetter<int> onSelected;
+
+  /// The starting elemets of this row
   final Widget? start;
+
+  /// The ending elements of this row
   final Widget? end;
+
+  /// The title of this row
   final String title;
+
+  /// The subtitle of this row
   final String? subtitle;
+
+  /// Whether to focus automatically when this widget is visible
+  /// defaults to false
   final bool autofocus;
+
+  /// Whether this combo row is enabled or not, defaults to true
   final bool enabled;
+
+  /// The padding b/w content of this Combo row
   final EdgeInsets? contentPadding;
 
   @override
   State<AdwComboRow> createState() => _AdwComboRowState();
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
 class _AdwComboRowState extends State<AdwComboRow> {
   _AdwComboRowState();
 
@@ -108,8 +126,13 @@ class AdwComboButton extends StatefulWidget {
     required this.selectedIndex,
   }) : super(key: key);
 
+  /// The choices available for this combo row
   final List<String> choices;
+
+  /// Executed when a choice is selected
   final ValueSetter<int> onSelected;
+
+  /// The index of the selected choice
   final int selectedIndex;
 
   @override

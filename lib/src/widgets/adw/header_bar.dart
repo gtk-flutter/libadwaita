@@ -44,19 +44,19 @@ class AdwHeaderBar extends StatefulWidget {
           onPressed: onClose,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.close,
+          buttonType: WindowButtonType.close,
         ),
         maximizeBtn = AdwWindowButton(
           onPressed: onMaximize,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.maximize,
+          buttonType: WindowButtonType.maximize,
         ),
         minimizeBtn = AdwWindowButton(
           themeType: themeType,
           onPressed: onMinimize,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.minimize,
+          buttonType: WindowButtonType.minimize,
         ),
         super(key: key);
 
@@ -107,7 +107,7 @@ class AdwHeaderBar extends StatefulWidget {
                 onPressed: appWindow?.close as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
-                buttonType: AdwWindowButtonType.close,
+                buttonType: WindowButtonType.close,
               )
             : null,
         maximizeBtn = showMaximize
@@ -115,7 +115,7 @@ class AdwHeaderBar extends StatefulWidget {
                 onPressed: appWindow?.maximize as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
-                buttonType: AdwWindowButtonType.maximize,
+                buttonType: WindowButtonType.maximize,
               )
             : null,
         minimizeBtn = showMinimize
@@ -123,7 +123,7 @@ class AdwHeaderBar extends StatefulWidget {
                 onPressed: appWindow?.minimize as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
-                buttonType: AdwWindowButtonType.minimize,
+                buttonType: WindowButtonType.minimize,
               )
             : null,
         onHeaderDrag = appWindow?.startDragging as void Function()?,
@@ -185,19 +185,19 @@ class AdwHeaderBar extends StatefulWidget {
           onPressed: showMinimize ? () => window.setMinimized(true) : null,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.minimize,
+          buttonType: WindowButtonType.minimize,
         ),
         maximizeBtn = AdwWindowButton(
           onPressed: showMaximize ? () => _maximizeOrRestore(window) : null,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.maximize,
+          buttonType: WindowButtonType.maximize,
         ),
         closeBtn = AdwWindowButton(
           onPressed: showClose ? window.close as void Function()? : null,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.close,
+          buttonType: WindowButtonType.close,
         ),
         super(key: key);
 

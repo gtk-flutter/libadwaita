@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-class AdwActionRowStyle {}
-
 class AdwActionRow extends StatelessWidget {
   const AdwActionRow({
     Key? key,
@@ -12,19 +10,33 @@ class AdwActionRow extends StatelessWidget {
     this.subtitle,
     this.autofocus = false,
     this.enabled = true,
-    this.style,
     this.contentPadding,
   }) : super(key: key);
 
+  /// The starting elemets of this row
   final Widget? start;
+
+  /// The ending elements of this row
   final Widget? end;
+
+  /// The title of this row
   final String title;
+
+  /// The subtitle of this row
   final String? subtitle;
+
+  /// Executed when this Action row is pressed
   final VoidCallback? onActivated;
+
+  /// Whether to focus automatically when this widget is visible
+  /// defaults to false
   final bool autofocus;
+
+  /// Whether this action row is enabled or not, defaults to true
   final bool enabled;
+
+  /// The padding b/w content of this Action row
   final EdgeInsets? contentPadding;
-  final AdwActionRowStyle? style;
 
   @override
   Widget build(BuildContext context) {

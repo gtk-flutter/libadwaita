@@ -21,11 +21,23 @@ class AdwViewSwitcher extends StatelessWidget {
   })  : assert(tabs.length >= 2, 'Minimum 2 tabs are required'),
         super(key: key);
 
+  /// The color of the badge at the top right of the tab's icon
   final Color? badgeColor;
+
+  /// The tabs of this view switcher
   final List<ViewSwitcherData> tabs;
+
+  /// Executed when the view switcher tab is changed
   final ValueChanged<int> onViewChanged;
+
+  /// The Policy of this view switcher defaults to wide for desktop and
+  /// narrow for mobile
   final ViewSwitcherPolicy? policy;
+
+  /// The current index of the selected view
   final int currentIndex;
+
+  /// The Padding for the icon of the view switcher tab
   final EdgeInsets? paddingIcon;
 
   @override

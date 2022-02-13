@@ -13,11 +13,22 @@ class AdwViewSwitcherTab extends StatelessWidget {
     this.paddingIcon,
   }) : super(key: key);
 
+  /// The color of the badge at the top right of the tab's icon
   final Color? badgeColor;
+
+  /// The of this view switcher  tab
   final ViewSwitcherData data;
+
+  /// The Policy of the parent view switcher, either narrow or widget
   final ViewSwitcherPolicy policy;
+
+  /// Whether this tab is selected or not, defaults to false
   final bool isSelected;
+
+  /// Executed when this tab is selected
   final VoidCallback? onSelected;
+
+  /// The Padding for the icon of the view switcher tab
   final EdgeInsets? paddingIcon;
 
   @override

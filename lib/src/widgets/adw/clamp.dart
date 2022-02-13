@@ -23,12 +23,25 @@ class AdwClamp extends StatefulWidget {
   })  : isScrollable = true,
         super(key: key);
 
+  /// Whether this clamp is scrollable or not
   final bool isScrollable;
+
+  /// The controller for the scrollable clamp
   final ScrollController? controller;
+
+  /// Whether to center the elements horizontally of the clamp
   final bool center;
+
+  /// The child of this clamp
   final Widget child;
+
+  /// Sets the maximum size allocated to the child.
   final double maximumSize;
+
+  /// The padding around this clamp
   final EdgeInsets padding;
+
+  /// The margin around this clamp
   final EdgeInsets margin;
 
   @override
