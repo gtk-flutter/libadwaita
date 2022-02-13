@@ -1,7 +1,7 @@
 # Examples for libadwaita flutter package
 
 ## Demo App
-[Here]('https://github.com/gtk-flutter/libadwaita/tree/main/example') is a demo app made with libadwaita package.
+[Here](https://github.com/gtk-flutter/libadwaita/tree/main/example) is a demo app made with libadwaita package.
 
 ## Minimal [`libadwaita_bitsdojo`](https://pub.dev/packages/libadwaita_bitsdojo) usage
 ```yaml
