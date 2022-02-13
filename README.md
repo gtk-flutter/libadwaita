@@ -78,6 +78,20 @@ AdwHeaderBar.bitsdojo(
 )
 ```
 
+#### [**`libadwaita_searchbar`**](https://pub.dev/packages/libadwaita_searchbar)
+Example:
+```dart
+import 'package:libadwaita_searchbar/libadwaita_searchbar.dart';
+
+bool searchedTerm = '';
+
+AdwSearchBar(
+    suggestions: const ['Hi', 'Hello'],
+    onSubmitted: (str) => setState(() => searchedTerm = str),
+    controller: const TextEditingController(),
+)
+```
+
 #### [**`nativeshell`**](https://pub.dev/packages/nativeshell  )
 Can be used with
 - `AdwHeaderBar.nativeshell`
