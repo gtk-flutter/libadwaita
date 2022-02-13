@@ -102,6 +102,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                   widget.headerbar?.call([leading], text) ??
                       AdwHeaderBar(
                         start: [leading],
+                        autoPositionWindowButtons: false,
                         onClose: Navigator.of(context).pop,
                         isTransparent: true,
                         title: text,
@@ -182,6 +183,15 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                               ]
                             : currentPage == 1
                                 ? widget.credits!
+                                    .map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 10,
+                                        ),
+                                        child: e,
+                                      ),
+                                    )
+                                    .toList()
                                 : [
                                     if (widget.copyright != null)
                                       Text(widget.copyright!),

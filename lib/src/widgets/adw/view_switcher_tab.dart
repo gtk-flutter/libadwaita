@@ -1,26 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/models/models.dart';
-import 'package:libadwaita/src/widgets/widgets.dart';
+import 'package:libadwaita/libadwaita.dart';
 
 class AdwViewSwitcherTab extends StatelessWidget {
   const AdwViewSwitcherTab({
     Key? key,
     required this.data,
-    required this.style,
+    required this.policy,
     this.badgeColor,
     this.isSelected = false,
     this.onSelected,
+    this.paddingIcon,
   }) : super(key: key);
 
+  /// The color of the badge at the top right of the tab's icon
   final Color? badgeColor;
+
+  /// The of this view switcher  tab
   final ViewSwitcherData data;
-  final ViewSwitcherStyle style;
+
+  /// The Policy of the parent view switcher, either narrow or widget
+  final ViewSwitcherPolicy policy;
+
+  /// Whether this tab is selected or not, defaults to false
   final bool isSelected;
+
+  /// Executed when this tab is selected
   final VoidCallback? onSelected;
+
+  /// The Padding for the icon of the view switcher tab
+  final EdgeInsets? paddingIcon;
 
   @override
   Widget build(BuildContext context) {
-    final isDesktop = style == ViewSwitcherStyle.desktop;
+    final isDesktop = policy == ViewSwitcherPolicy.wide;
 
     return AdwButton.flat(
       constraints: isDesktop
@@ -39,9 +51,10 @@ class AdwViewSwitcherTab extends StatelessWidget {
             Stack(
               children: [
                 Padding(
-                  padding: isDesktop
-                      ? const EdgeInsets.only(top: 4, bottom: 4, right: 8)
-                      : const EdgeInsets.only(top: 3.5, right: 4, left: 4),
+                  padding: paddingIcon ??
+                      (isDesktop
+                          ? const EdgeInsets.only(top: 4, bottom: 4, right: 8)
+                          : const EdgeInsets.only(top: 3.5, right: 4, left: 4)),
                   child: Icon(data.icon, size: 17),
                 ),
                 if (data.badge != null)
@@ -52,8 +65,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
                       height: 14,
                       width: 14,
                       child: CircleAvatar(
-                        backgroundColor:
-                            badgeColor ?? AdwColors.blue.backgroundColor,
+                        backgroundColor: badgeColor ?? AdwDefaultColors.blue,
                         child: Text(
                           data.badge!,
                           style: const TextStyle(
@@ -69,13 +81,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
             ),
           if (data.icon != null && data.title != null)
             const SizedBox(height: 1.5),
-          if (data.title != null)
-            Padding(
-              padding: isDesktop
-                  ? const EdgeInsets.symmetric(vertical: 4)
-                  : EdgeInsets.zero,
-              child: Text(data.title!),
-            ),
+          if (data.title != null) Text(data.title!),
         ],
       ),
     );

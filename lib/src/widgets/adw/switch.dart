@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:libadwaita/src/utils/colors.dart';
-import 'package:libadwaita/src/widgets/widgets.dart';
 
 // Examples can assume:
 // bool _lights = false;
@@ -313,8 +312,8 @@ class _AdwSwitchState extends State<AdwSwitch> with TickerProviderStateMixin {
         activeColor: widget.activeColor ??
             (switchTheme.thumbColor != null
                 ? switchTheme.thumbColor!.resolve({MaterialState.selected}) ??
-                    AdwColors.blue.backgroundColor
-                : AdwColors.blue.backgroundColor),
+                    AdwDefaultColors.blue
+                : AdwDefaultColors.blue),
         trackColor: widget.trackColor ??
             (switchTheme.trackColor != null
                 ? switchTheme.trackColor!.resolve({MaterialState.focused}) ??

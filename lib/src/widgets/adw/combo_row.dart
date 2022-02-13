@@ -3,13 +3,14 @@ import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/adw/button.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 
-/// This is the stateful widget that the main application instantiates.
 class AdwComboRow extends StatefulWidget {
   const AdwComboRow({
     Key? key,
     this.choices = const [],
     this.start,
     this.end,
+    required this.selectedIndex,
+    required this.onSelected,
     required this.title,
     this.subtitle,
     this.autofocus = false,
@@ -17,46 +18,48 @@ class AdwComboRow extends StatefulWidget {
     this.contentPadding,
   }) : super(key: key);
 
+  /// The choices available for this combo row
   final List<String> choices;
+
+  /// The index of the selected choice
+  final int selectedIndex;
+
+  /// Executed when a choice is selected
+  final ValueSetter<int> onSelected;
+
+  /// The starting elemets of this row
   final Widget? start;
+
+  /// The ending elements of this row
   final Widget? end;
+
+  /// The title of this row
   final String title;
+
+  /// The subtitle of this row
   final String? subtitle;
+
+  /// Whether to focus automatically when this widget is visible
+  /// defaults to false
   final bool autofocus;
+
+  /// Whether this combo row is enabled or not, defaults to true
   final bool enabled;
+
+  /// The padding b/w content of this Combo row
   final EdgeInsets? contentPadding;
 
   @override
   State<AdwComboRow> createState() => _AdwComboRowState();
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
 class _AdwComboRowState extends State<AdwComboRow> {
   _AdwComboRowState();
 
-  bool taped = false;
-  int selected = 0;
   final GlobalKey<_AdwComboButtonState> _comboButtonState =
       GlobalKey<_AdwComboButtonState>();
 
   late AdwComboButton button;
-
-  @override
-  void initState() {
-    button = AdwComboButton(
-      key: _comboButtonState,
-      choices: widget.choices,
-      getSelected: () {
-        return selected;
-      },
-      setSelected: (select) {
-        setState(() {
-          selected = select;
-        });
-      },
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,12 +95,19 @@ class _AdwComboRowState extends State<AdwComboRow> {
                 const SizedBox(width: 10),
                 Flexible(
                   child: Text(
-                    widget.choices[selected],
+                    widget.choices[widget.selectedIndex],
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(width: 5),
-                button,
+                AdwComboButton(
+                  key: _comboButtonState,
+                  choices: widget.choices,
+                  selectedIndex: widget.selectedIndex,
+                  onSelected: (val) {
+                    widget.onSelected(val);
+                  },
+                ),
                 const SizedBox(width: 10),
               ],
             ),
@@ -112,13 +122,18 @@ class AdwComboButton extends StatefulWidget {
   const AdwComboButton({
     Key? key,
     this.choices = const [],
-    required this.setSelected,
-    required this.getSelected,
+    required this.onSelected,
+    required this.selectedIndex,
   }) : super(key: key);
 
+  /// The choices available for this combo row
   final List<String> choices;
-  final ValueSetter<int> setSelected;
-  final ValueGetter<int> getSelected;
+
+  /// Executed when a choice is selected
+  final ValueSetter<int> onSelected;
+
+  /// The index of the selected choice
+  final int selectedIndex;
 
   @override
   State<AdwComboButton> createState() => _AdwComboButtonState();
@@ -131,13 +146,12 @@ class _AdwComboButtonState extends State<AdwComboButton> {
   bool active = false;
 
   @override
-  Widget build(BuildContext context) {
-    return const Icon(Icons.arrow_drop_down);
-  }
+  Widget build(BuildContext context) => const Icon(Icons.arrow_drop_down);
 
   void show() {
     showPopover(
       context: context,
+      arrowHeight: 14,
       barrierColor: Colors.transparent,
       shadow: [
         BoxShadow(
@@ -145,35 +159,35 @@ class _AdwComboButtonState extends State<AdwComboButton> {
           blurRadius: 6,
         ),
       ],
-      bodyBuilder: (_) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(widget.choices.length, (int index) {
-          return AdwButton.flat(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    widget.choices[index],
-                    overflow: TextOverflow.ellipsis,
+      bodyBuilder: (_) => SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(
+            widget.choices.length,
+            (int index) => AdwButton.flat(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      widget.choices[index],
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-                if (index == widget.getSelected())
-                  const Icon(Icons.check, size: 20),
-              ],
+                  if (index == widget.selectedIndex)
+                    const Icon(Icons.check, size: 20),
+                ],
+              ),
+              onPressed: () {
+                widget.onSelected(index);
+                setState(() {});
+                Navigator.of(context).pop();
+              },
             ),
-            onPressed: () {
-              setState(() {
-                widget.setSelected(index);
-                //if you want to assign the index somewhere to check
-              });
-              Navigator.of(context).pop();
-            },
-          );
-        }),
+          ),
+        ),
       ),
       width: 200,
-      height: null,
       backgroundColor: Theme.of(context).cardColor,
     ).whenComplete(() => setState(() => active = false));
   }

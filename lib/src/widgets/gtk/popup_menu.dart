@@ -40,6 +40,7 @@ class _AdwPopupMenuState extends State<AdwPopupMenu> {
         setState(() => isActive = true);
         showPopover(
           context: context,
+          arrowHeight: 14,
           shadow: [
             BoxShadow(
               color: context.borderColor,

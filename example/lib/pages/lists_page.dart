@@ -1,3 +1,4 @@
+import 'package:example/pages/run_demo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
@@ -7,24 +8,18 @@ class ListsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final switchVal = ValueNotifier(false);
-    return AdwClamp.scrollable(
-      child: Column(
+    const choices = ['Test', 'Second', 'Third and a long name'];
+    final selectionIndex = ValueNotifier<int>(0);
+
+    return DemoScreen(
+      image: const Icon(
+        Icons.list_rounded,
+        size: 150,
+      ),
+      title: 'Lists',
+      description: 'Rows and helpers for GtkListBox.',
+      footer: Column(
         children: [
-          const Icon(
-            Icons.list_rounded,
-            size: 150,
-          ),
-          Text(
-            'Lists',
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const Text('Rows and helpers for GtkListBox.'),
-          const SizedBox(
-            height: 10,
-          ),
           AdwPreferencesGroup(
             children: [
               const AdwActionRow(
@@ -41,11 +36,18 @@ class ListsPage extends StatelessWidget {
               )
             ],
           ),
-          const AdwPreferencesGroup(
+          AdwPreferencesGroup(
             children: [
-              AdwComboRow(
-                choices: ['Test', 'Second', 'Third and a long name'],
-                title: 'Combo row',
+              ValueListenableBuilder<int>(
+                valueListenable: selectionIndex,
+                builder: (context, val, _) {
+                  return AdwComboRow(
+                    choices: choices,
+                    title: 'Combo row',
+                    selectedIndex: val,
+                    onSelected: (val) => selectionIndex.value = val,
+                  );
+                },
               )
             ],
           ),

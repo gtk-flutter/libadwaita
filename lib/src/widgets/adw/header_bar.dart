@@ -8,6 +8,12 @@ import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 
+/// To be used with nativeshell package as it doesn't have this method
+Future<void> _maximizeOrRestore(dynamic window) async {
+  final dynamic flags = await window.getWindowStateFlags();
+  await window.setMaximized(!(flags.maximized as bool));
+}
+
 class AdwHeaderBar extends StatefulWidget {
   /// If you use with window_decorations
   /// If you don't want that. use AdwHeaderBar.custom
@@ -23,9 +29,10 @@ class AdwHeaderBar extends StatefulWidget {
     this.onDoubleTap,
     this.onHeaderDrag,
     this.start = const [],
-    this.title = const SizedBox(),
+    this.title,
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -37,19 +44,19 @@ class AdwHeaderBar extends StatefulWidget {
           onPressed: onClose,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.close,
+          buttonType: WindowButtonType.close,
         ),
         maximizeBtn = AdwWindowButton(
           onPressed: onMaximize,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.maximize,
+          buttonType: WindowButtonType.maximize,
         ),
         minimizeBtn = AdwWindowButton(
           themeType: themeType,
           onPressed: onMinimize,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.minimize,
+          buttonType: WindowButtonType.minimize,
         ),
         super(key: key);
 
@@ -61,6 +68,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -73,7 +81,7 @@ class AdwHeaderBar extends StatefulWidget {
   AdwHeaderBar.bitsdojo({
     Key? key,
 
-    /// The appWindow object from bitsdojo_window package
+    /// The appWindow object from libadwaita_bitsdojo package
     required dynamic appWindow,
     Widget Function(
       String name,
@@ -86,6 +94,7 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -98,7 +107,7 @@ class AdwHeaderBar extends StatefulWidget {
                 onPressed: appWindow?.close as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
-                buttonType: AdwWindowButtonType.close,
+                buttonType: WindowButtonType.close,
               )
             : null,
         maximizeBtn = showMaximize
@@ -106,7 +115,7 @@ class AdwHeaderBar extends StatefulWidget {
                 onPressed: appWindow?.maximize as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
-                buttonType: AdwWindowButtonType.maximize,
+                buttonType: WindowButtonType.maximize,
               )
             : null,
         minimizeBtn = showMinimize
@@ -114,7 +123,7 @@ class AdwHeaderBar extends StatefulWidget {
                 onPressed: appWindow?.minimize as void Function()?,
                 themeType: themeType,
                 windowDecor: windowDecor,
-                buttonType: AdwWindowButtonType.minimize,
+                buttonType: WindowButtonType.minimize,
               )
             : null,
         onHeaderDrag = appWindow?.startDragging as void Function()?,
@@ -124,12 +133,13 @@ class AdwHeaderBar extends StatefulWidget {
   AdwHeaderBar.customBitsdojo({
     Key? key,
 
-    /// The appWindow object from bitsdojo_window package
+    /// The appWindow object from libadwaita_bitsdojo package
     required dynamic appWindow,
     this.start = const [],
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -161,20 +171,33 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
     this.height = 51,
+    bool showMinimize = true,
+    bool showMaximize = true,
     bool showClose = true,
   })  : onHeaderDrag = window?.performDrag as void Function()?,
         onDoubleTap = null,
-        minimizeBtn = null,
-        maximizeBtn = null,
+        minimizeBtn = AdwWindowButton(
+          onPressed: showMinimize ? () => window.setMinimized(true) : null,
+          themeType: themeType,
+          windowDecor: windowDecor,
+          buttonType: WindowButtonType.minimize,
+        ),
+        maximizeBtn = AdwWindowButton(
+          onPressed: showMaximize ? () => _maximizeOrRestore(window) : null,
+          themeType: themeType,
+          windowDecor: windowDecor,
+          buttonType: WindowButtonType.maximize,
+        ),
         closeBtn = AdwWindowButton(
           onPressed: showClose ? window.close as void Function()? : null,
           themeType: themeType,
           windowDecor: windowDecor,
-          buttonType: AdwWindowButtonType.close,
+          buttonType: WindowButtonType.close,
         ),
         super(key: key);
 
@@ -187,15 +210,18 @@ class AdwHeaderBar extends StatefulWidget {
     this.title = const SizedBox(),
     this.end = const [],
     this.textStyle,
+    this.autoPositionWindowButtons = true,
     this.isTransparent = false,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
     this.height = 51,
+    Widget Function(VoidCallback onTap)? minimizeBtn,
+    Widget Function(VoidCallback onTap)? maximizeBtn,
     Widget Function(VoidCallback onTap)? closeBtn,
   })  : onHeaderDrag = window?.performDrag as void Function()?,
-        onDoubleTap = null,
-        minimizeBtn = null,
-        maximizeBtn = null,
+        onDoubleTap = (() => _maximizeOrRestore(window)),
+        minimizeBtn = minimizeBtn?.call(() => window.setMinimized(true)),
+        maximizeBtn = maximizeBtn?.call(() => _maximizeOrRestore(window)),
         closeBtn = closeBtn?.call(window.close as void Function()),
         super(key: key);
 
@@ -203,7 +229,7 @@ class AdwHeaderBar extends StatefulWidget {
   final List<Widget> start;
 
   /// The center widget for the headerbar
-  final Widget title;
+  final Widget? title;
 
   /// The trailing widget for the headerbar
   final List<Widget> end;
@@ -223,6 +249,12 @@ class AdwHeaderBar extends StatefulWidget {
 
   /// The height of the headerbar
   final double height;
+
+  /// Whether to automatically place the window buttons according to
+  /// the Platform, defaults to true
+  /// If false then it will follow the general Windows like window buttons
+  /// placement
+  final bool autoPositionWindowButtons;
 
   /// The padding inside the headerbar
   final EdgeInsets padding;
@@ -246,33 +278,39 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       widget.minimizeBtn != null ||
       widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>> seperator =
-      ValueNotifier(['', 'minimize,maximize,close']);
+  late ValueNotifier<List<String>> seperator = ValueNotifier([
+    '',
+    'minimize,maximize,close',
+  ]);
 
   @override
   void initState() {
     super.initState();
 
-    late final order = ValueNotifier<String>(':minimize,maximize,close');
-    void updateSep() {
-      if (mounted) {
-        seperator.value = order.value.split(':');
+    if (widget.autoPositionWindowButtons) {
+      void updateSep(String order) {
+        if (!mounted) return;
+        seperator.value = order.split(':');
       }
-    }
 
-    if (Platform.isLinux) {
-      final buttonLayout = ValueNotifier<DBusString?>(null);
-      final schema = GSettings('org.gnome.desktop.wm.preferences');
-      WidgetsBinding.instance?.addPostFrameCallback((_) async {
-        buttonLayout.value = await schema.get('button-layout') as DBusString;
-        if (buttonLayout.value != null) {
-          order.value = buttonLayout.value!.value;
-        }
-        updateSep();
-      });
-    } else if (Platform.isMacOS) {
-      order.value = 'close,maximize,minimize:';
-      updateSep();
+      if (Platform.isWindows) {
+        updateSep(':minimize,maximize,close');
+      } else if (Platform.isMacOS) {
+        updateSep('close,maximize,minimize:');
+      } else if (Platform.isLinux) {
+        updateSep(':close');
+
+        final schema = GSettings('org.gnome.desktop.wm.preferences');
+
+        WidgetsBinding.instance?.addPostFrameCallback((_) async {
+          final buttonLayout = await schema.get('button-layout') as DBusString?;
+          if (buttonLayout != null) {
+            updateSep(buttonLayout.value);
+          }
+        });
+      } else {
+        updateSep(':');
+      }
     }
   }
 
@@ -315,8 +353,8 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                   valueListenable: seperator,
                   builder: (context, sep, _) => DefaultTextStyle.merge(
                     style: const TextStyle(
-                      fontWeight: FontWeight.bold,
                       fontSize: 14,
+                      fontWeight: FontWeight.bold,
                     ).merge(widget.textStyle),
                     child: NavigationToolbar(
                       leading: Row(
@@ -326,26 +364,14 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                             SizedBox(width: widget.titlebarSpace),
                           for (var i in sep[0].split(','))
                             if (windowButtons[i] != null) windowButtons[i]!,
-                          ...widget.start.map(
-                            (e) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3),
-                              child: e,
-                            ),
-                          ),
+                          ...widget.start
                         ],
                       ),
                       middle: widget.title,
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ...widget.end.map(
-                            (e) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3),
-                              child: e,
-                            ),
-                          ),
+                          ...widget.end,
                           if (hasWindowControls && sep[1].split(',').isNotEmpty)
                             SizedBox(width: widget.titlebarSpace),
                           for (var i in sep[1].split(','))

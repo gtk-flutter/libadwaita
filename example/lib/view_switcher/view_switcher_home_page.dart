@@ -1,6 +1,6 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
 
 class ViewSwitcherHomePage extends StatefulWidget {
   const ViewSwitcherHomePage({Key? key}) : super(key: key);
@@ -16,60 +16,53 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: index,
-      builder: (context, int value, child) {
-        return Column(
-          children: [
-            AdwHeaderBar.bitsdojo(
-              appWindow: appWindow,
-              title: AdwViewSwitcher(
-                tabs: const [
-                  ViewSwitcherData(
-                    title: 'World',
-                    icon: Icons.public,
-                  ),
-                  ViewSwitcherData(
-                    title: 'Alarm',
-                    icon: Icons.alarm,
-                  ),
-                  ViewSwitcherData(
-                    title: 'Stopwatch',
-                    icon: Icons.stop,
-                    badge: '9',
-                  ),
-                  ViewSwitcherData(
-                    title: 'Timer',
-                    icon: Icons.timer,
-                    badge: '1',
-                  ),
-                ],
-                onViewChanged: (idx) => index.value = idx,
-                currentIndex: value,
-              ),
+      builder: (context, int value, child) => AdwScaffold(
+        headerbar: (viewSwitcher) => AdwHeaderBar.bitsdojo(
+          appWindow: appWindow,
+          title: viewSwitcher,
+        ),
+        viewSwitcher: AdwViewSwitcher(
+          tabs: const [
+            ViewSwitcherData(
+              title: 'World',
+              icon: Icons.public,
             ),
-            Expanded(
-              child: AdwScaffold(
-                body: AdwViewStack(
-                  index: value,
-                  children: const [
-                    Center(
-                      child: Text('World'),
-                    ),
-                    Center(
-                      child: Text('Alarm'),
-                    ),
-                    Center(
-                      child: Text('Stopwatch'),
-                    ),
-                    Center(
-                      child: Text('Timer'),
-                    ),
-                  ],
-                ),
-              ),
+            ViewSwitcherData(
+              title: 'Alarm',
+              icon: Icons.alarm,
+            ),
+            ViewSwitcherData(
+              title: 'Stopwatch',
+              icon: Icons.stop,
+              badge: '9',
+            ),
+            ViewSwitcherData(
+              title: 'Timer',
+              icon: Icons.timer,
+              badge: '1',
             ),
           ],
-        );
-      },
+          onViewChanged: (idx) => index.value = idx,
+          currentIndex: value,
+        ),
+        body: AdwViewStack(
+          index: value,
+          children: const [
+            Center(
+              child: Text('World'),
+            ),
+            Center(
+              child: Text('Alarm'),
+            ),
+            Center(
+              child: Text('Stopwatch'),
+            ),
+            Center(
+              child: Text('Timer'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

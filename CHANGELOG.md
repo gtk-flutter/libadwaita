@@ -1,16 +1,32 @@
+# Changelog
+
 ## 1.0.0
 
 ### **BREAKING**
 - `AdwHeaderBar.minimal` is now `AdwHeaderBar.custom`
 - Remove `label` parameter from `AdwTextField`
+- `ViewSwitcherStyle` is now `ViewSwitcherPolicy`
+- `ViewSwitcherStyle.desktop` and `ViewSwitcherStyle.mobile` are also renamed to `ViewSwitcherPolicy.wide` and `ViewSwitcherPolicy.narrow`
 
 ### **Changes to widgets**
+**ComboRow**
+- Dropdown is now scrollable if too many elements are there
+
+**Flap**
+- Renamed `flapController` to `controller`
+- Moved most of the things into `FlapStyle` class to simplify its usage in `AdwScaffold`
+
 **HeaderBar**
 - Now the `AdwHeaderBar` is not dependent on any package, `windowDecor` object is now optional
 - Add `isTransparent` parameter => Makes `AdwHeaderBar`'s background and border color
 
 **Popover**
 - Revisit popup menu by using `popover_gtk` package (popover package with fade transition) (#35)
+
+**TextField**
+- Add `autofocus` parameter
+- Add `prefixIcon` parameter
+- Add `onSubmitted` parameter
 
 **ViewSwitcher**
 - Add `badge` in `AdwViewSwitcher`
@@ -59,4 +75,4 @@
   - Replace trailing with end
   - Replace center with title
 
-For older Changelog visit: https://pub.dev/packages/gtk/changelog
+Older CHANGELOG can be found [here](https://pub.dev/packages/gtk/changelog)

@@ -1,3 +1,4 @@
+import 'package:example/pages/run_demo_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -5,31 +6,13 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Image(
-          image: AssetImage('assets/logo.png'),
-          height: 150,
-        ),
-        Text(
-          'Welcome to Adwaita flutter Demo.',
-          style: Theme.of(context)
-              .textTheme
-              .headline5
-              ?.copyWith(fontWeight: FontWeight.bold),
-        ),
-        const Text(
-          'This is a tour of the features this library has to offer.',
-        ),
-      ]
-          .map(
-            (e) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: e,
-            ),
-          )
-          .toList(),
+    return const DemoScreen(
+      image: Image(
+        image: AssetImage('assets/logo.png'),
+        height: 130,
+      ),
+      title: 'Welcome to Adwaita flutter Demo.',
+      description: 'This is a tour of the features this library has to offer.',
     );
   }
 }

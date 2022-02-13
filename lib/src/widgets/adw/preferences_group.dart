@@ -49,7 +49,7 @@ class AdwPreferencesGroup extends StatelessWidget {
               if (title != null) ...[
                 Text(
                   title!,
-                  style: titleStyle ?? Theme.of(context).textTheme.headline6,
+                  style: titleStyle ?? Theme.of(context).textTheme.headline5,
                 ),
                 if (description != null)
                   Text(
@@ -57,7 +57,7 @@ class AdwPreferencesGroup extends StatelessWidget {
                     style: descriptionStyle ??
                         Theme.of(context).textTheme.bodyText2,
                   ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
               ],
             ],
           ),

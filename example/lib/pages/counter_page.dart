@@ -1,3 +1,4 @@
+import 'package:example/pages/run_demo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
@@ -15,28 +16,19 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: AdwClamp.scrollable(
-        child: ValueListenableBuilder(
-          valueListenable: widget.counter,
-          builder: (_, value, child) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('You have pushed the add button this many times:'),
-                Text(
-                  '$value',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                AdwButton.pill(
-                  onPressed: _incrementCounter,
-                  child: const Text('Add'),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+    return ValueListenableBuilder<int>(
+      valueListenable: widget.counter,
+      builder: (context, val, _) {
+        return DemoScreen(
+          title: 'Counter Example',
+          description: 'You have pushed the add button this many times:',
+          secondDescription: '$val',
+          footer: AdwButton.pill(
+            onPressed: _incrementCounter,
+            child: const Text('Add'),
+          ),
+        );
+      },
     );
   }
 }
