@@ -164,7 +164,6 @@ class _AdwComboButtonState extends State<AdwComboButton> {
         ),
       ),
       width: 200,
-      height: null,
       backgroundColor: Theme.of(context).cardColor,
     ).whenComplete(() => setState(() => active = false));
   }
