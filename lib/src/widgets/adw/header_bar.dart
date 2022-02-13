@@ -81,7 +81,7 @@ class AdwHeaderBar extends StatefulWidget {
   AdwHeaderBar.bitsdojo({
     Key? key,
 
-    /// The appWindow object from bitsdojo_window package
+    /// The appWindow object from libadwaita_bitsdojo package
     required dynamic appWindow,
     Widget Function(
       String name,
@@ -133,7 +133,7 @@ class AdwHeaderBar extends StatefulWidget {
   AdwHeaderBar.customBitsdojo({
     Key? key,
 
-    /// The appWindow object from bitsdojo_window package
+    /// The appWindow object from libadwaita_bitsdojo package
     required dynamic appWindow,
     this.start = const [],
     this.title = const SizedBox(),

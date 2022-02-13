@@ -1,4 +1,3 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:example/pages/avatar_page.dart';
 import 'package:example/pages/counter_page.dart';
 import 'package:example/pages/flap_page.dart';
@@ -7,8 +6,12 @@ import 'package:example/pages/settings_page.dart';
 import 'package:example/pages/style_classes_page.dart';
 import 'package:example/pages/view_switcher_page.dart';
 import 'package:example/pages/welcome.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {

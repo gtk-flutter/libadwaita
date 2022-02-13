@@ -1,6 +1,6 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
 
 class FlapHomePage extends StatefulWidget {
   const FlapHomePage({Key? key, required this.themeNotifier}) : super(key: key);

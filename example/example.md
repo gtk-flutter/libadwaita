@@ -3,22 +3,22 @@
 ## Demo App
 [Here]('https://github.com/gtk-flutter/libadwaita/tree/main/example') is a demo app made with libadwaita package.
 
-## Minimal [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) usage
+## Minimal [`libadwaita_bitsdojo`](https://pub.dev/packages/libadwaita_bitsdojo) usage
 ```yaml
 #pubspec.yaml
 dependencies:
   adwaita:
-  bitsdojo_window:
   libadwaita:
+  libadwaita_bitsdojo:
 ```
 
 ```dart
 // main.dart
 
 import 'package:adwaita/adwaita.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
 
 void main() => runApp(MyApp());
 
