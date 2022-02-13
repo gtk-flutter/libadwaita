@@ -151,6 +151,7 @@ class _AdwComboButtonState extends State<AdwComboButton> {
   void show() {
     showPopover(
       context: context,
+      arrowHeight: 14,
       barrierColor: Colors.transparent,
       shadow: [
         BoxShadow(
