@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0+1
+
+- Fix Example link
+
 ## 1.0.0
 
 ### **BREAKING**
