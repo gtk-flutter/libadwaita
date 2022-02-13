@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/models/models.dart';
-import 'package:libadwaita/src/widgets/widgets.dart';
+import 'package:libadwaita/libadwaita.dart';
 
 class AdwViewSwitcherTab extends StatelessWidget {
   const AdwViewSwitcherTab({
@@ -66,8 +65,7 @@ class AdwViewSwitcherTab extends StatelessWidget {
                       height: 14,
                       width: 14,
                       child: CircleAvatar(
-                        backgroundColor:
-                            badgeColor ?? AdwColors.blue.backgroundColor,
+                        backgroundColor: badgeColor ?? AdwDefaultColors.blue,
                         child: Text(
                           data.badge!,
                           style: const TextStyle(
