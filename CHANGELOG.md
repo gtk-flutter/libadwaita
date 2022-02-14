@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Relicense under MPL-2.0
+
 ## 1.0.0+2
 
 - Fix Table view on pub.dev
