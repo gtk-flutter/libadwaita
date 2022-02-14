@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0+2
+
+- Fix Table view on pub.dev
+- 
 ## 1.0.0+1
 
 - Fix Example link
