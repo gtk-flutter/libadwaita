@@ -131,7 +131,7 @@ AdwHeaderBar(
 
 ## License
 
-`LGPL v3 / GNU LESSER GENERAL PUBLIC LICENSE v3`
+`Mozilla Public License 2.0`
 
 TLDR;
 
