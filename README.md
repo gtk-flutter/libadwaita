@@ -33,6 +33,7 @@ See the example app in the `example` folder for more info.
 There are 6 types of `AdwHeaderBar` constructor:
 
 If you want to use default adwaita style window icons or icons using window_decorations package then you have to use any one of the following HeaderBar's:
+
 | Widget | Docs |
 | ------ | ---- |
 | `AdwHeaderBar` | Default HeaderBar |
@@ -40,6 +41,7 @@ If you want to use default adwaita style window icons or icons using window_deco
 | `AdwHeaderBar.nativeshell` | HeaderBar to be used with [`nativeshell`](#nativeshell) package |
 
 If you want to have a custom icon for window button then you have to use any one of the following HeaderBar's:
+
 | Widget | Docs |
 | ------ | ---- |
 | `AdwHeaderBar.custom` | HeaderBar with custom icon |
