@@ -32,7 +32,7 @@ See the example app in the `example` folder for more info.
 ### AdwHeaderBar
 There are 6 types of `AdwHeaderBar` constructor:
 
-If you want to use default adwaita style window icons or icons using window_decorations package then you have to use any one of the following HeaderBar's:
+If you want to use default adwaita style window icons or icons using titlebar_buttons package then you have to use any one of the following HeaderBar's:
 
 | Widget | Docs |
 | ------ | ---- |
@@ -110,7 +110,7 @@ AdwHeaderBar.nativeshell(
 )
 ```
 
-#### [**`window_decorations`**](https://pub.dev/packages/window_decorations)
+#### [**`titlebar_buttons`**](https://pub.dev/packages/titlebar_buttons)
 Can be used with
 - `AdwHeaderBar`
 - `AdwHeaderBar.bitsdojo`
@@ -118,7 +118,7 @@ Can be used with
 
 Example:
 ```dart
-import 'package:window_decorations/window_decorations.dart';
+import 'package:titlebar_buttons/titlebar_buttons.dart';
 
 AdwHeaderBar(
   ...

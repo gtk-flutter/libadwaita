@@ -43,6 +43,7 @@ class AdwActionRow extends StatelessWidget {
     return ListTile(
       autofocus: autofocus,
       enabled: enabled,
+      horizontalTitleGap: 0,
       contentPadding: contentPadding,
       leading: start != null
           ? SizedBox(height: double.infinity, child: start)

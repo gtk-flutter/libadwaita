@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita_core/libadwaita_core.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -101,11 +102,15 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                 children: [
                   widget.headerbar?.call([leading], text) ??
                       AdwHeaderBar(
-                        start: [leading],
-                        autoPositionWindowButtons: false,
-                        onClose: Navigator.of(context).pop,
-                        isTransparent: true,
                         title: text,
+                        start: [leading],
+                        actions: AdwActions(
+                          onClose: Navigator.of(context).pop,
+                        ),
+                        style: const HeaderBarStyle(
+                          autoPositionWindowButtons: false,
+                          isTransparent: true,
+                        ),
                       ),
                   Flexible(
                     child: SingleChildScrollView(

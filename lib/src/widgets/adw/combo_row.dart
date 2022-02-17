@@ -81,6 +81,7 @@ class _AdwComboRowState extends State<AdwComboRow> {
               autofocus: widget.autofocus,
               enabled: widget.enabled,
               contentPadding: widget.contentPadding,
+              horizontalTitleGap: 0,
               leading: widget.start,
               title: Text(widget.title),
               subtitle: widget.subtitle != null && widget.subtitle!.isNotEmpty

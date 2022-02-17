@@ -48,8 +48,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
   Widget build(BuildContext context) {
     return AdwScaffold(
       flapController: _flapController,
-      headerbar: (_) => AdwHeaderBar.bitsdojo(
-        appWindow: appWindow,
+      headerbar: (_) => AdwHeaderBar(
+        actions: AdwActions().bitsdojo,
         start: [
           Builder(
             builder: (context) {

@@ -14,7 +14,8 @@ dependencies:
     sdk: flutter
   libadwaita:
     path: ../
-  libadwaita_bitsdojo: ">=0.5.0 <1.0.0"
+  libadwaita_bitsdojo:
+    path: ../../plugins/libadwaita_bitsdojo
 
 dev_dependencies:
   flutter_test:

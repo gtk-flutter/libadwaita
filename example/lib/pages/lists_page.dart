@@ -54,8 +54,8 @@ class ListsPage extends StatelessWidget {
           AdwPreferencesGroup(
             children: List.generate(
               3,
-              (index) => ListTile(
-                title: Text('Index $index'),
+              (index) => AdwActionRow(
+                title: 'Index $index',
               ),
             ),
           ),

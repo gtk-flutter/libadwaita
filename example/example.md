@@ -124,13 +124,13 @@ class MainWindowState extends WindowState {
 }
 ```
 
-## Minimal [`window_decorations`](https://pub.dev/packages/window_decorations) usage
+## Minimal [`titlebar_buttons`](https://pub.dev/packages/titlebar_buttons) usage
 ```yaml
 #pubspec.yaml
 dependencies:
   adwaita:
   libadwaita:
-  window_decorations:
+  titlebar_buttons:
 ```
 
 ```dart
@@ -139,7 +139,7 @@ dependencies:
 import 'package:adwaita/adwaita.dart';
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:window_decorations/window_decorations.dart';
+import 'package:titlebar_buttons/titlebar_buttons.dart';
 
 void main() => runApp(MyApp());
 

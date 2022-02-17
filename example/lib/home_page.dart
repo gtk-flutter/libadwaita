@@ -65,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return AdwScaffold(
       flapController: _flapController,
-      headerbar: (_) => AdwHeaderBar.bitsdojo(
-        appWindow: appWindow,
+      headerbar: (_) => AdwHeaderBar(
+        actions: AdwActions().bitsdojo,
         start: [
           AdwHeaderButton(
             icon: const Icon(Icons.view_sidebar_outlined, size: 19),
