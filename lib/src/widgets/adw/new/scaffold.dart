@@ -21,9 +21,10 @@ class AdwScaffold extends StatefulWidget {
     this.actions,
     this.controls,
   })  : assert(
-            viewSwitcher != null && actions != null,
-            'If viewSwitcher is there, then actions are also needed to be'
-            ' provided!'),
+          viewSwitcher != null && actions != null,
+          'If viewSwitcher is there, then actions are also needed to be'
+          ' provided!',
+        ),
         super(key: key);
 
   final Widget body;
