@@ -56,6 +56,7 @@
 
 ### ADDED
 
+* Add `appName` and `appVersion` parameter
 * `actions` and `controls` parameter for `AdwHeaderBar`
 * Add ability to change `horizontalTitleGap` for `AdwActionRow` and `AdwComboRow`
 * Init Translations
