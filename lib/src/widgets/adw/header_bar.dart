@@ -44,8 +44,6 @@ class HeaderBarStyle {
 }
 
 class AdwHeaderBar extends StatefulWidget {
-  /// If you use with titlebar_buttons
-  /// If you don't want that. use AdwHeaderBar.custom
   AdwHeaderBar({
     Key? key,
     this.title,

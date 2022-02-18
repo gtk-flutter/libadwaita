@@ -25,15 +25,26 @@ class AdwAboutWindow extends StatefulWidget {
     this.nextPageIcon,
     this.launchEndIcon,
     this.width = 360,
-    this.headerbar,
+    @Deprecated('headerbar is deprecated, use the properties separately')
+        AdwHeaderBar? Function(Widget?)? headerbar,
+    this.headerBarStyle,
+    this.start,
+    this.end,
+    this.actions,
+    this.controls,
     this.copyright,
     this.issueTrackerLink,
     this.license,
     this.credits,
   }) : super(key: key);
 
-  /// The HeaderBar for About Window, defaults to transparent [AdwHeaderBar]
-  final AdwHeaderBar Function(List<Widget> leading, Widget title)? headerbar;
+  final HeaderBarStyle? headerBarStyle;
+
+  final List<Widget>? start;
+  final List<Widget>? end;
+
+  final AdwActions? actions;
+  final AdwControls? controls;
 
   /// The width of the about window dialog
   final double width;
@@ -100,18 +111,24 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  widget.headerbar?.call([leading], text) ??
-                      AdwHeaderBar(
-                        title: text,
-                        start: [leading],
-                        actions: AdwActions(
+                  AdwHeaderBar(
+                    title: text,
+                    start: [
+                      leading,
+                      if (widget.start != null) ...widget.start!,
+                    ],
+                    end: widget.end ?? [],
+                    actions: widget.actions ??
+                        AdwActions(
                           onClose: Navigator.of(context).pop,
                         ),
-                        style: const HeaderBarStyle(
+                    controls: widget.controls,
+                    style: widget.headerBarStyle ??
+                        const HeaderBarStyle(
                           autoPositionWindowButtons: false,
                           isTransparent: true,
                         ),
-                      ),
+                  ),
                   Flexible(
                     child: SingleChildScrollView(
                       padding: commonPadding,

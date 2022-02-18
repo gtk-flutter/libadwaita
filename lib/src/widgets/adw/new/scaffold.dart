@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/controllers/flap_controller.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
+import 'package:libadwaita_core/libadwaita_core.dart';
 
 class AdwScaffold extends StatefulWidget {
   const AdwScaffold({
@@ -8,10 +9,22 @@ class AdwScaffold extends StatefulWidget {
     required this.body,
     this.flap,
     this.flapStyle,
+    this.flapOptions,
     this.flapController,
-    this.headerbar,
+    @Deprecated('headerbar is deprecated, use the properties separately')
+        AdwHeaderBar? Function(Widget?)? headerbar,
     this.viewSwitcher,
-  }) : super(key: key);
+    this.headerBarStyle,
+    this.start,
+    this.title,
+    this.end,
+    this.actions,
+    this.controls,
+  })  : assert(
+            viewSwitcher != null && actions != null,
+            'If viewSwitcher is there, then actions are also needed to be'
+            ' provided!'),
+        super(key: key);
 
   final Widget body;
 
@@ -20,8 +33,16 @@ class AdwScaffold extends StatefulWidget {
   final FlapController? flapController;
 
   final FlapStyle? flapStyle;
+  final FlapOptions? flapOptions;
 
-  final Widget? Function(Widget? viewSwitcher)? headerbar;
+  final HeaderBarStyle? headerBarStyle;
+
+  final List<Widget>? start;
+  final Widget? title;
+  final List<Widget>? end;
+
+  final AdwActions? actions;
+  final AdwControls? controls;
 
   final Widget? viewSwitcher;
 
@@ -41,8 +62,6 @@ class _AdwScaffoldState extends State<AdwScaffold> {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width <= 600;
-    final headerbar =
-        widget.headerbar?.call(!isMobile ? widget.viewSwitcher : null);
     final flap = widget.flap != null
         ? SizedBox(
             width: 200,
@@ -53,7 +72,14 @@ class _AdwScaffoldState extends State<AdwScaffold> {
     return SafeArea(
       child: Column(
         children: [
-          if (headerbar != null) headerbar,
+          AdwHeaderBar(
+            actions: widget.actions!,
+            controls: widget.controls,
+            title: widget.viewSwitcher ?? widget.title,
+            end: widget.end ?? [],
+            start: widget.start ?? [],
+            style: widget.headerBarStyle ?? const HeaderBarStyle(),
+          ),
           Expanded(
             child: Scaffold(
               drawerEnableOpenDragGesture: _flapController

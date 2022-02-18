@@ -65,92 +65,90 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return AdwScaffold(
       flapController: _flapController,
-      headerbar: (_) => AdwHeaderBar(
-        actions: AdwActions().bitsdojo,
-        start: [
-          AdwHeaderButton(
-            icon: const Icon(Icons.view_sidebar_outlined, size: 19),
-            isActive: _flapController.isOpen,
-            onPressed: () => _flapController.toggle(),
-          ),
-          AdwHeaderButton(
-            icon: const Icon(Icons.nightlight_round, size: 15),
-            onPressed: changeTheme,
-          ),
-        ],
-        title: const Text('Libadwaita Demo'),
-        end: [
-          AdwPopupMenu(
-            body: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                AdwButton.flat(
-                  onPressed: () {
-                    counter.value = 0;
-                    Navigator.of(context).pop();
-                  },
-                  padding: AdwButton.defaultButtonPadding.copyWith(
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  child: const Text(
-                    'Reset Counter',
-                    style: TextStyle(fontSize: 15),
-                  ),
+      actions: AdwActions().bitsdojo,
+      start: [
+        AdwHeaderButton(
+          icon: const Icon(Icons.view_sidebar_outlined, size: 19),
+          isActive: _flapController.isOpen,
+          onPressed: () => _flapController.toggle(),
+        ),
+        AdwHeaderButton(
+          icon: const Icon(Icons.nightlight_round, size: 15),
+          onPressed: changeTheme,
+        ),
+      ],
+      title: const Text('Libadwaita Demo'),
+      end: [
+        AdwPopupMenu(
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AdwButton.flat(
+                onPressed: () {
+                  counter.value = 0;
+                  Navigator.of(context).pop();
+                },
+                padding: AdwButton.defaultButtonPadding.copyWith(
+                  top: 10,
+                  bottom: 10,
                 ),
-                const Divider(),
-                AdwButton.flat(
-                  padding: AdwButton.defaultButtonPadding.copyWith(
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  child: const Text(
-                    'Preferences',
-                    style: TextStyle(fontSize: 15),
-                  ),
+                child: const Text(
+                  'Reset Counter',
+                  style: TextStyle(fontSize: 15),
                 ),
-                AdwButton.flat(
-                  padding: AdwButton.defaultButtonPadding.copyWith(
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  onPressed: () => showDialog<Widget>(
-                    context: context,
-                    builder: (ctx) => AdwAboutWindow(
-                      issueTrackerLink:
-                          'https://github.com/gtk-flutter/libadwaita/issues',
-                      appIcon: Image.asset('assets/logo.png'),
-                      credits: [
-                        AdwPreferencesGroup.credits(
-                          title: 'Developers',
-                          children: developers.entries
-                              .map(
-                                (e) => AdwActionRow(
-                                  title: e.key,
-                                  onActivated: () =>
-                                      launch('https://github.com/${e.value}'),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ],
-                      copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
-                      license: const Text(
-                        'GNU LGPL-3.0, This program comes with no warranty.',
+              ),
+              const Divider(),
+              AdwButton.flat(
+                padding: AdwButton.defaultButtonPadding.copyWith(
+                  top: 10,
+                  bottom: 10,
+                ),
+                child: const Text(
+                  'Preferences',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+              AdwButton.flat(
+                padding: AdwButton.defaultButtonPadding.copyWith(
+                  top: 10,
+                  bottom: 10,
+                ),
+                onPressed: () => showDialog<Widget>(
+                  context: context,
+                  builder: (ctx) => AdwAboutWindow(
+                    issueTrackerLink:
+                        'https://github.com/gtk-flutter/libadwaita/issues',
+                    appIcon: Image.asset('assets/logo.png'),
+                    credits: [
+                      AdwPreferencesGroup.credits(
+                        title: 'Developers',
+                        children: developers.entries
+                            .map(
+                              (e) => AdwActionRow(
+                                title: e.key,
+                                onActivated: () =>
+                                    launch('https://github.com/${e.value}'),
+                              ),
+                            )
+                            .toList(),
                       ),
+                    ],
+                    copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
+                    license: const Text(
+                      'GNU LGPL-3.0, This program comes with no warranty.',
                     ),
                   ),
-                  child: const Text(
-                    'About this Demo',
-                    style: TextStyle(fontSize: 15),
-                  ),
                 ),
-              ],
-            ),
+                child: const Text(
+                  'About this Demo',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
       flap: (isDrawer) => AdwSidebar(
         currentIndex: _currentIndex,
         isDrawer: isDrawer,

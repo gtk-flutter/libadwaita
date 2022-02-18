@@ -48,25 +48,23 @@ class _FlapHomePageState extends State<FlapHomePage> {
   Widget build(BuildContext context) {
     return AdwScaffold(
       flapController: _flapController,
-      headerbar: (_) => AdwHeaderBar(
-        actions: AdwActions().bitsdojo,
-        start: [
-          Builder(
-            builder: (context) {
-              return AdwHeaderButton(
-                icon: const Icon(Icons.view_sidebar, size: 15),
-                isActive: _flapController.isOpen,
-                onPressed: () => _flapController.toggle(),
-              );
-            },
-          ),
-          AdwHeaderButton(
-            icon: const Icon(Icons.nightlight_round, size: 15),
-            onPressed: changeTheme,
-          ),
-        ],
-        title: const Text('AdwFlap Demo'),
-      ),
+      actions: AdwActions().bitsdojo,
+      start: [
+        Builder(
+          builder: (context) {
+            return AdwHeaderButton(
+              icon: const Icon(Icons.view_sidebar, size: 15),
+              isActive: _flapController.isOpen,
+              onPressed: () => _flapController.toggle(),
+            );
+          },
+        ),
+        AdwHeaderButton(
+          icon: const Icon(Icons.nightlight_round, size: 15),
+          onPressed: changeTheme,
+        ),
+      ],
+      title: const Text('AdwFlap Demo'),
       flap: (isDrawer) => AdwSidebar(
         currentIndex: _currentIndex,
         isDrawer: isDrawer,
@@ -85,6 +83,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
       ),
       flapStyle: FlapStyle(
         locked: locked,
+      ),
+      flapOptions: FlapOptions(
         flapPosition: flapPosition,
         foldPolicy: FoldPolicy.values[selectionIndex],
       ),
