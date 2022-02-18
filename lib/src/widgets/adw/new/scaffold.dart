@@ -21,7 +21,7 @@ class AdwScaffold extends StatefulWidget {
     this.actions,
     this.controls,
   })  : assert(
-          viewSwitcher != null && actions != null,
+          viewSwitcher != null || actions != null,
           'If viewSwitcher is there, then actions are also needed to be'
           ' provided!',
         ),
@@ -66,7 +66,10 @@ class _AdwScaffoldState extends State<AdwScaffold> {
     final flap = widget.flap != null
         ? SizedBox(
             width: 200,
-            child: Drawer(elevation: 25, child: widget.flap!(true)),
+            child: Drawer(
+              elevation: 25,
+              child: widget.flap!(true),
+            ),
           )
         : null;
 
