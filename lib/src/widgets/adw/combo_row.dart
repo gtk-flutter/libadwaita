@@ -13,6 +13,7 @@ class AdwComboRow extends StatefulWidget {
     required this.onSelected,
     required this.title,
     this.subtitle,
+    this.horizontalTitleGap = 8,
     this.autofocus = false,
     this.enabled = true,
     this.contentPadding,
@@ -45,6 +46,9 @@ class AdwComboRow extends StatefulWidget {
 
   /// Whether this combo row is enabled or not, defaults to true
   final bool enabled;
+
+  /// The horizontal gap between the titles and the leading/trailing widgets.
+  final double horizontalTitleGap;
 
   /// The padding b/w content of this Combo row
   final EdgeInsets? contentPadding;
@@ -81,7 +85,7 @@ class _AdwComboRowState extends State<AdwComboRow> {
               autofocus: widget.autofocus,
               enabled: widget.enabled,
               contentPadding: widget.contentPadding,
-              horizontalTitleGap: 0,
+              horizontalTitleGap: widget.horizontalTitleGap,
               leading: widget.start,
               title: Text(widget.title),
               subtitle: widget.subtitle != null && widget.subtitle!.isNotEmpty

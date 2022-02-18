@@ -55,19 +55,19 @@ class AdwHeaderBar extends StatefulWidget {
     required AdwActions actions,
     AdwControls? controls,
   })  : closeBtn = controls != null
-            ? controls.closeBtn(actions.onClose)
+            ? controls.closeBtn?.call(actions.onClose)
             : AdwWindowButton(
                 buttonType: WindowButtonType.close,
                 onPressed: actions.onClose,
               ),
         maximizeBtn = controls != null
-            ? controls.maximizeBtn(actions.onMaximize)
+            ? controls.maximizeBtn?.call(actions.onMaximize)
             : AdwWindowButton(
                 buttonType: WindowButtonType.maximize,
                 onPressed: actions.onMaximize,
               ),
         minimizeBtn = controls != null
-            ? controls.minimizeBtn(actions.onMinimize)
+            ? controls.minimizeBtn?.call(actions.onMinimize)
             : AdwWindowButton(
                 buttonType: WindowButtonType.minimize,
                 onPressed: actions.onMinimize,
