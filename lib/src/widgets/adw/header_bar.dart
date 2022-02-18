@@ -108,7 +108,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       widget.minimizeBtn != null ||
       widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>> seperator =
+  late ValueNotifier<List<String>> separator =
       !kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
           ? ValueNotifier<List<String>>([
               '',
@@ -123,7 +123,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
     if (widget.style.autoPositionWindowButtons) {
       void updateSep(String order) {
         if (!mounted) return;
-        seperator.value = order.split(':');
+        separator.value = order.split(':');
       }
 
       if (Platform.isWindows) {
@@ -181,7 +181,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                   onDoubleTap: widget.onDoubleTap,
                 ),
                 ValueListenableBuilder<List<String>>(
-                  valueListenable: seperator,
+                  valueListenable: separator,
                   builder: (context, sep, _) => DefaultTextStyle.merge(
                     style: const TextStyle(
                       fontSize: 14,

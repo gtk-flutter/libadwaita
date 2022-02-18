@@ -22,14 +22,14 @@ class FlapOptions {
 
 class FlapStyle {
   const FlapStyle({
-    this.seperator,
+    this.separator,
     this.locked = false,
     this.breakpoint = 900,
     this.flapWidth = 270.0,
   });
 
-  /// The seperator b/w flap and the content
-  final Widget? seperator;
+  /// The separator b/w flap and the content
+  final Widget? separator;
 
   /// The breakpoint for small devices
   final double breakpoint;
@@ -135,15 +135,15 @@ class _AdwFlapState extends State<AdwFlap> {
       ),
     );
 
-    final seperator = widget.style.seperator ??
+    final separator = widget.style.separator ??
         Container(
           width: 1,
           color: context.borderColor,
         );
 
     final widgets = widget.options.flapPosition == FlapPosition.start
-        ? [flap, seperator, content]
-        : [content, seperator, flap];
+        ? [flap, separator, content]
+        : [content, separator, flap];
 
     return WindowResizeListener(
       onResize: (Size size) {

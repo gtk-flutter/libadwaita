@@ -6,7 +6,7 @@
 ## Search Bar example
 [Link](https://pub.dev/packages/libadwaita_searchbar/example)
 
-## Search Bar with Auto complete example
+## Search Bar with autocomplete example
 [Link](https://pub.dev/packages/libadwaita_searchbar_ac/example)
 
 ## [`bitsdojo_window`](https://pub.dev/packages/bitsdojo_window) example
