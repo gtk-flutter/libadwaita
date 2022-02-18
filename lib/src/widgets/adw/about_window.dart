@@ -22,6 +22,8 @@ class AdwAboutWindow extends StatefulWidget {
   const AdwAboutWindow({
     Key? key,
     required this.appIcon,
+    this.appName,
+    this.appVersion,
     this.nextPageIcon,
     this.launchEndIcon,
     this.width = 360,
@@ -51,6 +53,12 @@ class AdwAboutWindow extends StatefulWidget {
 
   /// The app icon to show in the about window
   final Widget appIcon;
+
+  /// The app name to show in the about window, not required
+  final String? appName;
+
+  /// The app version to show in the about window, not required
+  final String? appVersion;
 
   /// The end icon of The Credits and Legal button,
   /// defaults to chevron_right Material Icon
@@ -143,7 +151,8 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                                   child: widget.appIcon,
                                 ),
                                 Text(
-                                  isNotNull ? data!.appName : '---',
+                                  widget.appName ??
+                                      (isNotNull ? data!.appName : '---'),
                                   style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -155,7 +164,8 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                                     AdwActionRow(
                                       title: 'Version',
                                       end: Text(
-                                        isNotNull ? data!.version : '0',
+                                        widget.appVersion ??
+                                            (isNotNull ? data!.version : '0'),
                                       ),
                                     ),
                                     if (widget.issueTrackerLink != null)
