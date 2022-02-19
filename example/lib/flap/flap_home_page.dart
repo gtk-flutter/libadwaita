@@ -20,6 +20,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
   FlapPosition flapPosition = FlapPosition.start;
   FoldPolicy foldPolicy = FoldPolicy.auto;
   bool locked = false;
+  bool visible = true;
   int selectionIndex = 0;
 
   @override
@@ -87,6 +88,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
       flapOptions: FlapOptions(
         flapPosition: flapPosition,
         foldPolicy: FoldPolicy.values[selectionIndex],
+        visible: visible,
       ),
       body: AdwViewStack(
         index: _currentIndex,
@@ -143,6 +145,14 @@ Sidebar visibility doesn't change when fold state changes""",
                   selectedIndex: 0,
                   onSelected: (val) {},
                   choices: const ['Over', 'Under', 'Slide'],
+                ),
+                AdwSwitchRow(
+                  value: visible,
+                  onChanged: (val) {
+                    visible = val ?? true;
+                    setState(() {});
+                  },
+                  title: 'Visible',
                 ),
               ],
             ),

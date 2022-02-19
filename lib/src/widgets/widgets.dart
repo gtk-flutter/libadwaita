@@ -11,6 +11,7 @@ export 'adw/flap.dart';
 export 'adw/header_bar.dart';
 export 'adw/preferences_group.dart';
 export 'adw/switch.dart';
+export 'adw/switch_row.dart';
 export 'adw/view_stack.dart';
 export 'adw/view_switcher.dart';
 export 'adw/view_switcher_tab.dart';

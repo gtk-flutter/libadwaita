@@ -11,6 +11,7 @@ class FlapOptions {
   const FlapOptions({
     this.foldPolicy = FoldPolicy.auto,
     this.flapPosition = FlapPosition.start,
+    this.visible = true,
   });
 
   /// The FoldPolicy of this flap, defaults to auto
@@ -18,6 +19,9 @@ class FlapOptions {
 
   /// The FlapPosition of this flap, defaults to start
   final FlapPosition flapPosition;
+
+  /// The visiblity of this flap, defaults to true
+  final bool visible;
 }
 
 class FlapStyle {
@@ -145,31 +149,34 @@ class _AdwFlapState extends State<AdwFlap> {
         ? [flap, separator, content]
         : [content, separator, flap];
 
-    return WindowResizeListener(
-      onResize: (Size size) {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
-          // The stuff that happens when the window is resized
-          // We check for the mobile state and update it on every resize
-          // Do nothin if FoldPolicy is never / always, because they are not
-          // affected by window resizes.
-          // If FoldPolicy is auto, then close / open the sidebar depending on the
-          // state
-          final isMobile = size.width < widget.style.breakpoint;
-          _controller.updateModalState(context, state: isMobile);
+    return Visibility(
+      visible: widget.options.visible,
+      child: WindowResizeListener(
+        onResize: (Size size) {
+          WidgetsBinding.instance!.addPostFrameCallback((_) {
+            // The stuff that happens when the window is resized
+            // We check for the mobile state and update it on every resize
+            // Do nothin if FoldPolicy is never / always, because they are not
+            // affected by window resizes.
+            // If FoldPolicy is auto, then close / open the sidebar depending on the
+            // state
+            final isMobile = size.width < widget.style.breakpoint;
+            _controller.updateModalState(context, state: isMobile);
 
-          switch (widget.options.foldPolicy) {
-            case FoldPolicy.never:
-            case FoldPolicy.always:
-              break;
-            case FoldPolicy.auto:
-              _controller.updateOpenState(state: !isMobile);
-              break;
-          }
-        });
-      },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: widgets,
+            switch (widget.options.foldPolicy) {
+              case FoldPolicy.never:
+              case FoldPolicy.always:
+                break;
+              case FoldPolicy.auto:
+                _controller.updateOpenState(state: !isMobile);
+                break;
+            }
+          });
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: widgets,
+        ),
       ),
     );
   }
