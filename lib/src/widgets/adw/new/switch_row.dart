@@ -60,6 +60,7 @@ class _AdwSwitchRowState extends State<AdwSwitchRow> {
       child: AdwActionRow(
         title: widget.title,
         contentPadding: widget.contentPadding,
+        onActivated: () => widget.onChanged(!widget.value),
         end: AdwSwitch(
           value: widget.value,
           onChanged: widget.onChanged,
