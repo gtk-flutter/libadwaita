@@ -14,6 +14,7 @@ class AdwScaffold extends StatefulWidget {
     @Deprecated('headerbar is deprecated, use the properties separately')
         AdwHeaderBar? Function(Widget?)? headerbar,
     this.viewSwitcher,
+    this.viewSwitcherConstraint,
     this.headerBarStyle,
     this.start,
     this.title,
@@ -41,6 +42,7 @@ class AdwScaffold extends StatefulWidget {
   final AdwControls? controls;
 
   final Widget? viewSwitcher;
+  final double? viewSwitcherConstraint;
 
   @override
   _AdwScaffoldState createState() => _AdwScaffoldState();
@@ -57,8 +59,10 @@ class _AdwScaffoldState extends State<AdwScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width <= 600;
+    final isMobile = MediaQuery.of(context).size.width <=
+        (widget.viewSwitcherConstraint ?? 600);
     final isFlapVisible = widget.flap != null;
+    final isViewSwitcherVisible = widget.viewSwitcher != null;
 
     final flap = isFlapVisible
         ? SizedBox(
@@ -76,7 +80,9 @@ class _AdwScaffoldState extends State<AdwScaffold> {
           AdwHeaderBar(
             actions: widget.actions,
             controls: widget.controls,
-            title: widget.viewSwitcher ?? widget.title,
+            title: isViewSwitcherVisible && !isMobile
+                ? widget.viewSwitcher
+                : widget.title,
             end: widget.end ?? [],
             start: widget.start ?? [],
             style: widget.headerBarStyle ?? const HeaderBarStyle(),
@@ -101,9 +107,11 @@ class _AdwScaffoldState extends State<AdwScaffold> {
                       child: widget.body,
                     )
                   : widget.body,
-              bottomNavigationBar: widget.viewSwitcher != null && isMobile
+              bottomNavigationBar: isViewSwitcherVisible && isMobile
                   ? SizedBox(
-                      height: 51,
+                      height: widget.headerBarStyle != null
+                          ? widget.headerBarStyle!.height
+                          : 51,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
