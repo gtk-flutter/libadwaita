@@ -21,7 +21,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
   FoldPolicy foldPolicy = FoldPolicy.auto;
   bool locked = false;
   bool visible = true;
-  int selectionIndex = 0;
+  int selectionIndex = 2;
 
   @override
   void initState() {
@@ -102,17 +102,15 @@ class _FlapHomePageState extends State<FlapHomePage> {
                   onSelected: (val) => setState(() => selectionIndex = val),
                   choices: FoldPolicy.values.map((e) => e.name).toList(),
                 ),
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Locked',
                   subtitle: """
 Sidebar visibility doesn't change when fold state changes""",
-                  end: AdwSwitch(
-                    value: locked,
-                    onChanged: (val) {
-                      locked = val;
-                      setState(() {});
-                    },
-                  ),
+                  value: locked,
+                  onChanged: (val) {
+                    locked = val;
+                    setState(() {});
+                  },
                 )
               ],
             ),
@@ -149,7 +147,7 @@ Sidebar visibility doesn't change when fold state changes""",
                 AdwSwitchRow(
                   value: visible,
                   onChanged: (val) {
-                    visible = val ?? true;
+                    visible = val;
                     setState(() {});
                   },
                   title: 'Visible',
@@ -160,19 +158,22 @@ Sidebar visibility doesn't change when fold state changes""",
           AdwClamp.scrollable(
             child: AdwPreferencesGroup(
               children: [
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Modal',
                   subtitle: '''
 Clicking outside the sidebar or pressing Esc will close it when folded''',
-                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                  value: true,
+                  onChanged: (val) {},
                 ),
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Swipe to Open',
-                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                  value: true,
+                  onChanged: (val) {},
                 ),
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Swipe to Close',
-                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                  value: true,
+                  onChanged: (val) {},
                 ),
               ],
             ),

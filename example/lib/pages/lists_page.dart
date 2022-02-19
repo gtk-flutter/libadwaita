@@ -82,14 +82,19 @@ class ListsPage extends StatelessWidget {
               )
             ],
           ),
-          ValueListenableBuilder<bool>(
-            valueListenable: switchVal,
-            builder: (context, val, _) => AdwSwitch(
-              value: val,
-              onChanged: (v) {
-                switchVal.value = v;
-              },
-            ),
+          AdwPreferencesGroup(
+            children: [
+              ValueListenableBuilder<bool>(
+                valueListenable: switchVal,
+                builder: (context, val, _) => AdwSwitchRow(
+                  title: 'Switch example',
+                  value: val,
+                  onChanged: (v) {
+                    switchVal.value = v;
+                  },
+                ),
+              ),
+            ],
           ),
         ]
             .map(

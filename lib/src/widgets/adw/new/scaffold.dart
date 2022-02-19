@@ -58,9 +58,10 @@ class _AdwScaffoldState extends State<AdwScaffold> {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width <= 600;
-    final flap = widget.flap != null &&
-            widget.flapOptions != null &&
-            widget.flapOptions!.visible
+    final isFlapVisible = widget.flap != null && widget.flapOptions == null ||
+        widget.flapOptions!.visible;
+
+    final flap = isFlapVisible
         ? SizedBox(
             width: 200,
             child: Drawer(
@@ -92,9 +93,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
               onDrawerChanged: _flapController?.onDrawerChanged,
               drawer: flap,
               endDrawer: flap,
-              body: widget.flap != null &&
-                      widget.flapOptions != null &&
-                      widget.flapOptions!.visible
+              body: isFlapVisible
                   ? AdwFlap(
                       flap: widget.flap!(false),
                       controller: widget.flapController,

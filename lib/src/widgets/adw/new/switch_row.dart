@@ -5,7 +5,6 @@ class AdwSwitchRow extends StatefulWidget {
   const AdwSwitchRow({
     Key? key,
     this.start,
-    this.end,
     required this.value,
     required this.onChanged,
     required this.title,
@@ -20,13 +19,10 @@ class AdwSwitchRow extends StatefulWidget {
   final bool value;
 
   /// Executed when the switch is toggled
-  final ValueSetter<bool?> onChanged;
+  final ValueSetter<bool> onChanged;
 
   /// The starting elemets of this row
   final Widget? start;
-
-  /// The ending elements of this row
-  final Widget? end;
 
   /// The title of this row
   final String title;
