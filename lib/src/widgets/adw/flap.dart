@@ -145,14 +145,21 @@ class _AdwFlapState extends State<AdwFlap> {
           color: context.borderColor,
         );
 
-    final widgets = widget.options.flapPosition == FlapPosition.start
-        ? [flap, separator, content]
-        : [content, separator, flap];
+    final children = [
+      if (widget.options.visible) ...[
+        flap,
+        separator,
+      ],
+      content,
+    ];
 
-    return Visibility(
-      visible: widget.options.visible,
-      child: WindowResizeListener(
-        onResize: (Size size) {
+    final finalChildren = widget.options.flapPosition == FlapPosition.start
+        ? children
+        : children.reversed.toList();
+
+    return WindowResizeListener(
+      onResize: (Size size) {
+        if (widget.options.visible) {
           WidgetsBinding.instance!.addPostFrameCallback((_) {
             // The stuff that happens when the window is resized
             // We check for the mobile state and update it on every resize
@@ -172,11 +179,11 @@ class _AdwFlapState extends State<AdwFlap> {
                 break;
             }
           });
-        },
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: widgets,
-        ),
+        }
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: finalChildren,
       ),
     );
   }
