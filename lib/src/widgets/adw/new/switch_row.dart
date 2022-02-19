@@ -16,10 +16,10 @@ class AdwSwitchRow extends StatefulWidget {
     this.contentPadding,
   }) : super(key: key);
 
-  /// The index of the selected choice
+  /// The value of the switch
   final bool value;
 
-  /// Executed when a choice is selected
+  /// Executed when the switch is toggled
   final ValueSetter<bool?> onChanged;
 
   /// The starting elemets of this row

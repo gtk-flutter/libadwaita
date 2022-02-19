@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/utils/colors.dart';
-import 'package:libadwaita/src/widgets/adw/button.dart';
+import 'package:libadwaita/libadwaita.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 
 class AdwComboRow extends StatefulWidget {
@@ -81,16 +80,14 @@ class _AdwComboRowState extends State<AdwComboRow> {
       child: Row(
         children: [
           Expanded(
-            child: ListTile(
+            child: AdwActionRow(
               autofocus: widget.autofocus,
               enabled: widget.enabled,
               contentPadding: widget.contentPadding,
               horizontalTitleGap: widget.horizontalTitleGap,
-              leading: widget.start,
-              title: Text(widget.title),
-              subtitle: widget.subtitle != null && widget.subtitle!.isNotEmpty
-                  ? Text(widget.subtitle!)
-                  : null,
+              start: widget.start,
+              title: widget.title,
+              subtitle: widget.subtitle,
             ),
           ),
           Flexible(
