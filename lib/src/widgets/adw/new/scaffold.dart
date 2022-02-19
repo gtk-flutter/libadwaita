@@ -18,14 +18,9 @@ class AdwScaffold extends StatefulWidget {
     this.start,
     this.title,
     this.end,
-    this.actions,
+    required this.actions,
     this.controls,
-  })  : assert(
-          viewSwitcher != null || actions != null,
-          'If viewSwitcher is there, then actions are also needed to be'
-          ' provided!',
-        ),
-        super(key: key);
+  }) : super(key: key);
 
   final Widget body;
 
@@ -42,7 +37,7 @@ class AdwScaffold extends StatefulWidget {
   final Widget? title;
   final List<Widget>? end;
 
-  final AdwActions? actions;
+  final AdwActions actions;
   final AdwControls? controls;
 
   final Widget? viewSwitcher;
@@ -77,7 +72,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
       child: Column(
         children: [
           AdwHeaderBar(
-            actions: widget.actions!,
+            actions: widget.actions,
             controls: widget.controls,
             title: widget.viewSwitcher ?? widget.title,
             end: widget.end ?? [],
