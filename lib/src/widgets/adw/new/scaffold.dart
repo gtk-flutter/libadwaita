@@ -58,8 +58,8 @@ class _AdwScaffoldState extends State<AdwScaffold> {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width <= 600;
-    final isFlapVisible = widget.flap != null && widget.flapOptions == null ||
-        widget.flapOptions!.visible;
+    final isFlapVisible = widget.flap != null &&
+        (widget.flapOptions == null || widget.flapOptions!.visible);
 
     final flap = isFlapVisible
         ? SizedBox(
