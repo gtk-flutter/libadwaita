@@ -54,7 +54,10 @@ class AdwViewSwitcherTab extends StatelessWidget {
                   padding: paddingIcon ??
                       (isDesktop
                           ? const EdgeInsets.only(top: 4, bottom: 4, right: 8)
-                          : const EdgeInsets.only(top: 3.5, right: 4, left: 4)),
+                          : const EdgeInsets.only(
+                              right: 4,
+                              left: 4,
+                            )),
                   child: Icon(data.icon, size: 17),
                 ),
                 if (data.badge != null)
