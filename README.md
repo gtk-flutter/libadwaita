@@ -67,6 +67,19 @@ import 'package:libadwaita_searchbar/libadwaita_searchbar.dart';
 bool searchedTerm = '';
 
 AdwSearchBar(
+    onSubmitted: (str) => setState(() => searchedTerm = str),
+    controller: const TextEditingController(),
+)
+```
+
+#### [**`libadwaita_searchbar_ac`**](https://pub.dev/packages/libadwaita_searchbar_ac)
+Example:
+```dart
+import 'package:libadwaita_searchbar_ac/libadwaita_searchbar_ac.dart';
+
+bool searchedTerm = '';
+
+AdwSearchBarAc(
     suggestions: const ['Hi', 'Hello'],
     onSubmitted: (str) => setState(() => searchedTerm = str),
     controller: const TextEditingController(),
