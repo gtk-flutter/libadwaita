@@ -17,10 +17,7 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
     return ValueListenableBuilder(
       valueListenable: index,
       builder: (context, int value, child) => AdwScaffold(
-        headerbar: (viewSwitcher) => AdwHeaderBar.bitsdojo(
-          appWindow: appWindow,
-          title: viewSwitcher,
-        ),
+        actions: AdwActions().bitsdojo,
         viewSwitcher: AdwViewSwitcher(
           tabs: const [
             ViewSwitcherData(

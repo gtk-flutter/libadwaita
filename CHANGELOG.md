@@ -1,5 +1,71 @@
 # Changelog
 
+## 1.2.0
+
+### BREAKING
+
+* `flapPolicy` and `flapPosition` are now removed from `FlapStyle` use `FlapOptions` and options parameter of `AdwFlap`.
+  * Previously
+    ```dart
+    AdwFlap(
+      style: FlapStyle(
+        width: ...,
+        breakpoint: ...,
+        flapPosition: ...,
+        flapPolicy: ...,
+      )
+    )
+    ```
+  * Now
+    ```dart
+    AdwFlap(
+      style: FlapStyle(
+        width: ...,
+        breakpoint: ...,
+      ),
+      options: FlapOptions(
+        flapPosition: ...,
+        flapPolicy: ...,
+      )
+    )
+    ```
+* Fix spelling by renaming `seperator` to `separator` everywhere
+
+
+### DEPRECATED
+
+* `headerbar` parameter from `AdwScaffold` and `AdwAboutWindow` is deprecated
+  * Previously
+    ```dart
+    AdwScaffold(
+      headerbar: (_) => AdwHeaderBar(
+        start: start,
+        end: end,
+        title: title,
+      )
+    )
+    ```
+  * Now
+    ```dart
+    AdwScaffold(
+      start: start,
+      end: end,
+      title: title,
+    )
+    ```
+
+### ADDED
+
+* Add `appName` and `appVersion` parameter
+* `actions` and `controls` parameter for `AdwHeaderBar`
+* Add ability to change `horizontalTitleGap` for `AdwActionRow` and `AdwComboRow`
+* Init Translations
+
+### CHANGED
+* Changed default value of `horizontalTitleGap` to 8
+* Switch to `titlebar_buttons` package as `window_decorations` is deprecated
+* Link to external examples in example.md
+
 ## 1.0.2
 
 * Fix License in README

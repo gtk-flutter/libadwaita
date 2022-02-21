@@ -25,28 +25,7 @@ Libadwaita's widgets for Flutter. Following Gnome HIG and available on all platf
 - If you want custom titlebar then you can follow the steps for that on [`libadwaita_bitsdojo`](https://pub.dev/packages/libadwaita_bitsdojo) package.
 - Here is the list of widgets imported from libadwaita library : [widgets.dart](https://github.com/gtk-flutter/libadwaita/blob/main/lib/src/widgets/widgets.dart).
 
-See the example app in the `example` folder for more info.
-
-## Documentation
-
-### AdwHeaderBar
-There are 6 types of `AdwHeaderBar` constructor:
-
-If you want to use default adwaita style window icons or icons using window_decorations package then you have to use any one of the following HeaderBar's:
-
-| Widget | Docs |
-| ------ | ---- |
-| `AdwHeaderBar` | Default HeaderBar |
-| `AdwHeaderBar.bitsdojo` | HeaderBar to be used with [`bitsdojo`](#libadwaita_bitsdojo) package |
-| `AdwHeaderBar.nativeshell` | HeaderBar to be used with [`nativeshell`](#nativeshell) package |
-
-If you want to have a custom icon for window button then you have to use any one of the following HeaderBar's:
-
-| Widget | Docs |
-| ------ | ---- |
-| `AdwHeaderBar.custom` | HeaderBar with custom icon |
-| `AdwHeaderBar.customBitsdojo` | HeaderBar to be used with [`bitsdojo`](#libadwaita_bitsdojo) package with custom icon |
-| `AdwHeaderBar.customNativeshell` | HeaderBar to be used with [`nativeshell`](#nativeshell) package with custom icon |
+See the example app in the [`example`](example) folder for more info.
 
 ## Relavant Links
 - [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/index.html#classes)
@@ -110,7 +89,7 @@ AdwHeaderBar.nativeshell(
 )
 ```
 
-#### [**`window_decorations`**](https://pub.dev/packages/window_decorations)
+#### [**`titlebar_buttons`**](https://pub.dev/packages/titlebar_buttons)
 Can be used with
 - `AdwHeaderBar`
 - `AdwHeaderBar.bitsdojo`
@@ -118,7 +97,7 @@ Can be used with
 
 Example:
 ```dart
-import 'package:window_decorations/window_decorations.dart';
+import 'package:titlebar_buttons/titlebar_buttons.dart';
 
 AdwHeaderBar(
   ...

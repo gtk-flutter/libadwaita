@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita_core/libadwaita_core.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,24 +22,43 @@ class AdwAboutWindow extends StatefulWidget {
   const AdwAboutWindow({
     Key? key,
     required this.appIcon,
+    this.appName,
+    this.appVersion,
     this.nextPageIcon,
     this.launchEndIcon,
     this.width = 360,
-    this.headerbar,
+    @Deprecated('headerbar is deprecated, use the properties separately')
+        AdwHeaderBar? Function(Widget?)? headerbar,
+    this.headerBarStyle,
+    this.start,
+    this.end,
+    this.actions,
+    this.controls,
     this.copyright,
     this.issueTrackerLink,
     this.license,
     this.credits,
   }) : super(key: key);
 
-  /// The HeaderBar for About Window, defaults to transparent [AdwHeaderBar]
-  final AdwHeaderBar Function(List<Widget> leading, Widget title)? headerbar;
+  final HeaderBarStyle? headerBarStyle;
+
+  final List<Widget>? start;
+  final List<Widget>? end;
+
+  final AdwActions? actions;
+  final AdwControls? controls;
 
   /// The width of the about window dialog
   final double width;
 
   /// The app icon to show in the about window
   final Widget appIcon;
+
+  /// The app name to show in the about window, not required
+  final String? appName;
+
+  /// The app version to show in the about window, not required
+  final String? appVersion;
 
   /// The end icon of The Credits and Legal button,
   /// defaults to chevron_right Material Icon
@@ -99,14 +119,24 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  widget.headerbar?.call([leading], text) ??
-                      AdwHeaderBar(
-                        start: [leading],
-                        autoPositionWindowButtons: false,
-                        onClose: Navigator.of(context).pop,
-                        isTransparent: true,
-                        title: text,
-                      ),
+                  AdwHeaderBar(
+                    title: text,
+                    start: [
+                      leading,
+                      if (widget.start != null) ...widget.start!,
+                    ],
+                    end: widget.end ?? [],
+                    actions: widget.actions ??
+                        AdwActions(
+                          onClose: Navigator.of(context).pop,
+                        ),
+                    controls: widget.controls,
+                    style: widget.headerBarStyle ??
+                        const HeaderBarStyle(
+                          autoPositionWindowButtons: false,
+                          isTransparent: true,
+                        ),
+                  ),
                   Flexible(
                     child: SingleChildScrollView(
                       padding: commonPadding,
@@ -121,7 +151,8 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                                   child: widget.appIcon,
                                 ),
                                 Text(
-                                  isNotNull ? data!.appName : '---',
+                                  widget.appName ??
+                                      (isNotNull ? data!.appName : '---'),
                                   style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -133,7 +164,8 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                                     AdwActionRow(
                                       title: 'Version',
                                       end: Text(
-                                        isNotNull ? data!.version : '0',
+                                        widget.appVersion ??
+                                            (isNotNull ? data!.version : '0'),
                                       ),
                                     ),
                                     if (widget.issueTrackerLink != null)

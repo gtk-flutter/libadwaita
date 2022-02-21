@@ -63,7 +63,7 @@ class FlapController extends ChangeNotifier {
     }
   }
 
-  void open({BuildContext? context}) {
+  void open([BuildContext? context]) {
     if (!isOpen) {
       isOpen = true;
       // Usually open only should set the isOpen variable, but if we have a
@@ -83,7 +83,7 @@ class FlapController extends ChangeNotifier {
     }
   }
 
-  void close({BuildContext? context}) {
+  void close([BuildContext? context]) {
     if (isOpen) {
       isOpen = false;
       final scaffold = Scaffold.of(context ?? this.context!);
@@ -100,9 +100,9 @@ class FlapController extends ChangeNotifier {
 
   void toggle({BuildContext? context}) {
     if (isOpen) {
-      close(context: context ?? this.context);
+      close(context ?? this.context);
     } else {
-      open(context: context ?? this.context);
+      open(context ?? this.context);
     }
   }
 }

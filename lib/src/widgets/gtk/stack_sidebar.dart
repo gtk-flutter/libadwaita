@@ -7,7 +7,7 @@ class AdwStackSidebar extends StatefulWidget {
     Key? key,
     required this.sidebar,
     required this.content,
-    this.seperator,
+    this.separator,
     required this.onContentPopupClosed,
     this.breakpoint = 800,
     this.sidebarWidth = 250,
@@ -17,7 +17,7 @@ class AdwStackSidebar extends StatefulWidget {
 
   final Widget sidebar;
   final Widget content;
-  final Widget? seperator;
+  final Widget? separator;
 
   /// Keeps track of the content index
   final int? contentIndex;
@@ -94,7 +94,7 @@ class _AdwStackSidebarState extends State<AdwStackSidebar> {
           width: widget.sidebarWidth,
           child: widget.sidebar,
         ),
-        widget.seperator ?? Container(width: 1, color: context.borderColor),
+        widget.separator ?? Container(width: 1, color: context.borderColor),
         Flexible(child: widget.content),
       ];
       return Row(

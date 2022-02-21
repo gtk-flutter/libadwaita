@@ -20,7 +20,8 @@ class _FlapHomePageState extends State<FlapHomePage> {
   FlapPosition flapPosition = FlapPosition.start;
   FoldPolicy foldPolicy = FoldPolicy.auto;
   bool locked = false;
-  int selectionIndex = 0;
+  bool visible = true;
+  int selectionIndex = 2;
 
   @override
   void initState() {
@@ -48,25 +49,23 @@ class _FlapHomePageState extends State<FlapHomePage> {
   Widget build(BuildContext context) {
     return AdwScaffold(
       flapController: _flapController,
-      headerbar: (_) => AdwHeaderBar.bitsdojo(
-        appWindow: appWindow,
-        start: [
-          Builder(
-            builder: (context) {
-              return AdwHeaderButton(
-                icon: const Icon(Icons.view_sidebar, size: 15),
-                isActive: _flapController.isOpen,
-                onPressed: () => _flapController.toggle(),
-              );
-            },
-          ),
-          AdwHeaderButton(
-            icon: const Icon(Icons.nightlight_round, size: 15),
-            onPressed: changeTheme,
-          ),
-        ],
-        title: const Text('AdwFlap Demo'),
-      ),
+      actions: AdwActions().bitsdojo,
+      start: [
+        Builder(
+          builder: (context) {
+            return AdwHeaderButton(
+              icon: const Icon(Icons.view_sidebar, size: 15),
+              isActive: _flapController.isOpen,
+              onPressed: () => _flapController.toggle(),
+            );
+          },
+        ),
+        AdwHeaderButton(
+          icon: const Icon(Icons.nightlight_round, size: 15),
+          onPressed: changeTheme,
+        ),
+      ],
+      title: const Text('AdwFlap Demo'),
       flap: (isDrawer) => AdwSidebar(
         currentIndex: _currentIndex,
         isDrawer: isDrawer,
@@ -85,8 +84,11 @@ class _FlapHomePageState extends State<FlapHomePage> {
       ),
       flapStyle: FlapStyle(
         locked: locked,
+      ),
+      flapOptions: FlapOptions(
         flapPosition: flapPosition,
         foldPolicy: FoldPolicy.values[selectionIndex],
+        visible: visible,
       ),
       body: AdwViewStack(
         index: _currentIndex,
@@ -100,17 +102,15 @@ class _FlapHomePageState extends State<FlapHomePage> {
                   onSelected: (val) => setState(() => selectionIndex = val),
                   choices: FoldPolicy.values.map((e) => e.name).toList(),
                 ),
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Locked',
                   subtitle: """
 Sidebar visibility doesn't change when fold state changes""",
-                  end: AdwSwitch(
-                    value: locked,
-                    onChanged: (val) {
-                      locked = val;
-                      setState(() {});
-                    },
-                  ),
+                  value: locked,
+                  onChanged: (val) {
+                    locked = val;
+                    setState(() {});
+                  },
                 )
               ],
             ),
@@ -144,25 +144,36 @@ Sidebar visibility doesn't change when fold state changes""",
                   onSelected: (val) {},
                   choices: const ['Over', 'Under', 'Slide'],
                 ),
+                AdwSwitchRow(
+                  value: visible,
+                  onChanged: (val) {
+                    visible = val;
+                    setState(() {});
+                  },
+                  title: 'Visible',
+                ),
               ],
             ),
           ),
           AdwClamp.scrollable(
             child: AdwPreferencesGroup(
               children: [
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Modal',
                   subtitle: '''
 Clicking outside the sidebar or pressing Esc will close it when folded''',
-                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                  value: true,
+                  onChanged: (val) {},
                 ),
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Swipe to Open',
-                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                  value: true,
+                  onChanged: (val) {},
                 ),
-                AdwActionRow(
+                AdwSwitchRow(
                   title: 'Swipe to Close',
-                  end: AdwSwitch(value: true, onChanged: (val) {}),
+                  value: true,
+                  onChanged: (val) {},
                 ),
               ],
             ),

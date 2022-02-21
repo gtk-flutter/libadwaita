@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/utils/colors.dart';
-import 'package:libadwaita/src/widgets/adw/button.dart';
+import 'package:libadwaita/libadwaita.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 
 class AdwComboRow extends StatefulWidget {
@@ -13,6 +12,7 @@ class AdwComboRow extends StatefulWidget {
     required this.onSelected,
     required this.title,
     this.subtitle,
+    this.horizontalTitleGap = 8,
     this.autofocus = false,
     this.enabled = true,
     this.contentPadding,
@@ -46,6 +46,9 @@ class AdwComboRow extends StatefulWidget {
   /// Whether this combo row is enabled or not, defaults to true
   final bool enabled;
 
+  /// The horizontal gap between the titles and the leading/trailing widgets.
+  final double horizontalTitleGap;
+
   /// The padding b/w content of this Combo row
   final EdgeInsets? contentPadding;
 
@@ -77,15 +80,14 @@ class _AdwComboRowState extends State<AdwComboRow> {
       child: Row(
         children: [
           Expanded(
-            child: ListTile(
+            child: AdwActionRow(
               autofocus: widget.autofocus,
               enabled: widget.enabled,
               contentPadding: widget.contentPadding,
-              leading: widget.start,
-              title: Text(widget.title),
-              subtitle: widget.subtitle != null && widget.subtitle!.isNotEmpty
-                  ? Text(widget.subtitle!)
-                  : null,
+              horizontalTitleGap: widget.horizontalTitleGap,
+              start: widget.start,
+              title: widget.title,
+              subtitle: widget.subtitle,
             ),
           ),
           Flexible(

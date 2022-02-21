@@ -7,24 +7,33 @@ import 'package:libadwaita/src/utils/colors.dart';
 enum FoldPolicy { never, always, auto }
 enum FlapPosition { start, end }
 
-class FlapStyle {
-  FlapStyle({
-    this.seperator,
-    this.locked = false,
-    this.breakpoint = 900,
-    this.flapWidth = 270.0,
+class FlapOptions {
+  const FlapOptions({
     this.foldPolicy = FoldPolicy.auto,
     this.flapPosition = FlapPosition.start,
+    this.visible = true,
   });
-
-  /// The seperator b/w flap and the content
-  final Widget? seperator;
 
   /// The FoldPolicy of this flap, defaults to auto
   final FoldPolicy foldPolicy;
 
   /// The FlapPosition of this flap, defaults to start
   final FlapPosition flapPosition;
+
+  /// The visiblity of this flap, defaults to true
+  final bool visible;
+}
+
+class FlapStyle {
+  const FlapStyle({
+    this.separator,
+    this.locked = false,
+    this.breakpoint = 900,
+    this.flapWidth = 270.0,
+  });
+
+  /// The separator b/w flap and the content
+  final Widget? separator;
 
   /// The breakpoint for small devices
   final double breakpoint;
@@ -40,13 +49,15 @@ class FlapStyle {
 }
 
 class AdwFlap extends StatefulWidget {
-  AdwFlap({
+  const AdwFlap({
     Key? key,
     required this.flap,
     required this.child,
     this.controller,
     FlapStyle? style,
-  })  : style = style ?? FlapStyle(),
+    FlapOptions? options,
+  })  : style = style ?? const FlapStyle(),
+        options = options ?? const FlapOptions(),
         super(key: key);
 
   /// The flap widget itself, Mainly is a `AdwSidebar` instance
@@ -58,6 +69,9 @@ class AdwFlap extends StatefulWidget {
   /// The style of this flap
   final FlapStyle style;
 
+  /// The options for this flap
+  final FlapOptions options;
+
   /// The controller for this flap
   final FlapController? controller;
 
@@ -68,9 +82,7 @@ class AdwFlap extends StatefulWidget {
 class _AdwFlapState extends State<AdwFlap> {
   late FlapController _controller;
 
-  void rebuild() {
-    setState(() {});
-  }
+  void rebuild() => setState(() {});
 
   @override
   void initState() {
@@ -89,8 +101,8 @@ class _AdwFlapState extends State<AdwFlap> {
 
   void updateFlapData() {
     _controller
-      ..policy = widget.style.foldPolicy
-      ..position = widget.style.flapPosition
+      ..policy = widget.options.foldPolicy
+      ..position = widget.options.flapPosition
       ..locked = widget.style.locked;
   }
 
@@ -125,41 +137,44 @@ class _AdwFlapState extends State<AdwFlap> {
       ),
     );
 
-    final seperator = widget.style.seperator ??
+    final separator = widget.style.separator ??
         Container(
           width: 1,
           color: context.borderColor,
         );
 
-    final widgets = widget.style.flapPosition == FlapPosition.start
-        ? [flap, seperator, content]
-        : [content, seperator, flap];
+    final children = [flap, separator, content];
+
+    final finalChildren = widget.options.flapPosition == FlapPosition.start
+        ? children
+        : children.reversed.toList();
+
+    if (!widget.options.visible) widget.controller?.close();
 
     return WindowResizeListener(
-      onResize: (Size size) {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
-          // The stuff that happens when the window is resized
-          // We check for the mobile state and update it on every resize
-          // Do nothin if FoldPolicy is never / always, because they are not
-          // affected by window resizes.
-          // If FoldPolicy is auto, then close / open the sidebar depending on the
-          // state
-          final isMobile = size.width < widget.style.breakpoint;
-          _controller.updateModalState(context, state: isMobile);
-
-          switch (widget.style.foldPolicy) {
-            case FoldPolicy.never:
-            case FoldPolicy.always:
-              break;
-            case FoldPolicy.auto:
-              _controller.updateOpenState(state: !isMobile);
-              break;
-          }
-        });
-      },
+      onResize: (Size size) =>
+          WidgetsBinding.instance!.addPostFrameCallback((_) {
+        // The stuff that happens when the window is resized
+        // We check for the mobile state and update it on every resize
+        // Do nothin if FoldPolicy is never / always, because they are not
+        // affected by window resizes.
+        // If FoldPolicy is auto, then close / open the sidebar depending on the
+        // state
+        final isMobile = size.width < widget.style.breakpoint;
+        _controller.updateModalState(context, state: isMobile);
+        if (!widget.options.visible) return;
+        switch (widget.options.foldPolicy) {
+          case FoldPolicy.never:
+          case FoldPolicy.always:
+            break;
+          case FoldPolicy.auto:
+            _controller.updateOpenState(state: !isMobile);
+            break;
+        }
+      }),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: widgets,
+        children: finalChildren,
       ),
     );
   }

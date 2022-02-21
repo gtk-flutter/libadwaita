@@ -8,6 +8,7 @@ class AdwActionRow extends StatelessWidget {
     required this.title,
     this.onActivated,
     this.subtitle,
+    this.horizontalTitleGap = 8,
     this.autofocus = false,
     this.enabled = true,
     this.contentPadding,
@@ -35,6 +36,9 @@ class AdwActionRow extends StatelessWidget {
   /// Whether this action row is enabled or not, defaults to true
   final bool enabled;
 
+  /// The horizontal gap between the titles and the leading/trailing widgets.
+  final double horizontalTitleGap;
+
   /// The padding b/w content of this Action row
   final EdgeInsets? contentPadding;
 
@@ -43,6 +47,7 @@ class AdwActionRow extends StatelessWidget {
     return ListTile(
       autofocus: autofocus,
       enabled: enabled,
+      horizontalTitleGap: horizontalTitleGap,
       contentPadding: contentPadding,
       leading: start != null
           ? SizedBox(height: double.infinity, child: start)
