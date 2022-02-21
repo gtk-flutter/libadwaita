@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'dart:io';
 
 import 'package:dbus/dbus.dart';

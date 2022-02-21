@@ -38,11 +38,12 @@
   * Previously
     ```dart
     AdwScaffold(
-      headerbar: (_) => AdwHeaderBar(
+      headerbar: (viewS) => AdwHeaderBar(
         start: start,
         end: end,
-        title: title,
-      )
+        title: viewS ?? title,
+      ),
+      viewSwitcher: viewSwitcher,
     )
     ```
   * Now
@@ -51,6 +52,7 @@
       start: start,
       end: end,
       title: title,
+      viewSwitcher: viewSwitcher,
     )
     ```
 
@@ -59,6 +61,7 @@
 * Add `appName` and `appVersion` parameter
 * `actions` and `controls` parameter for `AdwHeaderBar`
 * Add ability to change `horizontalTitleGap` for `AdwActionRow` and `AdwComboRow`
+* Add `visible` property of `FlapOptions`
 * Init Translations
 
 ### CHANGED
