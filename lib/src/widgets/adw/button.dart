@@ -302,6 +302,7 @@ class _AdwButtonState extends State<AdwButton> {
           onTap: widget.onPressed,
           onTapDown: (_) => setState(() => _status = AdwButtonStatus.tapDown),
           onTapUp: (_) => setState(reset),
+          onTapCancel: () => setState(() => _status = AdwButtonStatus.enabled),
           child: AnimatedContainer(
             padding: widget.padding,
             constraints: widget.constraints,
