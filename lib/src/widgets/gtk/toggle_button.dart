@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 
-class AdwToggleButton extends StatelessWidget {
-  const AdwToggleButton({
+@Deprecated('Use GtkToggleButton instead')
+class AdwToggleButton {}
+
+class GtkToggleButton extends StatelessWidget {
+  const GtkToggleButton({
     Key? key,
     required this.children,
     required this.onPressed,

@@ -30,6 +30,9 @@
     )
     ```
 * Fix spelling by renaming `seperator` to `separator` everywhere
+* `AdwPopupMenu` is now `GtkPopupMenu`
+* `AdwStackSwitcher` is now `GtkStackSwitcher`
+* `AdwToggleButton` is now `GtkToggleButton`
 
 
 ### DEPRECATED
@@ -58,6 +61,7 @@
 
 ### ADDED
 
+* Add `GtkDialog`
 * Add `appName` and `appVersion` parameter
 * `actions` and `controls` parameter for `AdwHeaderBar`
 * Add ability to change `horizontalTitleGap` for `AdwActionRow` and `AdwComboRow`

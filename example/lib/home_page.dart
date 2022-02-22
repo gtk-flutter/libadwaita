@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
       title: const Text('Libadwaita Demo'),
       end: [
-        AdwPopupMenu(
+        GtkPopupMenu(
           body: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -120,6 +120,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     issueTrackerLink:
                         'https://github.com/gtk-flutter/libadwaita/issues',
                     appIcon: Image.asset('assets/logo.png'),
+                    actions: AdwActions(
+                      onClose: Navigator.of(context).pop,
+                      onHeaderDrag: appWindow?.startDragging,
+                      onDoubleTap: appWindow?.maximizeOrRestore,
+                    ),
                     credits: [
                       AdwPreferencesGroup.credits(
                         title: 'Developers',

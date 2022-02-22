@@ -106,137 +106,111 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
       builder: (context, snapshot) {
         final data = snapshot.hasData ? snapshot.data : null;
         final isNotNull = data != null;
-        return Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: widget.width,
-                minHeight: 350,
+        return GtkDialog(
+          constraints: BoxConstraints(
+            maxWidth: widget.width,
+            minHeight: 350,
+            maxHeight: 400,
+          ),
+          title: text,
+          start: [
+            leading,
+            if (widget.start != null) ...widget.start!,
+          ],
+          end: widget.end ?? [],
+          actions: widget.actions ??
+              AdwActions(
+                onClose: Navigator.of(context).pop,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AdwHeaderBar(
-                    title: text,
-                    start: [
-                      leading,
-                      if (widget.start != null) ...widget.start!,
-                    ],
-                    end: widget.end ?? [],
-                    actions: widget.actions ??
-                        AdwActions(
-                          onClose: Navigator.of(context).pop,
-                        ),
-                    controls: widget.controls,
-                    style: widget.headerBarStyle ??
-                        const HeaderBarStyle(
-                          autoPositionWindowButtons: false,
-                          isTransparent: true,
-                        ),
+          controls: widget.controls,
+          headerBarStyle: widget.headerBarStyle ??
+              const HeaderBarStyle(
+                autoPositionWindowButtons: false,
+                isTransparent: true,
+              ),
+          padding: commonPadding,
+          children: currentPage == 0
+              ? [
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 3),
+                    width: 80,
+                    child: widget.appIcon,
                   ),
-                  Flexible(
-                    child: SingleChildScrollView(
-                      padding: commonPadding,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: currentPage == 0
-                            ? [
-                                Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 3),
-                                  width: 80,
-                                  child: widget.appIcon,
-                                ),
-                                Text(
-                                  widget.appName ??
-                                      (isNotNull ? data!.appName : '---'),
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
-                                AdwPreferencesGroup(
-                                  children: [
-                                    AdwActionRow(
-                                      title: 'Version',
-                                      end: Text(
-                                        widget.appVersion ??
-                                            (isNotNull ? data!.version : '0'),
-                                      ),
-                                    ),
-                                    if (widget.issueTrackerLink != null)
-                                      AdwActionRow(
-                                        title: 'Report an issue',
-                                        onActivated: () => launch(
-                                          widget.issueTrackerLink!,
-                                        ),
-                                        end: widget.launchEndIcon ??
-                                            const Icon(
-                                              Icons.open_in_new_outlined,
-                                              size: 20,
-                                            ),
-                                      ),
-                                  ],
-                                ),
-                                if ((widget.credits != null) ||
-                                    widget.copyright != null ||
-                                    widget.license != null) ...[
-                                  const SizedBox(height: 8),
-                                  AdwPreferencesGroup(
-                                    children: [
-                                      if (widget.credits != null)
-                                        AdwActionRow(
-                                          title: 'Credits',
-                                          onActivated: () =>
-                                              setState(() => currentPage = 1),
-                                          end: widget.nextPageIcon ??
-                                              const Icon(
-                                                Icons.chevron_right,
-                                              ),
-                                        ),
-                                      if (widget.copyright != null ||
-                                          widget.license != null)
-                                        AdwActionRow(
-                                          title: 'Legal',
-                                          onActivated: () =>
-                                              setState(() => currentPage = 2),
-                                          end: widget.nextPageIcon ??
-                                              const Icon(
-                                                Icons.chevron_right,
-                                              ),
-                                        ),
-                                    ],
-                                  ),
-                                ],
-                              ]
-                            : currentPage == 1
-                                ? widget.credits!
-                                    .map(
-                                      (e) => Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 10,
-                                        ),
-                                        child: e,
-                                      ),
-                                    )
-                                    .toList()
-                                : [
-                                    if (widget.copyright != null)
-                                      Text(widget.copyright!),
-                                    const SizedBox(height: 5),
-                                    if (widget.license != null) widget.license!,
-                                  ],
-                      ),
+                  Text(
+                    widget.appName ?? (isNotNull ? data!.appName : '---'),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
+                  const SizedBox(height: 6),
+                  AdwPreferencesGroup(
+                    children: [
+                      AdwActionRow(
+                        title: 'Version',
+                        end: Text(
+                          widget.appVersion ??
+                              (isNotNull ? data!.version : '0'),
+                        ),
+                      ),
+                      if (widget.issueTrackerLink != null)
+                        AdwActionRow(
+                          title: 'Report an issue',
+                          onActivated: () => launch(
+                            widget.issueTrackerLink!,
+                          ),
+                          end: widget.launchEndIcon ??
+                              const Icon(
+                                Icons.open_in_new_outlined,
+                                size: 20,
+                              ),
+                        ),
+                    ],
+                  ),
+                  if ((widget.credits != null) ||
+                      widget.copyright != null ||
+                      widget.license != null) ...[
+                    const SizedBox(height: 8),
+                    AdwPreferencesGroup(
+                      children: [
+                        if (widget.credits != null)
+                          AdwActionRow(
+                            title: 'Credits',
+                            onActivated: () => setState(() => currentPage = 1),
+                            end: widget.nextPageIcon ??
+                                const Icon(
+                                  Icons.chevron_right,
+                                ),
+                          ),
+                        if (widget.copyright != null || widget.license != null)
+                          AdwActionRow(
+                            title: 'Legal',
+                            onActivated: () => setState(() => currentPage = 2),
+                            end: widget.nextPageIcon ??
+                                const Icon(
+                                  Icons.chevron_right,
+                                ),
+                          ),
+                      ],
+                    ),
+                  ],
+                ]
+              : currentPage == 1
+                  ? widget.credits!
+                      .map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 10,
+                          ),
+                          child: e,
+                        ),
+                      )
+                      .toList()
+                  : [
+                      if (widget.copyright != null) Text(widget.copyright!),
+                      const SizedBox(height: 5),
+                      if (widget.license != null) widget.license!,
+                    ],
         );
       },
     );

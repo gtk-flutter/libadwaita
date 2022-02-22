@@ -120,7 +120,7 @@ Sidebar visibility doesn't change when fold state changes""",
               children: [
                 AdwActionRow(
                   title: 'Flap position',
-                  end: AdwToggleButton(
+                  end: GtkToggleButton(
                     isSelected: [
                       flapPosition.index == 0,
                       flapPosition.index == 1

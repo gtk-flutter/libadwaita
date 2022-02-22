@@ -24,7 +24,8 @@ export 'adw/new/text_button.dart';
 export 'adw/new/text_field.dart';
 export 'adw/new/window_button.dart';
 
-// All the widgets imported from Gtk4
+// All the widgets imported from Gtk4 / Gtk3
+export 'gtk/dialog.dart';
 export 'gtk/popup_menu.dart';
 export 'gtk/stack_sidebar.dart';
 export 'gtk/toggle_button.dart';

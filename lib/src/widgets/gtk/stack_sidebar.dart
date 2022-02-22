@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
-class AdwStackSidebar extends StatefulWidget {
-  const AdwStackSidebar({
+@Deprecated('Use GtkStackSidebar instead')
+class AdwStackSidebar {}
+
+class GtkStackSidebar extends StatefulWidget {
+  const GtkStackSidebar({
     Key? key,
     required this.sidebar,
     required this.content,
@@ -36,10 +39,10 @@ class AdwStackSidebar extends StatefulWidget {
   final Function(int? contentIndex, Widget content)? fullContentBuilder;
 
   @override
-  _AdwStackSidebarState createState() => _AdwStackSidebarState();
+  _GtkStackSidebarState createState() => _GtkStackSidebarState();
 }
 
-class _AdwStackSidebarState extends State<AdwStackSidebar> {
+class _GtkStackSidebarState extends State<GtkStackSidebar> {
   bool _popupNotOpen = true;
 
   bool get canSplitPanes =>

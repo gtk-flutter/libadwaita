@@ -3,8 +3,11 @@ import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 
-class AdwPopupMenu extends StatefulWidget {
-  const AdwPopupMenu({
+@Deprecated('Use GtkPopupMenu instead')
+class AdwPopupMenu {}
+
+class GtkPopupMenu extends StatefulWidget {
+  const GtkPopupMenu({
     Key? key,
     required this.body,
     this.icon = const Icon(Icons.menu, size: 17),
@@ -25,10 +28,10 @@ class AdwPopupMenu extends StatefulWidget {
   final double? popupHeight;
 
   @override
-  State<AdwPopupMenu> createState() => _AdwPopupMenuState();
+  State<GtkPopupMenu> createState() => _GtkPopupMenuState();
 }
 
-class _AdwPopupMenuState extends State<AdwPopupMenu> {
+class _GtkPopupMenuState extends State<GtkPopupMenu> {
   bool isActive = false;
 
   @override
