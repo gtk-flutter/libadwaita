@@ -62,6 +62,7 @@
 * `actions` and `controls` parameter for `AdwHeaderBar`
 * Add ability to change `horizontalTitleGap` for `AdwActionRow` and `AdwComboRow`
 * Add `visible` property of `FlapOptions`
+* Add `border` to ViewSwitcher in mobile view
 * Init Translations
 
 ### CHANGED

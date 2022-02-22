@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/src/controllers/flap_controller.dart';
+import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 import 'package:libadwaita_core/libadwaita_core.dart';
 
@@ -108,10 +109,17 @@ class _AdwScaffoldState extends State<AdwScaffold> {
                     )
                   : widget.body,
               bottomNavigationBar: isViewSwitcherVisible && isMobile
-                  ? SizedBox(
+                  ? Container(
                       height: widget.headerBarStyle != null
                           ? widget.headerBarStyle!.height
                           : 51,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: context.borderColor,
+                          ),
+                        ),
+                      ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
