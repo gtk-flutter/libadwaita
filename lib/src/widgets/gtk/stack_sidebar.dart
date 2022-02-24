@@ -15,6 +15,7 @@ class GtkStackSidebar extends StatefulWidget {
     this.breakpoint = 800,
     this.sidebarWidth = 250,
     this.contentIndex,
+    this.pageRoute,
     this.fullContentBuilder,
   }) : super(key: key);
 
@@ -24,6 +25,9 @@ class GtkStackSidebar extends StatefulWidget {
 
   /// Keeps track of the content index
   final int? contentIndex;
+
+  /// Custom route for then next page of [GtkStackSidebar]
+  final Route Function(Widget child)? pageRoute;
 
   /// Called when content screen is closed and sidebar is shown
   final void Function() onContentPopupClosed;
@@ -53,22 +57,22 @@ class _GtkStackSidebarState extends State<GtkStackSidebar> {
     if (_popupNotOpen) {
       _popupNotOpen = false;
       SchedulerBinding.instance!.addPostFrameCallback((_) async {
+        final child = Scaffold(
+          body: widget.fullContentBuilder != null
+              ? widget.fullContentBuilder!(
+                  widget.contentIndex,
+                  widget.content,
+                ) as Widget?
+              : widget.content,
+        );
         // sets _popupNotOpen to true after popup is closed
         await Navigator.of(context)
             .push<void>(
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) {
-              return Scaffold(
-                body: widget.fullContentBuilder != null
-                    ? widget.fullContentBuilder!(
-                        widget.contentIndex,
-                        widget.content,
-                      ) as Widget?
-                    : widget.content,
-              );
-            },
-            fullscreenDialog: true,
-          ),
+          widget.pageRoute?.call(child) ??
+              MaterialPageRoute(
+                builder: (BuildContext context) => child,
+                fullscreenDialog: true,
+              ),
         )
             .then((_) {
           // less code than wapping in a WillPopScope
