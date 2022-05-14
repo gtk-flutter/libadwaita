@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.0-dev
+## 1.2.0
 
 ### BREAKING
 
@@ -70,6 +70,8 @@
 * Init Translations
 
 ### CHANGED
+* Remove null checks from WidgetsBinding (Flutter 3.0.0)
+* Changed launch to launchUrl for url_launcher package
 * Changed default value of `horizontalTitleGap` to 8
 * Switch to `titlebar_buttons` package as `window_decorations` is deprecated
 * Link to external examples in example.md

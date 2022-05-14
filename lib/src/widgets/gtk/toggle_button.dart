@@ -12,8 +12,11 @@ class GtkToggleButton extends StatelessWidget {
     required this.isSelected,
   }) : super(key: key);
 
+  /// The List of all the children widgets of this toggle button
   final List<Widget> children;
+
   final void Function(int index) onPressed;
+
   final List<bool> isSelected;
 
   @override

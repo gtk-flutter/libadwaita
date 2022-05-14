@@ -132,8 +132,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             .map(
                               (e) => AdwActionRow(
                                 title: e.key,
-                                onActivated: () =>
-                                    launch('https://github.com/${e.value}'),
+                                onActivated: () => launchUrl(
+                                  Uri.parse('https://github.com/${e.value}'),
+                                ),
                               ),
                             )
                             .toList(),

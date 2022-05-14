@@ -156,8 +156,8 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                       if (widget.issueTrackerLink != null)
                         AdwActionRow(
                           title: 'Report an issue',
-                          onActivated: () => launch(
-                            widget.issueTrackerLink!,
+                          onActivated: () => launchUrl(
+                            Uri.parse(widget.issueTrackerLink!),
                           ),
                           end: widget.launchEndIcon ??
                               const Icon(

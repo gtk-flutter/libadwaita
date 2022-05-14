@@ -56,7 +56,7 @@ class _GtkStackSidebarState extends State<GtkStackSidebar> {
   Future<void> loadContentPage(BuildContext context) async {
     if (_popupNotOpen) {
       _popupNotOpen = false;
-      SchedulerBinding.instance!.addPostFrameCallback((_) async {
+      SchedulerBinding.instance.addPostFrameCallback((_) async {
         final child = Scaffold(
           body: widget.fullContentBuilder != null
               ? widget.fullContentBuilder!(
@@ -87,7 +87,7 @@ class _GtkStackSidebarState extends State<GtkStackSidebar> {
   /// closes popup wind
   void _closePopup() {
     if (!_popupNotOpen) {
-      SchedulerBinding.instance!
+      SchedulerBinding.instance
           .addPostFrameCallback((_) => Navigator.pop(context));
     }
   }

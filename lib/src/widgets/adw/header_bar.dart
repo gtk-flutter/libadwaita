@@ -134,7 +134,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
 
         final schema = GSettings('org.gnome.desktop.wm.preferences');
 
-        WidgetsBinding.instance?.addPostFrameCallback((_) async {
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
           final buttonLayout = await schema.get('button-layout') as DBusString?;
           if (buttonLayout != null) {
             updateSep(buttonLayout.value);

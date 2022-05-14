@@ -5,6 +5,7 @@ import 'package:libadwaita/src/internal/window_resize_listener.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 
 enum FoldPolicy { never, always, auto }
+
 enum FlapPosition { start, end }
 
 class FlapOptions {
@@ -153,7 +154,7 @@ class _AdwFlapState extends State<AdwFlap> {
 
     return WindowResizeListener(
       onResize: (Size size) =>
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
         // The stuff that happens when the window is resized
         // We check for the mobile state and update it on every resize
         // Do nothin if FoldPolicy is never / always, because they are not
