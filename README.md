@@ -35,7 +35,7 @@ See the example app in the [`example`](example) folder for more info.
 
 ### **This package works great with**
 
-[**`adwaita`**](https://pub.dev/packages/adwaita) / [**`yaru`**](https://github.com/ubuntu/yaru.dart)  
+[**`adwaita`**](https://pub.dev/packages/adwaita) / [**`yaru`**](https://pub.dev/packages/yaru)  
 For theming
 
 ### **Optional packages**
@@ -43,19 +43,14 @@ For theming
 #### [**`adwaita_icons`**](https://pub.dev/packages/adwaita_icons)
 For Adwaita Icons
 
-#### [**`libadwaita_bitsdojo`**](https://pub.dev/packages/libadwaita_bitsdojo)
-Can be used with
-- `AdwHeaderBar.bitsdojo`
-- `AdwHeaderBar.customBitsdojo`
-
+#### [**`libadwaita_bitsdojo`**](https://pub.dev/packages/bitsdojo)
 Example:
 ```dart
 import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
 
-AdwHeaderBar.bitsdojo(
-  ...
-  appWindow: appWindow,
-  ...
+AdwHeaderBar(
+  actions: AdwActions().bitsdojo,
+//...
 )
 ```
 
@@ -67,8 +62,9 @@ import 'package:libadwaita_searchbar/libadwaita_searchbar.dart';
 bool searchedTerm = '';
 
 AdwSearchBar(
-    onSubmitted: (str) => setState(() => searchedTerm = str),
-    controller: const TextEditingController(),
+  onSubmitted: (str) => setState(() => searchedTerm = str),
+  controller: const TextEditingController(),
+//...
 )
 ```
 
@@ -80,42 +76,32 @@ import 'package:libadwaita_searchbar_ac/libadwaita_searchbar_ac.dart';
 bool searchedTerm = '';
 
 AdwSearchBarAc(
-    suggestions: const ['Hi', 'Hello'],
-    onSubmitted: (str) => setState(() => searchedTerm = str),
-    controller: const TextEditingController(),
+  suggestions: const ['Hi', 'Hello'],
+  onSubmitted: (str) => setState(() => searchedTerm = str),
+  controller: const TextEditingController(),
+//...
 )
 ```
 
-#### [**`nativeshell`**](https://pub.dev/packages/nativeshell  )
-Can be used with
-- `AdwHeaderBar.nativeshell`
-- `AdwHeaderBar.customNativeshell`
-
+#### [**`libadwaita_nativeshell`**](https://pub.dev/packages/nativeshell  )
 Example:
 ```dart
-import 'package:nativeshell/nativeshell.dart';
-
-AdwHeaderBar.nativeshell(
-  ...
-  window: Window.of(context),
-  ...
-)
-```
-
-#### [**`titlebar_buttons`**](https://pub.dev/packages/titlebar_buttons)
-Can be used with
-- `AdwHeaderBar`
-- `AdwHeaderBar.bitsdojo`
-- `AdwHeaderBar.nativeshell`
-
-Example:
-```dart
-import 'package:titlebar_buttons/titlebar_buttons.dart';
+import 'package:libadwaita_nativeshell/libadwaita_nativeshell.dart';
 
 AdwHeaderBar(
-  ...
-  windowDecor: windowDecor,
-  ...
+  actions: AdwActions().nativeshell(context),
+//...
+)
+```
+
+#### [**`libadwaita_titlebar_buttons`**](https://pub.dev/packages/titlebar_buttons)
+Example:
+```dart
+import 'package:libadwaita_titlebar_buttons/libadwaita_titlebar_buttons.dart';
+
+AdwHeaderBar(
+  controls: AdwControls().titlebarButtons(),
+//...
 )
 ```
 
