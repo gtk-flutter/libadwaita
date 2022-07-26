@@ -121,6 +121,14 @@ AdwHeaderBar(
 
 [Classic API Docs](https://pub.dev/documentation/libadwaita/latest/)
 
+## Support the development
+
+To sustain the development of this library we need someone who can help this library either through code or by donating to it. Donation will help us to live up in the world of unmaintained open source packages and to dedicate more time in improving this to live up to the mark. We will also add the name of the contributors or the donaters in the README section.
+
+To donate directly you can use below link, don't forget to leave a message there:
+
+<a href="https://www.buymeacoffee.com/prateekmedia" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## License
 
 `Mozilla Public License 2.0`
