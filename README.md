@@ -121,6 +121,15 @@ AdwHeaderBar(
 
 [Classic API Docs](https://pub.dev/documentation/libadwaita/latest/)
 
+## Contributors
+*Based on [Insights](https://github.com/gtk-flutter/libadwaita/graphs/contributors) ranking and the value of commits*
+
+- [@prateekmedia](https://github.com/prateekmedia) - Creator and Maintainer of this library
+- [@simrat39](https://github.com/simrat39) - Added various widgets and Improved example app
+- [@MalcolmMielle](https://github.com/MalcolmMielle) - Worked on theming side of adwaita and created CI
+- [@jesusrp98](https://github.com/jesusrp98) - Added widgets like `AdwButton`, `AdwAvatar` and improved some widgets
+- [@pablojimpas](https://github.com/pablojimpas) - Added `very_good_analysis` and Fixed some code
+
 ## Support the development
 
 To sustain the development of this library we need someone who can help this library either through code or by donating to it. Donation will help us to live up in the world of unmaintained open source packages and to dedicate more time in improving this to live up to the mark. We will also add the name of the contributors or the donaters in the README section.
