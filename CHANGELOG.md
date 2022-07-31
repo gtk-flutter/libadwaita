@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1
+
+* Improve Example
+* Upgrade Packages
+* Add onRightClick parameter for Headerbar's actions
+
 ## 1.2.0
 
 ### BREAKING
