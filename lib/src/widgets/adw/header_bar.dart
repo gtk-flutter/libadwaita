@@ -70,6 +70,7 @@ class AdwHeaderBar extends StatefulWidget {
               ),
         onHeaderDrag = actions.onHeaderDrag,
         onDoubleTap = actions.onDoubleTap,
+        onRightClick = actions.onRightClick,
         super(key: key);
 
   /// The leading widget for the headerbar
@@ -92,6 +93,9 @@ class AdwHeaderBar extends StatefulWidget {
 
   /// Called when headerbar is double tapped
   final VoidCallback? onDoubleTap;
+
+  /// Called when headerbar is right clicked
+  final VoidCallback? onRightClick;
 
   /// Default style applied to this [AdwHeaderBar] widget.
   final HeaderBarStyle style;
@@ -155,6 +159,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
     return Material(
       type: MaterialType.transparency,
       child: GestureDetector(
+        onSecondaryTap: widget.onRightClick,
         behavior: HitTestBehavior.translucent,
         onPanStart: (_) => widget.onHeaderDrag?.call(),
         child: Align(

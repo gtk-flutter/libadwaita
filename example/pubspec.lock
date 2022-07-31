@@ -182,7 +182,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.2.0"
+    version: "1.2.1"
   libadwaita_bitsdojo:
     dependency: "direct main"
     description:
@@ -196,7 +196,7 @@ packages:
       name: libadwaita_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.2"
   matcher:
     dependency: transitive
     description:
