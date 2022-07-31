@@ -23,39 +23,33 @@ packages:
     source: hosted
     version: "2.8.2"
   bitsdojo_window_linux:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: bitsdojo_window_linux
-      ref: HEAD
-      resolved-ref: "85e5d1481c52c950f488130d26b5b6dcc48b6d64"
-      url: "https://github.com/prateekmedia/bitsdojo_window.git"
-    source: git
-    version: "0.1.1"
+      name: bitsdojo_window_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   bitsdojo_window_macos:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: bitsdojo_window_macos
-      ref: HEAD
-      resolved-ref: "85e5d1481c52c950f488130d26b5b6dcc48b6d64"
-      url: "https://github.com/prateekmedia/bitsdojo_window.git"
-    source: git
-    version: "0.1.0"
+      name: bitsdojo_window_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   bitsdojo_window_platform_interface:
     dependency: transitive
     description:
       name: bitsdojo_window_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.2"
   bitsdojo_window_windows:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: bitsdojo_window_windows
-      ref: HEAD
-      resolved-ref: "85e5d1481c52c950f488130d26b5b6dcc48b6d64"
-      url: "https://github.com/prateekmedia/bitsdojo_window.git"
-    source: git
-    version: "0.1.0"
+      name: bitsdojo_window_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -97,14 +91,14 @@ packages:
       name: dbus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.3"
+    version: "0.7.4"
   desktop_multi_window:
     dependency: "direct main"
     description:
       name: desktop_multi_window
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -137,7 +131,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.1.1+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -189,14 +183,14 @@ packages:
       name: libadwaita_bitsdojo
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.3"
+    version: "0.5.5"
   libadwaita_core:
     dependency: transitive
     description:
       name: libadwaita_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.2"
+    version: "0.5.3"
   matcher:
     dependency: transitive
     description:
@@ -460,7 +454,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.4.1"
+    version: "6.1.0"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
-  flutter: ">=2.10.0"
+  dart: ">=2.17.0 <3.0.0"
+  flutter: ">=3.0.0"
