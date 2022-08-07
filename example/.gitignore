@@ -51,4 +51,4 @@ windows/*
 linux/*
 web/*
 
-!./linux/my_application.cc
+!linux/my_application.cc

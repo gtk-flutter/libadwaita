@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.5
+
+* Set default header buttons to min, max and close at the right side
+
 ## 1.2.1
 
 * Improve Example

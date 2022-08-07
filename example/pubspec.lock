@@ -176,7 +176,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.2.1"
+    version: "1.2.5"
   libadwaita_bitsdojo:
     dependency: "direct main"
     description:

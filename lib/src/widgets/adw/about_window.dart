@@ -125,7 +125,6 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
           controls: widget.controls,
           headerBarStyle: widget.headerBarStyle ??
               const HeaderBarStyle(
-                autoPositionWindowButtons: false,
                 isTransparent: true,
               ),
           padding: commonPadding,

@@ -110,14 +110,12 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       widget.minimizeBtn != null ||
       widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>> separator =
-      !widget.style.autoPositionWindowButtons ||
-              !kIsWeb &&
-                  (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
-          ? ValueNotifier<List<String>>(
+  late ValueNotifier<List<String>?> separator =
+      !kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
+          ? ValueNotifier(
               ['', 'minimize,maximize,close'],
             )
-          : ValueNotifier<List<String>>(['', '']);
+          : ValueNotifier(null);
 
   @override
   void initState() {
@@ -126,16 +124,23 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
     if (widget.style.autoPositionWindowButtons) {
       void updateSep(String order) {
         if (!mounted) return;
-        separator.value = order.split(':');
+        separator.value = order.split(':')
+          ..map<String>(
+            (e) => e
+                .split(',')
+                .where(
+                  (element) =>
+                      element == 'close' ||
+                      element == 'maximize' ||
+                      element == 'minimize',
+                )
+                .join(','),
+          );
       }
 
-      if (Platform.isWindows) {
-        updateSep(':minimize,maximize,close');
-      } else if (Platform.isMacOS) {
+      if (Platform.isMacOS) {
         updateSep('close,maximize,minimize:');
       } else if (Platform.isLinux) {
-        updateSep(':close');
-
         final schema = GSettings('org.gnome.desktop.wm.preferences');
 
         WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -189,7 +194,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                   behavior: HitTestBehavior.translucent,
                   onDoubleTap: widget.onDoubleTap,
                 ),
-                ValueListenableBuilder<List<String>>(
+                ValueListenableBuilder<List<String>?>(
                   valueListenable: separator,
                   builder: (context, sep, _) => DefaultTextStyle.merge(
                     style: const TextStyle(
@@ -200,11 +205,15 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                       leading: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (hasWindowControls && sep[0].split(',').isNotEmpty)
+                          if (hasWindowControls &&
+                              sep != null &&
+                              sep[0].split(',').isNotEmpty) ...[
                             SizedBox(width: widget.style.titlebarSpace),
-                          for (var i in sep[0].split(','))
-                            if (windowButtons[i] != null) windowButtons[i]!,
-                          ...widget.start
+                            for (var i in sep[0].split(','))
+                              if (windowButtons[i] != null) windowButtons[i]!,
+                            SizedBox(width: widget.style.titlebarSpace),
+                          ],
+                          ...widget.start,
                         ],
                       ),
                       middle: widget.title,
@@ -212,11 +221,14 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ...widget.end,
-                          if (hasWindowControls && sep[1].split(',').isNotEmpty)
+                          if (hasWindowControls &&
+                              sep != null &&
+                              sep[1].split(',').isNotEmpty) ...[
                             SizedBox(width: widget.style.titlebarSpace),
-                          for (var i in sep[1].split(','))
-                            if (windowButtons[i] != null) windowButtons[i]!,
-                          SizedBox(width: widget.style.titlebarSpace),
+                            for (var i in sep[1].split(','))
+                              if (windowButtons[i] != null) windowButtons[i]!,
+                            SizedBox(width: widget.style.titlebarSpace),
+                          ],
                         ],
                       ),
                     ),
