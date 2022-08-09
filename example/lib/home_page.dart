@@ -1,3 +1,4 @@
+import 'package:example/pages/about_dialog_page.dart';
 import 'package:example/pages/avatar_page.dart';
 import 'package:example/pages/counter_page.dart';
 import 'package:example/pages/flap_page.dart';
@@ -182,6 +183,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           AdwSidebarItem(
             label: 'Style Classes',
+          ),
+          AdwSidebarItem(
+            label: 'About Window',
           )
         ],
         onSelected: (index) => setState(() => _currentIndex = index),
@@ -198,6 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
           const ViewSwitcherPage(),
           const SettingsPage(),
           const StyleClassesPage(),
+          const AboutDialogPage(),
         ],
       ),
     );
