@@ -15,7 +15,7 @@ class GtkDialog extends StatelessWidget {
     this.constraints,
     this.height,
     this.width,
-    required this.children,
+    required this.child,
   }) : super(key: key);
 
   final HeaderBarStyle? headerBarStyle;
@@ -28,7 +28,7 @@ class GtkDialog extends StatelessWidget {
   final AdwControls? controls;
 
   final EdgeInsets? padding;
-  final List<Widget> children;
+  final Widget child;
 
   final BoxConstraints? constraints;
   final double? height;
@@ -65,13 +65,7 @@ class GtkDialog extends StatelessWidget {
                     ),
               ),
               Flexible(
-                child: SingleChildScrollView(
-                  padding: padding,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: children,
-                  ),
-                ),
+              child: child,
               ),
             ],
           ),
