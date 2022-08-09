@@ -115,38 +115,40 @@ class _MyHomePageState extends State<MyHomePage> {
                   top: 10,
                   bottom: 10,
                 ),
-                onPressed: () => showDialog<Widget>(
-                  context: context,
-                  builder: (ctx) => AdwAboutWindow(
-                    issueTrackerLink:
-                        'https://github.com/gtk-flutter/libadwaita/issues',
-                    appIcon: Image.asset('assets/logo.png'),
-                    actions: AdwActions(
-                      onClose: Navigator.of(context).pop,
-                      onHeaderDrag: appWindow?.startDragging,
-                      onDoubleTap: appWindow?.maximizeOrRestore,
-                    ),
-                    credits: [
-                      AdwPreferencesGroup.credits(
-                        title: 'Developers',
-                        children: developers.entries
-                            .map(
-                              (e) => AdwActionRow(
-                                title: e.key,
-                                onActivated: () => launchUrl(
-                                  Uri.parse('https://github.com/${e.value}'),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ],
-                    copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
-                    license: const Text(
-                      'GNU LGPL-3.0, This program comes with no warranty.',
-                    ),
-                  ),
-                ),
+                onPressed: () {
+                  // showDialog<Widget>(
+                  // context: context,
+                  // builder: (ctx) => AdwAboutWindow(
+                  //   issueTrackerLink:
+                  //       'https://github.com/gtk-flutter/libadwaita/issues',
+                  //   appIcon: Image.asset('assets/logo.png'),
+                  //   actions: AdwActions(
+                  //     onClose: Navigator.of(context).pop,
+                  //     onHeaderDrag: appWindow?.startDragging,
+                  //     onDoubleTap: appWindow?.maximizeOrRestore,
+                  //   ),
+                  //   credits: [
+                  //     AdwPreferencesGroup.credits(
+                  //       title: 'Developers',
+                  //       children: developers.entries
+                  //           .map(
+                  //             (e) => AdwActionRow(
+                  //               title: e.key,
+                  //               onActivated: () => launchUrl(
+                  //                 Uri.parse('https://github.com/${e.value}'),
+                  //               ),
+                  //             ),
+                  //           )
+                  //           .toList(),
+                  //     ),
+                  //   ],
+                  //   copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
+                  //   license: const Text(
+                  //     'GNU LGPL-3.0, This program comes with no warranty.',
+                  //   ),
+                  // ),
+                // );
+                },
                 child: const Text(
                   'About this Demo',
                   style: TextStyle(fontSize: 15),

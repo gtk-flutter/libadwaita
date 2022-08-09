@@ -20,7 +20,7 @@ class AboutDialogPage extends StatelessWidget {
           showDialog<Widget>(
             context: context,
             builder: (context) => const AdwAboutWindow(
-              appIcon: Icon(Icons.mp),
+              // appIcon: Icon(Icons.mp),
             ),
           );
         },
