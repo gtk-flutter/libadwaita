@@ -65,7 +65,7 @@ class GtkDialog extends StatelessWidget {
                     ),
               ),
               Flexible(
-              child: child,
+                child: child,
               ),
             ],
           ),
