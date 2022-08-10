@@ -24,14 +24,12 @@ class AdwAboutWindow extends StatefulWidget {
 
 class _AdwAboutWindowState extends State<AdwAboutWindow> {
   late GlobalKey<NavigatorState> navigatorKey;
-  late GlobalKey routeKey;
 
   String currentRoute = '';
 
   @override
   void initState() {
     navigatorKey = GlobalKey();
-    routeKey = GlobalKey();
     super.initState();
   }
 
