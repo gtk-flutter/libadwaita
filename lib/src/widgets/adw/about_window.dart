@@ -51,17 +51,20 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
         AnimatedOpacity(
           opacity: isVisible(currentRoute) ? 1 : 0,
           duration: const Duration(milliseconds: 300),
-          child: AdwHeaderButton(
-            icon: const Icon(
-              Icons.chevron_left,
-              size: 24,
+          child: AbsorbPointer(
+            absorbing: !isVisible(currentRoute),
+            child: AdwHeaderButton(
+              icon: const Icon(
+                Icons.chevron_left,
+                size: 24,
+              ),
+              onPressed: () {
+                navigatorKey.currentState?.pop();
+                setState(() {
+                  currentRoute = '/';
+                });
+              },
             ),
-            onPressed: () {
-              navigatorKey.currentState?.pop();
-              setState(() {
-                currentRoute = '/';
-              });
-            },
           ),
         )
       ],
