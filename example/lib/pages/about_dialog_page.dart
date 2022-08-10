@@ -15,12 +15,19 @@ class AboutDialogPage extends StatelessWidget {
       title: 'About Dialog',
       description: 'Something something',
       footer: AdwButton.pill(
-          child: const Text('Run the demo'),
+        child: const Text('Run the demo'),
         onPressed: () {
           showDialog<Widget>(
             context: context,
-            builder: (context) => const AdwAboutWindow(
-              // appIcon: Icon(Icons.mp),
+            builder: (context) => AdwAboutWindow(
+              details: AboutWindowDetails(
+                comments:
+                    "Typeset is an app that doesn't exist and is used as an example content for this about window.",
+                links: {
+                  'Website': 'https://example.org',
+                  'Documentation': 'https://example.org',
+                },
+              ),
             ),
           );
         },

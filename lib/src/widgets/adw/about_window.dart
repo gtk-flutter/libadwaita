@@ -16,7 +16,9 @@ import 'package:libadwaita/libadwaita.dart';
 /// ),
 /// ```
 class AdwAboutWindow extends StatefulWidget {
-  const AdwAboutWindow({Key? key}) : super(key: key);
+  const AdwAboutWindow({Key? key, this.details}) : super(key: key);
+
+  final AboutWindowDetails? details;
 
   @override
   State<AdwAboutWindow> createState() => _AdwAboutWindowState();
@@ -34,7 +36,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
   }
 
   bool isVisible(String name) {
-    return name != "/" && name != "";
+    return name != '/' && name != '';
   }
 
   void goTo(String route, BuildContext context) {
@@ -77,6 +79,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
           Widget page = Builder(
             builder: (context) => _AdwAboutDialogHome(
               goTo: (name) => goTo(name, context),
+              details: widget.details,
             ),
           );
 
@@ -85,6 +88,9 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
               break;
             case '/new':
               page = const _AdwAboutDialogPatchNotes();
+              break;
+            case '/details':
+              page = _AdwAboutDialogDetails(details: widget.details!);
               break;
           }
 
@@ -113,9 +119,11 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
 }
 
 class _AdwAboutDialogHome extends StatelessWidget {
-  const _AdwAboutDialogHome({Key? key, required this.goTo}) : super(key: key);
+  const _AdwAboutDialogHome({Key? key, required this.goTo, this.details})
+      : super(key: key);
 
   final Function(String) goTo;
+  final AboutWindowDetails? details;
 
   @override
   Widget build(BuildContext context) {
@@ -134,10 +142,10 @@ class _AdwAboutDialogHome extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Align(
-          child: const Text(
-            "Typeset",
-            style: const TextStyle(
+        const Align(
+          child: Text(
+            'Typeset',
+            style: TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.bold,
             ),
@@ -146,10 +154,10 @@ class _AdwAboutDialogHome extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        Align(
-          child: const Text(
-            "Angela Avery",
-            style: const TextStyle(
+        const Align(
+          child: Text(
+            'Angela Avery',
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w300,
             ),
@@ -179,31 +187,34 @@ class _AdwAboutDialogHome extends StatelessWidget {
         AdwPreferencesGroup(
           children: [
             AdwActionRow(
-              title: 'What\'s new',
+              title: "What's new",
               titleStyle: const TextStyle(
                 fontWeight: FontWeight.normal,
                 fontSize: 13,
               ),
               onActivated: () {
-                goTo("/new");
+                goTo('/new');
               },
               end: const Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
               ),
             ),
-            AdwActionRow(
-              title: 'Details',
-              titleStyle: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 13,
+            if (details != null)
+              AdwActionRow(
+                title: 'Details',
+                titleStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                ),
+                onActivated: () {
+                  goTo('/details');
+                },
+                end: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                ),
               ),
-              onActivated: () {},
-              end: const Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-              ),
-            ),
           ],
         ),
         const SizedBox(height: 8),
@@ -293,10 +304,10 @@ class _AdwAboutDialogPatchNotes extends StatelessWidget {
       color: Theme.of(context).dialogBackgroundColor,
       height: double.infinity,
       child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        children: [
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        children: const [
           Text(
-            "Version 1.2.0",
+            'Version 1.2.0',
             style: TextStyle(
               fontWeight: FontWeight.w500,
             ),
@@ -304,7 +315,8 @@ class _AdwAboutDialogPatchNotes extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          Text("""
+          Text(
+            '''
 This release adds the following features:
 
 • Added a way to export fonts.
@@ -312,7 +324,52 @@ This release adds the following features:
 • Added a way to preview italic text.
 • Bug fixes and performance improvements.
 • Translation updates.
-                    """),
+                    ''',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogDetails extends StatelessWidget {
+  const _AdwAboutDialogDetails({Key? key, required this.details})
+      : super(key: key);
+
+  final AboutWindowDetails details;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        children: [
+          if (details.comments != null)
+            Text(
+              details.comments!,
+            ),
+          const SizedBox(height: 16),
+          AdwPreferencesGroup(
+            children: details.links?.entries
+                    .map(
+                      (entry) => AdwActionRow(
+                        title: entry.key,
+                        titleStyle: const TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 13,
+                        ),
+                        onActivated: () {},
+                        end: const Icon(
+                          Icons.open_in_new,
+                          size: 16,
+                        ),
+                      ),
+                    )
+                    .toList() ??
+                [],
+          )
         ],
       ),
     );
