@@ -48,7 +48,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
   @override
   Widget build(BuildContext context) {
     return GtkDialog(
-      width: 0,
+      width: 300,
       start: [
         AnimatedOpacity(
           opacity: isVisible(currentRoute) ? 1 : 0,
