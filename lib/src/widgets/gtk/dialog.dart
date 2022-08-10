@@ -38,14 +38,11 @@ class GtkDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: ConstrainedBox(
-          constraints: constraints ??
-              BoxConstraints(
-                maxWidth: width ?? 600,
-                maxHeight: height ?? 600,
-              ),
+      child: SizedBox(
+        width: width ?? 600,
+        height: height ?? 600,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
