@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// The About window for your app in libadwaita style
 /// Use this with [showDialog] and onPressed / onTap / onActivated
@@ -16,9 +17,16 @@ import 'package:libadwaita/libadwaita.dart';
 /// ),
 /// ```
 class AdwAboutWindow extends StatefulWidget {
-  const AdwAboutWindow({Key? key, this.details}) : super(key: key);
+  const AdwAboutWindow({
+    Key? key,
+    this.details,
+    this.supportUrl,
+    this.issueUrl,
+  }) : super(key: key);
 
   final AboutWindowDetails? details;
+  final String? supportUrl;
+  final String? issueUrl;
 
   @override
   State<AdwAboutWindow> createState() => _AdwAboutWindowState();
@@ -80,6 +88,8 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
             builder: (context) => _AdwAboutDialogHome(
               goTo: (name) => goTo(name, context),
               details: widget.details,
+              supportUrl: widget.supportUrl,
+              issueUrl: widget.issueUrl,
             ),
           );
 
@@ -119,11 +129,22 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
 }
 
 class _AdwAboutDialogHome extends StatelessWidget {
-  const _AdwAboutDialogHome({Key? key, required this.goTo, this.details})
-      : super(key: key);
+  const _AdwAboutDialogHome({
+    Key? key,
+    required this.goTo,
+    this.details,
+    this.supportUrl,
+    this.issueUrl,
+  }) : super(key: key);
 
   final Function(String) goTo;
   final AboutWindowDetails? details;
+  final String? supportUrl;
+  final String? issueUrl;
+
+  bool hasTroubleshooting() {
+    return supportUrl != null || issueUrl != null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -217,35 +238,46 @@ class _AdwAboutDialogHome extends StatelessWidget {
               ),
           ],
         ),
-        const SizedBox(height: 8),
-        AdwPreferencesGroup(
-          children: [
-            AdwActionRow(
-              title: 'Support Questions',
-              titleStyle: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 13,
+        if (hasTroubleshooting())
+          Column(
+            children: [
+              const SizedBox(height: 8),
+              AdwPreferencesGroup(
+                children: [
+                  if (supportUrl != null)
+                    AdwActionRow(
+                      title: 'Support Questions',
+                      titleStyle: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13,
+                      ),
+                      onActivated: () {
+                        launchUrlString(supportUrl!);
+                      },
+                      end: const Icon(
+                        Icons.open_in_new_rounded,
+                        size: 16,
+                      ),
+                    ),
+                  if (issueUrl != null)
+                    AdwActionRow(
+                      title: 'Report an issue',
+                      titleStyle: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13,
+                      ),
+                      onActivated: () {
+                        launchUrlString(issueUrl!);
+                          },
+                      end: const Icon(
+                        Icons.open_in_new_rounded,
+                        size: 16,
+                      ),
+                    ),
+                ],
               ),
-              onActivated: () {},
-              end: const Icon(
-                Icons.open_in_new_rounded,
-                size: 16,
-              ),
-            ),
-            AdwActionRow(
-              title: 'Report an issue',
-              titleStyle: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 13,
-              ),
-              onActivated: () {},
-              end: const Icon(
-                Icons.open_in_new_rounded,
-                size: 16,
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
         const SizedBox(height: 8),
         AdwPreferencesGroup(
           children: [

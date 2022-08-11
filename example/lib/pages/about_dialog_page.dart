@@ -20,6 +20,8 @@ class AboutDialogPage extends StatelessWidget {
           showDialog<Widget>(
             context: context,
             builder: (context) => AdwAboutWindow(
+              supportUrl: 'https://example.org',
+              issueUrl: 'https://example.org',
               details: AboutWindowDetails(
                 comments:
                     "Typeset is an app that doesn't exist and is used as an example content for this about window.",
