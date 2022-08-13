@@ -122,7 +122,7 @@ To sustain the development of this library we need someone who can help this lib
 
 To donate directly you can use below link, don't forget to leave a message there:
 
-<a href="https://www.buymeacoffee.com/prateekmedia" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/prateeksunal" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## License
 
