@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
+import 'package:libadwaita/src/models/about_window/about_window_person.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 /// The About window for your app in libadwaita style
@@ -22,11 +23,21 @@ class AdwAboutWindow extends StatefulWidget {
     this.details,
     this.supportUrl,
     this.issueUrl,
+    this.developers,
+    this.designers,
+    this.artists,
+    this.documentors,
+    this.translators,
   }) : super(key: key);
 
   final AboutWindowDetails? details;
   final String? supportUrl;
   final String? issueUrl;
+  final List<AboutWindowPerson>? developers;
+  final List<AboutWindowPerson>? designers;
+  final List<AboutWindowPerson>? artists;
+  final List<AboutWindowPerson>? documentors;
+  final List<AboutWindowPerson>? translators;
 
   @override
   State<AdwAboutWindow> createState() => _AdwAboutWindowState();
@@ -101,6 +112,15 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
               break;
             case '/details':
               page = _AdwAboutDialogDetails(details: widget.details!);
+              break;
+            case '/credits':
+              page = _AdwAboutDialogCredits(
+                artists: widget.artists,
+                developers: widget.developers,
+                designers: widget.designers,
+                documentors: widget.documentors,
+                translators: widget.translators,
+              );
               break;
           }
 
@@ -268,7 +288,7 @@ class _AdwAboutDialogHome extends StatelessWidget {
                       ),
                       onActivated: () {
                         launchUrlString(issueUrl!);
-                          },
+                      },
                       end: const Icon(
                         Icons.open_in_new_rounded,
                         size: 16,
@@ -287,7 +307,9 @@ class _AdwAboutDialogHome extends StatelessWidget {
                 fontWeight: FontWeight.normal,
                 fontSize: 13,
               ),
-              onActivated: () {},
+              onActivated: () {
+                goTo('/credits');
+              },
               end: const Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
@@ -402,6 +424,87 @@ class _AdwAboutDialogDetails extends StatelessWidget {
                     .toList() ??
                 [],
           )
+        ],
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogCredits extends StatelessWidget {
+  const _AdwAboutDialogCredits({
+    Key? key,
+    this.developers,
+    this.designers,
+    this.artists,
+    this.documentors,
+    this.translators,
+  }) : super(key: key);
+
+  final List<AboutWindowPerson>? developers;
+  final List<AboutWindowPerson>? designers;
+  final List<AboutWindowPerson>? artists;
+  final List<AboutWindowPerson>? documentors;
+  final List<AboutWindowPerson>? translators;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        children: [
+          if (developers != null)
+            _CreditSection(type: 'Developed by', people: developers!),
+          if (designers != null)
+            _CreditSection(type: 'Design by', people: designers!),
+          if (artists != null)
+            _CreditSection(type: 'Artwork by', people: artists!),
+          if (documentors != null)
+            _CreditSection(type: 'Documented by', people: documentors!),
+          if (translators != null)
+            _CreditSection(type: 'Translated by', people: translators!),
+        ],
+      ),
+    );
+  }
+}
+
+class _CreditSection extends StatelessWidget {
+  const _CreditSection({Key? key, required this.type, required this.people})
+      : super(key: key);
+
+  final String type;
+  final List<AboutWindowPerson> people;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 5,
+      ),
+      child: AdwPreferencesGroup.credits(
+        title: type,
+        children: [
+          ...people
+              .map(
+                (e) => AdwActionRow(
+                  title: e.name,
+                  titleStyle: const TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13,
+                  ),
+                  onActivated:
+                      e.url != null ? () => launchUrlString(e.url!) : null,
+                  end: e.url != null
+                      ? const Icon(
+                          Icons.open_in_new,
+                          size: 16,
+                        )
+                      : null,
+                ),
+              )
+              .toList()
         ],
       ),
     );

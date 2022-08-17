@@ -22,6 +22,18 @@ class AboutDialogPage extends StatelessWidget {
             builder: (context) => AdwAboutWindow(
               supportUrl: 'https://example.org',
               issueUrl: 'https://example.org',
+              developers: [
+                AboutWindowPerson(
+                  name: 'Angela Avery',
+                  url: 'mailto:angela@example.com',
+                ),
+              ],
+              designers: [
+                AboutWindowPerson(
+                  name: 'Ben Dover',
+                  url: 'mailto:ben@dover.com',
+                ),
+              ],
               details: AboutWindowDetails(
                 comments:
                     "Typeset is an app that doesn't exist and is used as an example content for this about window.",
