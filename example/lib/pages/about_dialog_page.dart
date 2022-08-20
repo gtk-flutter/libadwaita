@@ -34,6 +34,16 @@ class AboutDialogPage extends StatelessWidget {
                   url: 'mailto:ben@dover.com',
                 ),
               ],
+              acknowledgements: [
+                AboutWindowAcknowledgementSection(
+                  name: 'Special Thanks to',
+                  people: [
+                    AboutWindowPerson(
+                      name: 'My Cat',
+                    ),
+                  ],
+                ),
+              ],
               details: AboutWindowDetails(
                 comments:
                     "Typeset is an app that doesn't exist and is used as an example content for this about window.",

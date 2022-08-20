@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:libadwaita/src/models/about_window/about_window_person.dart';
+import 'package:libadwaita/src/models/about_window/about_window_acknowledgement_section.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 /// The About window for your app in libadwaita style
@@ -28,6 +28,7 @@ class AdwAboutWindow extends StatefulWidget {
     this.artists,
     this.documentors,
     this.translators,
+    this.acknowledgements,
   }) : super(key: key);
 
   final AboutWindowDetails? details;
@@ -38,6 +39,7 @@ class AdwAboutWindow extends StatefulWidget {
   final List<AboutWindowPerson>? artists;
   final List<AboutWindowPerson>? documentors;
   final List<AboutWindowPerson>? translators;
+  final List<AboutWindowAcknowledgementSection>? acknowledgements;
 
   @override
   State<AdwAboutWindow> createState() => _AdwAboutWindowState();
@@ -101,6 +103,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
               details: widget.details,
               supportUrl: widget.supportUrl,
               issueUrl: widget.issueUrl,
+              acknowledgements: widget.acknowledgements,
             ),
           );
 
@@ -120,6 +123,11 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                 designers: widget.designers,
                 documentors: widget.documentors,
                 translators: widget.translators,
+              );
+              break;
+            case '/acknowledgements':
+              page = _AdwAboutDialogAcknowledgements(
+                sections: widget.acknowledgements!,
               );
               break;
           }
@@ -155,15 +163,21 @@ class _AdwAboutDialogHome extends StatelessWidget {
     this.details,
     this.supportUrl,
     this.issueUrl,
+    this.acknowledgements,
   }) : super(key: key);
 
   final Function(String) goTo;
   final AboutWindowDetails? details;
   final String? supportUrl;
   final String? issueUrl;
+  final List<AboutWindowAcknowledgementSection>? acknowledgements;
 
   bool hasTroubleshooting() {
     return supportUrl != null || issueUrl != null;
+  }
+
+  bool hasAcknowledgements() {
+    return acknowledgements != null && acknowledgements!.isNotEmpty;
   }
 
   @override
@@ -327,18 +341,21 @@ class _AdwAboutDialogHome extends StatelessWidget {
                 size: 16,
               ),
             ),
-            AdwActionRow(
-              title: 'Acknowledgements',
-              titleStyle: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 13,
+            if (hasAcknowledgements())
+              AdwActionRow(
+                title: 'Acknowledgements',
+                titleStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                ),
+                onActivated: () {
+                  goTo('/acknowledgements');
+                },
+                end: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                ),
               ),
-              onActivated: () {},
-              end: const Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-              ),
-            ),
           ],
         ),
         const SizedBox(
@@ -465,6 +482,34 @@ class _AdwAboutDialogCredits extends StatelessWidget {
           if (translators != null)
             _CreditSection(type: 'Translated by', people: translators!),
         ],
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogAcknowledgements extends StatelessWidget {
+  const _AdwAboutDialogAcknowledgements({
+    Key? key,
+    required this.sections,
+  }) : super(key: key);
+
+  final List<AboutWindowAcknowledgementSection> sections;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        children: sections
+            .map(
+              (e) => _CreditSection(
+                type: e.name,
+                people: e.people,
+              ),
+            )
+            .toList(),
       ),
     );
   }
