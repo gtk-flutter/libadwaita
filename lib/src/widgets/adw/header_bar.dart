@@ -12,7 +12,7 @@ class HeaderBarStyle {
   const HeaderBarStyle({
     this.isTransparent = false,
     this.textStyle,
-    this.height = 51,
+    this.height = 47,
     this.autoPositionWindowButtons = true,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
@@ -181,7 +181,6 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                   : null,
               border: !widget.style.isTransparent
                   ? Border(
-                      top: BorderSide(color: Theme.of(context).backgroundColor),
                       bottom: BorderSide(color: context.borderColor),
                     )
                   : null,
@@ -213,14 +212,24 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                               if (windowButtons[i] != null) windowButtons[i]!,
                             SizedBox(width: widget.style.titlebarSpace),
                           ],
-                          ...widget.start,
+                          ...widget.start.map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: e,
+                            ),
+                          ),
                         ],
                       ),
                       middle: widget.title,
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ...widget.end,
+                          ...widget.end.map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: e,
+                            ),
+                          ),
                           if (hasWindowControls &&
                               sep != null &&
                               sep[1].split(',').isNotEmpty) ...[
