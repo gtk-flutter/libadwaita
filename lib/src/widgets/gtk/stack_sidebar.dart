@@ -27,7 +27,7 @@ class GtkStackSidebar extends StatefulWidget {
   final int? contentIndex;
 
   /// Custom route for then next page of [GtkStackSidebar]
-  final Route Function(Widget child)? pageRoute;
+  final Route<dynamic> Function(Widget child)? pageRoute;
 
   /// Called when content screen is closed and sidebar is shown
   final void Function() onContentPopupClosed;
@@ -40,7 +40,7 @@ class GtkStackSidebar extends StatefulWidget {
   final double sidebarWidth;
 
   // Content builder on smaller screen
-  final Function(int? contentIndex, Widget content)? fullContentBuilder;
+  final void Function(int? contentIndex, Widget content)? fullContentBuilder;
 
   @override
   _GtkStackSidebarState createState() => _GtkStackSidebarState();

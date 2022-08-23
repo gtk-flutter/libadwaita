@@ -22,34 +22,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
-  bitsdojo_window_linux:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_linux
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
-  bitsdojo_window_macos:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
-  bitsdojo_window_platform_interface:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
-  bitsdojo_window_windows:
-    dependency: transitive
-    description:
-      name: bitsdojo_window_windows
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -98,7 +70,7 @@ packages:
       name: desktop_multi_window
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.2.0"
   fake_async:
     dependency: transitive
     description:
@@ -177,13 +149,6 @@ packages:
       relative: true
     source: path
     version: "1.2.5"
-  libadwaita_bitsdojo:
-    dependency: "direct main"
-    description:
-      name: libadwaita_bitsdojo
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.5.5"
   libadwaita_core:
     dependency: transitive
     description:
@@ -191,6 +156,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.4"
+  libadwaita_window_manager:
+    dependency: "direct main"
+    description:
+      name: libadwaita_window_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.4+1"
   matcher:
     dependency: transitive
     description:
@@ -310,6 +282,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  screen_retriever:
+    dependency: transitive
+    description:
+      name: screen_retriever
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -433,7 +412,7 @@ packages:
       name: very_good_analysis
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.0"
+    version: "3.0.1"
   win32:
     dependency: transitive
     description:
@@ -441,6 +420,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.2"
+  window_manager:
+    dependency: "direct main"
+    description:
+      name: window_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.6"
   xdg_directories:
     dependency: transitive
     description:
@@ -456,5 +442,5 @@ packages:
     source: hosted
     version: "6.1.0"
 sdks:
-  dart: ">=2.17.0 <3.0.0"
+  dart: ">=2.17.6 <3.0.0"
   flutter: ">=3.0.0"

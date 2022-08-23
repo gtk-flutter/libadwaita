@@ -26,7 +26,7 @@ class AdwTextField extends StatelessWidget {
   final TextInputType? keyboardType;
 
   /// Runs when value is changed from this field
-  final Function(String)? onChanged;
+  final void Function(String)? onChanged;
 
   /// The suffix icon for this field
   final IconData? icon;

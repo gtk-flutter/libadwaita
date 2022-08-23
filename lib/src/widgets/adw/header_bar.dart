@@ -16,6 +16,7 @@ class HeaderBarStyle {
     this.autoPositionWindowButtons = true,
     this.padding = const EdgeInsets.only(left: 3, right: 5),
     this.titlebarSpace = 6,
+    this.nativeControls = true,
   });
 
   /// If true, background color and border color
@@ -39,6 +40,10 @@ class HeaderBarStyle {
 
   /// The horizontal spacing before or after the window buttons
   final double titlebarSpace;
+
+  /// Whether to show native controls on Windows or Mac os instead of default
+  /// libadwaita buttons
+  final bool nativeControls;
 }
 
 class AdwHeaderBar extends StatefulWidget {
@@ -53,18 +58,21 @@ class AdwHeaderBar extends StatefulWidget {
   })  : closeBtn = controls != null
             ? controls.closeBtn?.call(actions.onClose)
             : AdwWindowButton(
+                nativeControls: style.nativeControls,
                 buttonType: WindowButtonType.close,
                 onPressed: actions.onClose,
               ),
         maximizeBtn = controls != null
             ? controls.maximizeBtn?.call(actions.onMaximize)
             : AdwWindowButton(
+                nativeControls: style.nativeControls,
                 buttonType: WindowButtonType.maximize,
                 onPressed: actions.onMaximize,
               ),
         minimizeBtn = controls != null
             ? controls.minimizeBtn?.call(actions.onMinimize)
             : AdwWindowButton(
+                nativeControls: style.nativeControls,
                 buttonType: WindowButtonType.minimize,
                 onPressed: actions.onMinimize,
               ),
@@ -210,7 +218,9 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                             SizedBox(width: widget.style.titlebarSpace),
                             for (var i in sep[0].split(','))
                               if (windowButtons[i] != null) windowButtons[i]!,
-                            SizedBox(width: widget.style.titlebarSpace),
+                            if (!widget.style.nativeControls ||
+                                !kIsWeb && Platform.isLinux)
+                              SizedBox(width: widget.style.titlebarSpace),
                           ],
                           ...widget.start.map(
                             (e) => Padding(
@@ -236,7 +246,9 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                             SizedBox(width: widget.style.titlebarSpace),
                             for (var i in sep[1].split(','))
                               if (windowButtons[i] != null) windowButtons[i]!,
-                            SizedBox(width: widget.style.titlebarSpace),
+                            if (!widget.style.nativeControls ||
+                                !kIsWeb && Platform.isLinux)
+                              SizedBox(width: widget.style.titlebarSpace),
                           ],
                         ],
                       ),
