@@ -7,7 +7,7 @@ class WindowResizeListener extends StatefulWidget {
     required this.child,
   }) : super(key: key);
 
-  final Function(Size size) onResize;
+  final void Function(Size size) onResize;
   final Widget child;
 
   @override

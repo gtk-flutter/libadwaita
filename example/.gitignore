@@ -50,5 +50,4 @@ ios/*
 windows/*
 linux/*
 web/*
-
-!linux/my_application.cc
+macos/*

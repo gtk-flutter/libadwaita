@@ -72,7 +72,7 @@ class AdwSidebar extends StatelessWidget {
   final ScrollController? controller;
 
   /// Called when one of the Sidebar item is selected.
-  final Function(int index) onSelected;
+  final void Function(int index) onSelected;
 
   /// Is the Sidebar present in the Drawer of the Scaffold
   final bool isDrawer;

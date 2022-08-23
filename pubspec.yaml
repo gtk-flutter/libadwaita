@@ -27,7 +27,7 @@ dependencies:
   url_launcher: ">=6.1.2 < 7.0.0"
 
 dev_dependencies:
-  very_good_analysis: ^2.4.0
+  very_good_analysis: ^3.0.1
 
 flutter:
   assets:
