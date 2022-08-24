@@ -67,10 +67,12 @@ packages:
   desktop_multi_window:
     dependency: "direct main"
     description:
-      name: desktop_multi_window
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: e013c81d75320bbf28adddeaadf462264ee6039d
+      url: "https://github.com/Kingtous/rustdesk_desktop_multi_window"
+    source: git
+    version: "0.1.0"
   fake_async:
     dependency: transitive
     description:
