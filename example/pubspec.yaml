@@ -9,7 +9,9 @@ environment:
 
 dependencies:
   adwaita: "0.5.1"
-  desktop_multi_window: ">=0.2.0 <1.0.0"
+  desktop_multi_window:
+    git:
+      url: https://github.com/Kingtous/rustdesk_desktop_multi_window
   flutter:
     sdk: flutter
   libadwaita:
