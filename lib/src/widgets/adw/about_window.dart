@@ -20,7 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 /// ```
 class AdwAboutWindow extends StatefulWidget {
   const AdwAboutWindow({
-    Key? key,
+    super.key,
     required this.appIcon,
     this.appName,
     this.appVersion,
@@ -38,7 +38,7 @@ class AdwAboutWindow extends StatefulWidget {
     this.issueTrackerLink,
     this.license,
     this.credits,
-  }) : super(key: key);
+  });
 
   final HeaderBarStyle? headerBarStyle;
 
@@ -136,7 +136,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                     child: widget.appIcon,
                   ),
                   Text(
-                    widget.appName ?? (isNotNull ? data!.appName : '---'),
+                    widget.appName ?? (isNotNull ? data.appName : '---'),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -148,8 +148,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
                       AdwActionRow(
                         title: 'Version',
                         end: Text(
-                          widget.appVersion ??
-                              (isNotNull ? data!.version : '0'),
+                          widget.appVersion ?? (isNotNull ? data.version : '0'),
                         ),
                       ),
                       if (widget.issueTrackerLink != null)

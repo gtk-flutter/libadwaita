@@ -4,7 +4,7 @@ import 'package:libadwaita_core/libadwaita_core.dart';
 
 class GtkDialog extends StatelessWidget {
   const GtkDialog({
-    Key? key,
+    super.key,
     this.headerBarStyle,
     this.start,
     this.title,
@@ -16,7 +16,7 @@ class GtkDialog extends StatelessWidget {
     this.height,
     this.width,
     required this.children,
-  }) : super(key: key);
+  });
 
   final HeaderBarStyle? headerBarStyle;
 

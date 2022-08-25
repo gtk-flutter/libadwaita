@@ -27,7 +27,7 @@ Either use builder or use child, Both can't be assigned at one""";
 /// their background through the [backgroundColorBuilder] callback.
 class AdwButton extends StatefulWidget {
   const AdwButton({
-    Key? key,
+    super.key,
     this.padding = defaultButtonPadding,
     this.margin = EdgeInsets.zero,
     this.builder,
@@ -47,14 +47,13 @@ class AdwButton extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
-  })  : assert(
+  }) : assert(
           builder != null || child != null,
           _bothBuilderAndChildError,
-        ),
-        super(key: key);
+        );
 
   AdwButton.circular({
-    Key? key,
+    super.key,
     double size = 34,
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
@@ -73,11 +72,10 @@ class AdwButton extends StatefulWidget {
   })  : assert(builder != null || child != null, _bothBuilderAndChildError),
         constraints = BoxConstraints.tightFor(width: size, height: size),
         shape = BoxShape.circle,
-        borderRadius = null,
-        super(key: key);
+        borderRadius = null;
 
   const AdwButton.pill({
-    Key? key,
+    super.key,
     this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 32),
     this.margin = EdgeInsets.zero,
     this.builder,
@@ -97,11 +95,10 @@ class AdwButton extends StatefulWidget {
           Radius.circular(9999),
         ),
         shape = BoxShape.rectangle,
-        assert(builder != null || child != null, _bothBuilderAndChildError),
-        super(key: key);
+        assert(builder != null || child != null, _bothBuilderAndChildError);
 
   const AdwButton.flat({
-    Key? key,
+    super.key,
     this.padding = defaultButtonPadding,
     this.margin = EdgeInsets.zero,
     this.builder,
@@ -121,8 +118,7 @@ class AdwButton extends StatefulWidget {
     this.animationCurve = Curves.easeOutQuad,
     this.isActive = false,
   })  : opaque = false,
-        assert(builder != null || child != null, _bothBuilderAndChildError),
-        super(key: key);
+        assert(builder != null || child != null, _bothBuilderAndChildError);
 
   static const defaultButtonConstrains = BoxConstraints(
     minHeight: 24,

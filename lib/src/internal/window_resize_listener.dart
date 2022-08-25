@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class WindowResizeListener extends StatefulWidget {
   const WindowResizeListener({
-    Key? key,
+    super.key,
     required this.onResize,
     required this.child,
-  }) : super(key: key);
+  });
 
   final void Function(Size size) onResize;
   final Widget child;

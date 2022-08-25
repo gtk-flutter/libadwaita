@@ -121,18 +121,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         'https://github.com/gtk-flutter/libadwaita/issues',
                     appIcon: Image.asset('assets/logo.png'),
                     credits: [
-                      AdwPreferencesGroup.credits(
+                      AdwPreferencesGroup.creditsBuilder(
                         title: 'Developers',
-                        children: developers.entries
-                            .map(
-                              (e) => AdwActionRow(
-                                title: e.key,
-                                onActivated: () => launchUrl(
-                                  Uri.parse('https://github.com/${e.value}'),
-                                ),
-                              ),
-                            )
-                            .toList(),
+                        itemCount: developers.length,
+                        itemBuilder: (_, index) => AdwActionRow(
+                          title: developers.keys.elementAt(index),
+                          onActivated: () => launchUrl(
+                            Uri.parse(
+                              'https://github.com/${developers.values.elementAt(index)}',
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                     copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',

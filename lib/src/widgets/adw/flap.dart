@@ -51,15 +51,14 @@ class FlapStyle {
 
 class AdwFlap extends StatefulWidget {
   const AdwFlap({
-    Key? key,
+    super.key,
     required this.flap,
     required this.child,
     this.controller,
     FlapStyle? style,
     FlapOptions? options,
   })  : style = style ?? const FlapStyle(),
-        options = options ?? const FlapOptions(),
-        super(key: key);
+        options = options ?? const FlapOptions();
 
   /// The flap widget itself, Mainly is a `AdwSidebar` instance
   final Widget flap;

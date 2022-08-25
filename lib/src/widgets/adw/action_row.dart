@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AdwActionRow extends StatelessWidget {
   const AdwActionRow({
-    Key? key,
+    super.key,
     this.start,
     this.end,
     required this.title,
@@ -12,7 +12,7 @@ class AdwActionRow extends StatelessWidget {
     this.autofocus = false,
     this.enabled = true,
     this.contentPadding,
-  }) : super(key: key);
+  });
 
   /// The starting elemets of this row
   final Widget? start;

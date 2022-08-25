@@ -4,7 +4,7 @@ import 'package:popover_gtk/popover_gtk.dart';
 
 class AdwComboRow extends StatefulWidget {
   const AdwComboRow({
-    Key? key,
+    super.key,
     this.choices = const [],
     this.start,
     this.end,
@@ -16,7 +16,7 @@ class AdwComboRow extends StatefulWidget {
     this.autofocus = false,
     this.enabled = true,
     this.contentPadding,
-  }) : super(key: key);
+  });
 
   /// The choices available for this combo row
   final List<String> choices;
@@ -122,11 +122,11 @@ class _AdwComboRowState extends State<AdwComboRow> {
 
 class AdwComboButton extends StatefulWidget {
   const AdwComboButton({
-    Key? key,
+    super.key,
     this.choices = const [],
     required this.onSelected,
     required this.selectedIndex,
-  }) : super(key: key);
+  });
 
   /// The choices available for this combo row
   final List<String> choices;

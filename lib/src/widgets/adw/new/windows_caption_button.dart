@@ -5,10 +5,10 @@ import 'package:libadwaita/libadwaita.dart';
 
 class WindowCaptionButtonIcon extends StatelessWidget {
   const WindowCaptionButtonIcon({
-    Key? key,
+    super.key,
     required this.type,
     required this.color,
-  }) : super(key: key);
+  });
 
   final WindowButtonType type;
   final Color color;
@@ -29,11 +29,11 @@ class WindowCaptionButtonIcon extends StatelessWidget {
 // ignore: must_be_immutable
 class WindowCaptionButton extends StatefulWidget {
   WindowCaptionButton({
-    Key? key,
+    super.key,
     this.brightness,
     required this.type,
     required this.onPressed,
-  }) : super(key: key) {
+  }) {
     if (type == WindowButtonType.close) {
       _lightButtonBgColorScheme = _ButtonBgColorScheme(
         normal: Colors.transparent,
@@ -183,7 +183,7 @@ class _ButtonIconColorScheme {
 
 /// Close
 class CloseIcon extends StatelessWidget {
-  const CloseIcon({Key? key, required this.color}) : super(key: key);
+  const CloseIcon({super.key, required this.color});
   final Color color;
   @override
   Widget build(BuildContext context) => Align(
@@ -209,14 +209,14 @@ class CloseIcon extends StatelessWidget {
 
 /// Maximize
 class MaximizeIcon extends StatelessWidget {
-  const MaximizeIcon({Key? key, required this.color}) : super(key: key);
+  const MaximizeIcon({super.key, required this.color});
   final Color color;
   @override
   Widget build(BuildContext context) => _AlignedPaint(_MaximizePainter(color));
 }
 
 class _MaximizePainter extends _IconPainter {
-  _MaximizePainter(Color color) : super(color);
+  _MaximizePainter(super.color);
   @override
   void paint(Canvas canvas, Size size) {
     final p = getPaint(color);
@@ -227,16 +227,16 @@ class _MaximizePainter extends _IconPainter {
 /// Restore
 class RestoreIcon extends StatelessWidget {
   const RestoreIcon({
-    Key? key,
+    super.key,
     required this.color,
-  }) : super(key: key);
+  });
   final Color color;
   @override
   Widget build(BuildContext context) => _AlignedPaint(_RestorePainter(color));
 }
 
 class _RestorePainter extends _IconPainter {
-  _RestorePainter(Color color) : super(color);
+  _RestorePainter(super.color);
   @override
   void paint(Canvas canvas, Size size) {
     final p = getPaint(color);
@@ -259,14 +259,14 @@ class _RestorePainter extends _IconPainter {
 
 /// Minimize
 class MinimizeIcon extends StatelessWidget {
-  const MinimizeIcon({Key? key, required this.color}) : super(key: key);
+  const MinimizeIcon({super.key, required this.color});
   final Color color;
   @override
   Widget build(BuildContext context) => _AlignedPaint(_MinimizePainter(color));
 }
 
 class _MinimizePainter extends _IconPainter {
-  _MinimizePainter(Color color) : super(color);
+  _MinimizePainter(super.color);
   @override
   void paint(Canvas canvas, Size size) {
     final p = getPaint(color);
@@ -288,7 +288,7 @@ abstract class _IconPainter extends CustomPainter {
 }
 
 class _AlignedPaint extends StatelessWidget {
-  const _AlignedPaint(this.painter, {Key? key}) : super(key: key);
+  const _AlignedPaint(this.painter);
   final CustomPainter painter;
 
   @override

@@ -54,14 +54,14 @@ class AdwSwitch extends StatefulWidget {
   /// The [dragStartBehavior] parameter defaults to [DragStartBehavior.start]
   /// and must not be null.
   const AdwSwitch({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.activeColor,
     this.trackColor,
     this.thumbColor,
     this.dragStartBehavior = DragStartBehavior.start,
-  }) : super(key: key);
+  });
 
   /// Whether this switch is on or off.
   ///
@@ -344,7 +344,6 @@ class _AdwSwitchState extends State<AdwSwitch> with TickerProviderStateMixin {
 
 class _AdwSwitchRenderObjectWidget extends LeafRenderObjectWidget {
   const _AdwSwitchRenderObjectWidget({
-    Key? key,
     required this.value,
     required this.activeColor,
     required this.trackColor,
@@ -352,7 +351,7 @@ class _AdwSwitchRenderObjectWidget extends LeafRenderObjectWidget {
     required this.onChanged,
     required this.textDirection,
     required this.state,
-  }) : super(key: key);
+  });
 
   final bool value;
   final Color activeColor;
