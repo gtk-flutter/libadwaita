@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 class AdwPreferencesGroup extends StatelessWidget {
   const AdwPreferencesGroup({
-    Key? key,
-    required this.children,
+    super.key,
+    required List<Widget> this.children,
     this.borderRadius = 12,
     this.title,
     this.titleStyle,
     this.description,
     this.descriptionStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
-  }) : super(key: key);
+  })  : itemBuilder = null,
+        itemCount = null;
 
   const AdwPreferencesGroup.credits({
-    Key? key,
-    required this.children,
+    super.key,
+    required List<Widget> this.children,
     this.borderRadius = 12,
     this.title,
     this.titleStyle = const TextStyle(
@@ -24,9 +25,39 @@ class AdwPreferencesGroup extends StatelessWidget {
     this.description,
     this.descriptionStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
-  }) : super(key: key);
+  })  : itemBuilder = null,
+        itemCount = null;
 
-  final List<Widget> children;
+  const AdwPreferencesGroup.builder({
+    super.key,
+    required Widget Function(BuildContext, int) this.itemBuilder,
+    required int this.itemCount,
+    this.borderRadius = 12,
+    this.title,
+    this.titleStyle,
+    this.description,
+    this.descriptionStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+  }) : children = null;
+
+  const AdwPreferencesGroup.creditsBuilder({
+    super.key,
+    required Widget Function(BuildContext, int) this.itemBuilder,
+    required int this.itemCount,
+    this.borderRadius = 12,
+    this.title,
+    this.titleStyle = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    ),
+    this.description,
+    this.descriptionStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+  }) : children = null;
+
+  final List<Widget>? children;
+  final Widget Function(BuildContext, int)? itemBuilder;
+  final int? itemCount;
   final double borderRadius;
   final String? title;
   final String? description;
@@ -69,15 +100,22 @@ class AdwPreferencesGroup extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-              2 * children.length - 1,
-              (index) => index.isEven
-                  ? children[index ~/ 2]
-                  : const Divider(height: 4),
-            ),
-          ),
+          child: children != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    2 * children!.length - 1,
+                    (index) => index.isEven
+                        ? children![index ~/ 2]
+                        : const Divider(height: 4),
+                  ),
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemBuilder: itemBuilder!,
+                  itemCount: itemCount,
+                ),
         ),
       ],
     );
