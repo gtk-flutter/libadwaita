@@ -7,7 +7,7 @@ class AdwStackSidebar {}
 
 class GtkStackSidebar extends StatefulWidget {
   const GtkStackSidebar({
-    Key? key,
+    super.key,
     required this.sidebar,
     required this.content,
     this.separator,
@@ -17,7 +17,7 @@ class GtkStackSidebar extends StatefulWidget {
     this.contentIndex,
     this.pageRoute,
     this.fullContentBuilder,
-  }) : super(key: key);
+  });
 
   final Widget sidebar;
   final Widget content;

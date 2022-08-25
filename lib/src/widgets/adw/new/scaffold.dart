@@ -6,7 +6,7 @@ import 'package:libadwaita_core/libadwaita_core.dart';
 
 class AdwScaffold extends StatefulWidget {
   const AdwScaffold({
-    Key? key,
+    super.key,
     required this.body,
     this.flap,
     this.flapStyle,
@@ -22,7 +22,7 @@ class AdwScaffold extends StatefulWidget {
     this.end,
     required this.actions,
     this.controls,
-  }) : super(key: key);
+  });
 
   final Widget body;
 

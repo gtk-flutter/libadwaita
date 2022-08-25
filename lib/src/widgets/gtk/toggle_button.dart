@@ -6,11 +6,11 @@ class AdwToggleButton {}
 
 class GtkToggleButton extends StatelessWidget {
   const GtkToggleButton({
-    Key? key,
+    super.key,
     required this.children,
     required this.onPressed,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   /// The List of all the children widgets of this toggle button
   final List<Widget> children;

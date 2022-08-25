@@ -2,26 +2,24 @@ import 'package:flutter/material.dart';
 
 class AdwClamp extends StatefulWidget {
   const AdwClamp({
-    Key? key,
+    super.key,
     required this.child,
     this.maximumSize = 580,
     this.padding = EdgeInsets.zero,
     this.margin = const EdgeInsets.all(14),
     this.center = true,
   })  : isScrollable = false,
-        controller = null,
-        super(key: key);
+        controller = null;
 
   const AdwClamp.scrollable({
-    Key? key,
+    super.key,
     required this.child,
     this.center = true,
     this.controller,
     this.maximumSize = 580,
     this.padding = EdgeInsets.zero,
     this.margin = const EdgeInsets.all(14),
-  })  : isScrollable = true,
-        super(key: key);
+  }) : isScrollable = true;
 
   /// Whether this clamp is scrollable or not
   final bool isScrollable;

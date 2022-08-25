@@ -48,7 +48,7 @@ class HeaderBarStyle {
 
 class AdwHeaderBar extends StatefulWidget {
   AdwHeaderBar({
-    Key? key,
+    super.key,
     this.title,
     this.start = const [],
     this.end = const [],
@@ -78,8 +78,7 @@ class AdwHeaderBar extends StatefulWidget {
               ),
         onHeaderDrag = actions.onHeaderDrag,
         onDoubleTap = actions.onDoubleTap,
-        onRightClick = actions.onRightClick,
-        super(key: key);
+        onRightClick = actions.onRightClick;
 
   /// The leading widget for the headerbar
   final List<Widget> start;

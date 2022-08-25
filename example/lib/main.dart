@@ -34,7 +34,7 @@ Future<void> main(List<String> args) async {
       skipTaskbar: false,
       backgroundColor: Colors.transparent,
       titleBarStyle: TitleBarStyle.hidden,
-      title: 'PsTube',
+      title: 'Libadwaita Example',
     );
 
     unawaited(

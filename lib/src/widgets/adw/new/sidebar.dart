@@ -11,7 +11,7 @@ Either use label or use labelWidget, both can't be assigned at once.""";
 /// children on demand.
 class AdwSidebar extends StatelessWidget {
   AdwSidebar({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onSelected,
     this.width = 270.0,
@@ -20,7 +20,7 @@ class AdwSidebar extends StatelessWidget {
     this.controller,
     this.padding = const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
     required List<AdwSidebarItem> children,
-  })  : _childrenDelegate = List.generate(
+  }) : _childrenDelegate = List.generate(
           children.length,
           (index) => _AdwSidebarItemBuilder(
             item: (context) => children[index],
@@ -28,11 +28,10 @@ class AdwSidebar extends StatelessWidget {
             isSelected: index == currentIndex,
             onSelected: () => onSelected(index),
           ),
-        ),
-        super(key: key);
+        );
 
   AdwSidebar.builder({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onSelected,
     this.width = 270.0,
@@ -57,8 +56,7 @@ class AdwSidebar extends StatelessWidget {
             isDrawer: isDrawer,
             onSelected: () => onSelected(index),
           ),
-        ),
-        super(key: key);
+        );
 
   /// The current index of the item selected.
   final int? currentIndex;
@@ -152,12 +150,11 @@ class AdwSidebarItem {
 
 class _AdwSidebarItemBuilder extends StatelessWidget {
   const _AdwSidebarItemBuilder({
-    Key? key,
     required this.item,
     required this.isSelected,
     required this.isDrawer,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   final AdwSidebarItem Function(BuildContext context) item;
   final bool isSelected;

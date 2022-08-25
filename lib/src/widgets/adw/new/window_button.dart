@@ -10,11 +10,11 @@ enum WindowButtonType { close, maximize, minimize }
 
 class AdwWindowButton extends StatelessWidget {
   const AdwWindowButton({
-    Key? key,
+    super.key,
     required this.buttonType,
     required this.onPressed,
     required this.nativeControls,
-  }) : super(key: key);
+  });
 
   /// Executed when this button is pressed
   final VoidCallback? onPressed;

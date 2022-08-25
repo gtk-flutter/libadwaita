@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AdwTextField extends StatelessWidget {
   const AdwTextField({
-    Key? key,
+    super.key,
     this.controller,
     this.keyboardType,
     this.onChanged,
@@ -11,7 +11,7 @@ class AdwTextField extends StatelessWidget {
     this.onSubmitted,
     this.initialValue,
     this.autofocus = false,
-  }) : super(key: key);
+  });
 
   /// Will automatically focus on this field when it's visible
   final bool autofocus;
