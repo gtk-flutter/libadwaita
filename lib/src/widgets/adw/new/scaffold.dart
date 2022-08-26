@@ -26,7 +26,7 @@ class AdwScaffold extends StatefulWidget {
 
   final Widget body;
 
-  final AdwSidebar Function(bool isDrawer)? flap;
+  final Widget Function(bool isDrawer)? flap;
 
   final FlapController? flapController;
 
