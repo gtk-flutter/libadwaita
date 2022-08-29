@@ -44,12 +44,6 @@ class _GtkPopupMenuState extends State<GtkPopupMenu> {
         showPopover(
           context: context,
           arrowHeight: 14,
-          shadow: [
-            BoxShadow(
-              color: context.borderColor,
-              blurRadius: 6,
-            ),
-          ],
           barrierColor: Colors.transparent,
           bodyBuilder: (_) => Padding(
             padding: const EdgeInsets.all(4),
