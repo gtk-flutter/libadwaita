@@ -45,13 +45,25 @@ class AboutDialogPage extends StatelessWidget {
                 ),
               ],
               details: AboutWindowDetails(
-                comments:
-                    "Typeset is an app that doesn't exist and is used as an example content for this about window.",
+                comments: """
+Typeset is an app that doesn't exist and is used as an example content for this about window.""",
                 links: {
                   'Website': 'https://example.org',
                   'Documentation': 'https://example.org',
                 },
               ),
+              legalSections: [
+                AboutWindowLegalSection(
+                  title: 'This Application',
+                  copyright: '© 2022',
+                  license: '''
+This application comes with absolutely no warranty. See the GNU Lesser General Public License, version 2.1 or later for details''',
+                ),
+                AboutWindowLegalSection(
+                    title: 'Fonts',
+                    copyright: '© 2022',
+                    license: 'This application uses font data from somewhere.'),
+              ],
             ),
           );
         },

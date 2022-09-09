@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:libadwaita/src/models/about_window/about_window_acknowledgement_section.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 /// The About window for your app in libadwaita style
 /// Use this with [showDialog] and onPressed / onTap / onActivated
 /// parameter of a button
 /// Example:
-/// ```
-/// showDialog<Widget>(
-///   context: context,
-///   builder: (ctx) => AdwAboutWindow(
-///     issueTrackerLink: 'link',
-///     appIcon: Image.asset('assets/logo.png'),
-///     credits: [],
-///   ),
-/// ),
-/// ```
+/// ``` showDialog<Widget>( context: context, builder: (ctx) => AdwAboutWindow( issueTrackerLink: 'link', appIcon: Image.asset('assets/logo.png'), credits: [],),), ```
 class AdwAboutWindow extends StatefulWidget {
   const AdwAboutWindow({
     Key? key,
@@ -29,6 +19,7 @@ class AdwAboutWindow extends StatefulWidget {
     this.documentors,
     this.translators,
     this.acknowledgements,
+    this.legalSections,
   }) : super(key: key);
 
   final AboutWindowDetails? details;
@@ -40,6 +31,7 @@ class AdwAboutWindow extends StatefulWidget {
   final List<AboutWindowPerson>? documentors;
   final List<AboutWindowPerson>? translators;
   final List<AboutWindowAcknowledgementSection>? acknowledgements;
+  final List<AboutWindowLegalSection>? legalSections;
 
   @override
   State<AdwAboutWindow> createState() => _AdwAboutWindowState();
@@ -104,6 +96,7 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
               supportUrl: widget.supportUrl,
               issueUrl: widget.issueUrl,
               acknowledgements: widget.acknowledgements,
+              legalSections: widget.legalSections,
             ),
           );
 
@@ -128,6 +121,11 @@ class _AdwAboutWindowState extends State<AdwAboutWindow> {
             case '/acknowledgements':
               page = _AdwAboutDialogAcknowledgements(
                 sections: widget.acknowledgements!,
+              );
+              break;
+            case '/legal':
+              page = _AdwAboutDialogLegal(
+                legalSections: widget.legalSections!,
               );
               break;
           }
@@ -164,6 +162,7 @@ class _AdwAboutDialogHome extends StatelessWidget {
     this.supportUrl,
     this.issueUrl,
     this.acknowledgements,
+    this.legalSections,
   }) : super(key: key);
 
   final Function(String) goTo;
@@ -171,6 +170,7 @@ class _AdwAboutDialogHome extends StatelessWidget {
   final String? supportUrl;
   final String? issueUrl;
   final List<AboutWindowAcknowledgementSection>? acknowledgements;
+  final List<AboutWindowLegalSection>? legalSections;
 
   bool hasTroubleshooting() {
     return supportUrl != null || issueUrl != null;
@@ -178,6 +178,10 @@ class _AdwAboutDialogHome extends StatelessWidget {
 
   bool hasAcknowledgements() {
     return acknowledgements != null && acknowledgements!.isNotEmpty;
+  }
+
+  bool hasLegal() {
+    return legalSections != null && legalSections!.isNotEmpty;
   }
 
   @override
@@ -329,18 +333,21 @@ class _AdwAboutDialogHome extends StatelessWidget {
                 size: 16,
               ),
             ),
-            AdwActionRow(
-              title: 'Legal',
-              titleStyle: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 13,
+            if (hasLegal())
+              AdwActionRow(
+                title: 'Legal',
+                titleStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                ),
+                onActivated: () {
+                  goTo('/legal');
+                },
+                end: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                ),
               ),
-              onActivated: () {},
-              end: const Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-              ),
-            ),
             if (hasAcknowledgements())
               AdwActionRow(
                 title: 'Acknowledgements',
@@ -552,6 +559,64 @@ class _CreditSection extends StatelessWidget {
               .toList()
         ],
       ),
+    );
+  }
+}
+
+class _AdwAboutDialogLegal extends StatelessWidget {
+  const _AdwAboutDialogLegal({Key? key, required this.legalSections})
+      : super(key: key);
+
+  final List<AboutWindowLegalSection> legalSections;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        children: legalSections
+            .map((e) => _AdwAboutDialogLegalSection(info: e))
+            .toList(),
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogLegalSection extends StatelessWidget {
+  const _AdwAboutDialogLegalSection({Key? key, required this.info})
+      : super(key: key);
+
+  final AboutWindowLegalSection info;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          info.title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Text(
+          info.copyright,
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Text(
+          info.license,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
     );
   }
 }
