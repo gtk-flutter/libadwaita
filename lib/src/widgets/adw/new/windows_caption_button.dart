@@ -136,7 +136,7 @@ class _WindowCaptionButtonState extends State<WindowCaptionButton> {
         onTapUp: (_) => _onActive(pressed: false),
         onTap: widget.onPressed,
         child: Container(
-          constraints: const BoxConstraints(minWidth: 46, minHeight: 32),
+          constraints: const BoxConstraints(minWidth: 58, minHeight: 32),
           decoration: BoxDecoration(
             color: bgColor,
           ),
