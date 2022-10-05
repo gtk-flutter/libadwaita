@@ -1,3 +1,4 @@
+import 'package:example/pages/about_dialog_page.dart';
 import 'package:example/pages/avatar_page.dart';
 import 'package:example/pages/counter_page.dart';
 import 'package:example/pages/flap_page.dart';
@@ -114,38 +115,40 @@ class _MyHomePageState extends State<MyHomePage> {
                   top: 10,
                   bottom: 10,
                 ),
-                onPressed: () => showDialog<Widget>(
-                  context: context,
-                  builder: (ctx) => AdwAboutWindow(
-                    issueTrackerLink:
-                        'https://github.com/gtk-flutter/libadwaita/issues',
-                    appIcon: Image.asset('assets/logo.png'),
-                    actions: AdwActions(
-                      onClose: Navigator.of(context).pop,
-                      onHeaderDrag: appWindow?.startDragging,
-                      onDoubleTap: appWindow?.maximizeOrRestore,
-                    ),
-                    credits: [
-                      AdwPreferencesGroup.credits(
-                        title: 'Developers',
-                        children: developers.entries
-                            .map(
-                              (e) => AdwActionRow(
-                                title: e.key,
-                                onActivated: () => launchUrl(
-                                  Uri.parse('https://github.com/${e.value}'),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ],
-                    copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
-                    license: const Text(
-                      'GNU LGPL-3.0, This program comes with no warranty.',
-                    ),
-                  ),
-                ),
+                onPressed: () {
+                  // showDialog<Widget>(
+                  // context: context,
+                  // builder: (ctx) => AdwAboutWindow(
+                  //   issueTrackerLink:
+                  //       'https://github.com/gtk-flutter/libadwaita/issues',
+                  //   appIcon: Image.asset('assets/logo.png'),
+                  //   actions: AdwActions(
+                  //     onClose: Navigator.of(context).pop,
+                  //     onHeaderDrag: appWindow?.startDragging,
+                  //     onDoubleTap: appWindow?.maximizeOrRestore,
+                  //   ),
+                  //   credits: [
+                  //     AdwPreferencesGroup.credits(
+                  //       title: 'Developers',
+                  //       children: developers.entries
+                  //           .map(
+                  //             (e) => AdwActionRow(
+                  //               title: e.key,
+                  //               onActivated: () => launchUrl(
+                  //                 Uri.parse('https://github.com/${e.value}'),
+                  //               ),
+                  //             ),
+                  //           )
+                  //           .toList(),
+                  //     ),
+                  //   ],
+                  //   copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
+                  //   license: const Text(
+                  //     'GNU LGPL-3.0, This program comes with no warranty.',
+                  //   ),
+                  // ),
+                // );
+                },
                 child: const Text(
                   'About this Demo',
                   style: TextStyle(fontSize: 15),
@@ -182,6 +185,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           AdwSidebarItem(
             label: 'Style Classes',
+          ),
+          AdwSidebarItem(
+            label: 'About Window',
           )
         ],
         onSelected: (index) => setState(() => _currentIndex = index),
@@ -198,6 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
           const ViewSwitcherPage(),
           const SettingsPage(),
           const StyleClassesPage(),
+          const AboutDialogPage(),
         ],
       ),
     );

@@ -6,6 +6,7 @@ class AdwActionRow extends StatelessWidget {
     this.start,
     this.end,
     required this.title,
+    this.titleStyle,
     this.onActivated,
     this.subtitle,
     this.horizontalTitleGap = 8,
@@ -22,6 +23,9 @@ class AdwActionRow extends StatelessWidget {
 
   /// The title of this row
   final String title;
+
+  /// The [TextStyle] of the title
+  final TextStyle? titleStyle;
 
   /// The subtitle of this row
   final String? subtitle;
@@ -53,7 +57,10 @@ class AdwActionRow extends StatelessWidget {
           ? SizedBox(height: double.infinity, child: start)
           : null,
       onTap: onActivated,
-      title: Text(title),
+      title: Text(
+        title,
+        style: titleStyle,
+      ),
       subtitle:
           subtitle != null && subtitle!.isNotEmpty ? Text(subtitle!) : null,
       trailing: end,

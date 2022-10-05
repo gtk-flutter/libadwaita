@@ -1,217 +1,622 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:libadwaita_core/libadwaita_core.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// The About window for your app in libadwaita style
 /// Use this with [showDialog] and onPressed / onTap / onActivated
 /// parameter of a button
 /// Example:
-/// ```
-/// showDialog<Widget>(
-///   context: context,
-///   builder: (ctx) => AdwAboutWindow(
-///     issueTrackerLink: 'link',
-///     appIcon: Image.asset('assets/logo.png'),
-///     credits: [],
-///   ),
-/// ),
-/// ```
+/// ``` showDialog<Widget>( context: context, builder: (ctx) => AdwAboutWindow( issueTrackerLink: 'link', appIcon: Image.asset('assets/logo.png'), credits: [],),), ```
 class AdwAboutWindow extends StatefulWidget {
   const AdwAboutWindow({
     Key? key,
-    required this.appIcon,
-    this.appName,
-    this.appVersion,
-    this.nextPageIcon,
-    this.launchEndIcon,
-    this.width = 360,
-    @Deprecated('headerbar is deprecated, use the properties separately')
-        AdwHeaderBar? Function(Widget?)? headerbar,
-    this.headerBarStyle,
-    this.start,
-    this.end,
-    this.actions,
-    this.controls,
-    this.copyright,
-    this.issueTrackerLink,
-    this.license,
-    this.credits,
+    this.details,
+    this.supportUrl,
+    this.issueUrl,
+    this.developers,
+    this.designers,
+    this.artists,
+    this.documentors,
+    this.translators,
+    this.acknowledgements,
+    this.legalSections,
   }) : super(key: key);
 
-  final HeaderBarStyle? headerBarStyle;
-
-  final List<Widget>? start;
-  final List<Widget>? end;
-
-  final AdwActions? actions;
-  final AdwControls? controls;
-
-  /// The width of the about window dialog
-  final double width;
-
-  /// The app icon to show in the about window
-  final Widget appIcon;
-
-  /// The app name to show in the about window, not required
-  final String? appName;
-
-  /// The app version to show in the about window, not required
-  final String? appVersion;
-
-  /// The end icon of The Credits and Legal button,
-  /// defaults to chevron_right Material Icon
-  final Widget? nextPageIcon;
-
-  /// The end icon of Report an issue button
-  final Widget? launchEndIcon;
-
-  /// The Copyright notice for Legal Screen
-  final String? copyright;
-
-  /// The link for the issue tracker
-  final String? issueTrackerLink;
-
-  /// The License for the app
-  final Text? license;
-
-  /// The content's of Credits screen
-  final List<AdwPreferencesGroup>? credits;
+  final AboutWindowDetails? details;
+  final String? supportUrl;
+  final String? issueUrl;
+  final List<AboutWindowPerson>? developers;
+  final List<AboutWindowPerson>? designers;
+  final List<AboutWindowPerson>? artists;
+  final List<AboutWindowPerson>? documentors;
+  final List<AboutWindowPerson>? translators;
+  final List<AboutWindowAcknowledgementSection>? acknowledgements;
+  final List<AboutWindowLegalSection>? legalSections;
 
   @override
   State<AdwAboutWindow> createState() => _AdwAboutWindowState();
 }
 
 class _AdwAboutWindowState extends State<AdwAboutWindow> {
-  int currentPage = 0;
+  late GlobalKey<NavigatorState> navigatorKey;
+
+  String currentRoute = '';
+
+  @override
+  void initState() {
+    navigatorKey = GlobalKey();
+    super.initState();
+  }
+
+  bool isVisible(String name) {
+    return name != '/' && name != '';
+  }
+
+  void goTo(String route, BuildContext context) {
+    setState(() {
+      Navigator.of(context).pushNamed(route);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    const commonPadding = EdgeInsets.symmetric(
-      horizontal: 12,
-      vertical: 8,
-    );
-    final leading = currentPage != 0
-        ? AdwHeaderButton(
-            icon: const Icon(Icons.chevron_left),
-            onPressed: () => setState(() => currentPage = 0),
-          )
-        : const SizedBox();
-    final text = currentPage != 0
-        ? Text(currentPage == 1 ? 'Credits' : 'Legal')
-        : const SizedBox();
-
-    return FutureBuilder<PackageInfo>(
-      future: PackageInfo.fromPlatform(),
-      builder: (context, snapshot) {
-        final data = snapshot.hasData ? snapshot.data : null;
-        final isNotNull = data != null;
-        return GtkDialog(
-          constraints: BoxConstraints(
-            maxWidth: widget.width,
-            minHeight: 350,
-            maxHeight: 400,
+    return GtkDialog(
+      width: 300,
+      start: [
+        AnimatedOpacity(
+          opacity: isVisible(currentRoute) ? 1 : 0,
+          duration: const Duration(milliseconds: 300),
+          child: AbsorbPointer(
+            absorbing: !isVisible(currentRoute),
+            child: AdwHeaderButton(
+              icon: const Icon(
+                Icons.chevron_left,
+                size: 24,
+              ),
+              onPressed: () {
+                navigatorKey.currentState?.pop();
+                setState(() {
+                  currentRoute = '/';
+                });
+              },
+            ),
           ),
-          title: text,
-          start: [
-            leading,
-            if (widget.start != null) ...widget.start!,
+        )
+      ],
+      child: Navigator(
+        key: navigatorKey,
+        initialRoute: '/',
+        onGenerateRoute: (settings) {
+          currentRoute = settings.name ?? '';
+
+          Widget page = Builder(
+            builder: (context) => _AdwAboutDialogHome(
+              goTo: (name) => goTo(name, context),
+              details: widget.details,
+              supportUrl: widget.supportUrl,
+              issueUrl: widget.issueUrl,
+              acknowledgements: widget.acknowledgements,
+              legalSections: widget.legalSections,
+            ),
+          );
+
+          switch (settings.name) {
+            case '/':
+              break;
+            case '/new':
+              page = const _AdwAboutDialogPatchNotes();
+              break;
+            case '/details':
+              page = _AdwAboutDialogDetails(details: widget.details!);
+              break;
+            case '/credits':
+              page = _AdwAboutDialogCredits(
+                artists: widget.artists,
+                developers: widget.developers,
+                designers: widget.designers,
+                documentors: widget.documentors,
+                translators: widget.translators,
+              );
+              break;
+            case '/acknowledgements':
+              page = _AdwAboutDialogAcknowledgements(
+                sections: widget.acknowledgements!,
+              );
+              break;
+            case '/legal':
+              page = _AdwAboutDialogLegal(
+                legalSections: widget.legalSections!,
+              );
+              break;
+          }
+
+          return PageRouteBuilder<Widget>(
+            pageBuilder: (context, _, __) => page,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              const begin = Offset(1, 0);
+              const end = Offset.zero;
+              const curve = Curves.ease;
+
+              final tween =
+                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            },
+            settings: settings,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogHome extends StatelessWidget {
+  const _AdwAboutDialogHome({
+    Key? key,
+    required this.goTo,
+    this.details,
+    this.supportUrl,
+    this.issueUrl,
+    this.acknowledgements,
+    this.legalSections,
+  }) : super(key: key);
+
+  final Function(String) goTo;
+  final AboutWindowDetails? details;
+  final String? supportUrl;
+  final String? issueUrl;
+  final List<AboutWindowAcknowledgementSection>? acknowledgements;
+  final List<AboutWindowLegalSection>? legalSections;
+
+  bool hasTroubleshooting() {
+    return supportUrl != null || issueUrl != null;
+  }
+
+  bool hasAcknowledgements() {
+    return acknowledgements != null && acknowledgements!.isNotEmpty;
+  }
+
+  bool hasLegal() {
+    return legalSections != null && legalSections!.isNotEmpty;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      children: [
+        Align(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 3),
+            child: Image.asset(
+              'assets/logo.png',
+              width: 100,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        const Align(
+          child: Text(
+            'Typeset',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        const Align(
+          child: Text(
+            'Angela Avery',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Align(
+          child: AdwButton.pill(
+            padding: const EdgeInsets.only(
+              top: 6,
+              bottom: 8,
+              left: 18,
+              right: 18,
+            ),
+            textStyle: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            child: const Text('1.2.3'),
+          ),
+        ),
+        const SizedBox(height: 20),
+        AdwPreferencesGroup(
+          children: [
+            AdwActionRow(
+              title: "What's new",
+              titleStyle: const TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 13,
+              ),
+              onActivated: () {
+                goTo('/new');
+              },
+              end: const Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+              ),
+            ),
+            if (details != null)
+              AdwActionRow(
+                title: 'Details',
+                titleStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                ),
+                onActivated: () {
+                  goTo('/details');
+                },
+                end: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                ),
+              ),
           ],
-          end: widget.end ?? [],
-          actions: widget.actions ??
-              AdwActions(
-                onClose: Navigator.of(context).pop,
-              ),
-          controls: widget.controls,
-          headerBarStyle: widget.headerBarStyle ??
-              const HeaderBarStyle(
-                isTransparent: true,
-              ),
-          padding: commonPadding,
-          children: currentPage == 0
-              ? [
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 3),
-                    width: 80,
-                    child: widget.appIcon,
-                  ),
-                  Text(
-                    widget.appName ?? (isNotNull ? data!.appName : '---'),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+        ),
+        if (hasTroubleshooting())
+          Column(
+            children: [
+              const SizedBox(height: 8),
+              AdwPreferencesGroup(
+                children: [
+                  if (supportUrl != null)
+                    AdwActionRow(
+                      title: 'Support Questions',
+                      titleStyle: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13,
+                      ),
+                      onActivated: () {
+                        launchUrlString(supportUrl!);
+                      },
+                      end: const Icon(
+                        Icons.open_in_new_rounded,
+                        size: 16,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 6),
-                  AdwPreferencesGroup(
-                    children: [
-                      AdwActionRow(
-                        title: 'Version',
-                        end: Text(
-                          widget.appVersion ??
-                              (isNotNull ? data!.version : '0'),
+                  if (issueUrl != null)
+                    AdwActionRow(
+                      title: 'Report an issue',
+                      titleStyle: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13,
+                      ),
+                      onActivated: () {
+                        launchUrlString(issueUrl!);
+                      },
+                      end: const Icon(
+                        Icons.open_in_new_rounded,
+                        size: 16,
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        const SizedBox(height: 8),
+        AdwPreferencesGroup(
+          children: [
+            AdwActionRow(
+              title: 'Credits',
+              titleStyle: const TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 13,
+              ),
+              onActivated: () {
+                goTo('/credits');
+              },
+              end: const Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+              ),
+            ),
+            if (hasLegal())
+              AdwActionRow(
+                title: 'Legal',
+                titleStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                ),
+                onActivated: () {
+                  goTo('/legal');
+                },
+                end: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                ),
+              ),
+            if (hasAcknowledgements())
+              AdwActionRow(
+                title: 'Acknowledgements',
+                titleStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                ),
+                onActivated: () {
+                  goTo('/acknowledgements');
+                },
+                end: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                ),
+              ),
+          ],
+        ),
+        const SizedBox(
+          height: 8,
+        )
+      ],
+    );
+  }
+}
+
+class _AdwAboutDialogPatchNotes extends StatelessWidget {
+  const _AdwAboutDialogPatchNotes({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        children: const [
+          Text(
+            'Version 1.2.0',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Text(
+            '''
+This release adds the following features:
+
+• Added a way to export fonts.
+• Better support for monospace fonts.
+• Added a way to preview italic text.
+• Bug fixes and performance improvements.
+• Translation updates.
+                    ''',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogDetails extends StatelessWidget {
+  const _AdwAboutDialogDetails({Key? key, required this.details})
+      : super(key: key);
+
+  final AboutWindowDetails details;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        children: [
+          if (details.comments != null)
+            Text(
+              details.comments!,
+            ),
+          const SizedBox(height: 16),
+          AdwPreferencesGroup(
+            children: details.links?.entries
+                    .map(
+                      (entry) => AdwActionRow(
+                        title: entry.key,
+                        titleStyle: const TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 13,
+                        ),
+                        onActivated: () {},
+                        end: const Icon(
+                          Icons.open_in_new,
+                          size: 16,
                         ),
                       ),
-                      if (widget.issueTrackerLink != null)
-                        AdwActionRow(
-                          title: 'Report an issue',
-                          onActivated: () => launchUrl(
-                            Uri.parse(widget.issueTrackerLink!),
-                          ),
-                          end: widget.launchEndIcon ??
-                              const Icon(
-                                Icons.open_in_new_outlined,
-                                size: 20,
-                              ),
-                        ),
-                    ],
+                    )
+                    .toList() ??
+                [],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogCredits extends StatelessWidget {
+  const _AdwAboutDialogCredits({
+    Key? key,
+    this.developers,
+    this.designers,
+    this.artists,
+    this.documentors,
+    this.translators,
+  }) : super(key: key);
+
+  final List<AboutWindowPerson>? developers;
+  final List<AboutWindowPerson>? designers;
+  final List<AboutWindowPerson>? artists;
+  final List<AboutWindowPerson>? documentors;
+  final List<AboutWindowPerson>? translators;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        children: [
+          if (developers != null)
+            _CreditSection(type: 'Developed by', people: developers!),
+          if (designers != null)
+            _CreditSection(type: 'Design by', people: designers!),
+          if (artists != null)
+            _CreditSection(type: 'Artwork by', people: artists!),
+          if (documentors != null)
+            _CreditSection(type: 'Documented by', people: documentors!),
+          if (translators != null)
+            _CreditSection(type: 'Translated by', people: translators!),
+        ],
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogAcknowledgements extends StatelessWidget {
+  const _AdwAboutDialogAcknowledgements({
+    Key? key,
+    required this.sections,
+  }) : super(key: key);
+
+  final List<AboutWindowAcknowledgementSection> sections;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        children: sections
+            .map(
+              (e) => _CreditSection(
+                type: e.name,
+                people: e.people,
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+}
+
+class _CreditSection extends StatelessWidget {
+  const _CreditSection({Key? key, required this.type, required this.people})
+      : super(key: key);
+
+  final String type;
+  final List<AboutWindowPerson> people;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 5,
+      ),
+      child: AdwPreferencesGroup.credits(
+        title: type,
+        children: [
+          ...people
+              .map(
+                (e) => AdwActionRow(
+                  title: e.name,
+                  titleStyle: const TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13,
                   ),
-                  if ((widget.credits != null) ||
-                      widget.copyright != null ||
-                      widget.license != null) ...[
-                    const SizedBox(height: 8),
-                    AdwPreferencesGroup(
-                      children: [
-                        if (widget.credits != null)
-                          AdwActionRow(
-                            title: 'Credits',
-                            onActivated: () => setState(() => currentPage = 1),
-                            end: widget.nextPageIcon ??
-                                const Icon(
-                                  Icons.chevron_right,
-                                ),
-                          ),
-                        if (widget.copyright != null || widget.license != null)
-                          AdwActionRow(
-                            title: 'Legal',
-                            onActivated: () => setState(() => currentPage = 2),
-                            end: widget.nextPageIcon ??
-                                const Icon(
-                                  Icons.chevron_right,
-                                ),
-                          ),
-                      ],
-                    ),
-                  ],
-                ]
-              : currentPage == 1
-                  ? widget.credits!
-                      .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 10,
-                          ),
-                          child: e,
-                        ),
-                      )
-                      .toList()
-                  : [
-                      if (widget.copyright != null) Text(widget.copyright!),
-                      const SizedBox(height: 5),
-                      if (widget.license != null) widget.license!,
-                    ],
-        );
-      },
+                  onActivated:
+                      e.url != null ? () => launchUrlString(e.url!) : null,
+                  end: e.url != null
+                      ? const Icon(
+                          Icons.open_in_new,
+                          size: 16,
+                        )
+                      : null,
+                ),
+              )
+              .toList()
+        ],
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogLegal extends StatelessWidget {
+  const _AdwAboutDialogLegal({Key? key, required this.legalSections})
+      : super(key: key);
+
+  final List<AboutWindowLegalSection> legalSections;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).dialogBackgroundColor,
+      height: double.infinity,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        children: legalSections
+            .map((e) => _AdwAboutDialogLegalSection(info: e))
+            .toList(),
+      ),
+    );
+  }
+}
+
+class _AdwAboutDialogLegalSection extends StatelessWidget {
+  const _AdwAboutDialogLegalSection({Key? key, required this.info})
+      : super(key: key);
+
+  final AboutWindowLegalSection info;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          info.title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Text(
+          info.copyright,
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Text(
+          info.license,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
     );
   }
 }
