@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/src/widgets/adw/flap.dart';
 
 class FlapController extends ChangeNotifier {
+  FlapController([this.key]);
+
+  final Key? key;
+
   bool isOpen = true;
   bool isModal = false;
 
