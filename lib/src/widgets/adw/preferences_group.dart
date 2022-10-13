@@ -26,13 +26,25 @@ class AdwPreferencesGroup extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   }) : super(key: key);
 
+  /// List of all the elements in this group
   final List<Widget> children;
+
+  /// The border radius of this visit
   final double borderRadius;
+
+  /// The title of this preferences group
   final String? title;
+
+  /// The description of this preferences group
   final String? description;
+
+  /// The padding around this preferences group
   final EdgeInsets padding;
 
+  /// The style of the title text of this group
   final TextStyle? titleStyle;
+
+  /// The style of the description text of this group
   final TextStyle? descriptionStyle;
 
   @override

@@ -18,20 +18,37 @@ class GtkDialog extends StatelessWidget {
     required this.children,
   }) : super(key: key);
 
+  /// The style of the header bar in this dialog
   final HeaderBarStyle? headerBarStyle;
 
+  /// The starting elements of the header bar in this dialog
   final List<Widget>? start;
+
+  /// The title of the header bar in this dialog
   final Widget? title;
+
+  /// The ending elements of the header bar in this dialog
   final List<Widget>? end;
 
+  /// The window button actions of the header bar in this dialog
   final AdwActions? actions;
+
+  /// The window button controls of the header bar in this dialog
   final AdwControls? controls;
 
+  /// The padding around the childrens of this dialog
   final EdgeInsets? padding;
+
+  /// The list of child widgets in this dialog
   final List<Widget> children;
 
+  /// The box constraints of this dialog
   final BoxConstraints? constraints;
+
+  /// The height of this dialog, will be ignored when constraints are provided
   final double? height;
+
+  /// The width of this dialog, will be ignored when constraints are provided
   final double? width;
 
   @override

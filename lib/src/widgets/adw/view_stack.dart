@@ -8,8 +8,14 @@ class AdwViewStack extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 450),
   }) : super(key: key);
 
+  /// The selected index of the element in this view stack
   final int? index;
+
+  /// All the elements in this view stack
   final List<Widget> children;
+
+  /// The duration of the animation while switching the elements
+  /// in this view stack
   final Duration animationDuration;
 
   @override
