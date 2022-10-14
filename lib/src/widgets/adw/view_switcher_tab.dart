@@ -98,7 +98,10 @@ class _AdwViewSwitcherTabLayout extends StatelessWidget {
     required this.children,
   }) : super(key: key);
 
+  /// The list of all the child widget
   final List<Widget> children;
+
+  /// Whether this tab layout is row or column
   final bool isRow;
 
   @override
