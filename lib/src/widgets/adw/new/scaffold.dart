@@ -46,7 +46,7 @@ class AdwScaffold extends StatefulWidget {
   final double? viewSwitcherConstraint;
 
   @override
-  _AdwScaffoldState createState() => _AdwScaffoldState();
+  State<AdwScaffold> createState() => _AdwScaffoldState();
 }
 
 class _AdwScaffoldState extends State<AdwScaffold> {

@@ -13,7 +13,7 @@ class SlideHide extends StatefulWidget {
   final double width;
 
   @override
-  _SlideHideState createState() => _SlideHideState();
+  State<SlideHide> createState() => _SlideHideState();
 }
 
 class _SlideHideState extends State<SlideHide>

@@ -11,7 +11,7 @@ class WindowResizeListener extends StatefulWidget {
   final Widget child;
 
   @override
-  _WindowResizeListenerState createState() => _WindowResizeListenerState();
+  State<WindowResizeListener> createState() => _WindowResizeListenerState();
 }
 
 class _WindowResizeListenerState extends State<WindowResizeListener>

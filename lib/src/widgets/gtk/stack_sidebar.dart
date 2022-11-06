@@ -48,7 +48,7 @@ class GtkStackSidebar extends StatefulWidget {
   final Function(int? contentIndex, Widget content)? fullContentBuilder;
 
   @override
-  _GtkStackSidebarState createState() => _GtkStackSidebarState();
+  State<GtkStackSidebar> createState() => _GtkStackSidebarState();
 }
 
 class _GtkStackSidebarState extends State<GtkStackSidebar> {

@@ -77,7 +77,7 @@ class AdwFlap extends StatefulWidget {
   final FlapController? controller;
 
   @override
-  _AdwFlapState createState() => _AdwFlapState();
+  State<AdwFlap> createState() => _AdwFlapState();
 }
 
 class _AdwFlapState extends State<AdwFlap> {

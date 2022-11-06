@@ -19,7 +19,7 @@ class AdwViewStack extends StatefulWidget {
   final Duration animationDuration;
 
   @override
-  _AdwViewStackState createState() => _AdwViewStackState();
+  State<AdwViewStack> createState() => _AdwViewStackState();
 }
 
 class _AdwViewStackState extends State<AdwViewStack>
