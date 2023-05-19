@@ -19,8 +19,13 @@ class GtkStackSidebar extends StatefulWidget {
     this.fullContentBuilder,
   });
 
+  /// The `AdwSidebar` widget or any other widget as the sidebar
   final Widget sidebar;
+
+  /// The content section for this stack sidebar
   final Widget content;
+
+  /// This is a widget between the `sidebar` and the `content`
   final Widget? separator;
 
   /// Keeps track of the content index

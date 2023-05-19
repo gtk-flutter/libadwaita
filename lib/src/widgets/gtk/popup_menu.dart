@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 import 'package:popover_gtk/popover_gtk.dart';
 

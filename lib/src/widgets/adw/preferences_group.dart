@@ -28,42 +28,25 @@ class AdwPreferencesGroup extends StatelessWidget {
   })  : itemBuilder = null,
         itemCount = null;
 
-  const AdwPreferencesGroup.builder({
-    super.key,
-    required Widget Function(BuildContext, int) this.itemBuilder,
-    required int this.itemCount,
-    this.borderRadius = 12,
-    this.title,
-    this.titleStyle,
-    this.description,
-    this.descriptionStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 5),
-  }) : children = null;
+  /// List of all the elements in this group
+  final List<Widget> children;
 
-  const AdwPreferencesGroup.creditsBuilder({
-    super.key,
-    required Widget Function(BuildContext, int) this.itemBuilder,
-    required int this.itemCount,
-    this.borderRadius = 12,
-    this.title,
-    this.titleStyle = const TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-    ),
-    this.description,
-    this.descriptionStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 5),
-  }) : children = null;
-
-  final List<Widget>? children;
-  final Widget Function(BuildContext, int)? itemBuilder;
-  final int? itemCount;
+  /// The border radius of this visit
   final double borderRadius;
+
+  /// The title of this preferences group
   final String? title;
+
+  /// The description of this preferences group
   final String? description;
+
+  /// The padding around this preferences group
   final EdgeInsets padding;
 
+  /// The style of the title text of this group
   final TextStyle? titleStyle;
+
+  /// The style of the description text of this group
   final TextStyle? descriptionStyle;
 
   @override
