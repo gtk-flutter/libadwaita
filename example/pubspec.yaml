@@ -5,10 +5,10 @@ publish_to: none
 version: 1.0.0+2
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <4.0.0"
 
 dependencies:
-  adwaita: "0.5.1"
+  adwaita: "0.5.2"
   desktop_multi_window:
     git:
       url: https://github.com/Kingtous/rustdesk_desktop_multi_window
@@ -17,12 +17,19 @@ dependencies:
   libadwaita:
     path: ../
   libadwaita_window_manager: ^0.5.4+1
-  window_manager: ^0.2.6
+  window_manager: ^0.3.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: ^3.0.1
+
+dependency_overrides:
+  file:
+    git:
+      url: https://github.com/google/file.dart
+      ref: release
+      path: packages/file
 
 flutter:
   uses-material-design: true

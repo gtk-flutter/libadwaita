@@ -4,7 +4,7 @@ version: 1.2.5
 homepage: https://github.com/gtk-flutter/libadwaita
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.0 <4.0.0"
   flutter: ">=1.17.0"
 
 platforms:
@@ -19,12 +19,12 @@ dependencies:
   dbus: ">=0.7.4 <1.0.0"
   flutter:
     sdk: flutter
-  flutter_svg: ">=1.0.3 < 2.0.0"
-  gsettings: ">=0.2.5 <1.0.0"
-  libadwaita_core: ">=0.5.4 < 2.0.0"
-  package_info_plus: ">=1.4.2 < 2.0.0"
-  popover_gtk: ">=0.2.6+3 < 1.0.0"
-  url_launcher: ">=6.1.2 < 7.0.0"
+  flutter_svg: ">=2.0.6 <3.0.0"
+  gsettings: ">=0.2.7 <1.0.0"
+  libadwaita_core: ">=0.5.4 <2.0.0"
+  package_info_plus: ">=4.0.0 <5.0.0"
+  popover_gtk: ">=0.2.6+3 <1.0.0"
+  url_launcher: ">=6.1.11 <7.0.0"
 
 dev_dependencies:
   very_good_analysis: ^3.0.1

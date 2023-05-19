@@ -3,7 +3,7 @@ import 'package:libadwaita/libadwaita.dart';
 import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 
 class FlapHomePage extends StatefulWidget {
-  const FlapHomePage({Key? key, required this.themeNotifier}) : super(key: key);
+  const FlapHomePage({super.key, required this.themeNotifier});
 
   final ValueNotifier<ThemeMode> themeNotifier;
 

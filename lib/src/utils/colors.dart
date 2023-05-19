@@ -39,15 +39,15 @@ extension BorderContext on BuildContext {
       _isDark ? const Color(0xFF535353) : const Color(0xFFE0E0E0);
 
   Color get selectColor => _isDark
-      ? Theme.of(this).backgroundColor.lighten()
-      : Theme.of(this).backgroundColor.darken();
+      ? Theme.of(this).colorScheme.background.lighten()
+      : Theme.of(this).colorScheme.background.darken();
 
   Color get hoverMenuColor => _isDark
-      ? Theme.of(this).backgroundColor.lighten(0.05)
-      : Theme.of(this).backgroundColor.darken(0.05);
+      ? Theme.of(this).colorScheme.background.lighten(0.05)
+      : Theme.of(this).colorScheme.background.darken(0.05);
 
   Color get hoverColor => _isDark
-      ? Theme.of(this).backgroundColor.lighten(0.15)
-      : Theme.of(this).backgroundColor.darken(0.005);
+      ? Theme.of(this).colorScheme.background.lighten(0.15)
+      : Theme.of(this).colorScheme.background.darken(0.005);
   Color get textColor => _isDark ? Colors.white : Colors.black;
 }

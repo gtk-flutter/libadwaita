@@ -146,7 +146,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       }
 
       if (Platform.isMacOS) {
-        updateSep('close,maximize,minimize:');
+        updateSep('close,minimize,maximize:');
       } else if (Platform.isLinux) {
         final schema = GSettings('org.gnome.desktop.wm.preferences');
 

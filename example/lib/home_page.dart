@@ -15,7 +15,7 @@ import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.themeNotifier}) : super(key: key);
+  const MyHomePage({super.key, required this.themeNotifier});
 
   final ValueNotifier<ThemeMode> themeNotifier;
 

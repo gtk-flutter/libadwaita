@@ -5,6 +5,7 @@ linter:
     public_member_api_docs: false
     library_private_types_in_public_api: false
     avoid_setters_without_getters: false
+    avoid_positional_boolean_parameters: false
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

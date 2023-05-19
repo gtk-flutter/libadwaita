@@ -130,10 +130,10 @@ class _WindowCaptionButtonState extends State<WindowCaptionButton> {
       onExit: (value) => _onEntered(hovered: false),
       onHover: (value) => _onEntered(hovered: true),
       child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
         onTapDown: (_) => _onActive(pressed: true),
         onTapCancel: () => _onActive(pressed: false),
         onTapUp: (_) => _onActive(pressed: false),
+        behavior: HitTestBehavior.opaque,
         onTap: widget.onPressed,
         child: Container(
           constraints: const BoxConstraints(minWidth: 58, minHeight: 32),

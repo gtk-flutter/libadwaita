@@ -49,13 +49,13 @@ class AdwTextField extends StatelessWidget {
         prefixIcon: prefixIcon != null
             ? Icon(
                 prefixIcon,
-                color: Theme.of(context).textTheme.headline1?.color,
+                color: Theme.of(context).textTheme.displayLarge?.color,
               )
             : null,
         suffixIcon: icon != null
             ? Icon(
                 icon,
-                color: Theme.of(context).textTheme.headline1?.color,
+                color: Theme.of(context).textTheme.displayLarge?.color,
               )
             : null,
       ),

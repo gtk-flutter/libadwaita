@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class CounterPage extends StatefulWidget {
-  const CounterPage({Key? key, required this.counter}) : super(key: key);
+  const CounterPage({super.key, required this.counter});
 
   final ValueNotifier<int> counter;
 

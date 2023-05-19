@@ -8,16 +8,16 @@ import 'package:libadwaita/libadwaita.dart';
 
 class DemoScreen extends StatelessWidget {
   const DemoScreen({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     this.secondDescription,
     this.image,
     this.footer,
-  }) : super(key: key);
+  });
 
   DemoScreen.runDemo({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     this.secondDescription,
@@ -36,8 +36,7 @@ class DemoScreen extends StatelessWidget {
             ..setTitle('$title Example')
             ..show(),
           child: const Text('Run the demo'),
-        ),
-        super(key: key);
+        );
 
   final String title;
   final String description;
@@ -57,7 +56,7 @@ class DemoScreen extends StatelessWidget {
             ],
             Text(
               title,
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(height: 15),
             Text(description),
@@ -65,7 +64,7 @@ class DemoScreen extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 secondDescription!,
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
             ],
             if (footer != null) ...[

@@ -43,8 +43,7 @@ class AdwSidebar extends StatelessWidget {
       BuildContext context,
       int index,
       bool isSelected,
-    )
-        itemBuilder,
+    ) itemBuilder,
     required int itemCount,
   })  : assert(itemCount >= 0, 'Item Count cannot not be negative!'),
         _childrenDelegate = List.generate(
@@ -92,7 +91,7 @@ class AdwSidebar extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(maxWidth: width),
       decoration: BoxDecoration(
-        color: color ?? Theme.of(context).backgroundColor,
+        color: color ?? Theme.of(context).colorScheme.background,
       ),
       child: ListView(
         controller: controller,

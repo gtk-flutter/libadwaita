@@ -13,9 +13,22 @@ class AdwPreferencesGroup extends StatelessWidget {
   })  : itemBuilder = null,
         itemCount = null;
 
-  const AdwPreferencesGroup.credits({
+  const AdwPreferencesGroup.builder({
     super.key,
-    required List<Widget> this.children,
+    required Widget Function(BuildContext, int) this.itemBuilder,
+    required int this.itemCount,
+    this.borderRadius = 12,
+    this.title,
+    this.titleStyle,
+    this.description,
+    this.descriptionStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+  }) : children = null;
+
+  const AdwPreferencesGroup.creditsBuilder({
+    super.key,
+    required Widget Function(BuildContext, int) this.itemBuilder,
+    required int this.itemCount,
     this.borderRadius = 12,
     this.title,
     this.titleStyle = const TextStyle(
@@ -25,11 +38,17 @@ class AdwPreferencesGroup extends StatelessWidget {
     this.description,
     this.descriptionStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
-  })  : itemBuilder = null,
-        itemCount = null;
+  }) : children = null;
 
   /// List of all the elements in this group
-  final List<Widget> children;
+  final List<Widget>? children;
+
+  /// Item Builder for this preferences griup
+  final Widget Function(BuildContext, int)? itemBuilder;
+
+  /// Count of elements in this preferences group,
+  /// used for itemBuilder
+  final int? itemCount;
 
   /// The border radius of this visit
   final double borderRadius;
@@ -63,13 +82,14 @@ class AdwPreferencesGroup extends StatelessWidget {
               if (title != null) ...[
                 Text(
                   title!,
-                  style: titleStyle ?? Theme.of(context).textTheme.headline5,
+                  style:
+                      titleStyle ?? Theme.of(context).textTheme.headlineSmall,
                 ),
                 if (description != null)
                   Text(
                     description!,
                     style: descriptionStyle ??
-                        Theme.of(context).textTheme.bodyText2,
+                        Theme.of(context).textTheme.bodyMedium,
                   ),
                 const SizedBox(height: 12),
               ],

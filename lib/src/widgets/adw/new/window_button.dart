@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:libadwaita/src/utils/colors.dart';
+import 'package:libadwaita/src/widgets/adw/new/macos_caption_button.dart';
 import 'package:libadwaita/src/widgets/adw/new/windows_caption_button.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 
@@ -38,7 +39,8 @@ class AdwWindowButton extends StatelessWidget {
                     width: 16,
                     package: 'libadwaita',
                     height: 16,
-                    color: context.textColor,
+                    colorFilter:
+                        ColorFilter.mode(context.textColor, BlendMode.srcIn),
                   ),
                 ),
               )
@@ -49,7 +51,10 @@ class AdwWindowButton extends StatelessWidget {
                     type: buttonType,
                   )
                 : Platform.isMacOS
-                    ? const SizedBox()
+                    ? MacOSCaptionButton(
+                        onPressed: onPressed,
+                        type: buttonType,
+                      )
                     : const SizedBox()
         : const SizedBox();
   }

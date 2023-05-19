@@ -39,7 +39,9 @@ Future<void> main(List<String> args) async {
 
     unawaited(
       windowManager.waitUntilReadyToShow(windowOptions, () async {
-        if (Platform.isLinux) await windowManager.setAsFrameless();
+        if (Platform.isLinux || Platform.isMacOS) {
+          await windowManager.setAsFrameless();
+        }
         await windowManager.show();
         await windowManager.focus();
       }),
@@ -50,7 +52,7 @@ Future<void> main(List<String> args) async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  MyApp({super.key});
 
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
