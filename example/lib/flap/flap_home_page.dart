@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
+import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 
 class FlapHomePage extends StatefulWidget {
-  const FlapHomePage({Key? key, required this.themeNotifier}) : super(key: key);
+  const FlapHomePage({super.key, required this.themeNotifier});
 
   final ValueNotifier<ThemeMode> themeNotifier;
 
@@ -49,7 +49,7 @@ class _FlapHomePageState extends State<FlapHomePage> {
   Widget build(BuildContext context) {
     return AdwScaffold(
       flapController: _flapController,
-      actions: AdwActions().bitsdojo,
+      actions: AdwActions().windowManager,
       start: [
         Builder(
           builder: (context) {

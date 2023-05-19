@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:adwaita/adwaita.dart';
 import 'package:collection/collection.dart';
@@ -6,6 +8,7 @@ import 'package:example/flap/flap_demo.dart';
 import 'package:example/home_page.dart';
 import 'package:example/view_switcher/view_switcher_demo.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
   if (args.firstOrNull == 'multi_window') {
@@ -22,12 +25,34 @@ Future<void> main(List<String> args) async {
         break;
     }
   } else {
+    WidgetsFlutterBinding.ensureInitialized();
+    await windowManager.ensureInitialized();
+
+    const windowOptions = WindowOptions(
+      size: Size(1000, 600),
+      minimumSize: Size(400, 450),
+      skipTaskbar: false,
+      backgroundColor: Colors.transparent,
+      titleBarStyle: TitleBarStyle.hidden,
+      title: 'Libadwaita Example',
+    );
+
+    unawaited(
+      windowManager.waitUntilReadyToShow(windowOptions, () async {
+        if (Platform.isLinux || Platform.isMacOS) {
+          await windowManager.setAsFrameless();
+        }
+        await windowManager.show();
+        await windowManager.focus();
+      }),
+    );
+
     runApp(MyApp());
   }
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  MyApp({super.key});
 
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);
@@ -38,6 +63,11 @@ class MyApp extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
+          builder: (context, child) {
+            final virtualWindowFrame = VirtualWindowFrameInit();
+
+            return virtualWindowFrame(context, child);
+          },
           theme: AdwaitaThemeData.light(),
           darkTheme: AdwaitaThemeData.dark(),
           debugShowCheckedModeBanner: false,

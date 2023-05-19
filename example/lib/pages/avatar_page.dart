@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class AvatarPage extends StatelessWidget {
-  const AvatarPage({Key? key}) : super(key: key);
+  const AvatarPage({super.key});
 
   @override
   Widget build(BuildContext context) {

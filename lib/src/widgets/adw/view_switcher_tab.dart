@@ -3,14 +3,14 @@ import 'package:libadwaita/libadwaita.dart';
 
 class AdwViewSwitcherTab extends StatelessWidget {
   const AdwViewSwitcherTab({
-    Key? key,
+    super.key,
     required this.data,
     required this.policy,
     this.badgeColor,
     this.isSelected = false,
     this.onSelected,
     this.paddingIcon,
-  }) : super(key: key);
+  });
 
   /// The color of the badge at the top right of the tab's icon
   final Color? badgeColor;
@@ -93,10 +93,9 @@ class AdwViewSwitcherTab extends StatelessWidget {
 
 class _AdwViewSwitcherTabLayout extends StatelessWidget {
   const _AdwViewSwitcherTabLayout({
-    Key? key,
     required this.isRow,
     required this.children,
-  }) : super(key: key);
+  });
 
   /// The list of all the child widget
   final List<Widget> children;

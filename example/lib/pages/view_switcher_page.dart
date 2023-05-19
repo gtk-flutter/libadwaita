@@ -2,7 +2,7 @@ import 'package:example/pages/run_demo_screen.dart';
 import 'package:flutter/material.dart';
 
 class ViewSwitcherPage extends StatelessWidget {
-  const ViewSwitcherPage({Key? key}) : super(key: key);
+  const ViewSwitcherPage({super.key});
 
   @override
   Widget build(BuildContext context) {

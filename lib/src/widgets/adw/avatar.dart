@@ -167,12 +167,12 @@ class AdwAvatarColorPalette {
 /// cohesive inside the avatar.
 class AdwAvatar extends StatelessWidget {
   const AdwAvatar({
-    Key? key,
+    super.key,
     required this.child,
     this.size = defaultAvatarSize,
     this.backgroundColor,
     this.backgroundImage,
-  }) : super(key: key);
+  });
 
   /// Constructor that allows the pass of a `String` object in order to render
   /// the first letters of the first two words inside the widget.

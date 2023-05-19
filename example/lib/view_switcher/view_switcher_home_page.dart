@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
-import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
+import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 
 class ViewSwitcherHomePage extends StatefulWidget {
-  const ViewSwitcherHomePage({Key? key}) : super(key: key);
+  const ViewSwitcherHomePage({super.key});
 
   @override
   _ViewSwitcherHomePageState createState() => _ViewSwitcherHomePageState();
@@ -17,7 +17,7 @@ class _ViewSwitcherHomePageState extends State<ViewSwitcherHomePage> {
     return ValueListenableBuilder(
       valueListenable: index,
       builder: (context, int value, child) => AdwScaffold(
-        actions: AdwActions().bitsdojo,
+        actions: AdwActions().windowManager,
         viewSwitcher: AdwViewSwitcher(
           tabs: const [
             ViewSwitcherData(

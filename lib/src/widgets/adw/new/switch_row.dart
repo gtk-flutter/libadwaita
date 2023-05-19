@@ -3,7 +3,7 @@ import 'package:libadwaita/libadwaita.dart';
 
 class AdwSwitchRow extends StatefulWidget {
   const AdwSwitchRow({
-    Key? key,
+    super.key,
     this.start,
     required this.value,
     required this.onChanged,
@@ -13,7 +13,7 @@ class AdwSwitchRow extends StatefulWidget {
     this.autofocus = false,
     this.enabled = true,
     this.contentPadding,
-  }) : super(key: key);
+  });
 
   /// The value of the switch
   final bool value;

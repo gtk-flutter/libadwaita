@@ -3,7 +3,7 @@ import 'package:example/flap/flap_home_page.dart';
 import 'package:flutter/material.dart';
 
 class FlapDemo extends StatelessWidget {
-  FlapDemo({Key? key}) : super(key: key);
+  FlapDemo({super.key});
 
   final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.system);

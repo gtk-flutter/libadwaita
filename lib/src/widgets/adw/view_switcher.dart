@@ -4,7 +4,7 @@ import 'package:libadwaita/src/widgets/widgets.dart';
 
 class AdwViewSwitcher extends StatelessWidget {
   const AdwViewSwitcher({
-    Key? key,
+    super.key,
     required this.tabs,
     required this.onViewChanged,
     required this.currentIndex,
@@ -18,8 +18,7 @@ class AdwViewSwitcher extends StatelessWidget {
     )
         bool? expanded,
     this.paddingIcon,
-  })  : assert(tabs.length >= 2, 'Minimum 2 tabs are required'),
-        super(key: key);
+  }) : assert(tabs.length >= 2, 'Minimum 2 tabs are required');
 
   /// The color of the badge at the top right of the tab's icon
   final Color? badgeColor;

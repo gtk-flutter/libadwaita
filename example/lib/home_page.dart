@@ -10,12 +10,12 @@ import 'package:example/pages/welcome.dart';
 import 'package:flutter/material.dart';
 
 import 'package:libadwaita/libadwaita.dart';
-import 'package:libadwaita_bitsdojo/libadwaita_bitsdojo.dart';
+import 'package:libadwaita_window_manager/libadwaita_window_manager.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.themeNotifier}) : super(key: key);
+  const MyHomePage({super.key, required this.themeNotifier});
 
   final ValueNotifier<ThemeMode> themeNotifier;
 
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return AdwScaffold(
       flapController: _flapController,
-      actions: AdwActions().bitsdojo,
+      actions: AdwActions().windowManager,
       start: [
         AdwHeaderButton(
           icon: const Icon(Icons.view_sidebar_outlined, size: 19),
@@ -120,24 +120,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     issueTrackerLink:
                         'https://github.com/gtk-flutter/libadwaita/issues',
                     appIcon: Image.asset('assets/logo.png'),
-                    actions: AdwActions(
-                      onClose: Navigator.of(context).pop,
-                      onHeaderDrag: appWindow?.startDragging,
-                      onDoubleTap: appWindow?.maximizeOrRestore,
-                    ),
                     credits: [
-                      AdwPreferencesGroup.credits(
+                      AdwPreferencesGroup.creditsBuilder(
                         title: 'Developers',
-                        children: developers.entries
-                            .map(
-                              (e) => AdwActionRow(
-                                title: e.key,
-                                onActivated: () => launchUrl(
-                                  Uri.parse('https://github.com/${e.value}'),
-                                ),
-                              ),
-                            )
-                            .toList(),
+                        itemCount: developers.length,
+                        itemBuilder: (_, index) => AdwActionRow(
+                          title: developers.keys.elementAt(index),
+                          onActivated: () => launchUrl(
+                            Uri.parse(
+                              'https://github.com/${developers.values.elementAt(index)}',
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                     copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',

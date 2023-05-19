@@ -6,7 +6,8 @@ import 'package:libadwaita_core/libadwaita_core.dart';
 
 class AdwScaffold extends StatefulWidget {
   const AdwScaffold({
-    Key? key,
+    super.key,
+    this.scaffoldKey,
     required this.body,
     this.flap,
     this.flapStyle,
@@ -22,11 +23,13 @@ class AdwScaffold extends StatefulWidget {
     this.end,
     required this.actions,
     this.controls,
-  }) : super(key: key);
+  });
+
+  final Key? scaffoldKey;
 
   final Widget body;
 
-  final AdwSidebar Function(bool isDrawer)? flap;
+  final Widget Function(bool isDrawer)? flap;
 
   final FlapController? flapController;
 
@@ -90,6 +93,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
           ),
           Expanded(
             child: Scaffold(
+              key: widget.scaffoldKey,
               drawerEnableOpenDragGesture: _flapController
                       ?.shouldEnableDrawerGesture(FlapPosition.start) ??
                   false,

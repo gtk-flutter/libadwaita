@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:libadwaita/libadwaita.dart';
 
 class StyleClassesPage extends StatelessWidget {
-  const StyleClassesPage({Key? key}) : super(key: key);
+  const StyleClassesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

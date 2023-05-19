@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AdwTextField extends StatelessWidget {
   const AdwTextField({
-    Key? key,
+    super.key,
     this.controller,
     this.keyboardType,
     this.onChanged,
@@ -11,7 +11,7 @@ class AdwTextField extends StatelessWidget {
     this.onSubmitted,
     this.initialValue,
     this.autofocus = false,
-  }) : super(key: key);
+  });
 
   /// Will automatically focus on this field when it's visible
   final bool autofocus;
@@ -26,7 +26,7 @@ class AdwTextField extends StatelessWidget {
   final TextInputType? keyboardType;
 
   /// Runs when value is changed from this field
-  final Function(String)? onChanged;
+  final void Function(String)? onChanged;
 
   /// The suffix icon for this field
   final IconData? icon;
@@ -49,13 +49,13 @@ class AdwTextField extends StatelessWidget {
         prefixIcon: prefixIcon != null
             ? Icon(
                 prefixIcon,
-                color: Theme.of(context).textTheme.headline1?.color,
+                color: Theme.of(context).textTheme.displayLarge?.color,
               )
             : null,
         suffixIcon: icon != null
             ? Icon(
                 icon,
-                color: Theme.of(context).textTheme.headline1?.color,
+                color: Theme.of(context).textTheme.displayLarge?.color,
               )
             : null,
       ),

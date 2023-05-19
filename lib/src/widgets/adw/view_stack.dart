@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class AdwViewStack extends StatefulWidget {
   const AdwViewStack({
-    Key? key,
+    super.key,
     this.index,
     required this.children,
     this.animationDuration = const Duration(milliseconds: 450),
-  }) : super(key: key);
+  });
 
   /// The selected index of the element in this view stack
   final int? index;

@@ -7,12 +7,12 @@ class AdwPopupMenu {}
 
 class GtkPopupMenu extends StatefulWidget {
   const GtkPopupMenu({
-    Key? key,
+    super.key,
     required this.body,
     this.icon = const Icon(Icons.menu, size: 17),
     this.popupWidth = 200,
     this.popupHeight,
-  }) : super(key: key);
+  });
 
   /// The body of the popup
   final Widget body;

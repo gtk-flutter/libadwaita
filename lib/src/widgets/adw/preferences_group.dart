@@ -2,19 +2,33 @@ import 'package:flutter/material.dart';
 
 class AdwPreferencesGroup extends StatelessWidget {
   const AdwPreferencesGroup({
-    Key? key,
-    required this.children,
+    super.key,
+    required List<Widget> this.children,
     this.borderRadius = 12,
     this.title,
     this.titleStyle,
     this.description,
     this.descriptionStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
-  }) : super(key: key);
+  })  : itemBuilder = null,
+        itemCount = null;
 
-  const AdwPreferencesGroup.credits({
-    Key? key,
-    required this.children,
+  const AdwPreferencesGroup.builder({
+    super.key,
+    required Widget Function(BuildContext, int) this.itemBuilder,
+    required int this.itemCount,
+    this.borderRadius = 12,
+    this.title,
+    this.titleStyle,
+    this.description,
+    this.descriptionStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+  }) : children = null;
+
+  const AdwPreferencesGroup.creditsBuilder({
+    super.key,
+    required Widget Function(BuildContext, int) this.itemBuilder,
+    required int this.itemCount,
     this.borderRadius = 12,
     this.title,
     this.titleStyle = const TextStyle(
@@ -24,10 +38,17 @@ class AdwPreferencesGroup extends StatelessWidget {
     this.description,
     this.descriptionStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
-  }) : super(key: key);
+  }) : children = null;
 
   /// List of all the elements in this group
-  final List<Widget> children;
+  final List<Widget>? children;
+
+  /// Item Builder for this preferences griup
+  final Widget Function(BuildContext, int)? itemBuilder;
+
+  /// Count of elements in this preferences group,
+  /// used for itemBuilder
+  final int? itemCount;
 
   /// The border radius of this visit
   final double borderRadius;
@@ -61,13 +82,14 @@ class AdwPreferencesGroup extends StatelessWidget {
               if (title != null) ...[
                 Text(
                   title!,
-                  style: titleStyle ?? Theme.of(context).textTheme.headline5,
+                  style:
+                      titleStyle ?? Theme.of(context).textTheme.headlineSmall,
                 ),
                 if (description != null)
                   Text(
                     description!,
                     style: descriptionStyle ??
-                        Theme.of(context).textTheme.bodyText2,
+                        Theme.of(context).textTheme.bodyMedium,
                   ),
                 const SizedBox(height: 12),
               ],
@@ -81,15 +103,22 @@ class AdwPreferencesGroup extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-              2 * children.length - 1,
-              (index) => index.isEven
-                  ? children[index ~/ 2]
-                  : const Divider(height: 4),
-            ),
-          ),
+          child: children != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    2 * children!.length - 1,
+                    (index) => index.isEven
+                        ? children![index ~/ 2]
+                        : const Divider(height: 4),
+                  ),
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemBuilder: itemBuilder!,
+                  itemCount: itemCount,
+                ),
         ),
       ],
     );
