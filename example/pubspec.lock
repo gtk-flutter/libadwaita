@@ -5,10 +5,10 @@ packages:
     dependency: "direct main"
     description:
       name: adwaita
-      sha256: "535781747357779fa2830815e0a1b6b7888c8c538194ba73ac4fc8d82412baec"
+      sha256: e39ac1b1d4b0790d0ea1f3649a1705754beabdcc7552dbca577dbc849f745e31
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.2"
+    version: "1.0.0"
   args:
     dependency: transitive
     description:
