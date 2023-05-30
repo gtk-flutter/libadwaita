@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0
+
+* Add Windows & Mac os headerbar buttons (using `nativeControls` parameter)
+* Add builder for `AdwPreferencesGroup`
+* Update Documentation for various widgets
+* Support Material 3 font naming scheme
+* Bump dependencies
+
 ## 1.2.5
 
 * Set default header buttons to min, max and close at the right side

@@ -168,7 +168,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.2.5"
+    version: "2.0.0"
   libadwaita_core:
     dependency: transitive
     description:
