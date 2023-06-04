@@ -28,34 +28,34 @@ class AdwWindowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return onPressed != null
-        ? !nativeControls || Platform.isLinux
-            ? AdwButton.circular(
-                size: 24,
-                margin: const EdgeInsets.all(6),
+        ? nativeControls && Platform.isWindows
+            ? WindowCaptionButton(
                 onPressed: onPressed,
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/icons/${buttonType.name}.svg',
-                    width: 16,
-                    package: 'libadwaita',
-                    height: 16,
-                    colorFilter:
-                        ColorFilter.mode(context.textColor, BlendMode.srcIn),
-                  ),
-                ),
+                brightness: Theme.of(context).brightness,
+                type: buttonType,
               )
-            : Platform.isWindows
-                ? WindowCaptionButton(
+            : nativeControls && Platform.isMacOS
+                ? MacOSCaptionButton(
                     onPressed: onPressed,
-                    brightness: Theme.of(context).brightness,
                     type: buttonType,
                   )
-                : Platform.isMacOS
-                    ? MacOSCaptionButton(
-                        onPressed: onPressed,
-                        type: buttonType,
-                      )
-                    : const SizedBox()
+                : AdwButton.circular(
+                    size: 24,
+                    margin: const EdgeInsets.all(6),
+                    onPressed: onPressed,
+                    child: Center(
+                      child: SvgPicture.asset(
+                        'assets/icons/${buttonType.name}.svg',
+                        width: 16,
+                        package: 'libadwaita',
+                        height: 16,
+                        colorFilter: ColorFilter.mode(
+                          context.textColor,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  )
         : const SizedBox();
   }
 }
