@@ -1,8 +1,12 @@
 # Changelog
 
+## 2.0.1
+
+* Fix window action buttons not visible sometimes
+
 ## 2.0.0
 
-* Add Windows & Mac os headerbar buttons (using `nativeControls` parameter)
+* Add Windows & macOS headerbar buttons (using `nativeControls` parameter)
 * Add builder for `AdwPreferencesGroup`
 * Update Documentation for various widgets
 * Support Material 3 font naming scheme
