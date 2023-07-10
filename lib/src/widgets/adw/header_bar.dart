@@ -118,7 +118,9 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
       widget.maximizeBtn != null;
 
   late ValueNotifier<List<String>?> separator =
-      !kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
+      !widget.style.autoPositionWindowButtons ||
+              !kIsWeb &&
+                  (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
           ? ValueNotifier(
               ['', 'minimize,maximize,close'],
             )

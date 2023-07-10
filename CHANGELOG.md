@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2
+
+* Fix for automatically position window buttons property
+
 ## 2.0.1
 
 * Fix window action buttons not visible sometimes
