@@ -13,15 +13,14 @@ class AdwScaffold extends StatefulWidget {
     this.flapStyle,
     this.flapOptions,
     this.flapController,
-    @Deprecated('headerbar is deprecated, use the properties separately')
-        AdwHeaderBar? Function(Widget?)? headerbar,
+    @Deprecated('headerbar is deprecated, use the properties separately') AdwHeaderBar? Function(Widget?)? headerbar,
     this.viewSwitcher,
     this.viewSwitcherConstraint,
     this.headerBarStyle,
     this.start,
     this.title,
     this.end,
-    required this.actions,
+    this.actions,
     this.controls,
   });
 
@@ -42,7 +41,7 @@ class AdwScaffold extends StatefulWidget {
   final Widget? title;
   final List<Widget>? end;
 
-  final AdwActions actions;
+  final AdwActions? actions;
   final AdwControls? controls;
 
   final Widget? viewSwitcher;
@@ -63,8 +62,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width <=
-        (widget.viewSwitcherConstraint ?? 600);
+    final isMobile = MediaQuery.of(context).size.width <= (widget.viewSwitcherConstraint ?? 600);
     final isFlapVisible = widget.flap != null;
     final isViewSwitcherVisible = widget.viewSwitcher != null;
 
@@ -84,9 +82,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
           AdwHeaderBar(
             actions: widget.actions,
             controls: widget.controls,
-            title: isViewSwitcherVisible && !isMobile
-                ? widget.viewSwitcher
-                : widget.title,
+            title: isViewSwitcherVisible && !isMobile ? widget.viewSwitcher : widget.title,
             end: widget.end ?? [],
             start: widget.start ?? [],
             style: widget.headerBarStyle ?? const HeaderBarStyle(),
@@ -94,12 +90,8 @@ class _AdwScaffoldState extends State<AdwScaffold> {
           Expanded(
             child: Scaffold(
               key: widget.scaffoldKey,
-              drawerEnableOpenDragGesture: _flapController
-                      ?.shouldEnableDrawerGesture(FlapPosition.start) ??
-                  false,
-              endDrawerEnableOpenDragGesture: _flapController
-                      ?.shouldEnableDrawerGesture(FlapPosition.end) ??
-                  false,
+              drawerEnableOpenDragGesture: _flapController?.shouldEnableDrawerGesture(FlapPosition.start) ?? false,
+              endDrawerEnableOpenDragGesture: _flapController?.shouldEnableDrawerGesture(FlapPosition.end) ?? false,
               onDrawerChanged: _flapController?.onDrawerChanged,
               drawer: flap,
               endDrawer: flap,
@@ -114,9 +106,7 @@ class _AdwScaffoldState extends State<AdwScaffold> {
                   : widget.body,
               bottomNavigationBar: isViewSwitcherVisible && isMobile
                   ? Container(
-                      height: widget.headerBarStyle != null
-                          ? widget.headerBarStyle!.height
-                          : 51,
+                      height: widget.headerBarStyle != null ? widget.headerBarStyle!.height : 51,
                       decoration: BoxDecoration(
                         border: Border(
                           top: BorderSide(
