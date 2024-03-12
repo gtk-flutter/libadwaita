@@ -26,6 +26,8 @@ dependencies:
   package_info_plus: ">=4.0.0 <5.0.0"
   popover_gtk: ">=0.2.6+3 <1.0.0"
   url_launcher: ">=6.1.11 <7.0.0"
+  universal_io: ^2.2.2
+
 
 dev_dependencies:
   very_good_analysis: ^3.0.1

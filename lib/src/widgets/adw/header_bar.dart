@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:dbus/dbus.dart';
 import 'package:flutter/foundation.dart';
