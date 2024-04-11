@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dbus/dbus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +5,7 @@ import 'package:gsettings/gsettings.dart';
 import 'package:libadwaita/src/utils/colors.dart';
 import 'package:libadwaita/src/widgets/widgets.dart';
 import 'package:libadwaita_core/libadwaita_core.dart';
+import 'package:universal_io/io.dart';
 
 class HeaderBarStyle {
   const HeaderBarStyle({
@@ -53,32 +52,32 @@ class AdwHeaderBar extends StatefulWidget {
     this.start = const [],
     this.end = const [],
     this.style = const HeaderBarStyle(),
-    required AdwActions actions,
+    AdwActions? actions,
     AdwControls? controls,
   })  : closeBtn = controls != null
-            ? controls.closeBtn?.call(actions.onClose)
+            ? controls.closeBtn?.call(actions?.onClose)
             : AdwWindowButton(
                 nativeControls: style.nativeControls,
                 buttonType: WindowButtonType.close,
-                onPressed: actions.onClose,
+                onPressed: actions?.onClose,
               ),
         maximizeBtn = controls != null
-            ? controls.maximizeBtn?.call(actions.onMaximize)
+            ? controls.maximizeBtn?.call(actions?.onMaximize)
             : AdwWindowButton(
                 nativeControls: style.nativeControls,
                 buttonType: WindowButtonType.maximize,
-                onPressed: actions.onMaximize,
+                onPressed: actions?.onMaximize,
               ),
         minimizeBtn = controls != null
-            ? controls.minimizeBtn?.call(actions.onMinimize)
+            ? controls.minimizeBtn?.call(actions?.onMinimize)
             : AdwWindowButton(
                 nativeControls: style.nativeControls,
                 buttonType: WindowButtonType.minimize,
-                onPressed: actions.onMinimize,
+                onPressed: actions?.onMinimize,
               ),
-        onHeaderDrag = actions.onHeaderDrag,
-        onDoubleTap = actions.onDoubleTap,
-        onRightClick = actions.onRightClick;
+        onHeaderDrag = actions?.onHeaderDrag,
+        onDoubleTap = actions?.onDoubleTap,
+        onRightClick = actions?.onRightClick;
 
   /// The leading widget for the headerbar
   final List<Widget> start;
@@ -112,19 +111,13 @@ class AdwHeaderBar extends StatefulWidget {
 }
 
 class _AdwHeaderBarState extends State<AdwHeaderBar> {
-  bool get hasWindowControls =>
-      widget.closeBtn != null ||
-      widget.minimizeBtn != null ||
-      widget.maximizeBtn != null;
+  bool get hasWindowControls => widget.closeBtn != null || widget.minimizeBtn != null || widget.maximizeBtn != null;
 
-  late ValueNotifier<List<String>?> separator =
-      !widget.style.autoPositionWindowButtons ||
-              !kIsWeb &&
-                  (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
-          ? ValueNotifier(
-              ['', 'minimize,maximize,close'],
-            )
-          : ValueNotifier(null);
+  late ValueNotifier<List<String>?> separator = !widget.style.autoPositionWindowButtons || !kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
+      ? ValueNotifier(
+          ['', 'minimize,maximize,close'],
+        )
+      : ValueNotifier(null);
 
   @override
   void initState() {
@@ -138,10 +131,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
             (e) => e
                 .split(',')
                 .where(
-                  (element) =>
-                      element == 'close' ||
-                      element == 'maximize' ||
-                      element == 'minimize',
+                  (element) => element == 'close' || element == 'maximize' || element == 'minimize',
                 )
                 .join(','),
           );
@@ -156,8 +146,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
 
         WidgetsBinding.instance.addPostFrameCallback((_) async {
           try {
-            final buttonLayout =
-                await schema.get('button-layout') as DBusString?;
+            final buttonLayout = await schema.get('button-layout') as DBusString?;
             if (buttonLayout != null) {
               updateSep(buttonLayout.value);
             }
@@ -187,9 +176,7 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
           alignment: Alignment.topCenter,
           child: Container(
             decoration: BoxDecoration(
-              color: !widget.style.isTransparent
-                  ? Theme.of(context).appBarTheme.backgroundColor
-                  : null,
+              color: !widget.style.isTransparent ? Theme.of(context).appBarTheme.backgroundColor : null,
               border: !widget.style.isTransparent
                   ? Border(
                       bottom: BorderSide(color: context.borderColor),
@@ -215,15 +202,11 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                       leading: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (hasWindowControls &&
-                              sep != null &&
-                              sep[0].split(',').isNotEmpty) ...[
+                          if (hasWindowControls && sep != null && sep[0].split(',').isNotEmpty) ...[
                             SizedBox(width: widget.style.titlebarSpace),
                             for (var i in sep[0].split(','))
                               if (windowButtons[i] != null) windowButtons[i]!,
-                            if (!widget.style.nativeControls ||
-                                !kIsWeb && Platform.isLinux)
-                              SizedBox(width: widget.style.titlebarSpace),
+                            if (!widget.style.nativeControls || !kIsWeb && Platform.isLinux) SizedBox(width: widget.style.titlebarSpace),
                           ],
                           ...widget.start.map(
                             (e) => Padding(
@@ -243,15 +226,11 @@ class _AdwHeaderBarState extends State<AdwHeaderBar> {
                               child: e,
                             ),
                           ),
-                          if (hasWindowControls &&
-                              sep != null &&
-                              sep[1].split(',').isNotEmpty) ...[
+                          if (hasWindowControls && sep != null && sep[1].split(',').isNotEmpty) ...[
                             SizedBox(width: widget.style.titlebarSpace),
                             for (var i in sep[1].split(','))
                               if (windowButtons[i] != null) windowButtons[i]!,
-                            if (!widget.style.nativeControls ||
-                                !kIsWeb && Platform.isLinux)
-                              SizedBox(width: widget.style.titlebarSpace),
+                            if (!widget.style.nativeControls || !kIsWeb && Platform.isLinux) SizedBox(width: widget.style.titlebarSpace),
                           ],
                         ],
                       ),
