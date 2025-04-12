@@ -1,5 +1,4 @@
 // Copyright 2014 The Flutter Authors => BSD-3 License
-// Copyright 2022 Gtk-Flutter Authors => LGPL-3 License
 
 import 'dart:ui' show lerpDouble;
 
