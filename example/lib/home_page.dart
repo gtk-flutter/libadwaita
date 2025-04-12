@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                     copyright: 'Copyright 2021-2022 Gtk-Flutter Developers',
                     license: const Text(
-                      'GNU LGPL-3.0, This program comes with no warranty.',
+                      'MPL-2.0, This program comes with no warranty.',
                     ),
                   ),
                 ),
